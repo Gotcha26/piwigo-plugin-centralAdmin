@@ -92,12 +92,12 @@ function central_admin_generate_css_vars(array $config)
         }
     }
 
-    // Couleurs par schéma
-    foreach (array('clear', 'dark') as $scheme) {
-        if (isset($config['colors'][$scheme])) {
-            foreach ($config['colors'][$scheme] as $key => $value) {
-                $css .= '--ca-' . $scheme . '-' . str_replace('_', '-', $key) . ': ' . $value . ";\n";
-            }
+    // Couleurs selon le schéma actif
+    $scheme = pwg_get_session_var('admin_theme', 'clear');
+    
+    if (isset($config['colors'][$scheme])) {
+        foreach ($config['colors'][$scheme] as $key => $value) {
+            $css .= '--ca-color-' . str_replace('_', '-', $key) . ': ' . $value . ";\n";
         }
     }
 
