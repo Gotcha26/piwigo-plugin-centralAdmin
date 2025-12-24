@@ -18,7 +18,7 @@ if (!isset($centralAdminDefault) || !is_array($centralAdminDefault)) {
 }
 
 // Fusion valeurs existantes + défaut
-$centralAdmin = array_merge(
+$centralAdmin = array_replace_recursive(
     $centralAdminDefault,
     (array) $conf['centralAdmin']
 );
@@ -31,7 +31,11 @@ $centralAdmin = array_merge(
 if (isset($_POST['save'])) {
     foreach ($centralAdminDefault as $key => $default) {
         if (isset($_POST[$key])) {
-            $centralAdmin[$key] = trim($_POST[$key]);
+            if (is_string($_POST[$key])) {
+                $centralAdmin[$key] = trim($_POST[$key]);
+            } else {
+                $centralAdmin[$key] = $_POST[$key]; // laisse passer le tableau
+            }
         }
     }
     $conf['centralAdmin'] = $centralAdmin;

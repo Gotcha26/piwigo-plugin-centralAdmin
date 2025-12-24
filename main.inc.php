@@ -5,7 +5,7 @@ Description: Centrage de toute l'administratin sur une colonne maximun de 1600px
 Tient compte de la couleur (clair / obscure).
 Corrections mineurs de divers éléments.
 Injecte des feuilles CSS personnalisées uniquement !
-Version: 1.1
+Version: 1.2
 Author: Gotcha
 */
 
@@ -17,7 +17,40 @@ global $conf, $centralAdminDefault;
 
 
 // -----------------------------
-// 1) Initialisation de la config
+// 1) Fonction de génération CSS
+// -----------------------------
+
+function central_admin_generate_css_vars(array $config)
+{
+    $css = '';
+
+    // Layout
+    foreach ($config['layout'] as $key => $value) {
+        $css .= "--ca-" . str_replace('_', '-', $key) . ": {$value}px;\n";
+    }
+
+    // Colors - Tooltips (sans préfixe de schéma)
+    if (isset($config['colors']['tooltips'])) {
+        foreach ($config['colors']['tooltips'] as $key => $value) {
+            $css .= "--ca-" . str_replace('_', '-', $key) . ": {$value};\n";
+        }
+    }
+
+    // Colors - par schéma (clear/dark)
+    foreach (['clear', 'dark'] as $scheme) {
+        if (isset($config['colors'][$scheme])) {
+            foreach ($config['colors'][$scheme] as $key => $value) {
+                $css .= "--ca-" . str_replace('_', '-', $key) . ": {$value};\n";
+            }
+        }
+    }
+
+    return $css;
+}
+
+
+// -----------------------------
+// 2) Initialisation de la config
 // -----------------------------
 
 // Valeurs par défaut du plugin
@@ -55,14 +88,13 @@ $centralAdminDefault = array(
 
 // Initialisation si absente ou vide
 if (!isset($conf['centralAdmin']) || !is_array($conf['centralAdmin'])) {
-    global $centralAdminDefault;
     $conf['centralAdmin'] = $centralAdminDefault;
     conf_update_param('centralAdmin', $conf['centralAdmin']);
 }
 
 
 // -----------------------------
-// 2) Menu admin
+// 3) Menu admin
 // -----------------------------
 
 add_event_handler('get_admin_plugin_menu_links', 'central_admin_menu');
@@ -83,10 +115,42 @@ function central_admin_menu($menu)
 
 
 // -----------------------------
-// 3) CSS dynamique
+// 4) Injection des fichiers CSS
 // -----------------------------
 
-add_event_handler('loc_end_admin_page_header', function () {
+add_event_handler('loc_begin_admin_page', function () {
+    global $conf, $template;
+
+    if (empty($conf['centralAdmin'])) {
+        return;
+    }
+
+    // Détecter le schéma de couleur
+    $scheme = pwg_get_session_var('admin_theme', 'clear');
+    
+    // Charger CSS commun
+    $template->append(
+        'head_elements',
+        '<link rel="stylesheet" type="text/css" href="'
+        . get_root_url() . 'plugins/centralAdmin/admin-common.css'
+        . '">'
+    );
+    
+    // Charger CSS spécifique au schéma
+    $template->append(
+        'head_elements',
+        '<link rel="stylesheet" type="text/css" href="'
+        . get_root_url() . 'plugins/centralAdmin/admin-' . $scheme . '.css'
+        . '">'
+    );
+});
+
+
+// -----------------------------
+// 5) Variables CSS dynamiques
+// -----------------------------
+
+add_event_handler('loc_begin_admin_page', function () {
     global $conf, $template;
 
     if (empty($conf['centralAdmin'])) {
