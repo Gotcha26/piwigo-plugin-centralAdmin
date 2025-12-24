@@ -48,3 +48,6 @@
   white-space: nowrap;
 }
 
+.theme-section.hidden {
+  display: none;
+}

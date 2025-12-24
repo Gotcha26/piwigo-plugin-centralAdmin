@@ -3,9 +3,6 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 global $template, $conf, $page, $centralAdminDefault;
 
-// CSS statique du plugin
-$template->assign('CENTRAL_ADMIN_CSS', 'plugins/centralAdmin/style.css');
-
 /* ===============================
  *  CONFIGURATION
  * =============================== */
@@ -77,31 +74,38 @@ if (isset($_POST['reset'])) {
  *  GÉNÉRATION DES VARIABLES CSS
  * =============================== */
 
-$cssVars = array();
+add_event_handler('loc_begin_admin_page', function () {
+    global $template, $conf, $centralAdminDefault;
 
-/* Layout → px */
-foreach ($centralAdmin['layout'] as $key => $value) {
-    if ($value === '') {
-        continue;
+    // Configuration actuelle
+    $centralAdmin = array_replace_recursive(
+        $centralAdminDefault,
+        (array) ($conf['centralAdmin'] ?? [])
+    );
+
+    // Thème actif
+    $active_scheme = pwg_get_session_var('admin_theme', 'clear');
+    $template->assign('ACTIVE_SCHEME', $active_scheme);
+
+    // Variables CSS dynamiques
+    $cssVars = array();
+
+    // Layout
+    foreach ($centralAdmin['layout'] as $key => $value) {
+        if ($value === '') continue;
+        $cssVars['--ca-layout-' . str_replace('_', '-', $key)] = (int)$value . 'px';
     }
 
-    $cssVars['--ca-layout-' . str_replace('_', '-', $key)] =
-        (int) $value . 'px';
-}
-
-/* Colors → brut */
-foreach ($centralAdmin['colors'] as $scheme => $colors) {
-    foreach ($colors as $key => $value) {
-        if ($value === '') {
-            continue;
+    // Couleurs → uniquement le thème actif
+    if (isset($centralAdmin['colors'][$active_scheme])) {
+        foreach ($centralAdmin['colors'][$active_scheme] as $key => $value) {
+            if ($value === '') continue;
+            $cssVars['--ca-color-' . $active_scheme . '-' . str_replace('_', '-', $key)] = $value;
         }
-
-        $cssVars['--ca-color-' . $scheme . '-' . str_replace('_', '-', $key)] =
-            $value;
     }
-}
 
-$template->assign('CENTRAL_ADMIN_CSS_VARS', $cssVars);
+    $template->assign('CENTRAL_ADMIN_CSS_VARS', $cssVars);
+});
 
 /* ===============================
  *  TRANSMISSION AU TEMPLATE

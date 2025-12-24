@@ -124,24 +124,36 @@ add_event_handler('loc_begin_admin_page', function () {
     if (empty($conf['centralAdmin'])) {
         return;
     }
-
-    // Détecter le schéma de couleur
-    $scheme = pwg_get_session_var('admin_theme', 'clear');
     
-    // Charger CSS commun
+    // CSS du plugin
     $template->append(
         'head_elements',
-        '<link rel="stylesheet" type="text/css" href="'
-        . get_root_url() . 'plugins/centralAdmin/admin-common.css'
-        . '">'
+        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/style.css">'
     );
-    
-    // Charger CSS spécifique au schéma
+
+    // Thème actif
+    $scheme = pwg_get_session_var('admin_theme', 'clear');
+
+    // CSS de base (structure + layout)
     $template->append(
         'head_elements',
-        '<link rel="stylesheet" type="text/css" href="'
-        . get_root_url() . 'plugins/centralAdmin/admin-' . $scheme . '.css'
-        . '">'
+        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/centralAdmin-rebuild.css">'
+    );
+
+    // CSS spécifique au thème
+    $template->append(
+        'head_elements',
+        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/admin-' . $scheme . '.css">'
+    );
+
+    // Variables dynamiques
+    $css  = ":root {\n";
+    $css .= central_admin_generate_css_vars($conf['centralAdmin']);
+    $css .= "}\n";
+
+    $template->append(
+        'head_elements',
+        '<style id="central-admin-vars">' . $css . '</style>'
     );
 });
 

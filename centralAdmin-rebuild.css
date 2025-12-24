@@ -1,4 +1,19 @@
-/* Général */    
+/* Général */
+html {
+    background-color: var(--ca--color-bg_global);
+}
+
+#content,
+.tabsheet li.selected_tab {
+  background-color: var(--ca-color-bg_content1);
+}
+
+#content H1,
+#tabsheet {
+  background-color: var(--ca-color-bg_content2);
+}
+
+
 .eiw .messages {
   background: linear-gradient(
     to right,

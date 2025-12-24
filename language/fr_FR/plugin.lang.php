@@ -22,8 +22,8 @@ $lang['central_admin_scheme'] = 'Schéma de couleurs';
 $lang['configuration_saved'] = 'Configuration enregistrée avec succès.';
 $lang['configuration_reset'] = 'Configuration réinitialisée.';
 
-$lang['central_admin_scheme_clear'] = 'Spécifique au thème : jour/clair';
-$lang['central_admin_scheme_dark'] = 'Spécifique au thème : nuit/obscure';
+$lang['central_admin_scheme_clear'] = 'Spécifique au thème actif : jour/clair';
+$lang['central_admin_scheme_dark'] = 'Spécifique au thème actif : nuit/obscure';
 
 $lang['admin_width'] = 'Largeur maximale de l\'administration';
 $lang['admin_width_tp'] =
@@ -54,11 +54,11 @@ $lang['messages_main_color_tp'] = '';
 $lang['error_main_color'] = 'error_main_color';
 $lang['error_main_color_tp'] = '';
 
-$lang['bg_clear_global'] = 'bg_global';
+$lang['bg_clear_global'] = 'Arrière plan général';
 $lang['bg_clear_global_tp'] = '';
-$lang['bg_clear_content1'] = 'bg_content1';
+$lang['bg_clear_content1'] = 'Arrière plan de l\'en-tête';
 $lang['bg_clear_content1_tp'] = '';
-$lang['bg_clear_content2'] = 'bg_content2';
+$lang['bg_clear_content2'] = 'Arrière plan des onglets';
 $lang['bg_clear_content2_tp'] = '';
 
 $lang['bg_dark_global'] = 'bg_global';
