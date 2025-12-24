@@ -67,6 +67,9 @@ if (isset($_POST['save'])) {
     $centralAdmin = $newConfig;
     
     $page['infos'][] = l10n('configuration_saved');
+    
+    // CRITIQUE : Recharger la page pour que les nouvelles variables CSS soient générées
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
 if (isset($_POST['reset'])) {
@@ -75,6 +78,9 @@ if (isset($_POST['reset'])) {
     $centralAdmin = $centralAdminDefault;
     
     $page['infos'][] = l10n('configuration_reset');
+    
+    // CRITIQUE : Recharger la page
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
 /* ===============================
