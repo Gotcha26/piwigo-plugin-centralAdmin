@@ -3,15 +3,42 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 global $template, $conf, $page, $centralAdminDefault;
 
-// Vérification que les valeurs par défaut existent
+$template->set_filename('plugin_admin_content', dirname(__FILE__).'/admin.tpl');
+
+$template->assign('CENTRAL_ADMIN_CSS', 'plugins/centralAdmin/style.css');
+
+
+/* ===============================
+ *  CONTEXTE (clear / dark)
+ * =============================== */
+
+$scheme = $_GET['scheme'] ?? 'clear';
+if (!in_array($scheme, array('clear','dark'))) {
+    $scheme = 'clear';
+}
+$template->assign('SCHEME', $scheme);
+
+
+/* ===============================
+ *  CONFIGURATION
+ * =============================== */
+
+// Vérification des valeurs par défaut
 if (!isset($centralAdminDefault) || !is_array($centralAdminDefault)) {
     die('Erreur : centralAdminDefault non défini');
 }
 
 // Fusion valeurs existantes + défaut
-$centralAdmin = array_merge($centralAdminDefault, (array) $conf['centralAdmin']);
+$centralAdmin = array_merge(
+    $centralAdminDefault,
+    (array) $conf['centralAdmin']
+);
 
-// Traitement du formulaire
+
+/* ===============================
+ *  FORMULAIRE
+ * =============================== */
+
 if (isset($_POST['save'])) {
     foreach ($centralAdminDefault as $key => $default) {
         if (isset($_POST[$key])) {
@@ -20,13 +47,23 @@ if (isset($_POST['save'])) {
     }
     $conf['centralAdmin'] = $centralAdmin;
     conf_update_param('centralAdmin', $conf['centralAdmin']);
-    $page['infos'][] = 'Configuration enregistrée 👍';
+    $page['infos'][] = l10n('configuration_saved');
 }
 
-// Assignation à Smarty
+if (isset($_POST['reset'])) {
+    $conf['centralAdmin'] = $centralAdminDefault;
+    conf_update_param('centralAdmin', $conf['centralAdmin']);
+    $page['infos'][] = l10n('configuration_reset');
+}
+
+
+/* ===============================
+ *  SMARTY
+ * =============================== */
+
 $template->assign('centralAdmin', $centralAdmin);
 
-// Charger le template admin
+// Template admin
 $template->set_filenames(array(
     'plugin_admin_content' => dirname(__FILE__).'/admin.tpl'
 ));
