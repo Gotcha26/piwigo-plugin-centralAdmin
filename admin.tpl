@@ -1,3 +1,13 @@
+{if isset($CENTRAL_ADMIN_CSS_VARS)}
+<style id="central-admin-vars">
+:root {
+{foreach from=$CENTRAL_ADMIN_CSS_VARS key=var item=value}
+  {$var}: {$value};
+{/foreach}
+}
+</style>
+{/if}
+
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
 
 <h2>{'central_admin'|@translate}</h2>

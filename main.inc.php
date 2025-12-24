@@ -26,13 +26,13 @@ function central_admin_generate_css_vars(array $config)
 
     // Layout
     foreach ($config['layout'] as $key => $value) {
-        $css .= "--ca-" . str_replace('_', '-', $key) . ": {$value}px;\n";
+        $css .= "--ca-layout-" . str_replace('_', '-', $key) . ": {$value}px;\n";
     }
 
     // Colors - Tooltips (sans préfixe de schéma)
     if (isset($config['colors']['tooltips'])) {
         foreach ($config['colors']['tooltips'] as $key => $value) {
-            $css .= "--ca-" . str_replace('_', '-', $key) . ": {$value};\n";
+            $css .= "--ca-color-" . str_replace('_', '-', $key) . ": {$value};\n";
         }
     }
 

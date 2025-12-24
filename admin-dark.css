@@ -1,15 +1,14 @@
 /* Général */
 html {
-    background-color: var(--ca-bg_global);
+    background-color: var(--ca--color-bg_global);
 }
 
 #content,
 .tabsheet li.selected_tab {
-  background-color: var(--ca-bg_content1);
+  background-color: var(--ca-color-bg_content1);
 }
 
 #content H1,
 #tabsheet {
-  background-color: var(--ca-bg_content2);
+  background-color: var(--ca-color-bg_content2);
 }
-
