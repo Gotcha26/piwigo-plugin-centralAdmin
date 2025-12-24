@@ -9,17 +9,6 @@ $template->assign('CENTRAL_ADMIN_CSS', 'plugins/centralAdmin/style.css');
 
 
 /* ===============================
- *  CONTEXTE (clear / dark)
- * =============================== */
-
-$scheme = $_GET['scheme'] ?? 'clear';
-if (!in_array($scheme, array('clear','dark'))) {
-    $scheme = 'clear';
-}
-$template->assign('SCHEME', $scheme);
-
-
-/* ===============================
  *  CONFIGURATION
  * =============================== */
 

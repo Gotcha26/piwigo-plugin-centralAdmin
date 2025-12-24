@@ -74,13 +74,8 @@ function central_admin_menu($menu)
     }
 
     $menu[] = array(
-      'NAME' => 'Central Admin – Clear',
-      'URL'  => get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php').'&scheme=clear'
-    );
-
-    $menu[] = array(
-      'NAME' => 'Central Admin – Dark',
-      'URL'  => get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php').'&scheme=dark'
+      'NAME' => 'Central Admin',
+      'URL'  => get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php')
     );
 
     return $menu;
@@ -91,43 +86,19 @@ function central_admin_menu($menu)
 // 3) CSS dynamique
 // -----------------------------
 
-add_event_handler('loc_end_admin_page_header', 'central_admin_inject_css_safe');
+add_event_handler('loc_end_admin_page_header', function () {
+    global $conf, $template;
 
-function central_admin_inject_css_safe()
-{
-    global $template, $themeconf, $conf, $page;
-
-    // Ne rien faire si $page n'est pas défini (évite FCKEditor)
-    if (!isset($page) || !is_array($page)) {
-        error_log('CENTRALADMIN DEBUG — page non défini, CSS ignoré pour éviter crash FCKEditor');
-        return;
-    }
-
-    // Schéma couleur actif
-    $colorscheme = (
-        isset($themeconf['colorscheme']) &&
-        in_array($themeconf['colorscheme'], ['clear', 'dark'], true)
-    ) ? $themeconf['colorscheme'] : 'clear';
-
-    // CSS global admin (centrage, layout, etc.)
-    $template->append(
-        'head_elements',
-        '<link rel="stylesheet" href="plugins/centralAdmin/admin/css/admin-'.$colorscheme.'.css">'
-    );
-
-    // Variables CSS dynamiques
-    if (empty($conf['centralAdmin']) || !is_array($conf['centralAdmin'])) {
+    if (empty($conf['centralAdmin'])) {
         return;
     }
 
     $css  = ":root {\n";
-    $css .= central_admin_css_vars($conf['centralAdmin']);
+    $css .= central_admin_generate_css_vars($conf['centralAdmin']);
     $css .= "}\n";
 
     $template->append(
         'head_elements',
-        '<style id="central-admin-vars">'.$css.'</style>'
+        '<style id="central-admin-vars">' . $css . '</style>'
     );
-
-    error_log('CENTRALADMIN DEBUG — CSS injecté pour ' . $page['section'] ?? 'NULL');
-}
+});

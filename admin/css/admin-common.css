@@ -2,8 +2,8 @@
 .eiw .messages {
   background: linear-gradient(
     to right,
-    var(--messages-main-color) 0,
-    var(--messages-main-color) var(--fade-start),
+    var(--ca-messages-main-color) 0,
+    var(--ca-messages-main-color) var(--ca-fade-start),
     rgba(0, 0, 0, 0.05) 100%
   );
 }
@@ -11,8 +11,8 @@
 .eiw .infos {
   background: linear-gradient(
     to right,
-    var(--infos-main-color) 0,
-    var(--infos-main-color) var(--fade-start),
+    var(--ca-infos-main-color) 0,
+    var(--ca-infos-main-color) var(--ca-fade-start),
     rgba(0, 170, 0, 0.05) 100%
   );
 }
@@ -20,8 +20,8 @@
 .eiw .warnings {
   background: linear-gradient(
     to right,
-    var(--warning-main-color) 0,
-    var(--warning-main-color) var(--fade-start),
+    var(--ca-warning-main-color) 0,
+    var(--ca-warning-main-color) var(--ca-fade-start),
     rgba(0, 0, 0, 0.05) 100%
   );
 }
@@ -29,8 +29,8 @@
 .eiw .error {
   background: linear-gradient(
     to right,
-    var(--error-main-color) 0,
-    var(--error-main-color) var(--fade-start),
+    var(--ca-error-main-color) 0,
+    var(--ca-error-main-color) var(--ca-fade-start),
     rgba(0, 0, 0, 0.05) 100%
   );
 }
@@ -38,7 +38,7 @@
 
 /* Centrage */
 #theAdminPage {
-    max-width: var(--admin-width);
+    max-width: var(--ca-admin-width);
     min-width: 0;
     margin-left: auto;
     margin-right: auto;
@@ -52,17 +52,17 @@
 #theAdminPage #footer {
   position: fixed;
   bottom: 0;
-  left: max(0px, calc((100vw - var(--admin-width)) / 2));
-  max-width: var(--admin-width);
-  width: var(--footer-width);
+  left: max(0px, calc((100vw - var(--ca-admin-width)) / 2));
+  max-width: var(--ca-admin-width);
+  width: var(--ca-footer-width);
 }
 
 /* -- Menubar -- */
 #menubar,
 #pwgHead a.visit-gallery {
-  left: max(0px, calc((100vw - var(--admin-width)) / 2));
-  max-width: var(--admin-width);
-  width: var(--footer-width);
+  left: max(0px, calc((100vw - var(--ca-admin-width)) / 2));
+  max-width: var(--ca-admin-width);
+  width: var(--ca-footer-width);
 }
 
 /* -- Communs -- */
@@ -90,11 +90,11 @@
 
 /* -- Barre d'actions -- */
 .pluginTypeFilter {
-  left: var(--align-pluginFilter-left);
+  left: var(--ca-align-pluginFilter-left);
 }
 
 .pluginFilter {
-  right: var(--align-pluginFilter-right);
+  right: var(--ca-align-pluginFilter-right);
 }
 
 .AlbumViewSelector {
@@ -103,15 +103,15 @@
 
 @media (min-width: 1600px) {
   .pluginTypeFilter {
-    left: calc((100vw - var(--admin-width)) / 2 + var(--align-pluginFilter-left));
+    left: calc((100vw - var(--ca-admin-width)) / 2 + var(--ca-align-pluginFilter-left));
   }
 
   .pluginFilter {
-    right: calc((100vw - var(--admin-width)) / 2 + var(--align-pluginFilter-right));
+    right: calc((100vw - var(--ca-admin-width)) / 2 + var(--ca-align-pluginFilter-right));
   }
 
   .AlbumViewSelector {
-    right: calc((100vw - var(--admin-width)) / 2 + 20px);
+    right: calc((100vw - var(--ca-admin-width)) / 2 + 20px);
   }
 }
 
@@ -159,7 +159,7 @@
 
 /* Tags */
 #search-tag {
-  right: var(--alignsearch-tag-left);
+  right: var(--ca-alignsearch-tag-left);
 }
 
 .selection-mode-group-manager {
@@ -169,10 +169,10 @@
 
 @media (min-width: 1600px) {
   #search-tag {
-    right: calc((100vw - var(--admin-width)) / 2 + var(--alignsearch-tag-left)) !important;
+    right: calc((100vw - var(--ca-admin-width)) / 2 + var(--ca-alignsearch-tag-left)) !important;
   }
   .selection-mode-group-manager {
-    right: calc((100vw - var(--admin-width)) / 2 + 15px);
+    right: calc((100vw - var(--ca-admin-width)) / 2 + 15px);
   }
 }
 
@@ -189,12 +189,12 @@
 /* Mode unitaire */
 .bottom-save-bar {
   right: 0px;
-  width: calc(var(--admin-width) - var(--admin-sidebar) + 20px);
+  width: calc(var(--ca-admin-width) - var(--ca-admin-sidebar) + 20px);
 }
 
 @media (min-width: 1600px) {
   .bottom-save-bar {
-    right: calc((100vw - var(--admin-width)) /2);
+    right: calc((100vw - var(--ca-admin-width)) /2);
   }
 }
 
@@ -207,7 +207,7 @@
 
 @media (min-width: 1600px) {
   .selection-mode-group-manager {
-    right: calc((100vw - var(--admin-width)) / 2 + 30px) !important;
+    right: calc((100vw - var(--ca-admin-width)) / 2 + 30px) !important;
   }
 }
 
@@ -215,12 +215,12 @@
 /* Paramétrage */
 .savebar-footer {
   right: 0px;
-  width: calc(var(--admin-width) - var(--admin-sidebar) + 20px);
+  width: calc(var(--ca-admin-width) - var(--ca-admin-sidebar) + 20px);
 }
 
 @media (min-width: 1600px) {
   .savebar-footer {
-    right: calc((100vw - var(--admin-width)) /2);
+    right: calc((100vw - var(--ca-admin-width)) /2);
   }
 }
 
@@ -232,7 +232,7 @@
 
 @media (min-width: 1600px) {
   .stat-compare-mode {
-    right: calc((100vw - var(--admin-width)) / 2 + 10px) !important;
+    right: calc((100vw - var(--ca-admin-width)) / 2 + 10px) !important;
   }
 }
 

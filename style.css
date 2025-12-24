@@ -4,10 +4,15 @@
 
 .centralAdminForm .field {
   display: grid;
-  grid-template-columns: 260px 1fr 60px auto;
+  grid-template-columns:
+    32px      /* lock */
+    260px     /* label */
+    1fr       /* input principal */
+    80px      /* output */
+  ;
+  gap: 12px;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  max-width: 1100px;
 }
 
 .centralAdminForm label {
@@ -23,3 +28,23 @@
 .centralAdminForm .reset {
   background: #ddd;
 }
+
+.centralAdminForm .field.locked {
+  opacity: 0.5;
+}
+
+.centralAdminForm .lock-toggle {
+  cursor: pointer;
+}
+
+.centralAdminForm input:disabled {
+  cursor: not-allowed;
+}
+
+.centralAdminForm .value {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
