@@ -156,25 +156,3 @@ add_event_handler('loc_begin_admin_page', function () {
         '<style id="central-admin-vars">' . $css . '</style>'
     );
 });
-
-
-// -----------------------------
-// 5) Variables CSS dynamiques
-// -----------------------------
-
-add_event_handler('loc_begin_admin_page', function () {
-    global $conf, $template;
-
-    if (empty($conf['centralAdmin'])) {
-        return;
-    }
-
-    $css  = ":root {\n";
-    $css .= central_admin_generate_css_vars($conf['centralAdmin']);
-    $css .= "}\n";
-
-    $template->append(
-        'head_elements',
-        '<style id="central-admin-vars">' . $css . '</style>'
-    );
-});

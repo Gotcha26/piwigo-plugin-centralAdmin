@@ -344,7 +344,7 @@
 {* SCHÉMA CLEAR *}
 {* ===================================================== *}
 
-<div class="theme-section {if $ACTIVE_SCHEME != 'clear'}hidden{/if}" id="theme-clear">
+{if $current_scheme == 'clear'}
   <h3>☀️ {'central_admin_scheme_clear'|@translate}</h3>
 
   <div class="field locked">
@@ -409,13 +409,13 @@
           disabled>
     <span></span>
   </div>
-</div>
+{/if}
 
 {* ===================================================== *}
 {* SCHÉMA DARK *}
 {* ===================================================== *}
 
-<div class="theme-section {if $ACTIVE_SCHEME != 'dark'}hidden{/if}" id="theme-dark">
+{if $current_scheme == 'dark'}
   <h3>🌙 {'central_admin_scheme_dark'|@translate}</h3>
 
   <div class="field locked">
@@ -480,7 +480,7 @@
           disabled>
     <span></span>
   </div>
-</div>
+{/if}
 
 <div class="actions">
   <input type="submit" name="save" value="💾 {'save'|@translate}">

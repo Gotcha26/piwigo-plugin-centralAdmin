@@ -47,7 +47,3 @@
   gap: 4px;
   white-space: nowrap;
 }
-
-.theme-section.hidden {
-  display: none;
-}
