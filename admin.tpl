@@ -33,12 +33,13 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_admin_width"
          name="layout[admin_width]"
          min="1024" max="1800" step="10"
-         value="{$centralAdmin.layout.admin_width}"
-         oninput="this.nextElementSibling.value=this.value">
+         value="{$centralAdmin.layout.admin_width}">
   <div class="value">
-    <output>{$centralAdmin.layout.admin_width}</output>
+    <output id="admin_width">{$centralAdmin.layout.admin_width}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -59,13 +60,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_admin_sidebar"
          name="layout[admin_sidebar]"
          min="15" max="250" step="1"
          value="{$centralAdmin.layout.admin_sidebar}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.admin_sidebar}</output>
+    <output id="admin_sidebar">{$centralAdmin.layout.admin_sidebar}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -86,13 +88,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_align_pluginFilter_left"
          name="layout[align_pluginFilter_left]"
          min="15" max="250" step="1"
          value="{$centralAdmin.layout.align_pluginFilter_left}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.align_pluginFilter_left}</output>
+    <output id="align_pluginFilter_left">{$centralAdmin.layout.align_pluginFilter_left}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -113,13 +116,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_align_pluginFilter_right"
          name="layout[align_pluginFilter_right]"
          min="15" max="250" step="1"
          value="{$centralAdmin.layout.align_pluginFilter_right}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.align_pluginFilter_right}</output>
+    <output id="align_pluginFilter_right">{$centralAdmin.layout.align_pluginFilter_right}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -140,13 +144,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_alignsearch_tag_left"
          name="layout[alignsearch_tag_left]"
          min="15" max="250" step="1"
          value="{$centralAdmin.layout.alignsearch_tag_left}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.alignsearch_tag_left}</output>
+    <output id="alignsearch_tag_left">{$centralAdmin.layout.alignsearch_tag_left}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -167,13 +172,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_alignsearch_tag_right"
          name="layout[alignsearch_tag_right]"
          min="15" max="250" step="5"
          value="{$centralAdmin.layout.alignsearch_tag_right}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.alignsearch_tag_right}</output>
+    <output id="alignsearch_tag_right">{$centralAdmin.layout.alignsearch_tag_right}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -194,13 +200,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_footer_width"
          name="layout[footer_width]"
          min="15" max="250" step="1"
          value="{$centralAdmin.layout.footer_width}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.footer_width}</output>
+    <output id="i_footer_width">{$centralAdmin.layout.footer_width}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -227,13 +234,14 @@
     </span>
   </label>
   <input type="range"
+         class="ca-slider"
+         id="i_fade_start"
          name="layout[fade_start]"
          min="800" max="1600" step="25"
          value="{$centralAdmin.layout.fade_start}"
-         disabled
-         oninput="this.nextElementSibling.value=this.value">
+         disabled>
   <div class="value">
-    <output>{$centralAdmin.layout.fade_start}</output>
+    <output id="fade_start">{$centralAdmin.layout.fade_start}</output>
     <span class="unit">px</span>
   </div>
 </div>
@@ -252,6 +260,7 @@
           aria-label="{'infos_main_color_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_infos_main_color"
          name="colors[tooltips][infos_main_color]"
          value="{$centralAdmin.colors.tooltips.infos_main_color}"
          disabled>
@@ -272,6 +281,7 @@
           aria-label="{'warning_main_color_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_warning_main_color"
          name="colors[tooltips][warning_main_color]"
          value="{$centralAdmin.colors.tooltips.warning_main_color}"
          disabled>
@@ -292,6 +302,7 @@
           aria-label="{'messages_main_color_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_messages_main_color"
          name="colors[tooltips][messages_main_color]"
          value="{$centralAdmin.colors.tooltips.messages_main_color}"
          disabled>
@@ -312,6 +323,7 @@
           aria-label="{'error_main_color_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_error_main_color_"
          name="colors[tooltips][error_main_color]"
          value="{$centralAdmin.colors.tooltips.error_main_color}"
          disabled>
@@ -338,6 +350,7 @@
           aria-label="{'bg_clear_global_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_clear_global"
          name="colors[clear][bg_global]"
          value="{$centralAdmin.colors.clear.bg_global}"
          disabled>
@@ -358,6 +371,7 @@
           aria-label="{'bg_clear_content1_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_clear_content1"
          name="colors[clear][bg_content1]"
          value="{$centralAdmin.colors.clear.bg_content1}"
          disabled>
@@ -378,6 +392,7 @@
           aria-label="{'bg_clear_content2_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_clear_content2"
          name="colors[clear][bg_content2]"
          value="{$centralAdmin.colors.clear.bg_content2}"
          disabled>
@@ -404,6 +419,7 @@
           aria-label="{'bg_dark_global_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_dark_global"
          name="colors[dark][bg_global]"
          value="{$centralAdmin.colors.dark.bg_global}"
          disabled>
@@ -424,6 +440,7 @@
           aria-label="{'bg_dark_content1_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_dark_content1"
          name="colors[dark][bg_content1]"
          value="{$centralAdmin.colors.dark.bg_content1}"
          disabled>
@@ -444,6 +461,7 @@
           aria-label="{'bg_dark_content2_tp'|@translate}">ⓘ</span>
   </label>
   <input type="color"
+         id="i_bg_dark_content2"
          name="colors[dark][bg_content2]"
          value="{$centralAdmin.colors.dark.bg_content2}"
          disabled>
@@ -461,6 +479,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+  // LOCK
   document.querySelectorAll('.lock-toggle').forEach(toggle => {
     const field = toggle.closest('.field');
     const input = field.querySelector('input:not(.lock-toggle)');
@@ -478,5 +498,20 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('change', updateState);
     updateState();
   });
+
+  // SLIDERS
+  document.querySelectorAll('.ca-slider').forEach(slider => {
+    const field  = slider.closest('.field');
+    const output = field.querySelector('output');
+
+    if (!output) return;
+
+    output.value = slider.value;
+
+    slider.addEventListener('input', () => {
+      output.value = slider.value;
+    });
+  });
+
 });
 </script>

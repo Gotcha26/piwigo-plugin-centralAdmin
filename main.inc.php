@@ -5,7 +5,7 @@ Description: Centrage de toute l'administratin sur une colonne maximun de 1600px
 Tient compte de la couleur (clair / obscure).
 Corrections mineurs de divers éléments.
 Injecte des feuilles CSS personnalisées uniquement !
-Version: 1.2
+Version: 1.3
 Author: Gotcha
 */
 
