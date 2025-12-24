@@ -493,40 +493,47 @@
 {* ===================================================== *}
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  // LOCK
-  document.querySelectorAll('.lock-toggle').forEach(toggle => {
-    const field = toggle.closest('.field');
-    const input = field.querySelector('input:not(.lock-toggle)');
-
-    const updateState = () => {
-      toggle.title = toggle.checked
-        ? toggle.dataset.tooltipLocked
-        : toggle.dataset.tooltipUnlocked;
-
-      toggle.checked
-        ? (field.classList.add('locked'), input.disabled = true)
-        : (field.classList.remove('locked'), input.disabled = false);
-    };
-
-    toggle.addEventListener('change', updateState);
-    updateState();
-  });
-
-  // SLIDERS
-  document.querySelectorAll('.ca-slider').forEach(slider => {
-    const field  = slider.closest('.field');
-    const output = field.querySelector('output');
-
-    if (!output) return;
-
-    output.value = slider.value;
-
-    slider.addEventListener('input', () => {
-      output.value = slider.value;
+    document.addEventListener('DOMContentLoaded', () => {
+      // Gestion des verrous
+      document.querySelectorAll('.lock-toggle').forEach(toggle => {
+        const field = toggle.closest('.field');
+        const inputs = field.querySelectorAll('input:not(.lock-toggle), select, textarea');
+    
+        const updateState = () => {
+          const isLocked = toggle.checked;
+          
+          // Mise à jour du titre
+          toggle.title = isLocked
+            ? toggle.dataset.tooltipLocked
+            : toggle.dataset.tooltipUnlocked;
+    
+          // Mise à jour de la classe et du disabled
+          if (isLocked) {
+            field.classList.add('locked');
+            inputs.forEach(input => input.disabled = true);
+          } else {
+            field.classList.remove('locked');
+            inputs.forEach(input => input.disabled = false);
+          }
+        };
+    
+        toggle.addEventListener('change', updateState);
+        updateState(); // État initial
+      });
+    
+      // Gestion des sliders
+      document.querySelectorAll('input[type="range"]').forEach(slider => {
+        const output = slider.closest('.field').querySelector('output');
+        
+        if (!output) return;
+    
+        // Valeur initiale
+        output.textContent = slider.value;
+    
+        // Mise à jour en temps réel
+        slider.addEventListener('input', () => {
+          output.textContent = slider.value;
+        });
+      });
     });
-  });
-
-});
 </script>

@@ -19,10 +19,17 @@ if (!isset($centralAdminDefault) || !is_array($centralAdminDefault)) {
     die('Erreur : centralAdminDefault non défini dans main.inc.php');
 }
 
-// Fusion valeurs existantes + défaut (en cas de nouvelles options)
+// Charger la configuration existante ou valeurs par défaut
+if (isset($conf['centralAdmin']) && is_array($conf['centralAdmin'])) {
+    $centralAdmin = $conf['centralAdmin'];
+} else {
+    $centralAdmin = $centralAdminDefault;
+}
+
+// Fusionner avec les valeurs par défaut pour garantir toutes les clés
 $centralAdmin = array_replace_recursive(
     $centralAdminDefault,
-    isset($conf['centralAdmin']) ? (array) $conf['centralAdmin'] : array()
+    $centralAdmin
 );
 
 /* ===============================
@@ -30,24 +37,18 @@ $centralAdmin = array_replace_recursive(
  * =============================== */
 
 if (isset($_POST['save'])) {
-    // Reconstruction de la structure complète
-    $newConfig = array(
-        'layout' => array(),
-        'colors' => array(
-            'tooltips' => array(),
-            'clear' => array(),
-            'dark' => array()
-        )
-    );
+    // IMPORTANT : On part de la configuration ACTUELLE
+    // et on met à jour UNIQUEMENT les valeurs envoyées
+    $newConfig = $centralAdmin;
     
-    // Récupération des valeurs layout
+    // Mise à jour des valeurs layout envoyées
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
         foreach ($_POST['layout'] as $key => $value) {
             $newConfig['layout'][$key] = trim($value);
         }
     }
     
-    // Récupération des valeurs colors
+    // Mise à jour des valeurs colors envoyées
     if (isset($_POST['colors']) && is_array($_POST['colors'])) {
         foreach ($_POST['colors'] as $scheme => $colors) {
             if (is_array($colors)) {
@@ -58,9 +59,9 @@ if (isset($_POST['save'])) {
         }
     }
     
-    // Mise à jour de la configuration globale
+    // Sauvegarde dans la base de données
     $conf['centralAdmin'] = $newConfig;
-    conf_update_param('centralAdmin', $conf['centralAdmin']);
+    conf_update_param('centralAdmin', $newConfig);
     
     // Mettre à jour la variable locale pour affichage immédiat
     $centralAdmin = $newConfig;
@@ -70,7 +71,7 @@ if (isset($_POST['save'])) {
 
 if (isset($_POST['reset'])) {
     $conf['centralAdmin'] = $centralAdminDefault;
-    conf_update_param('centralAdmin', $conf['centralAdmin']);
+    conf_update_param('centralAdmin', $centralAdminDefault);
     $centralAdmin = $centralAdminDefault;
     
     $page['infos'][] = l10n('configuration_reset');
