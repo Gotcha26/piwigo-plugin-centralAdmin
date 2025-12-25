@@ -27,3 +27,6 @@ Mais vous pouvez très bien passer outre en décochant la case prévue à cet ef
 * Le bouton "Synchronisation rapide" visible depuis la page de garde est masqué. C'est un choix arbitraire. Vous retrouverez cette fonction via Le menu `Outils > Synchroniser`
 
 ## INSTALLATION
+
+Rendez-vous dans les "[tags](https://github.com/Gotcha26/centralAdmin/tags)" du présent dépôt afin de trouver la dernière version STABLE.  
+☞ Si vous télécharger le code source (archive zip générée par GitHub, assurez-vous de modifier le nom du répertoire extrain en : **centralAdmin** sans rien d'autre.
