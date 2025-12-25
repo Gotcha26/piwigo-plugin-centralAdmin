@@ -146,34 +146,6 @@
          data-tooltip-locked="{'central_admin_locked'|@translate}"
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
-    {'alignsearch_tag_left'|@translate}
-    <span class="param-help"
-          title="{'alignsearch_tag_left_tp'|@translate}"
-          aria-label="{'alignsearch_tag_left_tp'|@translate}">
-      ⓘ
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_alignsearch_tag_left"
-         name="layout[alignsearch_tag_left]"
-         min="15" max="250" step="1"
-         value="{$centralAdmin.layout.alignsearch_tag_left}"
-         disabled>
-  <div class="value">
-    <output id="alignsearch_tag_left">{$centralAdmin.layout.alignsearch_tag_left}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
     {'alignsearch_tag_right'|@translate}
     <span class="param-help"
           title="{'alignsearch_tag_right_tp'|@translate}"

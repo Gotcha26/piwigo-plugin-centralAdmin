@@ -174,7 +174,7 @@ html {
 
 /* Tags */
 #search-tag {
-  right: var(--ca-layout-alignsearch-tag-left);
+  right: calc(var(--ca-layout-menubar-width) + 15);
 }
 
 .selection-mode-group-manager {
@@ -184,7 +184,7 @@ html {
 
 @media (min-width: 1600px) {
   #search-tag {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + var(--ca-layout-alignsearch-tag-left)) !important;
+    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + (var(--ca-layout-menubar-width) + 15)) !important;
   }
   .selection-mode-group-manager {
     right: calc((100vw - var(--ca-layout-admin-width)) / 2 + 15px);

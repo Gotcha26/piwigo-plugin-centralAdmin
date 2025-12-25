@@ -41,13 +41,6 @@ $lang['align_pluginFilter_right_tp'] =
 . "Valeur recommandée : 160 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['alignsearch_tag_left'] = 'alignsearch_tag_left';
-$lang['alignsearch_tag_left_tp'] =
-  "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie gauche.\n"
-. "Doit correspondre à la valeur de menubar + 15.\n"
-. "Valeur recommandée : 240 px.\n"
-. "Réservé aux utilisateurs avancés.";
-
 $lang['alignsearch_tag_right'] = 'alignsearch_tag_right';
 $lang['alignsearch_tag_right_tp'] =
   "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie droite.\n"

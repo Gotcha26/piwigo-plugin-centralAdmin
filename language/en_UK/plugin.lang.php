@@ -27,9 +27,6 @@ $lang['align_pluginFilter_left_tp'] = '';
 $lang['align_pluginFilter_right'] = '';
 $lang['align_pluginFilter_right_tp'] = '';
 
-$lang['alignsearch_tag_left'] = '';
-$lang['alignsearch_tag_left_tp'] = '';
-
 $lang['alignsearch_tag_right'] = '';
 $lang['alignsearch_tag_right_tp'] = '';
 
