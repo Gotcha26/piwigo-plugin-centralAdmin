@@ -6,40 +6,62 @@ Description: Centrage de toute l'administration sur une colonne maximum de 1600p
              Injecte des feuilles CSS personnalisées uniquement.
 Version: 1.1
 Author: Gotcha
+Has Settings: webmaster
 */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-load_language('plugin.lang', PHPWG_PLUGINS_PATH.'centralAdmin/');
-
-global $conf, $centralAdminDefault;
-
-/* ==================================================
- * 1) VALEURS PAR DÉFAUT
- * ================================================== */
-
-$centralAdminDefault = include __DIR__ . '/config/defaults.php';
+add_event_handler('init', 'central_admin_init');
 
 /* ==================================================
  * 2) CHARGEMENT & INITIALISATION DE LA CONFIG
  * ================================================== */
 
-// Désérialisation propre si existante
-if (isset($conf['centralAdmin'])) {
-    $conf['centralAdmin'] = safe_unserialize($conf['centralAdmin']);
-}
+function central_admin_init()
+{
+    global $conf, $centralAdminDefault;
 
-// Initialisation UNIQUEMENT si absente ou invalide
-if (empty($conf['centralAdmin']) || !is_array($conf['centralAdmin'])) {
-    $conf['centralAdmin'] = $centralAdminDefault;
-    conf_update_param('centralAdmin', $conf['centralAdmin']);
-}
+    // Langue
+    load_language('plugin.lang', PHPWG_PLUGINS_PATH.'centralAdmin/');
 
-// Fusion défensive avec les valeurs par défaut
-$conf['centralAdmin'] = array_replace_recursive(
-    $centralAdminDefault,
-    $conf['centralAdmin']
-);
+    // Valeurs par défaut
+    $defaults_file = __DIR__ . '/config/defaults.php';
+
+    if (!file_exists($defaults_file)) {
+        trigger_error(
+            'CentralAdmin: defaults.php introuvable (' . $defaults_file . ')',
+            E_USER_WARNING
+        );
+        return;
+    }
+
+    $centralAdminDefault = include $defaults_file;
+
+    if (!is_array($centralAdminDefault)) {
+        trigger_error(
+            'CentralAdmin: defaults.php ne retourne pas un tableau',
+            E_USER_WARNING
+        );
+        return;
+    }
+
+    // Désérialisation propre si existante
+    if (isset($conf['centralAdmin'])) {
+        $conf['centralAdmin'] = safe_unserialize($conf['centralAdmin']);
+    }
+
+    // Initialisation UNIQUEMENT si absente ou invalide
+    if (empty($conf['centralAdmin']) || !is_array($conf['centralAdmin'])) {
+        $conf['centralAdmin'] = $centralAdminDefault;
+        conf_update_param('centralAdmin', $conf['centralAdmin']);
+    }
+
+    // Fusion défensive avec les valeurs par défaut
+    $conf['centralAdmin'] = array_replace_recursive(
+        $centralAdminDefault,
+        $conf['centralAdmin']
+    );
+}
 
 /* ==================================================
  * 3) GÉNÉRATION DES VARIABLES CSS
@@ -98,14 +120,14 @@ add_event_handler('loc_begin_admin_page', function () {
         return;
     }
 
+    // Schéma actif
+    $scheme = pwg_get_session_var('admin_theme', 'clear');
+
     // CSS du plugin
     $template->append(
         'head_elements',
         '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/style.css">'
     );
-
-    // Schéma actif
-    $scheme = pwg_get_session_var('admin_theme', 'clear');
 
     // CSS structure
     $template->append(
