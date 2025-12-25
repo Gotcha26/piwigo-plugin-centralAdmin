@@ -24,7 +24,6 @@ $centralAdminDefault = array(
     'menubar_width'            => '205',
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
-    'alignsearch_tag_right'    => '15',
     'fade_start'               => '800',
   ),
   'colors' => array(

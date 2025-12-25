@@ -41,13 +41,6 @@ $lang['align_pluginFilter_right_tp'] =
 . "Valeur recommandée : 160 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['alignsearch_tag_right'] = 'alignsearch_tag_right';
-$lang['alignsearch_tag_right_tp'] =
-  "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie droite.\n"
-. "Décallage à droite du bord.\n"
-. "Valeur recommandée : 15 px.\n"
-. "Réservé aux utilisateurs avancés.";
-
 $lang['fade_start'] = 'Dégradé - Plein';
 $lang['fade_start_tp'] =
   "Distance sur laquelle la couleur reste unie à 100%\n"

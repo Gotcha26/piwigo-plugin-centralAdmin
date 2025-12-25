@@ -138,34 +138,6 @@
   </div>
 </div>
 
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'alignsearch_tag_right'|@translate}
-    <span class="param-help"
-          title="{'alignsearch_tag_right_tp'|@translate}"
-          aria-label="{'alignsearch_tag_right_tp'|@translate}">
-      ⓘ
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_alignsearch_tag_right"
-         name="layout[alignsearch_tag_right]"
-         min="15" max="250" step="5"
-         value="{$centralAdmin.layout.alignsearch_tag_right}"
-         disabled>
-  <div class="value">
-    <output id="alignsearch_tag_right">{$centralAdmin.layout.alignsearch_tag_right}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
 {* ===================================================== *}
 {* PARAMÈTRES COMMUNS — TOOLTIPS *}
 {* ===================================================== *}
