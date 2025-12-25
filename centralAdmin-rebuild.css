@@ -69,7 +69,7 @@ html {
   bottom: 0;
   left: max(0px, calc((100vw - var(--ca-layout-admin-width)) / 2));
   max-width: var(--ca-layout-admin-width);
-  width: var(--ca-layout-menu-width);
+  width: var(--ca-layout-menubar-width);
 }
 
 /* -- Menubar -- */
