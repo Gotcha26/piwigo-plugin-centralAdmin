@@ -21,7 +21,6 @@ global $conf, $centralAdminDefault;
 $centralAdminDefault = array(
   'layout' => array(
     'admin_width'              => '1600',
-    'admin_sidebar'            => '225',
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
     'alignsearch_tag_left'     => '240',

@@ -62,34 +62,6 @@
          data-tooltip-locked="{'central_admin_locked'|@translate}"
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
-    {'admin_sidebar'|@translate}
-    <span class="param-help"
-          title="{'admin_sidebar_tp'|@translate}"
-          aria-label="{'admin_sidebar_tp'|@translate}">
-      ⓘ
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_admin_sidebar"
-         name="layout[admin_sidebar]"
-         min="15" max="250" step="1"
-         value="{$centralAdmin.layout.admin_sidebar}"
-         disabled>
-  <div class="value">
-    <output id="admin_sidebar">{$centralAdmin.layout.admin_sidebar}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
     {'align_pluginFilter_left'|@translate}
     <span class="param-help"
           title="{'align_pluginFilter_left_tp'|@translate}"

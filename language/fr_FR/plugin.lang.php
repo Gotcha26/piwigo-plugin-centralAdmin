@@ -21,9 +21,6 @@ $lang['admin_width_tp'] =
 . "Valeur recommandée : 1600 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['admin_sidebar'] = 'admin_sidebar';
-$lang['admin_sidebar_tp'] = 'Je ne sais même plus comment l\'avoir pondu !';
-
 $lang['align_pluginFilter_left'] = 'align_pluginFilter_left';
 $lang['align_pluginFilter_left_tp'] =
   "Utile pour la page des plugins, en haut : barre des actions, partie gauche.\n"

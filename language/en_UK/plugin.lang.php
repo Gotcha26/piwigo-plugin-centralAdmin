@@ -18,9 +18,6 @@ $lang['central_admin_scheme_dark'] = '';
 $lang['admin_width'] = '';
 $lang['admin_width_tp'] = '';
 
-$lang['admin_sidebar'] = '';
-$lang['admin_sidebar_tp'] = '';
-
 $lang['align_pluginFilter_left'] = '';
 $lang['align_pluginFilter_left_tp'] = '';
 

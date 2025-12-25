@@ -204,7 +204,7 @@ html {
 /* Mode unitaire */
 .bottom-save-bar {
   right: 0px;
-  width: calc(var(--ca-layout-admin-width) - var(--ca-layout-admin-sidebar) + 20px);
+  width: calc(var(--ca-layout-admin-width) - var(--ca-layout-footer-width));
 }
 
 @media (min-width: 1600px) {
@@ -230,7 +230,7 @@ html {
 /* Paramétrage */
 .savebar-footer {
   right: 0px;
-  width: calc(var(--ca-layout-admin-width) - var(--ca-layout-admin-sidebar) + 20px);
+  width: calc(var(--ca-layout-admin-width) - var(--ca-layout-admin-width));
 }
 
 @media (min-width: 1600px) {
