@@ -49,6 +49,10 @@ html {
     rgba(0, 0, 0, 0.05) 100%
   );
 }
+
+#theAdminPage #the_page {
+  background-color: var(--ca-color-bg-content3);
+}
     
 
 /* Centrage */

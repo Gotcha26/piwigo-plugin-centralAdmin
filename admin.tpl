@@ -292,6 +292,27 @@
           data-tooltip-locked="{'central_admin_locked'|@translate}"
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
+      {'bg_clear_content2'|@translate}
+      <span class="param-help"
+            title="{'bg_clear_content2_tp'|@translate}"
+            aria-label="{'bg_clear_content2_tp'|@translate}">ⓘ</span>
+    </label>
+    <input type="color"
+          id="i_bg_clear_content2"
+          name="colors[clear][bg_content2]"
+          value="{$centralAdmin.colors.clear.bg_content2}"
+          disabled>
+    <span></span>
+  </div>
+
+  <div class="field locked">
+    <input type="checkbox"
+          class="lock-toggle"
+          checked
+          title="{'central_admin_locked'|@translate}"
+          data-tooltip-locked="{'central_admin_locked'|@translate}"
+          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
+    <label>
       {'bg_clear_content1'|@translate}
       <span class="param-help"
             title="{'bg_clear_content1_tp'|@translate}"
@@ -313,15 +334,15 @@
           data-tooltip-locked="{'central_admin_locked'|@translate}"
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
-      {'bg_clear_content2'|@translate}
+      {'bg_clear_content3'|@translate}
       <span class="param-help"
-            title="{'bg_clear_content2_tp'|@translate}"
-            aria-label="{'bg_clear_content2_tp'|@translate}">ⓘ</span>
+            title="{'bg_clear_content3_tp'|@translate}"
+            aria-label="{'bg_clear_content3_tp'|@translate}">ⓘ</span>
     </label>
     <input type="color"
-          id="i_bg_clear_content2"
-          name="colors[clear][bg_content2]"
-          value="{$centralAdmin.colors.clear.bg_content2}"
+          id="i_bg_clear_content3"
+          name="colors[clear][bg_content3]"
+          value="{$centralAdmin.colors.clear.bg_content3}"
           disabled>
     <span></span>
   </div>
@@ -393,6 +414,27 @@
           id="i_bg_dark_content1"
           name="colors[dark][bg_content1]"
           value="{$centralAdmin.colors.dark.bg_content1}"
+          disabled>
+    <span></span>
+  </div>
+
+  <div class="field locked">
+    <input type="checkbox"
+          class="lock-toggle"
+          checked
+          title="{'central_admin_locked'|@translate}"
+          data-tooltip-locked="{'central_admin_locked'|@translate}"
+          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
+    <label>
+      {'bg_dark_content3'|@translate}
+      <span class="param-help"
+            title="{'bg_dark_content3_tp'|@translate}"
+            aria-label="{'bg_dark_content3_tp'|@translate}">ⓘ</span>
+    </label>
+    <input type="color"
+          id="i_bg_dark_content3"
+          name="colors[dark][bg_content3]"
+          value="{$centralAdmin.colors.dark.bg_content3}"
           disabled>
     <span></span>
   </div>

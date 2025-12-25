@@ -42,14 +42,20 @@ $lang['messages_main_color_tp'] = '';
 $lang['error_main_color'] = '';
 $lang['error_main_color_tp'] = '';
 
+
+
 $lang['bg_clear_global'] = '';
 $lang['bg_clear_global_tp'] = '';
+
+$lang['bg_clear_content2'] = '';
+$lang['bg_clear_content2_tp'] = '';
 
 $lang['bg_clear_content1'] = '';
 $lang['bg_clear_content1_tp'] = '';
 
-$lang['bg_clear_content2'] = '';
-$lang['bg_clear_content2_tp'] = '';
+$lang['bg_clear_content3'] = '';
+$lang['bg_clear_content3_tp'] = '';
+
 
 $lang['bg_dark_global'] = '';
 $lang['bg_dark_global_tp'] = '';
@@ -59,3 +65,6 @@ $lang['bg_dark_content2_tp'] = '';
 
 $lang['bg_dark_content1'] = '';
 $lang['bg_dark_content1_tp'] = '';
+
+$lang['bg_dark_content3'] = '';
+$lang['bg_dark_content3_tp'] = '';

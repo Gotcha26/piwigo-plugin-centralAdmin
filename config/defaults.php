@@ -22,13 +22,15 @@ return array(
     ),
     'clear' => array(
       'bg_global'   => '#707070',
-      'bg_content1' => '#f8f8f8',
       'bg_content2' => '#eee',
+      'bg_content1' => '#f8f8f8',
+      'bg_content3' => '#eee',
     ),
     'dark' => array(
       'bg_global'   => '#f2f2f24d',
       'bg_content2' => '#f2f2f24d',
       'bg_content1' => '#f8f8f8',
+      'bg_content3' => '#f2f2f24d',
     ),
   ),
 );
