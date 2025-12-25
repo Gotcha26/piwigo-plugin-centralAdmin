@@ -21,44 +21,63 @@ $lang['admin_width_tp'] =
 . "Valeur recommandée : 1600 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['admin_sidebar'] = 'Menubar1';
-$lang['admin_sidebar_tp'] = 'Largeur de la partie à gauche "menubar".';
+$lang['admin_sidebar'] = 'admin_sidebar';
+$lang['admin_sidebar_tp'] = 'Je ne sais même plus comment l\'avoir pondu !';
 
 $lang['align_pluginFilter_left'] = 'align_pluginFilter_left';
-$lang['align_pluginFilter_left_tp'] = '';
+$lang['align_pluginFilter_left_tp'] =
+  "Utile pour la page des plugins, en haut : barre des actions, partie gauche.\n"
+. "Doit correspondre à la valeur de menubar.\n"
+. "Valeur recommandée : 225 px.\n"
+. "Réservé aux utilisateurs avancés.";
 
 $lang['align_pluginFilter_right'] = 'align_pluginFilter_right';
-$lang['align_pluginFilter_right_tp'] = '';
+$lang['align_pluginFilter_right_tp'] =
+  "Utile pour la page des plugins, en haut : barre des actions, partie droite.\n"
+. "Doit correspondre à la valeur de menubar.\n"
+. "Valeur recommandée : 160 px.\n"
+. "Réservé aux utilisateurs avancés.";
 
 $lang['alignsearch_tag_left'] = 'alignsearch_tag_left';
-$lang['alignsearch_tag_left_tp'] = '';
+$lang['alignsearch_tag_left_tp'] =
+  "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie gauche.\n"
+. "Doit correspondre à la valeur de menubar + 15.\n"
+. "Valeur recommandée : 240 px.\n"
+. "Réservé aux utilisateurs avancés.";
 
 $lang['alignsearch_tag_right'] = 'alignsearch_tag_right';
-$lang['alignsearch_tag_right_tp'] = '';
+$lang['alignsearch_tag_right_tp'] =
+  "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie droite.\n"
+. "Décallage à droite du bord.\n"
+. "Valeur recommandée : 15 px.\n"
+. "Réservé aux utilisateurs avancés.";
 
 $lang['footer_width'] = 'Menubar';
 $lang['footer_width_tp'] =
-  "Présenté initialement comme étant le footer...\n"
+  "Largeur de la colonne de gauche de l'administration, appelée : \"menubar\".\n"
 . "Valeur recommandée : 205 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['fade_start'] = 'Dégradé - Plein';
-$lang['fade_start_tp'] = 'Zone où la couleur reste à 100%';
+$lang['fade_start_tp'] =
+  "Distance sur laquelle la couleur reste unie à 100%\n"
+. "Valeur recommandée : 800 px.\n"
+. "Réservé aux utilisateurs avancés.";
 
-$lang['infos_main_color'] = 'infos_main_color';
+$lang['infos_main_color'] = 'Couleur du messge : infos';
 $lang['infos_main_color_tp'] = '';
 
-$lang['warning_main_color'] = 'warning_main_color';
+$lang['warning_main_color'] = 'Couleur du messge : warning';
 $lang['warning_main_color_tp'] = '';
 
-$lang['messages_main_color'] = 'messages_main_color';
+$lang['messages_main_color'] = 'Couleur du messge : main';
 $lang['messages_main_color_tp'] = '';
 
-$lang['error_main_color'] = 'error_main_color';
+$lang['error_main_color'] = 'Couleur du messge : error';
 $lang['error_main_color_tp'] = '';
 
 $lang['bg_clear_global'] = 'Arrière plan général';
-$lang['bg_clear_global_tp'] = '';
+$lang['bg_clear_global_tp'] = '... les bandes sur le coté...';
 
 $lang['bg_clear_content1'] = 'Arrière plan de l\'en-tête';
 $lang['bg_clear_content1_tp'] = '';
@@ -66,11 +85,11 @@ $lang['bg_clear_content1_tp'] = '';
 $lang['bg_clear_content2'] = 'Arrière plan des onglets';
 $lang['bg_clear_content2_tp'] = '';
 
-$lang['bg_dark_global'] = 'bg_global';
-$lang['bg_dark_global_tp'] = '';
+$lang['bg_dark_global'] = 'Arrière plan général';
+$lang['bg_dark_global_tp'] = '... les bandes sur le coté...';
 
-$lang['bg_dark_content1'] = 'bg_content1';
+$lang['bg_dark_content1'] = 'Arrière plan de l\'en-tête';
 $lang['bg_dark_content1_tp'] = '';
 
-$lang['bg_dark_content2'] = 'bg_content2';
+$lang['bg_dark_content2'] = 'Arrière plan des onglets';
 $lang['bg_dark_content2_tp'] = '';
