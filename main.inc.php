@@ -40,8 +40,8 @@ $centralAdminDefault = array(
     ),
     'dark' => array(
       'bg_global'   => '#f2f2f24d',
-      'bg_content1' => '#f8f8f8',
       'bg_content2' => '#f2f2f24d',
+      'bg_content1' => '#f8f8f8',
     ),
   ),
 );

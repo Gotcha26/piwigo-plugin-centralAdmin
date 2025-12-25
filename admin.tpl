@@ -363,15 +363,15 @@
           data-tooltip-locked="{'central_admin_locked'|@translate}"
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
-      {'bg_dark_content1'|@translate}
+      {'bg_dark_content2'|@translate}
       <span class="param-help"
-            title="{'bg_dark_content1_tp'|@translate}"
-            aria-label="{'bg_dark_content1_tp'|@translate}">ⓘ</span>
+            title="{'bg_dark_content2_tp'|@translate}"
+            aria-label="{'bg_dark_content2_tp'|@translate}">ⓘ</span>
     </label>
     <input type="color"
-          id="i_bg_dark_content1"
-          name="colors[dark][bg_content1]"
-          value="{$centralAdmin.colors.dark.bg_content1}"
+          id="i_bg_dark_content2"
+          name="colors[dark][bg_content2]"
+          value="{$centralAdmin.colors.dark.bg_content2}"
           disabled>
     <span></span>
   </div>
@@ -384,15 +384,15 @@
           data-tooltip-locked="{'central_admin_locked'|@translate}"
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
-      {'bg_dark_content2'|@translate}
+      {'bg_dark_content1'|@translate}
       <span class="param-help"
-            title="{'bg_dark_content2_tp'|@translate}"
-            aria-label="{'bg_dark_content2_tp'|@translate}">ⓘ</span>
+            title="{'bg_dark_content1_tp'|@translate}"
+            aria-label="{'bg_dark_content1_tp'|@translate}">ⓘ</span>
     </label>
     <input type="color"
-          id="i_bg_dark_content2"
-          name="colors[dark][bg_content2]"
-          value="{$centralAdmin.colors.dark.bg_content2}"
+          id="i_bg_dark_content1"
+          name="colors[dark][bg_content1]"
+          value="{$centralAdmin.colors.dark.bg_content1}"
           disabled>
     <span></span>
   </div>

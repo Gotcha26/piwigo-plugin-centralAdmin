@@ -62,7 +62,7 @@ $lang['error_main_color_tp'] = '';
 $lang['bg_clear_global'] = 'Arrière plan général';
 $lang['bg_clear_global_tp'] = '... les bandes sur le coté...';
 
-$lang['bg_clear_content1'] = 'Arrière plan de l\'en-tête';
+$lang['bg_clear_content1'] = 'Arrière plan des pages';
 $lang['bg_clear_content1_tp'] = '';
 
 $lang['bg_clear_content2'] = 'Arrière plan des onglets';
@@ -71,8 +71,8 @@ $lang['bg_clear_content2_tp'] = '';
 $lang['bg_dark_global'] = 'Arrière plan général';
 $lang['bg_dark_global_tp'] = '... les bandes sur le coté...';
 
-$lang['bg_dark_content1'] = 'Arrière plan de l\'en-tête';
-$lang['bg_dark_content1_tp'] = '';
-
-$lang['bg_dark_content2'] = 'Arrière plan des onglets';
+$lang['bg_dark_content2'] = 'Arrière plan de l\'entête des pages';
 $lang['bg_dark_content2_tp'] = '';
+
+$lang['bg_dark_content1'] = 'Arrière plan des pages';
+$lang['bg_dark_content1_tp'] = '';

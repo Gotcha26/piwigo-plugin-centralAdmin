@@ -54,8 +54,8 @@ $lang['bg_clear_content2_tp'] = '';
 $lang['bg_dark_global'] = '';
 $lang['bg_dark_global_tp'] = '';
 
-$lang['bg_dark_content1'] = '';
-$lang['bg_dark_content1_tp'] = '';
-
 $lang['bg_dark_content2'] = '';
 $lang['bg_dark_content2_tp'] = '';
+
+$lang['bg_dark_content1'] = '';
+$lang['bg_dark_content1_tp'] = '';
