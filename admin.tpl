@@ -36,10 +36,11 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'admin_width'|@translate}
-    <span class="param-help"
-          title="{'admin_width_tp'|@translate}"
-          aria-label="{'admin_width_tp'|@translate}">
+    <span class="param-help">
       ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'admin_width_tp'|@translate}
+      </span>
     </span>
   </label>
   <input type="range"
@@ -63,10 +64,11 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'menubar_width'|@translate}
-    <span class="param-help"
-          title="{'menubar_width'|@translate}"
-          aria-label="{'menubar_width'|@translate}">
+    <span class="param-help">
       ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'menubar_width_tp'|@translate}
+      </span>
     </span>
   </label>
   <input type="range"
@@ -91,10 +93,11 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'align_pluginFilter_left'|@translate}
-    <span class="param-help"
-          title="{'align_pluginFilter_left_tp'|@translate}"
-          aria-label="{'align_pluginFilter_left_tp'|@translate}">
+    <span class="param-help">
       ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'align_pluginFilter_left_tp'|@translate}
+      </span>
     </span>
   </label>
   <input type="range"
@@ -119,10 +122,11 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'align_pluginFilter_right'|@translate}
-    <span class="param-help"
-          title="{'align_pluginFilter_right_tp'|@translate}"
-          aria-label="{'align_pluginFilter_right_tp'|@translate}">
+    <span class="param-help">
       ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'align_pluginFilter_right_tp'|@translate}
+      </span>
     </span>
   </label>
   <input type="range"
@@ -153,10 +157,11 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'fade_start'|@translate}
-    <span class="param-help"
-          title="{'fade_start_tp'|@translate}"
-          aria-label="{'fade_start_tp'|@translate}">
+    <span class="param-help">
       ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'fade_start_tp'|@translate}
+      </span>
     </span>
   </label>
   <input type="range"
@@ -181,9 +186,12 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'infos_main_color'|@translate}
-    <span class="param-help"
-          title="{'infos_main_color_tp'|@translate}"
-          aria-label="{'infos_main_color_tp'|@translate}">ⓘ</span>
+    <span class="param-help">
+      ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'infos_main_color_tp'|@translate}
+      </span>
+    </span>
   </label>
   <input type="color"
          id="i_infos_main_color"
@@ -202,9 +210,12 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'warning_main_color'|@translate}
-    <span class="param-help"
-          title="{'warning_main_color_tp'|@translate}"
-          aria-label="{'warning_main_color_tp'|@translate}">ⓘ</span>
+    <span class="param-help">
+      ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'warning_main_color_tp'|@translate}
+      </span>
+    </span>
   </label>
   <input type="color"
          id="i_warning_main_color"
@@ -223,9 +234,12 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'messages_main_color'|@translate}
-    <span class="param-help"
-          title="{'messages_main_color_tp'|@translate}"
-          aria-label="{'messages_main_color_tp'|@translate}">ⓘ</span>
+    <span class="param-help">
+      ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'messages_main_color_tp'|@translate}
+      </span>
+    </span>
   </label>
   <input type="color"
          id="i_messages_main_color"
@@ -244,9 +258,12 @@
          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
   <label>
     {'error_main_color'|@translate}
-    <span class="param-help"
-          title="{'error_main_color_tp'|@translate}"
-          aria-label="{'error_main_color_tp'|@translate}">ⓘ</span>
+    <span class="param-help">
+      ⓘ
+      <span class="help-tooltip" role="tooltip">
+        {'error_main_color_tp'|@translate}
+      </span>
+    </span>
   </label>
   <input type="color"
          id="i_error_main_color_"
@@ -272,9 +289,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_clear_global'|@translate}
-      <span class="param-help"
-            title="{'bg_clear_global_tp'|@translate}"
-            aria-label="{'bg_clear_global_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_clear_global_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_clear_global"
@@ -293,9 +313,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_clear_content2'|@translate}
-      <span class="param-help"
-            title="{'bg_clear_content2_tp'|@translate}"
-            aria-label="{'bg_clear_content2_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_clear_content2_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_clear_content2"
@@ -314,9 +337,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_clear_content1'|@translate}
-      <span class="param-help"
-            title="{'bg_clear_content1_tp'|@translate}"
-            aria-label="{'bg_clear_content1_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_clear_content1_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_clear_content1"
@@ -335,9 +361,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_clear_content3'|@translate}
-      <span class="param-help"
-            title="{'bg_clear_content3_tp'|@translate}"
-            aria-label="{'bg_clear_content3_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_clear_content3_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_clear_content3"
@@ -364,9 +393,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_dark_global'|@translate}
-      <span class="param-help"
-            title="{'bg_dark_global_tp'|@translate}"
-            aria-label="{'bg_dark_global_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_dark_global_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_dark_global"
@@ -385,9 +417,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_dark_content2'|@translate}
-      <span class="param-help"
-            title="{'bg_dark_content2_tp'|@translate}"
-            aria-label="{'bg_dark_content2_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_dark_content2_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_dark_content2"
@@ -406,9 +441,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_dark_content1'|@translate}
-      <span class="param-help"
-            title="{'bg_dark_content1_tp'|@translate}"
-            aria-label="{'bg_dark_content1_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_dark_content1_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_dark_content1"
@@ -427,9 +465,12 @@
           data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
     <label>
       {'bg_dark_content3'|@translate}
-      <span class="param-help"
-            title="{'bg_dark_content3_tp'|@translate}"
-            aria-label="{'bg_dark_content3_tp'|@translate}">ⓘ</span>
+      <span class="param-help">
+        ⓘ
+        <span class="help-tooltip" role="tooltip">
+          {'bg_dark_content3_tp'|@translate}
+        </span>
+      </span>
     </label>
     <input type="color"
           id="i_bg_dark_content3"

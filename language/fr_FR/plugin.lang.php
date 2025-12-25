@@ -18,8 +18,8 @@ $lang['central_admin_scheme_dark'] = 'Spécifique au thème actif : nuit/obscure
 $lang['admin_width'] = 'Largeur maximale de l\'administration';
 $lang['admin_width_tp'] =
   "Largeur maximale de l'administration.\n"
-. "Valeur recommandée : 1600 px.\n"
-. "Réservé aux utilisateurs avancés.";
+. "Valeur recommandée : <strong>1600 px</strong>.\n"
+. "<i>Réservé aux utilisateurs avancés.</i>";
 
 $lang['align_pluginFilter_left'] = 'align_pluginFilter_left';
 $lang['align_pluginFilter_left_tp'] =

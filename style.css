@@ -52,3 +52,44 @@
 .content form {
     margin: 0 auto 0 auto;
 }
+
+.param-help {
+  position: relative;
+  cursor: help;
+}
+
+.help-tooltip {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 6px;
+  
+  background: #333;
+  color: #fff;
+  padding: .4em .6em;
+  border-radius: .3em;
+  font-size: .9em;
+  line-height: 1.4;
+  
+  min-width: 220px;
+  max-width: 320px;
+  white-space: normal;
+  z-index: 10;
+  
+  opacity: 0;
+  pointer-events: auto;  /* permet le survol de la tooltip */
+  transform: translate3d(0, -5px, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Survol icône OU tooltip → visible */
+.param-help:hover .help-tooltip,
+.help-tooltip:hover {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
