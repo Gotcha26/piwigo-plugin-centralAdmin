@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 1.0
+Version: 1.1
 Author: Gotcha
 */
 
@@ -18,33 +18,7 @@ global $conf, $centralAdminDefault;
  * 1) VALEURS PAR DÉFAUT
  * ================================================== */
 
-$centralAdminDefault = array(
-  'layout' => array(
-    'admin_width'              => '1600',
-    'menubar_width'            => '205',
-    'align_pluginFilter_left'  => '225',
-    'align_pluginFilter_right' => '160',
-    'fade_start'               => '800',
-  ),
-  'colors' => array(
-    'tooltips' => array(
-      'infos_main_color'    => '#c2f5c2',
-      'warning_main_color'  => '#ffdd99',
-      'messages_main_color' => '#bde5f8',
-      'error_main_color'    => '#ffd5dc',
-    ),
-    'clear' => array(
-      'bg_global'   => '#707070',
-      'bg_content1' => '#f8f8f8',
-      'bg_content2' => '#eee',
-    ),
-    'dark' => array(
-      'bg_global'   => '#f2f2f24d',
-      'bg_content2' => '#f2f2f24d',
-      'bg_content1' => '#f8f8f8',
-    ),
-  ),
-);
+$centralAdminDefault = include __DIR__ . '/config/defaults.php';
 
 /* ==================================================
  * 2) CHARGEMENT & INITIALISATION DE LA CONFIG
@@ -137,12 +111,6 @@ add_event_handler('loc_begin_admin_page', function () {
     $template->append(
         'head_elements',
         '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/centralAdmin-rebuild.css">'
-    );
-
-    // CSS spécifique au thème
-    $template->append(
-        'head_elements',
-        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/admin-' . $scheme . '.css">'
     );
 
     // Variables CSS dynamiques
