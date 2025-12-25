@@ -21,11 +21,11 @@ global $conf, $centralAdminDefault;
 $centralAdminDefault = array(
   'layout' => array(
     'admin_width'              => '1600',
+    'menubar_width'            => '205',
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
     'alignsearch_tag_left'     => '240',
     'alignsearch_tag_right'    => '15',
-    'footer_width'             => '205',
     'fade_start'               => '800',
   ),
   'colors' => array(

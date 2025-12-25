@@ -18,6 +18,9 @@ $lang['central_admin_scheme_dark'] = '';
 $lang['admin_width'] = '';
 $lang['admin_width_tp'] = '';
 
+$lang['menubar_width'] = '';
+$lang['menubr_width_tp'] = '';
+
 $lang['align_pluginFilter_left'] = '';
 $lang['align_pluginFilter_left_tp'] = '';
 
@@ -29,9 +32,6 @@ $lang['alignsearch_tag_left_tp'] = '';
 
 $lang['alignsearch_tag_right'] = '';
 $lang['alignsearch_tag_right_tp'] = '';
-
-$lang['footer_width'] = '';
-$lang['footer_width_tp'] = '';
 
 $lang['fade_start'] = '';
 $lang['fade_start_tp'] = '';

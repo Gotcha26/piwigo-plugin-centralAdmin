@@ -28,6 +28,12 @@ $lang['align_pluginFilter_left_tp'] =
 . "Valeur recommandée : 225 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
+$lang['menubar_width'] = 'Menubar';
+$lang['menubar_width_tp'] =
+  "Largeur de la colonne de gauche de l'administration, appelée : \"menubar\".\n"
+. "Valeur recommandée : 205 px.\n"
+. "Réservé aux utilisateurs avancés.";
+
 $lang['align_pluginFilter_right'] = 'align_pluginFilter_right';
 $lang['align_pluginFilter_right_tp'] =
   "Utile pour la page des plugins, en haut : barre des actions, partie droite.\n"
@@ -47,12 +53,6 @@ $lang['alignsearch_tag_right_tp'] =
   "Utile pour la menu \"Photos\" > page des plugins, en haut : barre des actions, partie droite.\n"
 . "Décallage à droite du bord.\n"
 . "Valeur recommandée : 15 px.\n"
-. "Réservé aux utilisateurs avancés.";
-
-$lang['footer_width'] = 'Menubar';
-$lang['footer_width_tp'] =
-  "Largeur de la colonne de gauche de l'administration, appelée : \"menubar\".\n"
-. "Valeur recommandée : 205 px.\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['fade_start'] = 'Dégradé - Plein';
