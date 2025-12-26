@@ -152,6 +152,10 @@ html {
   flex-wrap: wrap;
 }
 
+.pluginContainer.line-form .pluginBox {
+  max-width: 100%;
+}
+
 /* Cartes plugins */
 .pluginMiniBox {
   width: 323px;
