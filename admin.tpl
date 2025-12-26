@@ -11,11 +11,29 @@
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_THEME_CSS}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
 <div class="centralAdmin-container">
   <header class="ca-header">
-    <h2>{'central_admin'|@translate}</h2>
-    <p class="ca-subtitle">{'central_admin_description'|@translate}</p>
+    <div class="ca-header-main">
+      <div class="ca-header-left">
+        <h2>{'central_admin'|@translate}</h2>
+        <p class="ca-subtitle">{'central_admin_description'|@translate}</p>
+      </div>
+      <div class="ca-header-right">
+        <div class="ca-options-group">
+          <label class="ca-option-item">
+            <input type="checkbox" id="ca-browser-theme" class="ca-option-checkbox">
+            <span class="ca-option-label">Thème du navigateur</span>
+          </label>
+          <label class="ca-option-item">
+            <input type="checkbox" id="ca-single-accordion" class="ca-option-checkbox" checked>
+            <span class="ca-option-label">1 seul panneau ouvert</span>
+          </label>
+        </div>
+      </div>
+    </div>
   </header>
 
   {if isset($page.infos)}

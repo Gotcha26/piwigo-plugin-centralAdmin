@@ -9,10 +9,50 @@
   document.addEventListener('DOMContentLoaded', init);
 
   function init() {
+    initOptions();
     initAccordions();
     initLockToggles();
     initSliders();
     initColorPickers();
+  }
+
+  /* ================================================
+     OPTIONS GLOBALES
+     ================================================ */
+  function initOptions() {
+    // Option thème navigateur
+    const browserThemeCheckbox = document.getElementById('ca-browser-theme');
+    if (browserThemeCheckbox) {
+      // Charger la préférence sauvegardée
+      const useBrowserTheme = localStorage.getItem('ca-use-browser-theme') === 'true';
+      browserThemeCheckbox.checked = useBrowserTheme;
+      
+      if (useBrowserTheme) {
+        document.body.classList.add('ca-browser-theme');
+      }
+      
+      browserThemeCheckbox.addEventListener('change', () => {
+        if (browserThemeCheckbox.checked) {
+          document.body.classList.add('ca-browser-theme');
+          localStorage.setItem('ca-use-browser-theme', 'true');
+        } else {
+          document.body.classList.remove('ca-browser-theme');
+          localStorage.setItem('ca-use-browser-theme', 'false');
+        }
+      });
+    }
+
+    // Option accordion unique
+    const singleAccordionCheckbox = document.getElementById('ca-single-accordion');
+    if (singleAccordionCheckbox) {
+      // Charger la préférence sauvegardée
+      const singleAccordion = localStorage.getItem('ca-single-accordion') !== 'false';
+      singleAccordionCheckbox.checked = singleAccordion;
+      
+      singleAccordionCheckbox.addEventListener('change', () => {
+        localStorage.setItem('ca-single-accordion', singleAccordionCheckbox.checked);
+      });
+    }
   }
 
   /* ================================================
@@ -30,14 +70,37 @@
 
       header.addEventListener('click', () => {
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        const singleAccordionCheckbox = document.getElementById('ca-single-accordion');
+        const singleMode = singleAccordionCheckbox ? singleAccordionCheckbox.checked : true;
         
-        // Toggle la section actuelle (ouverture/fermeture individuelle)
+        // Si mode unitaire, fermer toutes les autres sections
+        if (singleMode && !isExpanded) {
+          sections.forEach(otherSection => {
+            if (otherSection !== section) {
+              const otherToggle = otherSection.querySelector('.ca-toggle');
+              const otherContent = otherSection.querySelector('.ca-section-content');
+              
+              if (otherToggle && otherContent && otherToggle.getAttribute('aria-expanded') === 'true') {
+                otherToggle.setAttribute('aria-expanded', 'false');
+                otherContent.style.maxHeight = '0';
+                otherContent.style.opacity = '0';
+                otherContent.style.transform = 'translateY(-10px)';
+                setTimeout(() => {
+                  if (otherToggle.getAttribute('aria-expanded') === 'false') {
+                    otherContent.style.display = 'none';
+                  }
+                }, 500);
+              }
+            }
+          });
+        }
+        
+        // Toggle la section actuelle
         if (isExpanded) {
           toggle.setAttribute('aria-expanded', 'false');
           content.style.maxHeight = '0';
           content.style.opacity = '0';
           content.style.transform = 'translateY(-10px)';
-          // Masquer après l'animation
           setTimeout(() => {
             if (toggle.getAttribute('aria-expanded') === 'false') {
               content.style.display = 'none';
@@ -46,7 +109,6 @@
         } else {
           toggle.setAttribute('aria-expanded', 'true');
           content.style.display = 'block';
-          // Forcer un reflow pour que l'animation fonctionne
           content.offsetHeight;
           content.style.maxHeight = '2000px';
           content.style.opacity = '1';

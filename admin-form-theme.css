@@ -2,15 +2,15 @@
    ADAPTATION THÈME CLEAR / DARK
    ================================================ */
 
-/* Détection du thème via l'attribut data-theme sur body */
-/* Piwigo ajoute automatiquement la classe sur le body */
+/* Par défaut, utiliser les couleurs de Piwigo */
+/* Les sélecteurs ciblent le thème Piwigo actif */
 
 /* ================================================
-   THÈME DARK (NUIT)
+   THÈME DARK (NUIT) - Piwigo
    ================================================ */
 
-body[class*="theme-dark"] .centralAdmin-container,
-body.dark-mode .centralAdmin-container {
+body[class*="theme-dark"]:not(.ca-browser-theme) .centralAdmin-container,
+body.dark-mode:not(.ca-browser-theme) .centralAdmin-container {
   
   /* Header */
   .ca-header h2 {
@@ -152,26 +152,23 @@ body.dark-mode .centralAdmin-container {
 }
 
 /* ================================================
-   THÈME CLEAR (JOUR) - Par défaut
+   THÈME CLEAR (JOUR) - Par défaut (Piwigo)
    ================================================ */
 
-/* Les styles par défaut sont déjà définis dans admin-form.css */
-/* Mais on peut ajouter des surcharges explicites si nécessaire */
-
-body:not([class*="theme-dark"]):not(.dark-mode) .centralAdmin-container {
-  /* Styles clear déjà définis par défaut */
+/* Utiliser les couleurs de Piwigo par défaut */
+body:not([class*="theme-dark"]):not(.dark-mode):not(.ca-browser-theme) .centralAdmin-container {
+  /* Styles clear déjà définis par défaut dans admin-form.css */
 }
 
 /* ================================================
-   DÉTECTION AUTOMATIQUE VIA MEDIA QUERY
+   MODE THÈME NAVIGATEUR (optionnel)
    ================================================ */
 
-/* Si l'utilisateur n'a pas de préférence dans Piwigo,
-   on peut détecter via le système d'exploitation */
-
-@media (prefers-color-scheme: dark) {
-  /* Ne s'applique que si aucune classe n'est présente sur body */
-  body:not([class*="theme"]):not(.dark-mode):not(.light-mode) .centralAdmin-container {
+/* Si l'option "Thème du navigateur" est activée */
+body.ca-browser-theme {
+  
+  @media (prefers-color-scheme: dark) {
+    .centralAdmin-container {
     
     /* Header */
     .ca-header h2 {
@@ -305,6 +302,7 @@ body:not([class*="theme-dark"]):not(.dark-mode) .centralAdmin-container {
       background: linear-gradient(135deg, #721c24 0%, #5a1419 100%);
       border-left-color: #dc3545;
       color: #f5c6cb;
+    }
     }
   }
 }
