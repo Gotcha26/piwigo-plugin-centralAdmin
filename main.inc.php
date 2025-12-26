@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 1.1
+Version: 2.0
 Author: Gotcha
 Has Settings: webmaster
 */
@@ -74,6 +74,9 @@ function central_admin_generate_css_vars(array $config)
     // Layout
     if (isset($config['layout'])) {
         foreach ($config['layout'] as $key => $value) {
+            // Ignorer hide_quick_sync (ce n'est pas une variable CSS)
+            if ($key === 'hide_quick_sync') continue;
+            
             $css .= '--ca-layout-' . str_replace('_', '-', $key) . ': ' . (int)$value . "px;\n";
         }
     }
@@ -144,4 +147,13 @@ add_event_handler('loc_begin_admin_page', function () {
         'head_elements',
         '<style id="central-admin-vars">' . $css . '</style>'
     );
+    
+    // CSS conditionnel pour masquer le bouton sync rapide
+    if (isset($conf['centralAdmin']['layout']['hide_quick_sync']) 
+        && $conf['centralAdmin']['layout']['hide_quick_sync'] === '1') {
+        $template->append(
+            'head_elements',
+            '<style>.showCreateAlbum { display: none !important; }</style>'
+        );
+    }
 });

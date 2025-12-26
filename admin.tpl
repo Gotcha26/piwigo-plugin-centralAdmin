@@ -9,530 +9,60 @@
 {/if}
 
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
+<link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
 
-<h2>{'central_admin'|@translate}</h2>
+<div class="centralAdmin-container">
+  <header class="ca-header">
+    <h2>{'central_admin'|@translate}</h2>
+    <p class="ca-subtitle">{'central_admin_description'|@translate}</p>
+  </header>
 
-{if isset($page.infos)}
-<div class="infos">
-  {foreach from=$page.infos item=info}
-    <p>{$info}</p>
-  {/foreach}
-</div>
-{/if}
-
-<form method="post" class="centralAdminForm">
-
-{* ===================================================== *}
-{* PARAMÈTRES COMMUNS — LAYOUT *}
-{* ===================================================== *}
-
-<h3>📐 {'central_admin_layout'|@translate}</h3>
-
-<div class="field">
-  <input type="checkbox"
-         class="lock-toggle"
-         title="{'central_admin_unlocked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'admin_width'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'admin_width_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_admin_width"
-         name="layout[admin_width]"
-         min="1024" max="1800" step="10"
-         value="{$centralAdmin.layout.admin_width}">
-  <div class="value">
-    <output id="admin_width">{$centralAdmin.layout.admin_width}</output>
-    <span class="unit">px</span>
+  {if isset($page.infos)}
+  <div class="ca-notification ca-notification-success">
+    {foreach from=$page.infos item=info}
+      <p>{$info}</p>
+    {/foreach}
   </div>
-</div>
+  {/if}
 
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'menubar_width'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'menubar_width_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="menubar_width"
-         name="layout[menubar_width]"
-         min="15" max="250" step="1"
-         value="{$centralAdmin.layout.menubar_width}"
-         disabled>
-  <div class="value">
-    <output id="menubar_width">{$centralAdmin.layout.menubar_width}</output>
-    <span class="unit">px</span>
+  {if isset($page.errors)}
+  <div class="ca-notification ca-notification-error">
+    {foreach from=$page.errors item=error}
+      <p>{$error}</p>
+    {/foreach}
   </div>
-</div>
+  {/if}
 
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'align_pluginFilter_left'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'align_pluginFilter_left_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_align_pluginFilter_left"
-         name="layout[align_pluginFilter_left]"
-         min="15" max="250" step="1"
-         value="{$centralAdmin.layout.align_pluginFilter_left}"
-         disabled>
-  <div class="value">
-    <output id="align_pluginFilter_left">{$centralAdmin.layout.align_pluginFilter_left}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'align_pluginFilter_right'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'align_pluginFilter_right_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_align_pluginFilter_right"
-         name="layout[align_pluginFilter_right]"
-         min="15" max="250" step="1"
-         value="{$centralAdmin.layout.align_pluginFilter_right}"
-         disabled>
-  <div class="value">
-    <output id="align_pluginFilter_right">{$centralAdmin.layout.align_pluginFilter_right}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
-{* ===================================================== *}
-{* PARAMÈTRES COMMUNS — TOOLTIPS *}
-{* ===================================================== *}
-
-<h3>💬 {'central_admin_tooltips'|@translate}</h3>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'fade_start'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'fade_start_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="range"
-         class="ca-slider"
-         id="i_fade_start"
-         name="layout[fade_start]"
-         min="800" max="1600" step="25"
-         value="{$centralAdmin.layout.fade_start}"
-         disabled>
-  <div class="value">
-    <output id="fade_start">{$centralAdmin.layout.fade_start}</output>
-    <span class="unit">px</span>
-  </div>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'infos_main_color'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'infos_main_color_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="color"
-         id="i_infos_main_color"
-         name="colors[tooltips][infos_main_color]"
-         value="{$centralAdmin.colors.tooltips.infos_main_color}"
-         disabled>
-  <span></span>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'warning_main_color'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'warning_main_color_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="color"
-         id="i_warning_main_color"
-         name="colors[tooltips][warning_main_color]"
-         value="{$centralAdmin.colors.tooltips.warning_main_color}"
-         disabled>
-  <span></span>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'messages_main_color'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'messages_main_color_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="color"
-         id="i_messages_main_color"
-         name="colors[tooltips][messages_main_color]"
-         value="{$centralAdmin.colors.tooltips.messages_main_color}"
-         disabled>
-  <span></span>
-</div>
-
-<div class="field locked">
-  <input type="checkbox"
-         class="lock-toggle"
-         checked
-         title="{'central_admin_locked'|@translate}"
-         data-tooltip-locked="{'central_admin_locked'|@translate}"
-         data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-  <label>
-    {'error_main_color'|@translate}
-    <span class="param-help">
-      ⓘ
-      <span class="help-tooltip" role="tooltip">
-        {'error_main_color_tp'|@translate}
-      </span>
-    </span>
-  </label>
-  <input type="color"
-         id="i_error_main_color_"
-         name="colors[tooltips][error_main_color]"
-         value="{$centralAdmin.colors.tooltips.error_main_color}"
-         disabled>
-  <span></span>
-</div>
-
-{* ===================================================== *}
-{* SCHÉMA CLEAR *}
-{* ===================================================== *}
-
-{if $current_scheme == 'clear'}
-  <h3>☀️ {'central_admin_scheme_clear'|@translate}</h3>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_clear_global'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_clear_global_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_clear_global"
-          name="colors[clear][bg_global]"
-          value="{$centralAdmin.colors.clear.bg_global}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_clear_content2'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_clear_content2_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_clear_content2"
-          name="colors[clear][bg_content2]"
-          value="{$centralAdmin.colors.clear.bg_content2}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_clear_content1'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_clear_content1_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_clear_content1"
-          name="colors[clear][bg_content1]"
-          value="{$centralAdmin.colors.clear.bg_content1}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_clear_content3'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_clear_content3_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_clear_content3"
-          name="colors[clear][bg_content3]"
-          value="{$centralAdmin.colors.clear.bg_content3}"
-          disabled>
-    <span></span>
-  </div>
-{/if}
-
-{* ===================================================== *}
-{* SCHÉMA DARK *}
-{* ===================================================== *}
-
-{if $current_scheme == 'dark'}
-  <h3>🌙 {'central_admin_scheme_dark'|@translate}</h3>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_dark_global'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_dark_global_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_dark_global"
-          name="colors[dark][bg_global]"
-          value="{$centralAdmin.colors.dark.bg_global}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_dark_content2'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_dark_content2_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_dark_content2"
-          name="colors[dark][bg_content2]"
-          value="{$centralAdmin.colors.dark.bg_content2}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_dark_content1'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_dark_content1_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_dark_content1"
-          name="colors[dark][bg_content1]"
-          value="{$centralAdmin.colors.dark.bg_content1}"
-          disabled>
-    <span></span>
-  </div>
-
-  <div class="field locked">
-    <input type="checkbox"
-          class="lock-toggle"
-          checked
-          title="{'central_admin_locked'|@translate}"
-          data-tooltip-locked="{'central_admin_locked'|@translate}"
-          data-tooltip-unlocked="{'central_admin_unlocked'|@translate}">
-    <label>
-      {'bg_dark_content3'|@translate}
-      <span class="param-help">
-        ⓘ
-        <span class="help-tooltip" role="tooltip">
-          {'bg_dark_content3_tp'|@translate}
-        </span>
-      </span>
-    </label>
-    <input type="color"
-          id="i_bg_dark_content3"
-          name="colors[dark][bg_content3]"
-          value="{$centralAdmin.colors.dark.bg_content3}"
-          disabled>
-    <span></span>
-  </div>
-{/if}
-
-<div class="actions">
-  <input type="submit" name="save" value="💾 {'save'|@translate}">
-  <button type="submit" name="reset" class="reset">♻ {'reset'|@translate}</button>
-</div>
-
-
-{* ===================================================== *}
-{* JS — gestion des verrous + tooltips dynamiques *}
-{* ===================================================== *}
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Gestion des verrous
-      document.querySelectorAll('.lock-toggle').forEach(toggle => {
-        const field = toggle.closest('.field');
-        const inputs = field.querySelectorAll('input:not(.lock-toggle), select, textarea');
+  <form method="post" class="ca-form" id="centralAdminForm">
     
-        const updateState = () => {
-          const isLocked = toggle.checked;
-          
-          // Mise à jour du titre
-          toggle.title = isLocked
-            ? toggle.dataset.tooltipLocked
-            : toggle.dataset.tooltipUnlocked;
+    {* Section Layout *}
+    {include file=$LAYOUT_SECTION_TPL}
     
-          // Mise à jour de la classe et du disabled
-          if (isLocked) {
-            field.classList.add('locked');
-            inputs.forEach(input => input.disabled = true);
-          } else {
-            field.classList.remove('locked');
-            inputs.forEach(input => input.disabled = false);
-          }
-        };
+    {* Section Tooltips *}
+    {include file=$TOOLTIPS_SECTION_TPL}
     
-        toggle.addEventListener('change', updateState);
-        updateState(); // État initial
-      });
+    {* Section Couleurs (Clear) *}
+    {if $current_scheme == 'clear'}
+      {include file=$COLORS_CLEAR_SECTION_TPL}
+    {/if}
     
-      // Gestion des sliders
-      document.querySelectorAll('input[type="range"]').forEach(slider => {
-        const output = slider.closest('.field').querySelector('output');
-        
-        if (!output) return;
-    
-        // Valeur initiale
-        output.textContent = slider.value;
-    
-        // Mise à jour en temps réel
-        slider.addEventListener('input', () => {
-          output.textContent = slider.value;
-        });
-      });
-    });
-</script>
+    {* Section Couleurs (Dark) *}
+    {if $current_scheme == 'dark'}
+      {include file=$COLORS_DARK_SECTION_TPL}
+    {/if}
+
+    <div class="ca-actions">
+      <button type="submit" name="save" class="ca-btn ca-btn-primary">
+        <span class="ca-icon">💾</span>
+        {'save'|@translate}
+      </button>
+      <button type="submit" name="reset" class="ca-btn ca-btn-secondary">
+        <span class="ca-icon">♻</span>
+        {'reset'|@translate}
+      </button>
+    </div>
+  </form>
+</div>
+
+{* Chargement du JavaScript *}
+<script src="{$CENTRAL_ADMIN_JS}"></script>

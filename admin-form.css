@@ -1,0 +1,572 @@
+/* ================================================
+   CENTRALADMIN - FORMULAIRE D'ADMINISTRATION
+   ================================================ */
+
+/* Container principal */
+.centralAdmin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ================================================
+   HEADER
+   ================================================ */
+
+.ca-header {
+  margin-bottom: 30px;
+}
+
+.ca-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ca-subtitle {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+/* ================================================
+   NOTIFICATIONS
+   ================================================ */
+
+.ca-notification {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.ca-notification-success {
+  background: linear-gradient(135deg, #c2f5c2 0%, #a8e6a3 100%);
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.ca-notification-error {
+  background: linear-gradient(135deg, #ffd5dc 0%, #ffb3c1 100%);
+  border-left: 4px solid #dc3545;
+  color: #721c24;
+}
+
+.ca-notification p {
+  margin: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================
+   SECTIONS (ACCORDÉONS)
+   ================================================ */
+
+.ca-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ca-section:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ca-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.ca-section-header:hover {
+  background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
+}
+
+.ca-section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-icon {
+  font-size: 20px;
+  display: inline-block;
+}
+
+.ca-toggle {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ca-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ca-chevron {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.ca-section-active .ca-chevron,
+.ca-toggle[aria-expanded="true"] .ca-chevron {
+  transform: rotate(180deg);
+}
+
+.ca-section-content {
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+  animation: expandSection 0.3s ease-out;
+}
+
+@keyframes expandSection {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+/* ================================================
+   FIELDS (CHAMPS)
+   ================================================ */
+
+.ca-field {
+  margin-bottom: 24px;
+  transition: opacity 0.2s ease;
+}
+
+.ca-field-locked {
+  opacity: 0.5;
+}
+
+.ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ca-lock {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ca-lock:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ca-lock-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.ca-lock[data-locked="false"] .ca-lock-icon {
+  transform: scale(1.1);
+}
+
+.ca-lock-placeholder {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.ca-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ca-help {
+  background: #6c757d;
+  color: white;
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: help;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.ca-help:hover {
+  background: #5a6268;
+  transform: scale(1.1);
+}
+
+.ca-help:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  background: #2c3e50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: normal;
+  max-width: 280px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: tooltipFade 0.2s ease-out;
+}
+
+@keyframes tooltipFade {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================
+   CONTRÔLES DES CHAMPS
+   ================================================ */
+
+.ca-field-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Sliders */
+.ca-slider {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(to right, #3498db, #2980b9);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.ca-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #3498db;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.ca-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.ca-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #3498db;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.ca-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.ca-slider:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #dee2e6;
+}
+
+/* Groupe valeur */
+.ca-value-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 90px;
+}
+
+.ca-input-number {
+  width: 70px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: right;
+  transition: all 0.2s ease;
+}
+
+.ca-input-number:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.ca-input-number:disabled {
+  background: #e9ecef;
+  cursor: not-allowed;
+}
+
+.ca-unit {
+  font-size: 13px;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* ================================================
+   COLOR PICKER
+   ================================================ */
+
+.ca-field-controls-color {
+  justify-content: flex-start;
+}
+
+.ca-color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.ca-color-picker-wrapper:hover {
+  border-color: #adb5bd;
+}
+
+.ca-color-picker {
+  width: 50px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.ca-color-picker:hover {
+  transform: scale(1.05);
+}
+
+.ca-color-picker:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ca-color-input {
+  width: 90px;
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.ca-color-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.ca-color-input:disabled {
+  background: #e9ecef;
+  cursor: not-allowed;
+}
+
+/* ================================================
+   SWITCH (CHECKBOX)
+   ================================================ */
+
+.ca-field-checkbox .ca-field-controls {
+  justify-content: flex-start;
+}
+
+.ca-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.ca-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.ca-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 28px;
+}
+
+.ca-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ca-switch input:checked + .ca-switch-slider {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.ca-switch input:checked + .ca-switch-slider:before {
+  transform: translateX(24px);
+}
+
+.ca-switch:hover .ca-switch-slider {
+  opacity: 0.9;
+}
+
+/* ================================================
+   BOUTONS D'ACTION
+   ================================================ */
+
+.ca-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 30px;
+  margin-top: 30px;
+  border-top: 2px solid #e9ecef;
+}
+
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ca-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ca-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ca-btn-primary {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.ca-btn-primary:hover {
+  background: linear-gradient(135deg, #2980b9, #21618c);
+}
+
+.ca-btn-secondary {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  color: white;
+}
+
+.ca-btn-secondary:hover {
+  background: linear-gradient(135deg, #7f8c8d, #6c7a7b);
+}
+
+/* ================================================
+   RESPONSIVE
+   ================================================ */
+
+@media (max-width: 768px) {
+  .ca-field-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ca-value-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ca-input-number {
+    flex: 1;
+  }
+
+  .ca-actions {
+    flex-direction: column;
+  }
+
+  .ca-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -68,3 +68,10 @@ $lang['bg_dark_content1_tp'] = '';
 
 $lang['bg_dark_content3'] = '';
 $lang['bg_dark_content3_tp'] = '';
+
+
+
+$lang['central_admin_description'] = '';
+
+$lang['hide_quick_sync_button'] = '';
+$lang['hide_quick_sync_button_tp'] = '';

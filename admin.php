@@ -44,8 +44,18 @@ if (isset($_POST['save'])) {
     // Mise à jour des valeurs layout envoyées
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
         foreach ($_POST['layout'] as $key => $value) {
-            $newConfig['layout'][$key] = trim($value);
+            // Traitement spécial pour le checkbox
+            if ($key === 'hide_quick_sync') {
+                $newConfig['layout'][$key] = $value;
+            } else {
+                $newConfig['layout'][$key] = trim($value);
+            }
         }
+    }
+    
+    // Gestion du checkbox non coché (non envoyé)
+    if (!isset($_POST['layout']['hide_quick_sync'])) {
+        $newConfig['layout']['hide_quick_sync'] = '0';
     }
     
     // Mise à jour des valeurs colors envoyées
@@ -87,6 +97,8 @@ if (isset($_POST['reset'])) {
  *  TRANSMISSION AU TEMPLATE
  * =============================== */
 
+$plugin_path = get_root_url() . 'plugins/centralAdmin/';
+
 // Transmettre TOUT ce dont le template a besoin
 $template->assign(array(
     // Configuration complète
@@ -99,8 +111,18 @@ $template->assign(array(
     // Schéma de couleur actuel (CRITIQUE pour afficher les bons champs)
     'current_scheme' => $current_scheme,
     
-    // CSS du formulaire
-    'CENTRAL_ADMIN_CSS' => get_root_url() . 'plugins/centralAdmin/style.css',
+    // CSS
+    'CENTRAL_ADMIN_CSS' => $plugin_path . 'style.css',
+    'CENTRAL_ADMIN_FORM_CSS' => $plugin_path . 'admin-form.css',
+    
+    // JavaScript
+    'CENTRAL_ADMIN_JS' => $plugin_path . 'admin-form.js',
+    
+    // Chemins des templates de sections
+    'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',
+    'TOOLTIPS_SECTION_TPL' => dirname(__FILE__) . '/sections/tooltips.tpl',
+    'COLORS_CLEAR_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_clear.tpl',
+    'COLORS_DARK_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_dark.tpl',
 ));
 
 // Template admin

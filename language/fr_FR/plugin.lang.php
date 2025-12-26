@@ -85,3 +85,13 @@ $lang['bg_dark_content1_tp'] = 'Espace utilisé par les options / page.';
 
 $lang['bg_dark_content3'] = 'Arrière plan des pages (inutilisé)';
 $lang['bg_dark_content3_tp'] = 'Espace parfois restant sous les options.';
+
+
+
+$lang['central_admin_description'] = 'Personnalisez l\'apparence de votre interface d\'administration';
+
+$lang['hide_quick_sync_button'] = 'Masquer le bouton de synchronisation rapide';
+$lang['hide_quick_sync_button_tp'] = 
+  "Active la règle CSS pour masquer le bouton « Créer un album »\n"
+. "sur la page de synchronisation.\n"
+. "Utile si vous préférez une interface plus épurée.";

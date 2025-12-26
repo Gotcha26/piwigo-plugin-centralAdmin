@@ -12,6 +12,7 @@ return array(
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
     'fade_start'               => '800',
+    'hide_quick_sync'          => '0',  // Nouvelle option
   ),
   'colors' => array(
     'tooltips' => array(
@@ -22,9 +23,9 @@ return array(
     ),
     'clear' => array(
       'bg_global'   => '#707070',
-      'bg_content2' => '#eee',
+      'bg_content2' => '#eeeeee',
       'bg_content1' => '#f8f8f8',
-      'bg_content3' => '#eee',
+      'bg_content3' => '#eeeeee',
     ),
     'dark' => array(
       'bg_global'   => '#f2f2f24d',
