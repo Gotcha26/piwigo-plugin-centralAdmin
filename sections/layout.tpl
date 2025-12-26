@@ -19,10 +19,12 @@
         </button>
         <label class="ca-label">
           {'admin_width'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'admin_width_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -52,10 +54,12 @@
         </button>
         <label class="ca-label">
           {'menubar_width'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'menubar_width_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -87,10 +91,12 @@
         </button>
         <label class="ca-label">
           {'align_pluginFilter_left'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'align_pluginFilter_left_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -122,10 +128,12 @@
         </button>
         <label class="ca-label">
           {'align_pluginFilter_right'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'align_pluginFilter_right_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -157,10 +165,12 @@
         </button>
         <label class="ca-label">
           {'hide_quick_sync_button'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'hide_quick_sync_button_tp'|@translate}">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help" data-tooltip="{'hide_quick_sync_button_tp'|@translate}">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'hide_quick_sync_button_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls">

@@ -7,8 +7,22 @@ global $template, $conf, $page, $centralAdminDefault;
  *  DÉTECTION DU SCHÉMA ACTUEL
  * =============================== */
 
-// Récupérer le schéma de couleur actif (clear ou dark)
-$current_scheme = pwg_get_session_var('admin_theme', 'clear');
+// Récupérer le thème admin actif
+// Piwigo stocke cette info dans la session
+$current_scheme = 'clear'; // Valeur par défaut
+
+// Méthode 1 : Via la session Piwigo
+if (isset($_SESSION['pwg_admin_theme'])) {
+    $current_scheme = $_SESSION['pwg_admin_theme'];
+}
+// Méthode 2 : Via pwg_get_session_var (fonction Piwigo)
+elseif (function_exists('pwg_get_session_var')) {
+    $current_scheme = pwg_get_session_var('admin_theme', 'clear');
+}
+// Méthode 3 : Via les préférences utilisateur
+elseif (isset($user['admin_theme'])) {
+    $current_scheme = $user['admin_theme'];
+}
 
 /* ===============================
  *  CONFIGURATION
@@ -98,34 +112,41 @@ if (isset($_POST['reset'])) {
  * =============================== */
 
 $plugin_path = get_root_url() . 'plugins/centralAdmin/';
+$assets_path = $plugin_path . 'assets/';
 
 // Transmettre TOUT ce dont le template a besoin
 $template->assign(array(
     // Configuration complète
     'centralAdmin' => $centralAdmin,
     
-    // Raccourcis pour faciliter l'accès dans le template
+    // Raccourcis
     'layout' => $centralAdmin['layout'],
     'colors' => $centralAdmin['colors'],
-    
-    // Schéma de couleur actuel (CRITIQUE pour afficher les bons champs)
     'current_scheme' => $current_scheme,
     
-    // CSS
-    'CENTRAL_ADMIN_CSS' => $plugin_path . 'style.css',
-    'CENTRAL_ADMIN_FORM_CSS' => $plugin_path . 'admin-form.css',
-    'CENTRAL_ADMIN_THEME_CSS' => $plugin_path . 'admin-form-theme.css',
+    // CSS - CHEMINS MIS À JOUR
+    'CENTRAL_ADMIN_CSS' => $assets_path . 'css/sandbox.css',
+    'CENTRAL_ADMIN_FORM_CSS' => $assets_path . 'css/admin-form.css',
+    'CENTRAL_ADMIN_THEME_CSS' => $assets_path . 'css/admin-form-theme.css',
     
-    // JavaScript
-    'CENTRAL_ADMIN_JS' => $plugin_path . 'admin-form.js',
-    'CENTRAL_ADMIN_PREVIEW_JS' => $plugin_path . 'admin-form-preview.js',
+    // JavaScript - CHEMINS MIS À JOUR
+    'CENTRAL_ADMIN_JS' => $assets_path . 'js/admin-form.js',
+    'CENTRAL_ADMIN_PREVIEW_JS' => $assets_path . 'js/admin-form-preview.js',
     
-    // Chemins des templates de sections
+    // Sections templates (chemins inchangés)
     'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',
     'TOOLTIPS_SECTION_TPL' => dirname(__FILE__) . '/sections/tooltips.tpl',
     'COLORS_CLEAR_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_clear.tpl',
     'COLORS_DARK_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_dark.tpl',
 ));
+
+// Injecter une classe sur le body pour le thème
+$template->append(
+    'head_elements',
+    '<script>document.addEventListener("DOMContentLoaded", function() {
+        document.body.classList.add("ca-admin-theme-' . $current_scheme . '");
+    });</script>'
+);
 
 // Template admin
 $template->set_filenames(array(

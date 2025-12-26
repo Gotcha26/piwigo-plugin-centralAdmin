@@ -19,10 +19,12 @@
         </button>
         <label class="ca-label">
           {'bg_clear_global'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'bg_clear_global_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -52,10 +54,12 @@
         </button>
         <label class="ca-label">
           {'bg_clear_content2'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'bg_clear_content2_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -85,10 +89,12 @@
         </button>
         <label class="ca-label">
           {'bg_clear_content1'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'bg_clear_content1_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -118,10 +124,12 @@
         </button>
         <label class="ca-label">
           {'bg_clear_content3'|@translate}
-          <button type="button" class="ca-help">
-            ⓘ
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
             <span class="help-tooltip">{'bg_clear_content3_tp'|@translate}</span>
-          </button>
+          </span>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">

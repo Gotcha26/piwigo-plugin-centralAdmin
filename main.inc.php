@@ -4,9 +4,10 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 2.2
+Version: 2.3
+Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
-Has Settings: webmaster
+Has Settings: true
 */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
@@ -125,17 +126,20 @@ add_event_handler('loc_begin_admin_page', function () {
 
     // Schéma actif
     $scheme = pwg_get_session_var('admin_theme', 'clear');
+    
+    // CHEMINS MIS À JOUR
+    $assets_path = get_root_url() . 'plugins/centralAdmin/assets/';
 
     // CSS du plugin
     $template->append(
         'head_elements',
-        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/style.css">'
+        '<link rel="stylesheet" href="' . $assets_path . 'css/style.css">'
     );
 
     // CSS structure
     $template->append(
         'head_elements',
-        '<link rel="stylesheet" href="' . get_root_url() . 'plugins/centralAdmin/centralAdmin-rebuild.css">'
+        '<link rel="stylesheet" href="' . $assets_path . 'css/centralAdmin-rebuild.css">'
     );
 
     // Variables CSS dynamiques

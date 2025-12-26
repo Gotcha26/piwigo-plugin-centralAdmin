@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_THEME_CSS}">
+
+{* Spectrum Color Picker *}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
