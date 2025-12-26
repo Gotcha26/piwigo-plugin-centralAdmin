@@ -19,7 +19,10 @@
         </button>
         <label class="ca-label">
           {'fade_start'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'fade_start_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'fade_start_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -51,7 +54,10 @@
         </button>
         <label class="ca-label">
           {'infos_main_color'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'infos_main_color_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'infos_main_color_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -81,7 +87,10 @@
         </button>
         <label class="ca-label">
           {'warning_main_color'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'warning_main_color_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'warning_main_color_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -111,7 +120,10 @@
         </button>
         <label class="ca-label">
           {'messages_main_color'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'messages_main_color_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'messages_main_color_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -141,7 +153,10 @@
         </button>
         <label class="ca-label">
           {'error_main_color'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'error_main_color_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'error_main_color_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">

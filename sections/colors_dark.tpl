@@ -19,7 +19,10 @@
         </button>
         <label class="ca-label">
           {'bg_dark_global'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'bg_dark_global_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'bg_dark_global_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -49,7 +52,10 @@
         </button>
         <label class="ca-label">
           {'bg_dark_content2'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'bg_dark_content2_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'bg_dark_content2_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -79,7 +85,10 @@
         </button>
         <label class="ca-label">
           {'bg_dark_content1'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'bg_dark_content1_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'bg_dark_content2_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">
@@ -109,7 +118,10 @@
         </button>
         <label class="ca-label">
           {'bg_dark_content3'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'bg_dark_content3_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'bg_dark_content2_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls ca-field-controls-color">

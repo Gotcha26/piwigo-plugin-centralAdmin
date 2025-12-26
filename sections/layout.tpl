@@ -19,7 +19,10 @@
         </button>
         <label class="ca-label">
           {'admin_width'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'admin_width_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'admin_width_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -27,14 +30,14 @@
                class="ca-slider"
                id="admin_width_range"
                name="layout[admin_width]"
-               min="1024" max="1800" step="10"
+               min="1024" max="1800" step="1"
                value="{$centralAdmin.layout.admin_width}"
                data-output="admin_width_value">
         <div class="ca-value-group">
           <input type="number" 
                  class="ca-input-number"
                  id="admin_width_value"
-                 min="1024" max="1800" step="10"
+                 min="1024" max="1800" step="1"
                  value="{$centralAdmin.layout.admin_width}">
           <span class="ca-unit">px</span>
         </div>
@@ -49,7 +52,10 @@
         </button>
         <label class="ca-label">
           {'menubar_width'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'menubar_width_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'menubar_width_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -81,7 +87,10 @@
         </button>
         <label class="ca-label">
           {'align_pluginFilter_left'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'align_pluginFilter_left_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'align_pluginFilter_left_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -113,7 +122,10 @@
         </button>
         <label class="ca-label">
           {'align_pluginFilter_right'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'align_pluginFilter_right_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help">
+            ⓘ
+            <span class="help-tooltip">{'align_pluginFilter_right_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">
@@ -140,10 +152,15 @@
     {* Option supplémentaire : masquer bouton sync rapide *}
     <div class="ca-field ca-field-checkbox">
       <div class="ca-field-header">
-        <span class="ca-lock-placeholder"></span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_unlocked'|@translate}" style="visibility: hidden;">
+          <span class="ca-lock-icon">🔓</span>
+        </button>
         <label class="ca-label">
           {'hide_quick_sync_button'|@translate}
-          <button type="button" class="ca-help" data-tooltip="{'hide_quick_sync_button_tp'|@translate}">ⓘ</button>
+          <button type="button" class="ca-help" data-tooltip="{'hide_quick_sync_button_tp'|@translate}">
+            ⓘ
+            <span class="help-tooltip">{'hide_quick_sync_button_tp'|@translate}</span>
+          </button>
         </label>
       </div>
       <div class="ca-field-controls">

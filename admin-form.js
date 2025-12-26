@@ -31,26 +31,26 @@
       header.addEventListener('click', () => {
         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
         
-        // Fermer toutes les autres sections
-        sections.forEach(otherSection => {
-          if (otherSection !== section) {
-            const otherToggle = otherSection.querySelector('.ca-toggle');
-            const otherContent = otherSection.querySelector('.ca-section-content');
-            
-            if (otherToggle && otherContent) {
-              otherToggle.setAttribute('aria-expanded', 'false');
-              otherContent.style.display = 'none';
-            }
-          }
-        });
-        
-        // Toggle la section actuelle
+        // Toggle la section actuelle (ouverture/fermeture individuelle)
         if (isExpanded) {
           toggle.setAttribute('aria-expanded', 'false');
-          content.style.display = 'none';
+          content.style.maxHeight = '0';
+          content.style.opacity = '0';
+          content.style.transform = 'translateY(-10px)';
+          // Masquer après l'animation
+          setTimeout(() => {
+            if (toggle.getAttribute('aria-expanded') === 'false') {
+              content.style.display = 'none';
+            }
+          }, 500);
         } else {
           toggle.setAttribute('aria-expanded', 'true');
           content.style.display = 'block';
+          // Forcer un reflow pour que l'animation fonctionne
+          content.offsetHeight;
+          content.style.maxHeight = '2000px';
+          content.style.opacity = '1';
+          content.style.transform = 'translateY(0)';
         }
       });
     });

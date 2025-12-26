@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
+<link rel="stylesheet" href="{$CENTRAL_ADMIN_THEME_CSS}">
 
 <div class="centralAdmin-container">
   <header class="ca-header">
@@ -66,3 +67,4 @@
 
 {* Chargement du JavaScript *}
 <script src="{$CENTRAL_ADMIN_JS}"></script>
+<script src="{$CENTRAL_ADMIN_PREVIEW_JS}"></script>

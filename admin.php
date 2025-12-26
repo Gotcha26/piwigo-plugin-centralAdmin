@@ -114,9 +114,11 @@ $template->assign(array(
     // CSS
     'CENTRAL_ADMIN_CSS' => $plugin_path . 'style.css',
     'CENTRAL_ADMIN_FORM_CSS' => $plugin_path . 'admin-form.css',
+    'CENTRAL_ADMIN_THEME_CSS' => $plugin_path . 'admin-form-theme.css',
     
     // JavaScript
     'CENTRAL_ADMIN_JS' => $plugin_path . 'admin-form.js',
+    'CENTRAL_ADMIN_PREVIEW_JS' => $plugin_path . 'admin-form-preview.js',
     
     // Chemins des templates de sections
     'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',

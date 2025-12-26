@@ -1,0 +1,310 @@
+/* ================================================
+   ADAPTATION THÈME CLEAR / DARK
+   ================================================ */
+
+/* Détection du thème via l'attribut data-theme sur body */
+/* Piwigo ajoute automatiquement la classe sur le body */
+
+/* ================================================
+   THÈME DARK (NUIT)
+   ================================================ */
+
+body[class*="theme-dark"] .centralAdmin-container,
+body.dark-mode .centralAdmin-container {
+  
+  /* Header */
+  .ca-header h2 {
+    color: #e9ecef;
+  }
+  
+  .ca-subtitle {
+    color: #adb5bd;
+  }
+  
+  /* Sections */
+  .ca-section {
+    background: #2c3e50;
+    border-color: #4a5568;
+  }
+  
+  .ca-section-header {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+  }
+  
+  .ca-section-header:hover {
+    background: linear-gradient(135deg, #3d5a70 0%, #34495e 100%);
+  }
+  
+  .ca-section-title {
+    color: #e9ecef;
+  }
+  
+  .ca-section-content {
+    border-top-color: #4a5568;
+    background: #2c3e50;
+  }
+  
+  /* Labels */
+  .ca-label {
+    color: #cbd5e0;
+  }
+  
+  /* Inputs */
+  .ca-input-number {
+    background: #1a252f;
+    border-color: #4a5568;
+    color: #e9ecef;
+  }
+  
+  .ca-input-number:focus {
+    border-color: #3498db;
+    background: #243447;
+  }
+  
+  .ca-input-number:disabled {
+    background: #1a252f;
+    color: #6c757d;
+  }
+  
+  /* Color picker wrapper */
+  .ca-color-picker-wrapper {
+    background: #1a252f;
+    border-color: #4a5568;
+  }
+  
+  .ca-color-input {
+    background: #1a252f;
+    border-color: #4a5568;
+    color: #e9ecef;
+  }
+  
+  .ca-color-input:focus {
+    border-color: #3498db;
+    background: #243447;
+  }
+  
+  .ca-color-input:disabled {
+    background: #1a252f;
+    color: #6c757d;
+  }
+  
+  /* Unit */
+  .ca-unit {
+    color: #adb5bd;
+  }
+  
+  /* Slider track */
+  .ca-slider {
+    background: linear-gradient(to right, #3498db, #2980b9);
+  }
+  
+  .ca-slider:disabled {
+    background: #4a5568;
+  }
+  
+  /* Toggle button */
+  .ca-toggle:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Lock button */
+  .ca-lock:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Help tooltip */
+  .ca-help {
+    background: #5a6c7d;
+  }
+  
+  .ca-help:hover {
+    background: #4a5a6b;
+  }
+  
+  .ca-help .help-tooltip {
+    background: #1a252f;
+    color: #e9ecef;
+    border: 1px solid #4a5568;
+  }
+  
+  /* Switch */
+  .ca-switch-slider {
+    background-color: #4a5568;
+  }
+  
+  /* Actions */
+  .ca-actions {
+    border-top-color: #4a5568;
+  }
+  
+  /* Notifications */
+  .ca-notification-success {
+    background: linear-gradient(135deg, #155724 0%, #0f4419 100%);
+    border-left-color: #28a745;
+    color: #c3e6cb;
+  }
+  
+  .ca-notification-error {
+    background: linear-gradient(135deg, #721c24 0%, #5a1419 100%);
+    border-left-color: #dc3545;
+    color: #f5c6cb;
+  }
+}
+
+/* ================================================
+   THÈME CLEAR (JOUR) - Par défaut
+   ================================================ */
+
+/* Les styles par défaut sont déjà définis dans admin-form.css */
+/* Mais on peut ajouter des surcharges explicites si nécessaire */
+
+body:not([class*="theme-dark"]):not(.dark-mode) .centralAdmin-container {
+  /* Styles clear déjà définis par défaut */
+}
+
+/* ================================================
+   DÉTECTION AUTOMATIQUE VIA MEDIA QUERY
+   ================================================ */
+
+/* Si l'utilisateur n'a pas de préférence dans Piwigo,
+   on peut détecter via le système d'exploitation */
+
+@media (prefers-color-scheme: dark) {
+  /* Ne s'applique que si aucune classe n'est présente sur body */
+  body:not([class*="theme"]):not(.dark-mode):not(.light-mode) .centralAdmin-container {
+    
+    /* Header */
+    .ca-header h2 {
+      color: #e9ecef;
+    }
+    
+    .ca-subtitle {
+      color: #adb5bd;
+    }
+    
+    /* Sections */
+    .ca-section {
+      background: #2c3e50;
+      border-color: #4a5568;
+    }
+    
+    .ca-section-header {
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    }
+    
+    .ca-section-header:hover {
+      background: linear-gradient(135deg, #3d5a70 0%, #34495e 100%);
+    }
+    
+    .ca-section-title {
+      color: #e9ecef;
+    }
+    
+    .ca-section-content {
+      border-top-color: #4a5568;
+      background: #2c3e50;
+    }
+    
+    /* Labels */
+    .ca-label {
+      color: #cbd5e0;
+    }
+    
+    /* Inputs */
+    .ca-input-number {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .ca-input-number:focus {
+      border-color: #3498db;
+      background: #243447;
+    }
+    
+    .ca-input-number:disabled {
+      background: #1a252f;
+      color: #6c757d;
+    }
+    
+    /* Color picker wrapper */
+    .ca-color-picker-wrapper {
+      background: #1a252f;
+      border-color: #4a5568;
+    }
+    
+    .ca-color-input {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .ca-color-input:focus {
+      border-color: #3498db;
+      background: #243447;
+    }
+    
+    .ca-color-input:disabled {
+      background: #1a252f;
+      color: #6c757d;
+    }
+    
+    /* Unit */
+    .ca-unit {
+      color: #adb5bd;
+    }
+    
+    /* Slider track */
+    .ca-slider:disabled {
+      background: #4a5568;
+    }
+    
+    /* Toggle button */
+    .ca-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    /* Lock button */
+    .ca-lock:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    /* Help tooltip */
+    .ca-help {
+      background: #5a6c7d;
+    }
+    
+    .ca-help:hover {
+      background: #4a5a6b;
+    }
+    
+    .ca-help .help-tooltip {
+      background: #1a252f;
+      color: #e9ecef;
+      border: 1px solid #4a5568;
+    }
+    
+    /* Switch */
+    .ca-switch-slider {
+      background-color: #4a5568;
+    }
+    
+    /* Actions */
+    .ca-actions {
+      border-top-color: #4a5568;
+    }
+    
+    /* Notifications */
+    .ca-notification-success {
+      background: linear-gradient(135deg, #155724 0%, #0f4419 100%);
+      border-left-color: #28a745;
+      color: #c3e6cb;
+    }
+    
+    .ca-notification-error {
+      background: linear-gradient(135deg, #721c24 0%, #5a1419 100%);
+      border-left-color: #dc3545;
+      color: #f5c6cb;
+    }
+  }
+}
