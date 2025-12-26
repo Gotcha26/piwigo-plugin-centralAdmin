@@ -9,11 +9,28 @@
   document.addEventListener('DOMContentLoaded', init);
 
   function init() {
+    console.log('[CentralAdmin] Initialisation...');
     initOptions();
     initAccordions();
     initLockToggles();
     initSliders();
-    initColorPickers();
+    
+    // Attendre que Spectrum soit chargé
+    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
+      console.log('[CentralAdmin] Spectrum détecté, initialisation des color pickers');
+      initColorPickers();
+    } else {
+      console.warn('[CentralAdmin] Spectrum non disponible, attente...');
+      // Réessayer après un délai
+      setTimeout(function() {
+        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
+          console.log('[CentralAdmin] Spectrum chargé avec délai, initialisation');
+          initColorPickers();
+        } else {
+          console.error('[CentralAdmin] Spectrum toujours non disponible après délai');
+        }
+      }, 500);
+    }
   }
 
   /* ================================================
@@ -23,7 +40,6 @@
     // Option thème navigateur
     const browserThemeCheckbox = document.getElementById('ca-browser-theme');
     if (browserThemeCheckbox) {
-      // Charger la préférence sauvegardée
       const useBrowserTheme = localStorage.getItem('ca-use-browser-theme') === 'true';
       browserThemeCheckbox.checked = useBrowserTheme;
       
@@ -35,9 +51,11 @@
         if (browserThemeCheckbox.checked) {
           document.body.classList.add('ca-browser-theme');
           localStorage.setItem('ca-use-browser-theme', 'true');
+          console.log('[CentralAdmin] Thème navigateur activé');
         } else {
           document.body.classList.remove('ca-browser-theme');
           localStorage.setItem('ca-use-browser-theme', 'false');
+          console.log('[CentralAdmin] Thème navigateur désactivé, retour au thème Piwigo');
         }
       });
     }
@@ -45,7 +63,6 @@
     // Option accordion unique
     const singleAccordionCheckbox = document.getElementById('ca-single-accordion');
     if (singleAccordionCheckbox) {
-      // Charger la préférence sauvegardée
       const singleAccordion = localStorage.getItem('ca-single-accordion') !== 'false';
       singleAccordionCheckbox.checked = singleAccordion;
       
@@ -85,6 +102,9 @@
                 otherContent.style.maxHeight = '0';
                 otherContent.style.opacity = '0';
                 otherContent.style.transform = 'translateY(-10px)';
+                otherContent.style.paddingTop = '0';
+                otherContent.style.paddingBottom = '0';
+                otherContent.style.borderTopWidth = '0';
                 setTimeout(() => {
                   if (otherToggle.getAttribute('aria-expanded') === 'false') {
                     otherContent.style.display = 'none';
@@ -101,6 +121,9 @@
           content.style.maxHeight = '0';
           content.style.opacity = '0';
           content.style.transform = 'translateY(-10px)';
+          content.style.paddingTop = '0';
+          content.style.paddingBottom = '0';
+          content.style.borderTopWidth = '0';
           setTimeout(() => {
             if (toggle.getAttribute('aria-expanded') === 'false') {
               content.style.display = 'none';
@@ -109,6 +132,9 @@
         } else {
           toggle.setAttribute('aria-expanded', 'true');
           content.style.display = 'block';
+          content.style.paddingTop = '';
+          content.style.paddingBottom = '';
+          content.style.borderTopWidth = '';
           content.offsetHeight;
           content.style.maxHeight = '2000px';
           content.style.opacity = '1';
@@ -134,29 +160,28 @@
         const isLocked = lock.getAttribute('data-locked') === 'true';
         const newLockedState = !isLocked;
         
-        // Mettre à jour l'état du verrou
         lock.setAttribute('data-locked', newLockedState);
-        lock.title = newLockedState 
-          ? lock.getAttribute('data-tooltip-locked') || 'Verrouillé'
-          : lock.getAttribute('data-tooltip-unlocked') || 'Déverrouillé';
+        lock.title = newLockedState ? 'Verrouillé' : 'Déverrouillé';
         
-        // Mettre à jour l'icône
         const icon = lock.querySelector('.ca-lock-icon');
         if (icon) {
           icon.textContent = newLockedState ? '🔒' : '🔓';
         }
         
-        // Gérer la classe CSS
         if (newLockedState) {
           field.classList.add('ca-field-locked');
         } else {
           field.classList.remove('ca-field-locked');
         }
         
-        // Activer/désactiver les inputs
         const inputs = field.querySelectorAll('input:not(.ca-lock), select, textarea');
         inputs.forEach(input => {
           input.disabled = newLockedState;
+          
+          // Si c'est un color picker Spectrum, le désactiver aussi
+          if (input.classList.contains('ca-color-input') && typeof jQuery !== 'undefined') {
+            jQuery(input).spectrum(newLockedState ? 'disable' : 'enable');
+          }
         });
       });
     });
@@ -175,12 +200,10 @@
       const numberInput = document.getElementById(outputId);
       if (!numberInput) return;
       
-      // Mise à jour du number input quand le slider change
       slider.addEventListener('input', () => {
         numberInput.value = slider.value;
       });
       
-      // Mise à jour du slider quand le number input change
       numberInput.addEventListener('input', () => {
         const value = parseInt(numberInput.value, 10);
         const min = parseInt(slider.min, 10);
@@ -191,7 +214,6 @@
         }
       });
       
-      // Validation au blur
       numberInput.addEventListener('blur', () => {
         let value = parseInt(numberInput.value, 10);
         const min = parseInt(slider.min, 10);
@@ -212,50 +234,69 @@
   }
 
   /* ================================================
-     COLOR PICKERS
+     COLOR PICKERS AVEC SPECTRUM
      ================================================ */
   function initColorPickers() {
     const colorPickers = document.querySelectorAll('.ca-color-picker');
+    let initCount = 0;
     
     colorPickers.forEach(picker => {
       const pickerId = picker.id;
       const textInputId = pickerId.replace('_picker', '_text');
       const textInput = document.getElementById(textInputId);
       
-      if (!textInput) return;
+      if (!textInput) {
+        console.warn('[CentralAdmin] Input texte non trouvé pour', pickerId);
+        return;
+      }
       
-      // Mise à jour du text input quand le color picker change
-      picker.addEventListener('input', () => {
-        textInput.value = picker.value.toUpperCase();
-      });
+      // Vérifier jQuery et Spectrum
+      if (typeof jQuery === 'undefined' || typeof jQuery.fn.spectrum === 'undefined') {
+        console.error('[CentralAdmin] jQuery ou Spectrum non disponible');
+        return;
+      }
       
-      // Mise à jour du color picker quand le text input change
-      textInput.addEventListener('input', () => {
-        const value = textInput.value.trim();
-        if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
-          picker.value = value;
+      // Cacher le picker natif
+      picker.style.display = 'none';
+      
+      // Initialiser Spectrum
+      jQuery(textInput).spectrum({
+        color: textInput.value || '#000000',
+        showInput: true,
+        showInitial: true,
+        showPalette: true,
+        showButtons: false,
+        preferredFormat: "hex",
+        clickoutFiresChange: true,
+        disabled: textInput.disabled,
+        containerClassName: 'ca-spectrum-container',
+        replacerClassName: 'ca-spectrum-replacer',
+        palette: [
+          ["#000","#444","#666","#999","#ccc","#eee","#f3f3f3","#fff"],
+          ["#f00","#f90","#ff0","#0f0","#0ff","#00f","#90f","#f0f"],
+          ["#f4cccc","#fce5cd","#fff2cc","#d9ead3","#d0e0e3","#cfe2f3","#d9d2e9","#ead1dc"],
+          ["#ea9999","#f9cb9c","#ffe599","#b6d7a8","#a2c4c9","#9fc5e8","#b4a7d6","#d5a6bd"],
+          ["#e06666","#f6b26b","#ffd966","#93c47d","#76a5af","#6fa8dc","#8e7cc3","#c27ba0"]
+        ],
+        move: function(color) {
+          if (color) {
+            picker.value = color.toHexString();
+          }
+        },
+        change: function(color) {
+          if (color) {
+            const hexValue = color.toHexString().toUpperCase();
+            textInput.value = hexValue;
+            picker.value = hexValue;
+            console.log('[CentralAdmin] Couleur changée:', hexValue);
+          }
         }
       });
       
-      // Validation au blur
-      textInput.addEventListener('blur', () => {
-        let value = textInput.value.trim().toUpperCase();
-        
-        // Ajouter # si absent
-        if (/^[0-9A-Fa-f]{6}$/.test(value)) {
-          value = '#' + value;
-        }
-        
-        // Valider le format
-        if (/^#[0-9A-Fa-f]{6}$/.test(value)) {
-          textInput.value = value;
-          picker.value = value;
-        } else {
-          // Restaurer la valeur du picker
-          textInput.value = picker.value.toUpperCase();
-        }
-      });
+      initCount++;
     });
+    
+    console.log('[CentralAdmin] Color pickers initialisés:', initCount);
   }
 
 })();

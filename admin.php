@@ -1,64 +1,85 @@
 <?php
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
-global $template, $conf, $page, $centralAdminDefault;
+global $template, $conf, $page, $user;
 
 /* ===============================
  *  DÉTECTION DU SCHÉMA ACTUEL
  * =============================== */
 
 // Récupérer le thème admin actif
-// Piwigo stocke cette info dans la session
 $current_scheme = 'clear'; // Valeur par défaut
 
-// Méthode 1 : Via la session Piwigo
+// Debug : créer un tableau pour tracer la détection
+$theme_debug = array(
+    'session_pwg_admin_theme' => isset($_SESSION['pwg_admin_theme']) ? $_SESSION['pwg_admin_theme'] : 'non défini',
+    'pwg_get_session_var' => function_exists('pwg_get_session_var') ? pwg_get_session_var('admin_theme', 'non défini') : 'fonction non disponible',
+    'user_theme' => isset($user['theme']) ? $user['theme'] : 'non défini',
+    'user_admin_theme' => isset($user['admin_theme']) ? $user['admin_theme'] : 'non défini',
+);
+
+// Méthode 1 : Via la session Piwigo (le plus fiable)
 if (isset($_SESSION['pwg_admin_theme'])) {
     $current_scheme = $_SESSION['pwg_admin_theme'];
+    $theme_debug['methode_utilisee'] = 'SESSION pwg_admin_theme';
 }
-// Méthode 2 : Via pwg_get_session_var (fonction Piwigo)
+// Méthode 2 : Via pwg_get_session_var
 elseif (function_exists('pwg_get_session_var')) {
-    $current_scheme = pwg_get_session_var('admin_theme', 'clear');
+    $temp = pwg_get_session_var('admin_theme', null);
+    if ($temp !== null && $temp !== 'non défini') {
+        $current_scheme = $temp;
+        $theme_debug['methode_utilisee'] = 'pwg_get_session_var';
+    }
 }
 // Méthode 3 : Via les préférences utilisateur
 elseif (isset($user['admin_theme'])) {
     $current_scheme = $user['admin_theme'];
+    $theme_debug['methode_utilisee'] = 'user admin_theme';
 }
+else {
+    $theme_debug['methode_utilisee'] = 'défaut (clear)';
+}
+
+// S'assurer que la valeur est soit 'clear' soit 'dark'
+if (!in_array($current_scheme, array('clear', 'dark'))) {
+    $current_scheme = 'clear';
+}
+
+$theme_debug['theme_final'] = $current_scheme;
 
 /* ===============================
- *  CONFIGURATION
+ *  CHARGEMENT CONFIG
  * =============================== */
 
-// Vérification des valeurs par défaut
-if (!isset($centralAdminDefault) || !is_array($centralAdminDefault)) {
-    die('Erreur : centralAdminDefault non défini dans main.inc.php');
+// Charger les valeurs par défaut
+$defaults_file = dirname(__FILE__) . '/config/defaults.php';
+if (!file_exists($defaults_file)) {
+    die('Erreur : config/defaults.php introuvable');
 }
 
-// Charger la configuration existante ou valeurs par défaut
-if (isset($conf['centralAdmin']) && is_array($conf['centralAdmin'])) {
-    $centralAdmin = $conf['centralAdmin'];
-} else {
-    $centralAdmin = $centralAdminDefault;
+$centralAdminDefault = include $defaults_file;
+if (!is_array($centralAdminDefault)) {
+    die('Erreur : config/defaults.php ne retourne pas un tableau');
 }
 
-// Fusionner avec les valeurs par défaut pour garantir toutes les clés
-$centralAdmin = array_replace_recursive(
-    $centralAdminDefault,
-    $centralAdmin
-);
+// Charger la configuration existante
+$centralAdmin = isset($conf['centralAdmin']) && is_array($conf['centralAdmin']) 
+    ? $conf['centralAdmin'] 
+    : $centralAdminDefault;
+
+// Fusionner avec les valeurs par défaut
+$centralAdmin = array_replace_recursive($centralAdminDefault, $centralAdmin);
 
 /* ===============================
  *  TRAITEMENT DU FORMULAIRE
  * =============================== */
 
 if (isset($_POST['save'])) {
-    // IMPORTANT : On part de la configuration ACTUELLE
-    // et on met à jour UNIQUEMENT les valeurs envoyées
     $newConfig = $centralAdmin;
     
-    // Mise à jour des valeurs layout envoyées
+    // Layout
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
         foreach ($_POST['layout'] as $key => $value) {
-            // Traitement spécial pour le checkbox
             if ($key === 'hide_quick_sync') {
                 $newConfig['layout'][$key] = $value;
             } else {
@@ -67,12 +88,12 @@ if (isset($_POST['save'])) {
         }
     }
     
-    // Gestion du checkbox non coché (non envoyé)
+    // Gestion checkbox non coché
     if (!isset($_POST['layout']['hide_quick_sync'])) {
         $newConfig['layout']['hide_quick_sync'] = '0';
     }
     
-    // Mise à jour des valeurs colors envoyées
+    // Colors
     if (isset($_POST['colors']) && is_array($_POST['colors'])) {
         foreach ($_POST['colors'] as $scheme => $colors) {
             if (is_array($colors)) {
@@ -83,27 +104,19 @@ if (isset($_POST['save'])) {
         }
     }
     
-    // Sauvegarde dans la base de données
-    $conf['centralAdmin'] = $newConfig;
+    // Sauvegarder
     conf_update_param('centralAdmin', $newConfig);
-    
-    // Mettre à jour la variable locale pour affichage immédiat
     $centralAdmin = $newConfig;
     
     $page['infos'][] = l10n('configuration_saved');
-    
-    // CRITIQUE : Recharger la page pour que les nouvelles variables CSS soient générées
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
 if (isset($_POST['reset'])) {
-    $conf['centralAdmin'] = $centralAdminDefault;
     conf_update_param('centralAdmin', $centralAdminDefault);
     $centralAdmin = $centralAdminDefault;
     
     $page['infos'][] = l10n('configuration_reset');
-    
-    // CRITIQUE : Recharger la page
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
@@ -114,41 +127,50 @@ if (isset($_POST['reset'])) {
 $plugin_path = get_root_url() . 'plugins/centralAdmin/';
 $assets_path = $plugin_path . 'assets/';
 
-// Transmettre TOUT ce dont le template a besoin
 $template->assign(array(
-    // Configuration complète
+    // Configuration
     'centralAdmin' => $centralAdmin,
-    
-    // Raccourcis
     'layout' => $centralAdmin['layout'],
     'colors' => $centralAdmin['colors'],
+
+    // Thème actuel
     'current_scheme' => $current_scheme,
-    
-    // CSS - CHEMINS MIS À JOUR
-    'CENTRAL_ADMIN_CSS' => $assets_path . 'css/sandbox.css',
+
+    // Debug thème
+    'theme_debug' => $theme_debug,
+
+    // CSS - TOUS LES CHEMINS DÉFINIS
+    'CENTRAL_ADMIN_CSS' => $assets_path . 'css/style.css',
+    'CENTRAL_ADMIN_REBUILD_CSS' => $assets_path . 'css/centralAdmin-rebuild.css',
     'CENTRAL_ADMIN_FORM_CSS' => $assets_path . 'css/admin-form.css',
     'CENTRAL_ADMIN_THEME_CSS' => $assets_path . 'css/admin-form-theme.css',
-    
-    // JavaScript - CHEMINS MIS À JOUR
-    'CENTRAL_ADMIN_JS' => $assets_path . 'js/admin-form.js',
+
+    // JavaScript - TOUS LES CHEMINS DÉFINIS
+    'CENTRAL_ADMIN_FORM_JS' => $assets_path . 'js/admin-form.js',
     'CENTRAL_ADMIN_PREVIEW_JS' => $assets_path . 'js/admin-form-preview.js',
-    
-    // Sections templates (chemins inchangés)
+
+    // Templates sections
     'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',
     'TOOLTIPS_SECTION_TPL' => dirname(__FILE__) . '/sections/tooltips.tpl',
     'COLORS_CLEAR_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_clear.tpl',
     'COLORS_DARK_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_dark.tpl',
 ));
 
-// Injecter une classe sur le body pour le thème
+// Injecter la classe du thème sur body via JavaScript
 $template->append(
     'head_elements',
-    '<script>document.addEventListener("DOMContentLoaded", function() {
-        document.body.classList.add("ca-admin-theme-' . $current_scheme . '");
-    });</script>'
+    '<script>
+    (function() {
+        var scheme = "' . $current_scheme . '";
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.classList.add("ca-piwigo-theme-" + scheme);
+            console.log("[CentralAdmin] Thème Piwigo détecté:", scheme);
+        });
+    })();
+    </script>'
 );
 
-// Template admin
+// Template
 $template->set_filenames(array(
     'plugin_admin_content' => dirname(__FILE__).'/admin.tpl'
 ));

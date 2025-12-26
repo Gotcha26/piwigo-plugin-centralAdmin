@@ -28,10 +28,10 @@ return array(
       'bg_content3' => '#eeeeee',
     ),
     'dark' => array(
-      'bg_global'   => '#f2f2f24d',
-      'bg_content2' => '#f2f2f24d',
-      'bg_content1' => '#f8f8f8',
-      'bg_content3' => '#f2f2f24d',
+      'bg_global'   => '#000000',
+      'bg_content2' => '#565656',
+      'bg_content1' => '#444444',
+      'bg_content3' => '#565656',
     ),
   ),
 );

@@ -75,3 +75,23 @@ $lang['central_admin_description'] = '';
 
 $lang['hide_quick_sync_button'] = '';
 $lang['hide_quick_sync_button_tp'] = '';
+
+$lang['actual_piwigo_admin_theme'] = '';
+$lang['preference_browser_scheme'] = '';
+$lang['accordion_choice'] = '';
+$lang['debug_infos_area'] = '';
+$lang['theme_detection'] = '';
+$lang['theme_applied'] = '';
+$lang['method_used'] = '';
+$lang['files_charged'] = '';
+$lang['css_principal'] = '';
+$lang['css_rebuild'] = '';
+$lang['css_spectrum'] = '';
+$lang['loading_spectrum_eop'] = '';
+$lang['browser_consol'] = '';
+$lang['messages_verification'] = '';
+$lang['detected_piwigo_admin_theme'] = '';
+$lang['jquery_version'] = '';
+$lang['spectrum_availability'] = '';
+$lang['initialisation_colorpicker'] = '';
+$lang[''] = '';

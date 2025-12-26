@@ -1,3 +1,4 @@
+{* Variables CSS dynamiques *}
 {if isset($CENTRAL_ADMIN_CSS_VARS)}
 <style id="central-admin-vars">
 :root {
@@ -8,15 +9,17 @@
 </style>
 {/if}
 
+{* CSS du plugin *}
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
+<link rel="stylesheet" href="{$CENTRAL_ADMIN_REBUILD_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_THEME_CSS}">
 
 {* Spectrum Color Picker *}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
 <div class="centralAdmin-container">
+  
   <header class="ca-header">
     <div class="ca-header-main">
       <div class="ca-header-left">
@@ -25,13 +28,17 @@
       </div>
       <div class="ca-header-right">
         <div class="ca-options-group">
+          <div class="ca-option-info">
+            <span class="ca-option-label-info">{'actual_piwigo_admin_theme'|@translate}</span>
+            <span class="ca-option-value">{$current_scheme|upper}</span>
+          </div>
           <label class="ca-option-item">
             <input type="checkbox" id="ca-browser-theme" class="ca-option-checkbox">
-            <span class="ca-option-label">Thème du navigateur</span>
+            <span class="ca-option-label">{'preference_browser_scheme'|@translate}</span>
           </label>
           <label class="ca-option-item">
             <input type="checkbox" id="ca-single-accordion" class="ca-option-checkbox" checked>
-            <span class="ca-option-label">1 seul panneau ouvert</span>
+            <span class="ca-option-label">{'accordion_choice'|@translate}</span>
           </label>
         </div>
       </div>
@@ -72,6 +79,68 @@
       {include file=$COLORS_DARK_SECTION_TPL}
     {/if}
 
+    {* SECTION DEBUG - Accordion replié par défaut *}
+    <div class="ca-section" data-section="debug">
+      <div class="ca-section-header">
+        <h3 class="ca-section-title">
+          <span class="ca-icon">🐛</span>
+          {'debug_infos_area'|@translate}
+        </h3>
+        <button type="button" class="ca-toggle" aria-expanded="false">
+          <span class="ca-chevron">▼</span>
+        </button>
+      </div>
+      
+      <div class="ca-section-content" style="display: none;">
+        <div class="ca-debug-info">
+          <h4>{'theme_detection'|@translate}</h4>
+          <table class="ca-debug-table">
+            <tr>
+              <td><strong>{'theme_applied'|@translate}</strong></td>
+              <td><span class="ca-debug-value">{$theme_debug.theme_final}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{'method_used'|@translate}</strong></td>
+              <td>{$theme_debug.methode_utilisee}</td>
+            </tr>
+            <tr>
+              <td><strong>$_SESSION['pwg_admin_theme'] :</strong></td>
+              <td>{$theme_debug.session_pwg_admin_theme}</td>
+            </tr>
+            <tr>
+              <td><strong>pwg_get_session_var('admin_theme') :</strong></td>
+              <td>{$theme_debug.pwg_get_session_var}</td>
+            </tr>
+            <tr>
+              <td><strong>$user['theme'] :</strong></td>
+              <td>{$theme_debug.user_theme}</td>
+            </tr>
+            <tr>
+              <td><strong>$user['admin_theme'] :</strong></td>
+              <td>{$theme_debug.user_admin_theme}</td>
+            </tr>
+          </table>
+          
+          <h4 style="margin-top: 20px;">{'files_charged'|@translate}</h4>
+          <ul class="ca-debug-list">
+            <li>{'css_principal'|@translate} {$CENTRAL_ADMIN_CSS}</li>
+            <li>{'css_rebuild'|@translate} {$CENTRAL_ADMIN_REBUILD_CSS}</li>
+            <li>{'css_spectrum'|@translate} https://cdnjs.cloudflare.com/.../spectrum.min.css</li>
+            <li>{'loading_spectrum_eop'|@translate}</li>
+          </ul>
+          
+          <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
+          <p>{'messages_verification'|@translate}</p>
+          <ul class="ca-debug-list">
+            <li>[CentralAdmin] {'detected_piwigo_admin_theme'|@translate} {$theme_debug.theme_final}</li>
+            <li>[CentralAdmin] {'jquery_version'|@translate} {$define_me_please}</li>
+            <li>[CentralAdmin] {'spectrum_availability'|@translate} {$define_me_please}</li>
+            <li>[CentralAdmin] {'initialisation_colorpicker'|@translate} {$define_me_please}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <div class="ca-actions">
       <button type="submit" name="save" class="ca-btn ca-btn-primary">
         <span class="ca-icon">💾</span>
@@ -85,6 +154,17 @@
   </form>
 </div>
 
-{* Chargement du JavaScript *}
-<script src="{$CENTRAL_ADMIN_JS}"></script>
+{* Spectrum JS - Charger APRÈS jQuery mais AVANT nos scripts *}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+
+{* Vérification du chargement *}
+<script>
+(function() {
+  console.log('[CentralAdmin] jQuery version:', typeof jQuery !== 'undefined' ? jQuery.fn.jquery : 'non chargé');
+  console.log('[CentralAdmin] Spectrum disponible:', typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined');
+})();
+</script>
+
+{* Scripts du plugin - EN DERNIER *}
+<script src="{$CENTRAL_ADMIN_FORM_JS}"></script>
 <script src="{$CENTRAL_ADMIN_PREVIEW_JS}"></script>

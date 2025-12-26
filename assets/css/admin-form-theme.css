@@ -1,16 +1,13 @@
 /* ================================================
    ADAPTATION THÈME CLEAR / DARK
+   Priorité : Thème Piwigo > Option navigateur
    ================================================ */
-
-/* Par défaut, utiliser les couleurs de Piwigo */
-/* Les sélecteurs ciblent le thème Piwigo actif */
 
 /* ================================================
-   THÈME DARK (NUIT) - Piwigo
+   THÈME DARK - Piwigo (PRIORITAIRE)
    ================================================ */
 
-body[class*="theme-dark"]:not(.ca-browser-theme) .centralAdmin-container,
-body.dark-mode:not(.ca-browser-theme) .centralAdmin-container {
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .centralAdmin-container {
   
   /* Header */
   .ca-header h2 {
@@ -19,6 +16,16 @@ body.dark-mode:not(.ca-browser-theme) .centralAdmin-container {
   
   .ca-subtitle {
     color: #adb5bd;
+  }
+  
+  /* Options group */
+  .ca-options-group {
+    background: #2c3e50;
+    border-color: #4a5568;
+  }
+  
+  .ca-option-label {
+    color: #cbd5e0;
   }
   
   /* Sections */
@@ -149,28 +156,38 @@ body.dark-mode:not(.ca-browser-theme) .centralAdmin-container {
     border-left-color: #dc3545;
     color: #f5c6cb;
   }
+  
+  /* Spectrum adaptations */
+  .sp-replacer {
+    background: #1a252f;
+    border-color: #4a5568;
+    color: #e9ecef;
+  }
+  
+  .sp-dd {
+    color: #adb5bd;
+  }
 }
 
 /* ================================================
-   THÈME CLEAR (JOUR) - Par défaut (Piwigo)
+   THÈME CLEAR - Par défaut (Piwigo)
    ================================================ */
 
-/* Utiliser les couleurs de Piwigo par défaut */
-body:not([class*="theme-dark"]):not(.dark-mode):not(.ca-browser-theme) .centralAdmin-container {
+body.ca-piwigo-theme-clear:not(.ca-browser-theme) .centralAdmin-container {
   /* Styles clear déjà définis par défaut dans admin-form.css */
+  /* Pas besoin de redéfinir */
 }
 
 /* ================================================
-   MODE THÈME NAVIGATEUR (optionnel)
+   MODE THÈME NAVIGATEUR (optionnel - priorité basse)
    ================================================ */
 
-/* Si l'option "Thème du navigateur" est activée */
 body.ca-browser-theme {
   
   @media (prefers-color-scheme: dark) {
     .centralAdmin-container {
     
-    /* Header */
+    /* Reprend les mêmes styles que le thème dark Piwigo */
     .ca-header h2 {
       color: #e9ecef;
     }
@@ -179,7 +196,15 @@ body.ca-browser-theme {
       color: #adb5bd;
     }
     
-    /* Sections */
+    .ca-options-group {
+      background: #2c3e50;
+      border-color: #4a5568;
+    }
+    
+    .ca-option-label {
+      color: #cbd5e0;
+    }
+    
     .ca-section {
       background: #2c3e50;
       border-color: #4a5568;
@@ -202,12 +227,10 @@ body.ca-browser-theme {
       background: #2c3e50;
     }
     
-    /* Labels */
     .ca-label {
       color: #cbd5e0;
     }
     
-    /* Inputs */
     .ca-input-number {
       background: #1a252f;
       border-color: #4a5568;
@@ -224,7 +247,6 @@ body.ca-browser-theme {
       color: #6c757d;
     }
     
-    /* Color picker wrapper */
     .ca-color-picker-wrapper {
       background: #1a252f;
       border-color: #4a5568;
@@ -246,27 +268,22 @@ body.ca-browser-theme {
       color: #6c757d;
     }
     
-    /* Unit */
     .ca-unit {
       color: #adb5bd;
     }
     
-    /* Slider track */
     .ca-slider:disabled {
       background: #4a5568;
     }
     
-    /* Toggle button */
     .ca-toggle:hover {
       background: rgba(255, 255, 255, 0.08);
     }
     
-    /* Lock button */
     .ca-lock:hover {
       background: rgba(255, 255, 255, 0.08);
     }
     
-    /* Help tooltip */
     .ca-help {
       background: #5a6c7d;
     }
@@ -281,17 +298,14 @@ body.ca-browser-theme {
       border: 1px solid #4a5568;
     }
     
-    /* Switch */
     .ca-switch-slider {
       background-color: #4a5568;
     }
     
-    /* Actions */
     .ca-actions {
       border-top-color: #4a5568;
     }
     
-    /* Notifications */
     .ca-notification-success {
       background: linear-gradient(135deg, #155724 0%, #0f4419 100%);
       border-left-color: #28a745;
@@ -302,6 +316,16 @@ body.ca-browser-theme {
       background: linear-gradient(135deg, #721c24 0%, #5a1419 100%);
       border-left-color: #dc3545;
       color: #f5c6cb;
+    }
+    
+    .sp-replacer {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .sp-dd {
+      color: #adb5bd;
     }
     }
   }

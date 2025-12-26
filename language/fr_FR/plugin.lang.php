@@ -95,3 +95,23 @@ $lang['hide_quick_sync_button_tp'] =
   "Active la règle CSS pour masquer le bouton « Créer un album »\n"
 . "sur la page de synchronisation.\n"
 . "Utile si vous préférez une interface plus épurée.";
+
+$lang['actual_piwigo_admin_theme'] = 'Thème Piwigo actuel :';
+$lang['preference_browser_scheme'] = 'Préférence pour le thème du navigateur';
+$lang['accordion_choice'] = '1 seul panneau ouvert';
+$lang['debug_infos_area'] = 'Informations de débogage';
+$lang['theme_detection'] = 'Détection du thème Piwigo';
+$lang['theme_applied'] = 'Thème final appliqué :';
+$lang['method_used'] = 'Méthode utilisée :';
+$lang['files_charged'] = 'Fichiers chargés';
+$lang['css_principal'] = 'CSS principal :';
+$lang['css_rebuild'] = 'CSS rebuild :';
+$lang['css_spectrum'] = 'Spectrum CSS :';
+$lang['loading_spectrum_eop'] = 'Spectrum JS : chargé en fin de page';
+$lang['browser_consol'] = 'Console navigateur (F12)';
+$lang['messages_verification'] = 'Vérifier les messages :';
+$lang['detected_piwigo_admin_theme'] = 'Thème Piwigo détecté :';
+$lang['jquery_version'] = 'jQuery version :';
+$lang['spectrum_availability'] = 'Spectrum disponible :';
+$lang['initialisation_colorpicker'] = 'Color pickers initialisés :';
+$lang[''] = '';
