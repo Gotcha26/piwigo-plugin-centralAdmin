@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 2.6
+Version: 2.6.2
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
@@ -68,7 +68,7 @@ function central_admin_init()
  * 3) GÉNÉRATION DES VARIABLES CSS
  * ================================================== */
 
-function central_admin_generate_css_vars(array $config)
+function central_admin_generate_css_vars(array $config, $current_scheme = 'clear')
 {
     $css = '';
 
@@ -89,11 +89,19 @@ function central_admin_generate_css_vars(array $config)
         }
     }
 
-    // Couleurs selon le schéma actif
-    $scheme = pwg_get_session_var('admin_theme', 'clear');
-    
-    if (isset($config['colors'][$scheme])) {
-        foreach ($config['colors'][$scheme] as $key => $value) {
+    // Couleurs selon le schéma actif + modifications utilisateur
+    if (isset($config['colors'][$current_scheme])) {
+        $scheme_colors = $config['colors'][$current_scheme];
+        
+        // Fusionner avec les modifications utilisateur
+        if (isset($config['user_modifications'][$current_scheme])) {
+            $scheme_colors = array_merge(
+                $scheme_colors,
+                $config['user_modifications'][$current_scheme]
+            );
+        }
+        
+        foreach ($scheme_colors as $key => $value) {
             $css .= '--ca-color-' . str_replace('_', '-', $key) . ': ' . $value . ";\n";
         }
     }
@@ -143,8 +151,11 @@ add_event_handler('loc_begin_admin_page', function () {
     );
 
     // Variables CSS dynamiques
+    $scheme = pwg_get_session_var('admin_theme', 'clear');
+    $scheme = ($scheme === 'roma') ? 'dark' : 'clear'; // Normalisation
+
     $css  = ":root {\n";
-    $css .= central_admin_generate_css_vars($conf['centralAdmin']);
+    $css .= central_admin_generate_css_vars($conf['centralAdmin'], $scheme);
     $css .= "}\n";
 
     $template->append(

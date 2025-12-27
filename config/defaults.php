@@ -3,6 +3,7 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 /* ==================================================
  * VALEURS PAR DÉFAUT
+ * Structure : layout (commun) + colors (par schéma)
  * ================================================== */
 
 return array(
@@ -12,7 +13,7 @@ return array(
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
     'fade_start'               => '800',
-    'hide_quick_sync'          => '0',  // Nouvelle option
+    'hide_quick_sync'          => '0',
   ),
   'colors' => array(
     'tooltips' => array(
@@ -33,5 +34,10 @@ return array(
       'bg_content1' => '#444444',
       'bg_content3' => '#565656',
     ),
+  ),
+  // Nouveau : sauvegarde des modifications utilisateur par schéma
+  'user_modifications' => array(
+    'clear' => array(),
+    'dark' => array(),
   ),
 );

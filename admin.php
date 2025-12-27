@@ -109,7 +109,7 @@ $centralAdmin = array_replace_recursive($centralAdminDefault, $centralAdmin);
 if (isset($_POST['save'])) {
     $newConfig = $centralAdmin;
     
-    // Layout
+    // Layout (commun aux deux schémas)
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
         foreach ($_POST['layout'] as $key => $value) {
             if ($key === 'hide_quick_sync') {
@@ -125,12 +125,28 @@ if (isset($_POST['save'])) {
         $newConfig['layout']['hide_quick_sync'] = '0';
     }
     
-    // Colors
+    // Colors - IMPORTANT : sauvegarder pour le schéma actif uniquement
     if (isset($_POST['colors']) && is_array($_POST['colors'])) {
         foreach ($_POST['colors'] as $scheme => $colors) {
             if (is_array($colors)) {
                 foreach ($colors as $key => $value) {
-                    $newConfig['colors'][$scheme][$key] = trim($value);
+                    $trimmedValue = trim($value);
+                    $newConfig['colors'][$scheme][$key] = $trimmedValue;
+                    
+                    // Détecter si l'utilisateur a modifié la valeur par défaut
+                    $defaultValue = $centralAdminDefault['colors'][$scheme][$key] ?? null;
+                    if ($defaultValue && $trimmedValue !== $defaultValue) {
+                        // Stocker la modification utilisateur
+                        if (!isset($newConfig['user_modifications'])) {
+                            $newConfig['user_modifications'] = array('clear' => array(), 'dark' => array());
+                        }
+                        $newConfig['user_modifications'][$scheme][$key] = $trimmedValue;
+                    } else {
+                        // Supprimer si revenu à la valeur par défaut
+                        if (isset($newConfig['user_modifications'][$scheme][$key])) {
+                            unset($newConfig['user_modifications'][$scheme][$key]);
+                        }
+                    }
                 }
             }
         }
@@ -145,8 +161,20 @@ if (isset($_POST['save'])) {
 }
 
 if (isset($_POST['reset'])) {
-    conf_update_param('centralAdmin', $centralAdminDefault);
-    $centralAdmin = $centralAdminDefault;
+    // Reset : restaurer les défauts mais préserver les modifications de l'autre schéma
+    $newConfig = $centralAdminDefault;
+    
+    // Préserver les modifications de l'autre schéma
+    $other_scheme = ($current_scheme === 'clear') ? 'dark' : 'clear';
+    if (isset($centralAdmin['user_modifications'][$other_scheme])) {
+        $newConfig['user_modifications'][$other_scheme] = $centralAdmin['user_modifications'][$other_scheme];
+    }
+    
+    // Effacer les modifications du schéma actuel
+    $newConfig['user_modifications'][$current_scheme] = array();
+    
+    conf_update_param('centralAdmin', $newConfig);
+    $centralAdmin = $newConfig;
     
     $page['infos'][] = l10n('configuration_reset');
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
@@ -167,6 +195,12 @@ $template->assign(array(
 
     // Thème actuel
     'current_scheme' => $current_scheme,
+
+    // Appliquer les modifications utilisateur au schéma actif
+    'active_scheme_colors' => array_merge(
+        $centralAdmin['colors'][$current_scheme] ?? array(),
+        $centralAdmin['user_modifications'][$current_scheme] ?? array()
+    ),
 
     // Debug thème
     'theme_debug' => $theme_debug,
