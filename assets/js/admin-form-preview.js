@@ -8,6 +8,17 @@
   // Attendre le chargement du DOM
   document.addEventListener('DOMContentLoaded', initPreview);
 
+  // Fonction utilitaire pour logger avec style
+  function logPreview(message, varName, value) {
+    console.log(
+      '%c[CentralAdmin Preview]%c ' + message,
+      'color: #3498db; font-weight: bold;',
+      'color: inherit;',
+      '\n→ Variable:', varName,
+      '\n→ Valeur:', value
+    );
+  }
+
   function initPreview() {
     // Récupérer la balise <style> existante (déjà créée par le template)
     let styleTag = document.getElementById('central-admin-vars-preview');
@@ -122,93 +133,144 @@
     }
   }
 
-  /* ================================================
-     PRÉVISUALISATION COULEURS
-     ================================================ */
-  function initColorPreview() {
-    // Tooltips colors
-    const tooltipColors = [
-      'infos_main_color',
-      'warning_main_color',
-      'messages_main_color',
-      'error_main_color'
-    ];
+/* ================================================
+   PRÉVISUALISATION COULEURS
+   ================================================ */
+function initColorPreview() {
+  
+  // TOOLTIPS COLORS (commun aux deux schémas)
+  const tooltipColors = [
+    'infos_main_color',
+    'warning_main_color',
+    'messages_main_color',
+    'error_main_color'
+  ];
 
-    tooltipColors.forEach(colorName => {
-      const picker = document.getElementById(colorName + '_picker');
-      const textInput = document.getElementById(colorName + '_text');
-      
-      if (picker) {
-        picker.addEventListener('input', () => {
-          updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), picker.value);
+  tooltipColors.forEach(colorName => {
+    const textInput = document.getElementById(colorName + '_text');
+    
+    if (textInput) {
+      // Écouter les changements via Spectrum
+      if (typeof jQuery !== 'undefined' && jQuery(textInput).spectrum) {
+        jQuery(textInput).on('change.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
+            console.log('[CentralAdmin Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
+            logPreview('[CentralAdmin Preview] Couleur tooltip mise à jour', colorName, hexValue);
+          }
         });
-      }
-      
-      if (textInput) {
-        textInput.addEventListener('input', () => {
-          if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
-            updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), textInput.value);
+        
+        jQuery(textInput).on('move.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
           }
         });
       }
-    });
-
-    // Clear colors
-    const clearColors = [
-      'bg_clear_global',
-      'bg_clear_content2',
-      'bg_clear_content1',
-      'bg_clear_content3'
-    ];
-
-    clearColors.forEach(colorName => {
-      const picker = document.getElementById(colorName + '_picker');
-      const textInput = document.getElementById(colorName + '_text');
-      const cssVarName = '--ca-color-' + colorName.replace(/^bg_clear_/, 'bg-').replace(/_/g, '-');
       
-      if (picker) {
-        picker.addEventListener('input', () => {
-          updateCSSVariable(cssVarName, picker.value);
+      // Fallback : input manuel dans le champ texte
+      textInput.addEventListener('input', function() {
+        if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
+          updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), textInput.value);
+          console.log('[CentralAdmin Preview] Couleur tooltip (manuel):', colorName, '=', textInput.value);
+          logPreview('[CentralAdmin Preview] Couleur tooltip (manuel):', colorName, textInput.value);
+        }
+      });
+    }
+  });
+
+  // CLEAR COLORS
+  const clearColors = [
+    'bg_global',
+    'bg_content2',
+    'bg_content1',
+    'bg_content3'
+  ];
+
+  clearColors.forEach(colorName => {
+    const fullName = 'bg_clear_' + colorName; // bg_clear_global, etc.
+    const textInput = document.getElementById(fullName + '_text');
+    const cssVarName = '--ca-color-' + colorName.replace(/_/g, '-'); // --ca-color-bg-global
+    
+    if (textInput) {
+      // Écouter les changements via Spectrum
+      if (typeof jQuery !== 'undefined' && jQuery(textInput).spectrum) {
+        jQuery(textInput).on('change.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable(cssVarName, hexValue);
+            console.log('[CentralAdmin Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
+            logPreview('[CentralAdmin Preview] Couleur clear mise à jour:', colorName, hexValue);
+          }
         });
-      }
-      
-      if (textInput) {
-        textInput.addEventListener('input', () => {
-          if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
-            updateCSSVariable(cssVarName, textInput.value);
+        
+        jQuery(textInput).on('move.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable(cssVarName, hexValue);
           }
         });
       }
-    });
-
-    // Dark colors
-    const darkColors = [
-      'bg_dark_global',
-      'bg_dark_content2',
-      'bg_dark_content1',
-      'bg_dark_content3'
-    ];
-
-    darkColors.forEach(colorName => {
-      const picker = document.getElementById(colorName + '_picker');
-      const textInput = document.getElementById(colorName + '_text');
-      const cssVarName = '--ca-color-' + colorName.replace(/^bg_dark_/, 'bg-').replace(/_/g, '-');
       
-      if (picker) {
-        picker.addEventListener('input', () => {
-          updateCSSVariable(cssVarName, picker.value);
+      // Fallback : input manuel
+      textInput.addEventListener('input', function() {
+        if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
+          updateCSSVariable(cssVarName, textInput.value);
+          console.log('[CentralAdmin Preview] Couleur clear (manuel):', colorName, '=', textInput.value);
+          logPreview('[CentralAdmin Preview] Couleur clear (manuel):', colorName, textInput.value);
+        }
+      });
+    }
+  });
+
+  // DARK COLORS
+  const darkColors = [
+    'bg_global',
+    'bg_content2',
+    'bg_content1',
+    'bg_content3'
+  ];
+
+  darkColors.forEach(colorName => {
+    const fullName = 'bg_dark_' + colorName; // bg_dark_global, etc.
+    const textInput = document.getElementById(fullName + '_text');
+    const cssVarName = '--ca-color-' + colorName.replace(/_/g, '-'); // --ca-color-bg-global
+    
+    if (textInput) {
+      // Écouter les changements via Spectrum
+      if (typeof jQuery !== 'undefined' && jQuery(textInput).spectrum) {
+        jQuery(textInput).on('change.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable(cssVarName, hexValue);
+            console.log('[CentralAdmin Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
+            logPreview('[[CentralAdmin Preview] Couleur dark mise à jour:', colorName, hexValue);
+          }
         });
-      }
-      
-      if (textInput) {
-        textInput.addEventListener('input', () => {
-          if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
-            updateCSSVariable(cssVarName, textInput.value);
+        
+        jQuery(textInput).on('move.spectrum', function(e, color) {
+          if (color) {
+            const hexValue = color.toHexString();
+            updateCSSVariable(cssVarName, hexValue);
           }
         });
       }
-    });
-  }
+      
+      // Fallback : input manuel
+      textInput.addEventListener('input', function() {
+        if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
+          updateCSSVariable(cssVarName, textInput.value);
+          console.log('[CentralAdmin Preview] Couleur dark (manuel):', colorName, '=', textInput.value);
+          logPreview('[CentralAdmin Preview] Couleur dark (manuel):', colorName, textInput.value);
+        }
+      });
+    }
+  });
+  
+  console.log('[CentralAdmin Preview] Prévisualisation couleurs initialisée');
+  logPreview('[CentralAdmin Preview] Prévisualisation couleurs initialisée');
+}
 
   /* ================================================
     MISE À JOUR VARIABLE CSS

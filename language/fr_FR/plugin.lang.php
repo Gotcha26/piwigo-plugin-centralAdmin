@@ -145,4 +145,6 @@ $lang['reset_current_scheme_only'] = 'Réinitialiser uniquement le thème actuel
 $lang['css_vars_injected'] = 'Variables CSS injectées';
 $lang['css_preview_active'] = 'Prévisualisation temps réel active';
 $lang['css_applying_scheme'] = 'Application du schéma : {scheme}';
+$lang['color_preview_active'] = 'Prévisualisation des couleurs active';
+$lang['color_updated_realtime'] = 'Couleur mise à jour en temps réel';
 $lang[''] = '';

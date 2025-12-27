@@ -6,3 +6,5 @@ $lang['reset_current_scheme_only'] = 'Reset current theme only';
 $lang['css_vars_injected'] = 'CSS variables injected';
 $lang['css_preview_active'] = 'Real-time preview active';
 $lang['css_applying_scheme'] = 'Applying scheme: {scheme}';
+$lang['color_preview_active'] = 'Color preview active';
+$lang['color_updated_realtime'] = 'Color updated in real-time';
