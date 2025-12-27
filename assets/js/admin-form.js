@@ -256,8 +256,12 @@
         return;
       }
       
-      // Cacher le picker natif
+      // Cacher UNIQUEMENT le picker natif (pas l'input texte)
       picker.style.display = 'none';
+
+      // S'assurer que l'input texte reste visible
+      textInput.style.display = 'inline-block';
+      textInput.readOnly = false;
       
       // Initialiser Spectrum
       jQuery(textInput).spectrum({

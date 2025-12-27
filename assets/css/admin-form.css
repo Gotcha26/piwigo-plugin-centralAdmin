@@ -791,3 +791,14 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-info {
 body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-label-info {
   color: #adb5bd;
 }
+
+/* ================================================
+   SPECTRUM (color picker)
+   ================================================ */
+
+ /* Forcer l'affichage de l'input Spectrum */
+.sp-input {
+  display: block !important;
+  width: 100%;
+  margin-top: 5px;
+}  
