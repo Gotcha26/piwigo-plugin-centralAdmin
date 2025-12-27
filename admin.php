@@ -50,66 +50,7 @@ $theme_debug['current_scheme_returned'] = $current_scheme;
 // Injecter la détection combinée PHP + JS
 $template->append(
     'head_elements',
-    '<script>
-    (function() {
-        // === DÉTECTION PHP (côté serveur) ===
-        var phpDetectedScheme = "' . $current_scheme . '";
-        
-        // === DÉTECTION JS/CSS (côté client) ===
-        var jsDetectedScheme = "clear"; // Défaut
-        
-        document.addEventListener("DOMContentLoaded", function() {
-            // Méthode 1 : Vérifier les classes sur <html> ou <body>
-            var htmlClasses = document.documentElement.className;
-            var bodyClasses = document.body.className;
-            
-            if (htmlClasses.includes("theme-roma") || bodyClasses.includes("theme-roma")) {
-                jsDetectedScheme = "dark";
-            } else if (htmlClasses.includes("theme-clear") || bodyClasses.includes("theme-clear")) {
-                jsDetectedScheme = "clear";
-            } else {
-                // Méthode 2 : Analyser les styles CSS appliqués
-                var bgColor = window.getComputedStyle(document.body).backgroundColor;
-                // Si fond très sombre (roma), détecter dark
-                // Roma utilise généralement un fond noir ou très sombre
-                if (bgColor === "rgb(0, 0, 0)" || bgColor === "rgb(17, 17, 17)") {
-                    jsDetectedScheme = "dark";
-                }
-            }
-            
-            // Appliquer la classe du thème sur body
-            document.body.classList.add("ca-piwigo-theme-" + phpDetectedScheme);
-            
-            // Logs de debug
-            console.log("═══════════════════════════════════════════════");
-            console.log("[CentralAdmin] DÉTECTION DU THÈME ADMIN");
-            console.log("═══════════════════════════════════════════════");
-            console.log("🔍 PHP Detection (userprefs):", phpDetectedScheme);
-            console.log("🔍 JS Detection (DOM/CSS):", jsDetectedScheme);
-            console.log("📋 <html> classes:", htmlClasses || "aucune");
-            console.log("📋 <body> classes:", bodyClasses || "aucune");
-            console.log("🎨 Background color:", window.getComputedStyle(document.body).backgroundColor);
-            
-            if (phpDetectedScheme !== jsDetectedScheme) {
-                console.warn("⚠️ Divergence détectée entre PHP et JS !");
-                console.warn("   → Utilisation de la valeur PHP (prioritaire)");
-            } else {
-                console.log("✅ PHP et JS concordent");
-            }
-            console.log("═══════════════════════════════════════════════");
-            
-            // Stocker pour le debugger
-            window.caThemeDebug = {
-                php: phpDetectedScheme,
-                js: jsDetectedScheme,
-                htmlClasses: htmlClasses,
-                bodyClasses: bodyClasses,
-                bgColor: window.getComputedStyle(document.body).backgroundColor,
-                concordance: phpDetectedScheme === jsDetectedScheme
-            };
-        });
-    })();
-    </script>'
+    '<script>document.body.setAttribute("data-ca-theme", "' . $current_scheme . '");</script>'
 );
 
 /* ===============================
@@ -239,6 +180,8 @@ $template->assign(array(
     // JavaScript - TOUS LES CHEMINS DÉFINIS
     'CENTRAL_ADMIN_FORM_JS' => $assets_path . 'js/admin-form.js',
     'CENTRAL_ADMIN_PREVIEW_JS' => $assets_path . 'js/admin-form-preview.js',
+    'CENTRAL_ADMIN_THEME_DETECTION_JS' => $assets_path . 'js/admin-theme-detection.js',
+    'CENTRAL_ADMIN_DEBUG_JS' => $assets_path . 'js/admin-debug-populate.js',
 
     // Templates sections
     'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',

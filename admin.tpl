@@ -219,37 +219,8 @@
 {* Spectrum JS - Charger APRÈS jQuery mais AVANT nos scripts *}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
-{* SCRIPT POUR PEUPLER LE DEBUG JS *}
-<script>
-(function() {
-  document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-      if (window.caThemeDebug) {
-        var debug = window.caThemeDebug;
-        
-        // Remplir les valeurs JS dans le tableau debug
-        document.getElementById('js-scheme-value').innerHTML = 
-          '<span class="ca-debug-badge ca-badge-' + (debug.js === 'dark' ? 'dark' : 'light') + '">' + debug.js + '</span>';
-        
-        document.getElementById('html-classes-value').textContent = debug.htmlClasses || '(vide)';
-        document.getElementById('body-classes-value').textContent = debug.bodyClasses || '(vide)';
-        document.getElementById('body-bgcolor-value').textContent = debug.bgColor;
-        
-        document.getElementById('concordance-value').innerHTML = debug.concordance 
-          ? '✅ <strong style="color: #28a745;">Oui</strong>' 
-          : '⚠️ <strong style="color: #ffa500;">Non (divergence)</strong>';
-        
-        document.getElementById('console-js-detection').innerHTML = 
-          '<strong>' + debug.js + '</strong>';
-        document.getElementById('console-concordance').innerHTML = debug.concordance 
-          ? '<strong style="color: #28a745;">Oui</strong>' 
-          : '<strong style="color: #ffa500;">Non</strong>';
-      }
-    }, 100);
-  });
-})();
-</script>
-
 {* Scripts du plugin - EN DERNIER *}
 <script src="{$CENTRAL_ADMIN_FORM_JS}"></script>
+<script src="{$CENTRAL_ADMIN_DEBUG_JS}"></script>
+<script src="{$CENTRAL_ADMIN_THEME_DETECTION_JS}"></script>
 <script src="{$CENTRAL_ADMIN_PREVIEW_JS}"></script>

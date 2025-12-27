@@ -576,6 +576,21 @@
   opacity: 0.9;
 }
 
+.ca-field-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.ca-field-checkbox .ca-field-header {
+  flex: 1;
+  margin-bottom: 0; /* Annuler le margin-bottom par défaut */
+}
+
+.ca-field-checkbox .ca-field-controls {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
 /* ================================================
    BOUTONS D'ACTION
    ================================================ */
