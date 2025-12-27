@@ -9,17 +9,32 @@
   document.addEventListener('DOMContentLoaded', initPreview);
 
   function initPreview() {
-    // Récupérer ou créer la balise <style> pour les variables CSS
+    // Récupérer la balise <style> existante (déjà créée par le template)
     let styleTag = document.getElementById('central-admin-vars-preview');
+    
     if (!styleTag) {
+      console.warn('[CentralAdmin Preview] Style tag non trouvé, création...');
       styleTag = document.createElement('style');
       styleTag.id = 'central-admin-vars-preview';
       document.head.appendChild(styleTag);
+    } else {
+      console.log('[CentralAdmin Preview] Style tag existant trouvé, préservation des valeurs initiales');
     }
 
     // Initialiser la prévisualisation pour tous les champs
     initLayoutPreview();
     initColorPreview();
+    
+    console.log('[CentralAdmin Preview] Prévisualisation initialisée');
+
+    // Debug : afficher les variables CSS actuelles
+    setTimeout(() => {
+      const styleTag = document.getElementById('central-admin-vars-preview');
+      if (styleTag) {
+        console.log('[CentralAdmin Preview] Contenu CSS actuel:');
+        console.log(styleTag.textContent);
+      }
+    }, 100);
   }
 
   /* ================================================
@@ -196,27 +211,34 @@
   }
 
   /* ================================================
-     MISE À JOUR VARIABLE CSS
-     ================================================ */
+    MISE À JOUR VARIABLE CSS
+    ================================================ */
   function updateCSSVariable(varName, value) {
     const styleTag = document.getElementById('central-admin-vars-preview');
-    if (!styleTag) return;
+    if (!styleTag) {
+      console.error('[CentralAdmin Preview] Style tag introuvable');
+      return;
+    }
 
     // Récupérer le contenu actuel
     let cssContent = styleTag.textContent;
     
-    // Créer le pattern pour trouver la variable
-    const pattern = new RegExp(varName + ':\\s*[^;]+;', 'g');
+    // Créer le pattern pour trouver la variable (accepte espaces et sauts de ligne)
+    const pattern = new RegExp(varName + '\\s*:\\s*[^;]+;', 'g');
     
     // Si la variable existe, la remplacer
     if (pattern.test(cssContent)) {
       cssContent = cssContent.replace(pattern, varName + ': ' + value + ';');
+      console.log('[CentralAdmin Preview] Variable mise à jour:', varName, '=', value);
     } else {
       // Sinon, l'ajouter dans le bloc :root
       if (cssContent.includes(':root')) {
-        cssContent = cssContent.replace(/:root\s*{/, ':root {\n  ' + varName + ': ' + value + ';');
+        // Ajouter avant la fermeture du :root
+        cssContent = cssContent.replace(/}([^}]*)$/, '  ' + varName + ': ' + value + ';\n}$1');
+        console.log('[CentralAdmin Preview] Variable ajoutée:', varName, '=', value);
       } else {
         cssContent = ':root {\n  ' + varName + ': ' + value + ';\n}';
+        console.log('[CentralAdmin Preview] Bloc :root créé avec:', varName, '=', value);
       }
     }
     

@@ -1,13 +1,34 @@
-{* Variables CSS dynamiques *}
-{if isset($CENTRAL_ADMIN_CSS_VARS)}
-<style id="central-admin-vars">
+{* Variables CSS dynamiques - INJECTION CORRECTE DES VALEURS *}
+<style id="central-admin-vars-preview">
 :root {
-{foreach from=$CENTRAL_ADMIN_CSS_VARS key=var item=value}
-  {$var}: {$value};
-{/foreach}
+  {* Layout *}
+  --ca-layout-admin-width: {$centralAdmin.layout.admin_width}px;
+  --ca-layout-menubar-width: {$centralAdmin.layout.menubar_width}px;
+  --ca-layout-align-pluginFilter-left: {$centralAdmin.layout.align_pluginFilter_left}px;
+  --ca-layout-align-pluginFilter-right: {$centralAdmin.layout.align_pluginFilter_right}px;
+  --ca-layout-fade-start: {$centralAdmin.layout.fade_start}px;
+  
+  {* Tooltips (commun) *}
+  --ca-color-infos-main-color: {$centralAdmin.colors.tooltips.infos_main_color};
+  --ca-color-warning-main-color: {$centralAdmin.colors.tooltips.warning_main_color};
+  --ca-color-messages-main-color: {$centralAdmin.colors.tooltips.messages_main_color};
+  --ca-color-error-main-color: {$centralAdmin.colors.tooltips.error_main_color};
+  
+  {* Couleurs du schéma actif (avec modifications utilisateur fusionnées) *}
+  {if isset($active_scheme_colors)}
+    --ca-color-bg-global: {$active_scheme_colors.bg_global};
+    --ca-color-bg-content2: {$active_scheme_colors.bg_content2};
+    --ca-color-bg-content1: {$active_scheme_colors.bg_content1};
+    --ca-color-bg-content3: {$active_scheme_colors.bg_content3};
+  {else}
+    {* Fallback si active_scheme_colors n'existe pas *}
+    --ca-color-bg-global: {$centralAdmin.colors[$current_scheme].bg_global};
+    --ca-color-bg-content2: {$centralAdmin.colors[$current_scheme].bg_content2};
+    --ca-color-bg-content1: {$centralAdmin.colors[$current_scheme].bg_content1};
+    --ca-color-bg-content3: {$centralAdmin.colors[$current_scheme].bg_content3};
+  {/if}
 }
 </style>
-{/if}
 
 {* CSS du plugin *}
 <link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">

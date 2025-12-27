@@ -198,6 +198,7 @@ $template->assign(array(
 
     // Appliquer les modifications utilisateur au schéma actif
     'active_scheme_colors' => array_merge(
+        $centralAdminDefault['colors'][$current_scheme] ?? array(),
         $centralAdmin['colors'][$current_scheme] ?? array(),
         $centralAdmin['user_modifications'][$current_scheme] ?? array()
     ),

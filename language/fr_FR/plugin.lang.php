@@ -142,4 +142,7 @@ $lang['open_console_f12'] = 'Ouvrez la console (F12) pour voir les détails :';
 $lang['scheme_switch_warning'] = 'Attention : vous avez changé de thème';
 $lang['user_modifications_preserved'] = 'Vos modifications pour le thème {scheme} ont été préservées';
 $lang['reset_current_scheme_only'] = 'Réinitialiser uniquement le thème actuel';
+$lang['css_vars_injected'] = 'Variables CSS injectées';
+$lang['css_preview_active'] = 'Prévisualisation temps réel active';
+$lang['css_applying_scheme'] = 'Application du schéma : {scheme}';
 $lang[''] = '';
