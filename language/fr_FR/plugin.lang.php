@@ -96,7 +96,7 @@ $lang['hide_quick_sync_button_tp'] =
 . "sur la page de synchronisation.\n"
 . "Utile si vous préférez une interface plus épurée.";
 
-$lang['actual_piwigo_admin_theme'] = 'Thème Piwigo actuel :';
+$lang['actual_piwigo_admin_theme'] = 'Thème admin Piwigo détecté :';
 $lang['preference_browser_scheme'] = 'Préférence pour le thème du navigateur';
 $lang['accordion_choice'] = '1 seul panneau ouvert';
 $lang['debug_infos_area'] = 'Informations de débogage';
@@ -123,4 +123,19 @@ $lang['detected_piwigo_admin_theme'] = 'Thème Piwigo détecté :';
 $lang['jquery_version'] = 'jQuery version :';
 $lang['spectrum_availability'] = 'Spectrum disponible :';
 $lang['initialisation_colorpicker'] = 'Color pickers initialisés :';
+$lang['theme_detection_php'] = 'Détection du thème (PHP - serveur)';
+$lang['theme_detection_js'] = 'Détection du thème (JS - client)';
+$lang['detection_method'] = 'Méthode de détection';
+$lang['raw_value_userprefs'] = 'Valeur brute (userprefs)';
+$lang['normalized_value'] = 'Valeur normalisée';
+$lang['is_roma_check'] = 'Est-ce le thème Roma ?';
+$lang['is_clear_check'] = 'Est-ce le thème Clear ?';
+$lang['js_detected_scheme'] = 'Schéma détecté (JS)';
+$lang['html_classes'] = 'Classes <html>';
+$lang['body_classes'] = 'Classes <body>';
+$lang['body_bgcolor'] = 'Couleur de fond <body>';
+$lang['php_js_concordance'] = 'Concordance PHP/JS';
+$lang['additional_info'] = 'Informations complémentaires';
+$lang['gallery_theme'] = 'thème galerie publique';
+$lang['open_console_f12'] = 'Ouvrez la console (F12) pour voir les détails :';
 $lang[''] = '';

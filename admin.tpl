@@ -79,87 +79,129 @@
       {include file=$COLORS_DARK_SECTION_TPL}
     {/if}
 
-{* SECTION DEBUG - Accordion replié par défaut *}
-  <div class="ca-section" data-section="debug">
-    <div class="ca-section-header">
-      <h3 class="ca-section-title">
-        <span class="ca-icon">🐛</span>
-        {'debug_infos_area'|@translate}
-      </h3>
-      <button type="button" class="ca-toggle" aria-expanded="false">
-        <span class="ca-chevron">▼</span>
-      </button>
-    </div>
-    
-    <div class="ca-section-content" style="display: none;">
-      <div class="ca-debug-info">
-        <h4>{'versions'|@translate}</h4>
-        <table class="ca-debug-table">
-          <tr>
-            <td><strong>{'plugin_internal_version'|@translate}</strong></td>
-            <td>{$theme_debug.plugin_version}</td>
-          </tr>
-          <tr>
-            <td><strong>jQuery :</strong></td>
-            <td>{$theme_debug.jquery_version}</td>
-          </tr>
-          <tr>
-            <td><strong>Smarty :</strong></td>
-            <td>{$theme_debug.smarty_version}</td>
-          </tr>
-          <tr>
-            <td><strong>Spectrum :</strong></td>
-            <td><span id="spectrum-version">{'verification_'|@translate}Vérification...</span></td>
-          </tr>
-        </table>
-        
-        <h4>{'theme_detection'|@translate}</h4>
-        <table class="ca-debug-table">
-          <tr>
-            <td><strong>{'theme_applied'|@translate}</strong></td>
-            <td><span class="ca-debug-value">{$theme_debug.theme_final}</span></td>
-          </tr>
-          <tr>
-            <td><strong>{'method_used'|@translate}</strong></td>
-            <td>{$theme_debug.methode_utilisee}</td>
-          </tr>
-          <tr>
-            <td><strong>$user['theme'] :</strong></td>
-            <td>{$theme_debug.user_theme}</td>
-          </tr>
-          {if isset($theme_debug.admin_theme_brut)}
-          <tr>
-            <td><strong>{'raw_admin_theme'|@translate}</strong></td>
-            <td>{$theme_debug.admin_theme_brut}</td>
-          </tr>
-          {/if}
-        </table>
-        
-        <h4 style="margin-top: 20px;">{'files_charged'|@translate}</h4>
-        <ul class="ca-debug-list">
-          <li>{'css_principal'|@translate} {$CENTRAL_ADMIN_CSS}</li>
-          <li>{'css_rebuild'|@translate} {$CENTRAL_ADMIN_REBUILD_CSS}</li>
-          <li>{'css_form'|@translate} {$CENTRAL_ADMIN_FORM_CSS}</li>
-          <li>{'css_admin_theme'|@translate} {$CENTRAL_ADMIN_THEME_CSS}</li>
-          <li>{'css_spectrum'|@translate} CDN cloudflare</li>
-		  <li>{'loading_spectrum_eop'|@translate}</li>
-          <li>{'spectrum_js'|@translate} CDN cloudflare</li>
-          <li>{'js_form'|@translate} {$CENTRAL_ADMIN_FORM_JS}</li>
-          <li>{'js_preview'|@translate} {$CENTRAL_ADMIN_PREVIEW_JS}</li>
-        </ul>
-        
-        <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
-        <p>{'messages_verification'|@translate}</p>
-        <ul class="ca-debug-list">
-          <li>[CentralAdmin] {'detected_piwigo_admin_theme'|@translate} {$theme_debug.theme_final}</li>
-          <li>[CentralAdmin] user[theme]: {$theme_debug.user_theme}</li>
-          <li>[CentralAdmin] {'jquery_version'|@translate} {$theme_debug.jquery_version}</li>
-          <li>[CentralAdmin] {'spectrum_availability'|@translate} true</li>
-          <li>[CentralAdmin] {'initialisation_colorpicker'|@translate} X</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+	{* SECTION DEBUG - Accordion replié par défaut *}
+	<div class="ca-section" data-section="debug">
+	  <div class="ca-section-header">
+		<h3 class="ca-section-title">
+		  <span class="ca-icon">🐛</span>
+		  {'debug_infos_area'|@translate}
+		</h3>
+		<button type="button" class="ca-toggle" aria-expanded="false">
+		  <span class="ca-chevron">▼</span>
+		</button>
+	  </div>
+	  
+	  <div class="ca-section-content" style="display: none;">
+		<div class="ca-debug-info">
+		  
+		  {* VERSIONS *}
+		  <h4>{'versions'|@translate}</h4>
+		  <table class="ca-debug-table">
+			<tr>
+			  <td><strong>{'plugin_internal_version'|@translate}</strong></td>
+			  <td>{$theme_debug.plugin_version}</td>
+			</tr>
+			<tr>
+			  <td><strong>jQuery :</strong></td>
+			  <td>{$theme_debug.jquery_version}</td>
+			</tr>
+			<tr>
+			  <td><strong>Smarty :</strong></td>
+			  <td>{$theme_debug.smarty_version}</td>
+			</tr>
+			<tr>
+			  <td><strong>Spectrum :</strong></td>
+			  <td><span id="spectrum-version">{'verification_'|@translate}</span></td>
+			</tr>
+		  </table>
+		  
+		  {* DÉTECTION THÈME PHP *}
+		  <h4 style="margin-top: 20px;">{'theme_detection_php'|@translate}</h4>
+		  <table class="ca-debug-table">
+			<tr>
+			  <td><strong>{'detection_method'|@translate}</strong></td>
+			  <td><span class="ca-debug-badge ca-badge-info">{$theme_debug.detection_method}</span></td>
+			</tr>
+			<tr>
+			  <td><strong>{'raw_value_userprefs'|@translate}</strong></td>
+			  <td><span class="ca-debug-badge ca-badge-warning">{$theme_debug.admin_theme_value}</span></td>
+			</tr>
+			<tr>
+			  <td><strong>{'normalized_value'|@translate}</strong></td>
+			  <td>{$theme_debug.normalized}</td>
+			</tr>
+			<tr>
+			  <td><strong>{'theme_applied'|@translate}</strong></td>
+			  <td><span class="ca-debug-value">{$theme_debug.current_scheme_returned}</span></td>
+			</tr>
+			<tr>
+			  <td><strong>{'is_roma_check'|@translate}</strong></td>
+			  <td>{if $theme_debug.is_roma}✅ Oui{else}❌ Non{/if}</td>
+			</tr>
+			<tr>
+			  <td><strong>{'is_clear_check'|@translate}</strong></td>
+			  <td>{if $theme_debug.is_clear}✅ Oui{else}❌ Non{/if}</td>
+			</tr>
+		  </table>
+		  
+		  {* DÉTECTION THÈME JS *}
+		  <h4 style="margin-top: 20px;">{'theme_detection_js'|@translate}</h4>
+		  <table class="ca-debug-table">
+			<tr>
+			  <td><strong>{'js_detected_scheme'|@translate}</strong></td>
+			  <td><span id="js-scheme-value">{'verification_'|@translate}</span></td>
+			</tr>
+			<tr>
+			  <td><strong>{'html_classes'|@translate}</strong></td>
+			  <td><code id="html-classes-value">{'verification_'|@translate}</code></td>
+			</tr>
+			<tr>
+			  <td><strong>{'body_classes'|@translate}</strong></td>
+			  <td><code id="body-classes-value">{'verification_'|@translate}</code></td>
+			</tr>
+			<tr>
+			  <td><strong>{'body_bgcolor'|@translate}</strong></td>
+			  <td><code id="body-bgcolor-value">{'verification_'|@translate}</code></td>
+			</tr>
+			<tr>
+			  <td><strong>{'php_js_concordance'|@translate}</strong></td>
+			  <td><span id="concordance-value">{'verification_'|@translate}</span></td>
+			</tr>
+		  </table>
+		  
+		  {* INFORMATIONS COMPLÉMENTAIRES *}
+		  <h4 style="margin-top: 20px;">{'additional_info'|@translate}</h4>
+		  <table class="ca-debug-table">
+			<tr>
+			  <td><strong>$user['theme'] ({'gallery_theme'|@translate}) :</strong></td>
+			  <td><em>{$theme_debug.user_theme_gallery}</em></td>
+			</tr>
+		  </table>
+		  
+		  {* FICHIERS CHARGÉS *}
+		  <h4 style="margin-top: 20px;">{'files_charged'|@translate}</h4>
+		  <ul class="ca-debug-list">
+			<li>{'css_principal'|@translate} {$CENTRAL_ADMIN_CSS}</li>
+			<li>{'css_rebuild'|@translate} {$CENTRAL_ADMIN_REBUILD_CSS}</li>
+			<li>{'css_form'|@translate} {$CENTRAL_ADMIN_FORM_CSS}</li>
+			<li>{'css_admin_theme'|@translate} {$CENTRAL_ADMIN_THEME_CSS}</li>
+			<li>{'css_spectrum'|@translate} CDN cloudflare</li>
+			<li>{'spectrum_js'|@translate} CDN cloudflare (EOP)</li>
+			<li>{'js_form'|@translate} {$CENTRAL_ADMIN_FORM_JS}</li>
+			<li>{'js_preview'|@translate} {$CENTRAL_ADMIN_PREVIEW_JS}</li>
+		  </ul>
+		  
+		  {* CONSOLE NAVIGATEUR *}
+		  <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
+		  <p>{'open_console_f12'|@translate}</p>
+		  <ul class="ca-debug-list">
+			<li>🔍 PHP Detection (userprefs): {$theme_debug.current_scheme_returned}</li>
+			<li>🔍 JS Detection (DOM/CSS): <span id="console-js-detection">{'verification_'|@translate}</span></li>
+			<li>✅ PHP et JS concordent : <span id="console-concordance">{'verification_'|@translate}</span></li>
+		  </ul>
+		</div>
+	  </div>
+	</div>
 
     <div class="ca-actions">
       <button type="submit" name="save" class="ca-btn ca-btn-primary">
@@ -175,32 +217,36 @@
 </div>
 
 {* Spectrum JS - Charger APRÈS jQuery mais AVANT nos scripts *}
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
-{* Vérification du chargement *}																							 
+{* SCRIPT POUR PEUPLER LE DEBUG JS *}
 <script>
-// Détecter la version de Spectrum
 (function() {
-  if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
-    var spectrumEl = document.getElementById('spectrum-version');
-    if (spectrumEl) {
-      spectrumEl.textContent = '1.8.1 (disponible)';
-      spectrumEl.style.color = '#28a745';
-    }
-  } else {
+  document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-      var spectrumEl = document.getElementById('spectrum-version');
-      if (spectrumEl) {
-        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
-          spectrumEl.textContent = '1.8.1 (chargé avec délai)';
-          spectrumEl.style.color = '#ffa500';
-        } else {
-          spectrumEl.textContent = 'Non disponible';
-          spectrumEl.style.color = '#dc3545';
-        }
+      if (window.caThemeDebug) {
+        var debug = window.caThemeDebug;
+        
+        // Remplir les valeurs JS dans le tableau debug
+        document.getElementById('js-scheme-value').innerHTML = 
+          '<span class="ca-debug-badge ca-badge-' + (debug.js === 'dark' ? 'dark' : 'light') + '">' + debug.js + '</span>';
+        
+        document.getElementById('html-classes-value').textContent = debug.htmlClasses || '(vide)';
+        document.getElementById('body-classes-value').textContent = debug.bodyClasses || '(vide)';
+        document.getElementById('body-bgcolor-value').textContent = debug.bgColor;
+        
+        document.getElementById('concordance-value').innerHTML = debug.concordance 
+          ? '✅ <strong style="color: #28a745;">Oui</strong>' 
+          : '⚠️ <strong style="color: #ffa500;">Non (divergence)</strong>';
+        
+        document.getElementById('console-js-detection').innerHTML = 
+          '<strong>' + debug.js + '</strong>';
+        document.getElementById('console-concordance').innerHTML = debug.concordance 
+          ? '<strong style="color: #28a745;">Oui</strong>' 
+          : '<strong style="color: #ffa500;">Non</strong>';
       }
-    }, 500);
-  }
+    }, 100);
+  });
 })();
 </script>
 

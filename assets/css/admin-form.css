@@ -793,6 +793,46 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-label-info {
 }
 
 /* ================================================
+   BADGES DEBUG
+   ================================================ */
+
+.ca-debug-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ca-badge-info {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.ca-badge-warning {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.ca-badge-dark {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+}
+
+.ca-badge-light {
+  background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+  color: #2c3e50;
+}
+
+/* Thème dark pour les badges */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-badge-light {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  color: #ecf0f1;
+}
+
+/* ================================================
    SPECTRUM (color picker)
    ================================================ */
 

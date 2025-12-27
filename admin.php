@@ -19,38 +19,98 @@ if (file_exists($main_file)) {
  *  DÉTECTION DU THÈME ACTUEL
  * =============================== */
 
-// Le thème admin est stocké dans $user['theme']
-// Valeurs possibles : 'clear' (clair) ou 'roma' (sombre)
-$current_scheme = 'clear'; // Valeur par défaut
+// MÉTHODE CORRECTE : userprefs_get_param() au lieu de $user['theme']
+$current_scheme = userprefs_get_param('admin_theme', 'clear');
 
 // Debug : créer un tableau pour tracer la détection
 $theme_debug = array(
-    'user_theme' => isset($user['theme']) ? $user['theme'] : 'non défini',
     'plugin_version' => $plugin_version,
+    'detection_method' => 'userprefs_get_param',
+    'admin_theme_value' => $current_scheme,
+    'is_roma' => ($current_scheme === 'roma'),
+    'is_clear' => ($current_scheme === 'clear'),
+    'user_theme_gallery' => isset($user['theme']) ? $user['theme'] : 'non défini',
 );
 
-// MÉTHODE CORRECTE selon votre confrère
-if (isset($user['theme'])) {
-    $admin_theme = $user['theme'];
-    $theme_debug['admin_theme_brut'] = $admin_theme;
-    
-    // Déterminer si c'est un thème dark ou clear
-    // 'roma' = dark, 'clear' = clear
-    // Pour les thèmes personnalisés, on regarde s'ils contiennent 'dark' ou 'roma'
-    if ($admin_theme === 'roma' || 
-        stripos($admin_theme, 'dark') !== false || 
-        stripos($admin_theme, 'roma') !== false) {
-        $current_scheme = 'dark';
-        $theme_debug['methode_utilisee'] = 'user[theme] = roma';
-    } else {
-        $current_scheme = 'clear';
-        $theme_debug['methode_utilisee'] = 'user[theme] = clear';
-    }
+// Normalisation : 'roma' = dark, 'clear' = clear
+// Piwigo utilise directement 'roma' ou 'clear' comme valeurs
+if ($current_scheme === 'roma') {
+    $current_scheme = 'dark';
+    $theme_debug['scheme_final'] = 'dark';
+    $theme_debug['normalized'] = 'roma → dark';
 } else {
-    $theme_debug['methode_utilisee'] = 'default (clear) - user[theme] undefined';
+    // Par défaut, tout ce qui n'est pas 'roma' est considéré comme 'clear'
+    $current_scheme = 'clear';
+    $theme_debug['scheme_final'] = 'clear';
+    $theme_debug['normalized'] = $theme_debug['admin_theme_value'] . ' → clear';
 }
 
-$theme_debug['theme_final'] = $current_scheme;
+$theme_debug['current_scheme_returned'] = $current_scheme;
+
+// Injecter la détection combinée PHP + JS
+$template->append(
+    'head_elements',
+    '<script>
+    (function() {
+        // === DÉTECTION PHP (côté serveur) ===
+        var phpDetectedScheme = "' . $current_scheme . '";
+        
+        // === DÉTECTION JS/CSS (côté client) ===
+        var jsDetectedScheme = "clear"; // Défaut
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            // Méthode 1 : Vérifier les classes sur <html> ou <body>
+            var htmlClasses = document.documentElement.className;
+            var bodyClasses = document.body.className;
+            
+            if (htmlClasses.includes("theme-roma") || bodyClasses.includes("theme-roma")) {
+                jsDetectedScheme = "dark";
+            } else if (htmlClasses.includes("theme-clear") || bodyClasses.includes("theme-clear")) {
+                jsDetectedScheme = "clear";
+            } else {
+                // Méthode 2 : Analyser les styles CSS appliqués
+                var bgColor = window.getComputedStyle(document.body).backgroundColor;
+                // Si fond très sombre (roma), détecter dark
+                // Roma utilise généralement un fond noir ou très sombre
+                if (bgColor === "rgb(0, 0, 0)" || bgColor === "rgb(17, 17, 17)") {
+                    jsDetectedScheme = "dark";
+                }
+            }
+            
+            // Appliquer la classe du thème sur body
+            document.body.classList.add("ca-piwigo-theme-" + phpDetectedScheme);
+            
+            // Logs de debug
+            console.log("═══════════════════════════════════════════════");
+            console.log("[CentralAdmin] DÉTECTION DU THÈME ADMIN");
+            console.log("═══════════════════════════════════════════════");
+            console.log("🔍 PHP Detection (userprefs):", phpDetectedScheme);
+            console.log("🔍 JS Detection (DOM/CSS):", jsDetectedScheme);
+            console.log("📋 <html> classes:", htmlClasses || "aucune");
+            console.log("📋 <body> classes:", bodyClasses || "aucune");
+            console.log("🎨 Background color:", window.getComputedStyle(document.body).backgroundColor);
+            
+            if (phpDetectedScheme !== jsDetectedScheme) {
+                console.warn("⚠️ Divergence détectée entre PHP et JS !");
+                console.warn("   → Utilisation de la valeur PHP (prioritaire)");
+            } else {
+                console.log("✅ PHP et JS concordent");
+            }
+            console.log("═══════════════════════════════════════════════");
+            
+            // Stocker pour le debugger
+            window.caThemeDebug = {
+                php: phpDetectedScheme,
+                js: jsDetectedScheme,
+                htmlClasses: htmlClasses,
+                bodyClasses: bodyClasses,
+                bgColor: window.getComputedStyle(document.body).backgroundColor,
+                concordance: phpDetectedScheme === jsDetectedScheme
+            };
+        });
+    })();
+    </script>'
+);
 
 /* ===============================
  *  RÉCUPÉRATION VERSIONS
