@@ -361,6 +361,19 @@
                 'backdrop-filter': 'blur(3px)',
                 'background': 'rgba(0, 0, 0, 0.5)'
               });
+              
+              // Ajuster la hauteur de la modale
+              jQuery('.jconfirm-box-container').css({
+                'max-height': '85vh',      // Hauteur maximale = 85% de la hauteur viewport
+                'min-height': '400px'      // Hauteur minimale
+              });
+              
+              // Rendre le contenu scrollable si nécessaire
+              jQuery('.jconfirm-content').css({
+                'max-height': 'calc(85vh - 120px)', // Hauteur max - header/footer
+                'overflow-y': 'auto',
+                'padding': '20px'
+              });
             }
           });
         },
