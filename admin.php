@@ -3,6 +3,32 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 global $template, $conf, $page, $user;
 
+// CRITIQUE : Forcer le chargement de jQuery et dépendances
+add_event_handler('loc_begin_page_header', function() {
+    global $template;
+    
+    // jQuery (base)
+    $template->scriptLoader->add('jquery', 
+        'themes/default/js/jquery.min.js', 
+        array(), 0, false);
+    
+    // jQuery Confirm (pour les modales)
+    $template->scriptLoader->add('jquery-confirm', 
+        'themes/default/js/plugins/jquery-confirm.min.js', 
+        array('jquery'), 10, false);
+    
+    // CSS jQuery Confirm
+    $template->cssLoader->add('jquery-confirm', 
+        'themes/default/js/plugins/jquery-confirm.min.css', 
+        array(), 0);
+        
+    // Falback nécessaire pour jquery-confirm
+    $template->append('head_elements', '
+    <link rel="stylesheet" href="themes/default/js/plugins/jquery-confirm.min.css">
+    <script src="themes/default/js/plugins/jquery-confirm.min.js"></script>
+    ');
+});
+
 /* ===============================
  *  RÉCUPÉRATION VERSION PLUGIN
  * =============================== */

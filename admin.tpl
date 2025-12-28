@@ -124,8 +124,12 @@
 			  <td>{$theme_debug.plugin_version}</td>
 			</tr>
 			<tr>
-			  <td><strong>jQuery :</strong></td>
-			  <td>{$theme_debug.jquery_version}</td>
+			<td><strong>jQuery :</strong></td>
+				<td><span id="jquery-version">{'verification_'|@translate}</span></td>
+				</tr>
+			<tr>
+				<td><strong>jQuery Confirm :</strong></td>
+				<td><span id="jquery-confirm-status">{'verification_'|@translate}</span></td>
 			</tr>
 			<tr>
 			  <td><strong>Smarty :</strong></td>

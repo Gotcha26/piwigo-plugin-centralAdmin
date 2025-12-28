@@ -11,3 +11,6 @@ $lang['color_updated_realtime'] = 'Color updated in real-time';
 $lang['credits'] = 'Credits';
 $lang['credits_modal_title'] = 'Credits - centralAdmin';
 $lang['version_number'] = 'Version';
+$lang['jquery_not_loaded'] = 'jQuery not loaded';
+$lang['jquery_confirm_available'] = 'jQuery Confirm available';
+$lang['credits_loading_error'] = 'Credits loading error';

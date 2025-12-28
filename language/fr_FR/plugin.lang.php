@@ -150,4 +150,7 @@ $lang['color_updated_realtime'] = 'Couleur mise à jour en temps réel';
 $lang['credits'] = 'Crédits';
 $lang['credits_modal_title'] = 'Crédits - centralAdmin';
 $lang['version_number'] = 'Version';
+$lang['jquery_not_loaded'] = 'jQuery non chargé';
+$lang['jquery_confirm_available'] = 'jQuery Confirm disponible';
+$lang['credits_loading_error'] = 'Erreur de chargement des crédits';
 $lang[''] = '';

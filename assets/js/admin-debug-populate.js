@@ -7,6 +7,25 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
+      // Détecter jQuery
+      if (typeof jQuery !== 'undefined') {
+        const jqVersion = jQuery.fn.jquery || 'inconnu';
+        document.getElementById('jquery-version').innerHTML = 
+          '<span class="ca-debug-badge ca-badge-info">' + jqVersion + '</span>';
+      } else {
+        document.getElementById('jquery-version').innerHTML = 
+          '<span style="color: #dc3545;">❌ Non chargé</span>';
+      }
+      
+      // Détecter jQuery Confirm
+      if (typeof jQuery !== 'undefined' && typeof jQuery.confirm !== 'undefined') {
+        document.getElementById('jquery-confirm-status').innerHTML = 
+          '<span class="ca-debug-badge ca-badge-info">✅ Disponible</span>';
+      } else {
+        document.getElementById('jquery-confirm-status').innerHTML = 
+          '<span style="color: #dc3545;">❌ Non disponible</span>';
+      }
+      
       // Détecter Spectrum
       if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
         document.getElementById('spectrum-version').innerHTML = 
