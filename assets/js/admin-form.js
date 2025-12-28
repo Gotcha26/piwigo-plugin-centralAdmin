@@ -319,7 +319,7 @@
       if (typeof jQuery === 'undefined' || typeof jQuery.confirm === 'undefined') {
         console.error('[CentralAdmin] jQuery Confirm non disponible');
         // Fallback : nouvelle fenêtre
-        window.open('plugins/centralAdmin/credentials.html', 'credits', 'width=750,height=600');
+        window.open('plugins/centralAdmin/credentials.html', 'credits', 'width=750');
         return;
       }
       
@@ -330,26 +330,37 @@
         success: function(html) {
           // Afficher avec jquery-confirm (système natif Piwigo)
           jQuery.confirm({
-            title: 'Crédits - centralAdmin',
+            title: '<span style="color: #3498db;">🎨 Crédits - centralAdmin</span>',
             content: html,
             type: 'blue',
+            columnClass: 'large',
             boxWidth: '750px',
             useBootstrap: false,
+            backgroundDismiss: true,
+            escapeKey: true,
+            animation: 'scale',
+            closeAnimation: 'scale',
+            animationSpeed: 300,
+            animationBounce: 1.2,
+            draggable: false,
+            theme: 'material',
+            buttons: {
+              close: {
+                text: 'Fermer',
+                btnClass: 'btn-blue',
+                keys: ['esc'],
+                action: function() {
+                  // Se ferme automatiquement
+                }
+              }
+            },
+            // Ajouter un overlay avec flou
             onOpenBefore: function() {
               // Ajouter une classe pour flouter l'arrière-plan
               jQuery('.jconfirm-bg').css({
                 'backdrop-filter': 'blur(3px)',
                 'background': 'rgba(0, 0, 0, 0.5)'
               });
-            },
-            buttons: {
-              close: {
-                text: 'Fermer',
-                btnClass: 'btn-blue',
-                action: function() {
-                  // Se ferme automatiquement
-                }
-              }
             }
           });
         },

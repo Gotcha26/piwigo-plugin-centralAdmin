@@ -12,10 +12,10 @@
   <div class="ca-section-content" style="display: none;">
     
     {* fade_start *}
-    <div class="ca-field ca-field-locked">
+    <div class="ca-field">
       <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="true" title="{'central_admin_locked'|@translate}">
-          <span class="ca-lock-icon">🔒</span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_locked'|@translate}">
+          <span class="ca-lock-icon">🔓</span>
         </button>
         <label class="ca-label">
           {'fade_start'|@translate}
@@ -32,25 +32,23 @@
                name="layout[fade_start]"
                min="800" max="1600" step="25"
                value="{$centralAdmin.layout.fade_start}"
-               data-output="fade_start_value"
-               disabled>
+               data-output="fade_start_value">
         <div class="ca-value-group">
           <input type="number" 
                  class="ca-input-number"
                  id="fade_start_value"
                  min="800" max="1600" step="25"
-                 value="{$centralAdmin.layout.fade_start}"
-                 disabled>
+                 value="{$centralAdmin.layout.fade_start}">
           <span class="ca-unit">px</span>
         </div>
       </div>
     </div>
 
     {* infos_main_color *}
-    <div class="ca-field ca-field-locked">
+    <div class="ca-field">
       <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="true" title="{'central_admin_locked'|@translate}">
-          <span class="ca-lock-icon">🔒</span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_locked'|@translate}">
+          <span class="ca-lock-icon">🔓</span>
         </button>
         <label class="ca-label">
           {'infos_main_color'|@translate}
@@ -65,25 +63,23 @@
           <input type="color" 
                  class="ca-color-picker"
                  id="infos_main_color_picker"
-                 value="{$centralAdmin.colors.tooltips.infos_main_color}"
-                 disabled>
+                 value="{$centralAdmin.colors.tooltips.infos_main_color}">
           <input type="text" 
                  class="ca-color-input"
                  id="infos_main_color_text"
                  name="colors[tooltips][infos_main_color]"
                  value="{$centralAdmin.colors.tooltips.infos_main_color}"
                  pattern="^#[0-9A-Fa-f]{literal}{{/literal}6{literal}}{/literal}$"
-                 maxlength="7"
-                 disabled>
+                 maxlength="7">
         </div>
       </div>
     </div>
 
     {* warning_main_color *}
-    <div class="ca-field ca-field-locked">
+    <div class="ca-field">
       <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="true" title="{'central_admin_locked'|@translate}">
-          <span class="ca-lock-icon">🔒</span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_locked'|@translate}">
+          <span class="ca-lock-icon">🔓</span>
         </button>
         <label class="ca-label">
           {'warning_main_color'|@translate}
@@ -98,25 +94,23 @@
           <input type="color" 
                  class="ca-color-picker"
                  id="warning_main_color_picker"
-                 value="{$centralAdmin.colors.tooltips.warning_main_color}"
-                 disabled>
+                 value="{$centralAdmin.colors.tooltips.warning_main_color}">
           <input type="text" 
                  class="ca-color-input"
                  id="warning_main_color_text"
                  name="colors[tooltips][warning_main_color]"
                  value="{$centralAdmin.colors.tooltips.warning_main_color}"
                  pattern="^#[0-9A-Fa-f]{literal}{{/literal}6{literal}}{/literal}$"
-                 maxlength="7"
-                 disabled>
+                 maxlength="7">
         </div>
       </div>
     </div>
 
     {* messages_main_color *}
-    <div class="ca-field ca-field-locked">
+    <div class="ca-field">
       <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="true" title="{'central_admin_locked'|@translate}">
-          <span class="ca-lock-icon">🔒</span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_locked'|@translate}">
+          <span class="ca-lock-icon">🔓</span>
         </button>
         <label class="ca-label">
           {'messages_main_color'|@translate}
@@ -131,25 +125,23 @@
           <input type="color" 
                  class="ca-color-picker"
                  id="messages_main_color_picker"
-                 value="{$centralAdmin.colors.tooltips.messages_main_color}"
-                 disabled>
+                 value="{$centralAdmin.colors.tooltips.messages_main_color}">
           <input type="text" 
                  class="ca-color-input"
                  id="messages_main_color_text"
                  name="colors[tooltips][messages_main_color]"
                  value="{$centralAdmin.colors.tooltips.messages_main_color}"
                  pattern="^#[0-9A-Fa-f]{literal}{{/literal}6{literal}}{/literal}$"
-                 maxlength="7"
-                 disabled>
+                 maxlength="7">
         </div>
       </div>
     </div>
 
     {* error_main_color *}
-    <div class="ca-field ca-field-locked">
+    <div class="ca-field">
       <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="true" title="{'central_admin_locked'|@translate}">
-          <span class="ca-lock-icon">🔒</span>
+        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_locked'|@translate}">
+          <span class="ca-lock-icon">🔓</span>
         </button>
         <label class="ca-label">
           {'error_main_color'|@translate}
@@ -164,16 +156,14 @@
           <input type="color" 
                  class="ca-color-picker"
                  id="error_main_color_picker"
-                 value="{$centralAdmin.colors.tooltips.error_main_color}"
-                 disabled>
+                 value="{$centralAdmin.colors.tooltips.error_main_color}">
           <input type="text" 
                  class="ca-color-input"
                  id="error_main_color_text"
                  name="colors[tooltips][error_main_color]"
                  value="{$centralAdmin.colors.tooltips.error_main_color}"
                  pattern="^#[0-9A-Fa-f]{literal}{{/literal}6{literal}}{/literal}$"
-                 maxlength="7"
-                 disabled>
+                 maxlength="7">
         </div>
       </div>
     </div>
