@@ -76,7 +76,18 @@ $theme_debug['current_scheme_returned'] = $current_scheme;
 // Injecter la détection combinée PHP + JS
 $template->append(
     'head_elements',
-    '<script>document.body.setAttribute("data-ca-theme", "' . $current_scheme . '");</script>'
+    '<script>
+    (function() {
+        var scheme = "' . $current_scheme . '";
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function() {
+                document.body.setAttribute("data-ca-theme", scheme);
+            });
+        } else {
+            document.body.setAttribute("data-ca-theme", scheme);
+        }
+    })();
+    </script>'
 );
 
 /* ===============================
