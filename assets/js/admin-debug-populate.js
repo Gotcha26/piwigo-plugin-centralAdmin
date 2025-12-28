@@ -28,9 +28,16 @@
         document.getElementById('body-classes-value').textContent = debug.bodyClasses || '(vide)';
         document.getElementById('body-bgcolor-value').textContent = debug.bgColor;
         
-        document.getElementById('concordance-value').innerHTML = debug.concordance 
-          ? '✅ <strong style="color: #28a745;">Oui</strong>' 
-          : '⚠️ <strong style="color: #ffa500;">Non (divergence)</strong>';
+        // Forcer la concordance sur la valeur PHP (prioritaire)
+        const phpScheme = document.body.getAttribute('data-ca-theme');
+        document.getElementById('concordance-value').innerHTML = 
+          '<strong style="color: #3498db;">PHP prioritaire : ' + phpScheme + '</strong>';
+
+        // Afficher la divergence si elle existe
+        if (debug.js !== phpScheme) {
+          document.getElementById('concordance-value').innerHTML += 
+            '<br><small style="color: #ffa500;">⚠️ JS détecte : ' + debug.js + ' (Paramètre ignoré)</small>';
+        }
         
         document.getElementById('console-js-detection').innerHTML = '<strong>' + debug.js + '</strong>';
         document.getElementById('console-concordance').innerHTML = debug.concordance 
