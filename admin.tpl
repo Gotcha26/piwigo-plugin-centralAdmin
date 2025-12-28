@@ -45,7 +45,7 @@
   <header class="ca-header">
     <div class="ca-header-main">
       <div class="ca-header-left">
-        <h2>{'central_admin'|@translate}</h2>
+        <h2>{'central_admin'|@translate} <small style="color: #999; font-size: 0.6em;">v{$theme_debug.plugin_version}</small></h2>
         <p class="ca-subtitle">{'central_admin_description'|@translate}</p>
       </div>
       <div class="ca-header-right">
