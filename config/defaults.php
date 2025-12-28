@@ -13,7 +13,7 @@ return array(
     'align_pluginFilter_left'  => '225',
     'align_pluginFilter_right' => '160',
     'fade_start'               => '800',
-    'hide_quick_sync'          => '0',
+    'hide_quick_sync'          => '1',
   ),
   'colors' => array(
     'tooltips' => array(

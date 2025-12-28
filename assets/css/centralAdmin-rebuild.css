@@ -103,8 +103,10 @@ html {
 }
 
 /* -- Bouton de synchro rapide -- */
-.showCreateAlbum {
-    display: none !important;
+.showCreateAlbum,
+a.icon-plus-circled[href*="page=album"],
+#addAlbumForm {
+  display: var(--ca-layout-hide-quick-sync, block) !important;
 }
 
 /* -- Barre d'actions -- */

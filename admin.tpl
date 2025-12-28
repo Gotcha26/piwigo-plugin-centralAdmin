@@ -7,6 +7,7 @@
   --ca-layout-align-pluginFilter-left: {$centralAdmin.layout.align_pluginFilter_left}px;
   --ca-layout-align-pluginFilter-right: {$centralAdmin.layout.align_pluginFilter_right}px;
   --ca-layout-fade-start: {$centralAdmin.layout.fade_start}px;
+  --ca-layout-hide-quick-sync: {if $centralAdmin.layout.hide_quick_sync == '1'}none{else}block{/if};
   
   {* Tooltips (commun) *}
   --ca-color-infos-main-color: {$centralAdmin.colors.tooltips.infos_main_color};

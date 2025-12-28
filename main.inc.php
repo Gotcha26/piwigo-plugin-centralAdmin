@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 2.6.4
+Version: 2.8.1
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
@@ -72,11 +72,15 @@ function central_admin_generate_css_vars(array $config, $current_scheme = 'clear
 {
     $css = '';
 
-    // Layout
+    // Layout + button
     if (isset($config['layout'])) {
         foreach ($config['layout'] as $key => $value) {
-            // Ignorer hide_quick_sync (ce n'est pas une variable CSS)
-            if ($key === 'hide_quick_sync') continue;
+            // Traitement spécial pour hide_quick_sync
+            if ($key === 'hide_quick_sync') {
+                $displayValue = ($value === '1') ? 'none' : 'block';
+                $css .= '--ca-layout-hide-quick-sync: ' . $displayValue . ";\n";
+                continue;
+            }
             
             $css .= '--ca-layout-' . str_replace('_', '-', $key) . ': ' . (int)$value . "px;\n";
         }
@@ -132,9 +136,12 @@ add_event_handler('loc_begin_admin_page', function () {
         return;
     }
 
-    // Schéma actif avec normalisation
-    $scheme = pwg_get_session_var('admin_theme', 'clear');
+    // Schéma actif avec normalisation (MÊME MÉTHODE que admin.php)
+    $scheme = userprefs_get_param('admin_theme', 'clear');
     $scheme = ($scheme === 'roma') ? 'dark' : 'clear';
+
+    error_log('[CentralAdmin] loc_begin_admin_page - Schéma détecté: ' . $scheme);
+    error_log('[CentralAdmin] userprefs admin_theme brut: ' . userprefs_get_param('admin_theme', 'clear'));
     
     // CHEMINS
     $assets_path = get_root_url() . 'plugins/centralAdmin/assets/';
@@ -160,13 +167,4 @@ add_event_handler('loc_begin_admin_page', function () {
         'head_elements',
         '<style id="central-admin-vars">' . $css . '</style>'
     );
-    
-    // CSS conditionnel pour masquer le bouton sync rapide
-    if (isset($conf['centralAdmin']['layout']['hide_quick_sync']) 
-        && $conf['centralAdmin']['layout']['hide_quick_sync'] === '1') {
-        $template->append(
-            'head_elements',
-            '<style>.showCreateAlbum { display: none !important; }</style>'
-        );
-    }
 });
