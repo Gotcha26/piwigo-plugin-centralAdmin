@@ -365,12 +365,12 @@
               // Ajuster la hauteur de la modale
               jQuery('.jconfirm-box-container').css({
                 'max-height': '85vh',      // Hauteur maximale = 85% de la hauteur viewport
-                'min-height': '600px'      // Hauteur minimale
+                'min-height': '400px'      // Hauteur minimale
               });
               
               // Rendre le contenu scrollable si nécessaire
               jQuery('.jconfirm-content').css({
-                'max-height': '100%', // Hauteur max - header/footer
+                'max-height': 'calc(85vh - 120px)', // Hauteur max - header/footer
                 'overflow-y': 'auto',
                 'padding': '20px'
               });
