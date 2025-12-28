@@ -137,7 +137,7 @@ $lang['body_bgcolor'] = 'Couleur de fond <body>';
 $lang['php_js_concordance'] = 'Concordance PHP/JS';
 $lang['additional_info'] = 'Informations complémentaires';
 $lang['gallery_theme'] = 'thème galerie publique';
-$lang['open_console_f12'] = 'Ouvrez la console (F12) pour voir les détails :';
+$lang['open_console_f12'] = 'Ouvrez les outils de développement (F12) > Console > Journeaux, pour voir les détails :';
 
 $lang['scheme_switch_warning'] = 'Attention : vous avez changé de thème';
 $lang['user_modifications_preserved'] = 'Vos modifications pour le thème {scheme} ont été préservées';

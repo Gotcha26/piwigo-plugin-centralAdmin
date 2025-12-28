@@ -233,7 +233,6 @@ $template->assign(array(
     'theme_debug' => $theme_debug,
 
     // CSS - TOUS LES CHEMINS DÉFINIS
-    'CENTRAL_ADMIN_CSS' => $assets_path . 'css/style.css',
     'CENTRAL_ADMIN_REBUILD_CSS' => $assets_path . 'css/centralAdmin-rebuild.css',
     'CENTRAL_ADMIN_FORM_CSS' => $assets_path . 'css/admin-form.css',
     'CENTRAL_ADMIN_THEME_CSS' => $assets_path . 'css/admin-form-theme.css',

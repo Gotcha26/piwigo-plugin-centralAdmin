@@ -146,12 +146,6 @@ add_event_handler('loc_begin_admin_page', function () {
     // CHEMINS
     $assets_path = get_root_url() . 'plugins/centralAdmin/assets/';
 
-    // CSS du plugin
-    $template->append(
-        'head_elements',
-        '<link rel="stylesheet" href="' . $assets_path . 'css/style.css">'
-    );
-
     // CSS structure
     $template->append(
         'head_elements',

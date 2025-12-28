@@ -16,6 +16,24 @@
         document.getElementById('jquery-version').innerHTML = 
           '<span style="color: #dc3545;">❌ Non chargé</span>';
       }
+
+      // Vérifier l'ordre de chargement
+      const scripts = Array.from(document.querySelectorAll('script[src]'));
+      const spectrumScript = scripts.find(s => s.src.includes('spectrum'));
+      const adminFormScript = scripts.find(s => s.src.includes('admin-form.js'));
+
+      if (spectrumScript && adminFormScript) {
+        const spectrumIndex = scripts.indexOf(spectrumScript);
+        const adminFormIndex = scripts.indexOf(adminFormScript);
+        
+        console.log('[CentralAdmin Debug] Ordre de chargement :');
+        console.log('  - admin-form.js : position', adminFormIndex);
+        console.log('  - spectrum.min.js : position', spectrumIndex);
+        
+        if (spectrumIndex > adminFormIndex) {
+          console.warn('⚠️ Spectrum chargé APRÈS admin-form.js (normal, géré par délai)');
+        }
+      }
       
       // Détecter jQuery Confirm
       if (typeof jQuery !== 'undefined' && typeof jQuery.confirm !== 'undefined') {

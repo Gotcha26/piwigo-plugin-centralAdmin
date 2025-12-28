@@ -335,6 +335,13 @@
             type: 'blue',
             boxWidth: '750px',
             useBootstrap: false,
+            onOpenBefore: function() {
+              // Ajouter une classe pour flouter l'arrière-plan
+              jQuery('.jconfirm-bg').css({
+                'backdrop-filter': 'blur(3px)',
+                'background': 'rgba(0, 0, 0, 0.5)'
+              });
+            },
             buttons: {
               close: {
                 text: 'Fermer',
