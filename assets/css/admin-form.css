@@ -883,7 +883,7 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-badge-light {
 
 /* Contenu scrollable */
 .jconfirm-content {
-  max-height: 500px !important;
+  /* max-height: 500px !important; */
   overflow-y: auto !important;
   padding-right: 10px !important;
 }
