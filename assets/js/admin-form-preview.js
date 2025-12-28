@@ -147,28 +147,23 @@ function initColorPreview() {
   ];
 
   tooltipColors.forEach(colorName => {
-    const textInput = document.getElementById(colorName + '_text');
-    
-    if (textInput) {
-      // Écouter les changements via Spectrum
-      if (typeof jQuery !== 'undefined' && jQuery(textInput).spectrum) {
-        jQuery(textInput).on('change.spectrum', function(e, color) {
-          if (color) {
-            const hexValue = color.toHexString();
-            updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
-            console.log('[CentralAdmin Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
-            logPreview('[CentralAdmin Preview] Couleur tooltip mise à jour', colorName, hexValue);
-          }
-        });
-        
-        jQuery(textInput).on('move.spectrum', function(e, color) {
-          if (color) {
-            const hexValue = color.toHexString();
-            updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
-          }
-        });
-      }
+  const textInput = document.getElementById(colorName + '_text');
+  
+  if (textInput) {
+      // Écouter l'événement spectrum-move pour prévisualisation
+      textInput.addEventListener('spectrum-move', function(e) {
+        const hexValue = e.detail.color;
+        updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
+        console.log('[CentralAdmin Preview] Aperçu couleur:', colorName, '=', hexValue);
+      });
       
+      // Écouter spectrum-change pour validation
+      textInput.addEventListener('spectrum-change', function(e) {
+        const hexValue = e.detail.color;
+        updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
+        console.log('[CentralAdmin Preview] Couleur validée:', colorName, '=', hexValue);
+      });
+     
       // Fallback : input manuel dans le champ texte
       textInput.addEventListener('input', function() {
         if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {

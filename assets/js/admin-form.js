@@ -286,7 +286,13 @@
         ],
         move: function(color) {
           if (color) {
-            picker.value = color.toHexString();
+            const hexValue = color.toHexString().toUpperCase();
+            picker.value = hexValue;
+            // Déclencher l'événement personnalisé pour la prévisualisation
+            const event = new CustomEvent('spectrum-move', { 
+              detail: { color: hexValue, inputId: textInput.id } 
+            });
+            textInput.dispatchEvent(event);
           }
         },
         change: function(color) {
@@ -294,6 +300,11 @@
             const hexValue = color.toHexString().toUpperCase();
             textInput.value = hexValue;
             picker.value = hexValue;
+            // Déclencher l'événement personnalisé
+            const event = new CustomEvent('spectrum-change', { 
+              detail: { color: hexValue, inputId: textInput.id } 
+            });
+            textInput.dispatchEvent(event);
             console.log('[CentralAdmin] Couleur changée:', hexValue);
           }
         }
