@@ -225,6 +225,13 @@
 	  </div>
 	</div>
 
+	{* Lien crédits *}
+    <div style="text-align: right; margin-bottom: 10px; padding-right: 5px;">
+      <a href="#" id="ca-credits-link" style="color: #999; font-size: 13px; text-decoration: none;">
+        {'credits'|@translate} : Gotcha
+      </a>
+    </div>
+
     <div class="ca-actions">
       <button type="submit" name="save" class="ca-btn ca-btn-primary">
         <span class="ca-icon">💾</span>

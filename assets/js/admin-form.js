@@ -14,6 +14,7 @@
     initAccordions();
     initLockToggles();
     initSliders();
+    initCreditsModal();
     
     // Attendre que Spectrum soit chargé
     if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
@@ -302,6 +303,60 @@
     });
     
     console.log('[CentralAdmin] Color pickers initialisés:', initCount);
+  }
+
+  /* ================================================
+    MODALE CRÉDITS
+    ================================================ */
+  function initCreditsModal() {
+    const creditsLink = document.getElementById('ca-credits-link');
+    if (!creditsLink) return;
+    
+    creditsLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Vérifier que jQuery Confirm est chargé
+      if (typeof jQuery === 'undefined' || typeof jQuery.confirm === 'undefined') {
+        console.error('[CentralAdmin] jQuery Confirm non disponible');
+        // Fallback : nouvelle fenêtre
+        window.open('plugins/centralAdmin/credentials.html', 'credits', 'width=750,height=600');
+        return;
+      }
+      
+      // Charger le contenu HTML via AJAX
+      jQuery.ajax({
+        url: 'plugins/centralAdmin/config/credentials.html',
+        dataType: 'html',
+        success: function(html) {
+          // Afficher avec jquery-confirm (système natif Piwigo)
+          jQuery.confirm({
+            title: 'Crédits - centralAdmin',
+            content: html,
+            type: 'blue',
+            boxWidth: '750px',
+            useBootstrap: false,
+            buttons: {
+              close: {
+                text: 'Fermer',
+                btnClass: 'btn-blue',
+                action: function() {
+                  // Se ferme automatiquement
+                }
+              }
+            }
+          });
+        },
+        error: function() {
+          jQuery.alert({
+            title: 'Erreur',
+            content: 'Impossible de charger les crédits.',
+            type: 'red'
+          });
+        }
+      });
+    });
+    
+    console.log('[CentralAdmin] Modale crédits initialisée');
   }
 
 })();

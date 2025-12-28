@@ -8,3 +8,6 @@ $lang['css_preview_active'] = 'Real-time preview active';
 $lang['css_applying_scheme'] = 'Applying scheme: {scheme}';
 $lang['color_preview_active'] = 'Color preview active';
 $lang['color_updated_realtime'] = 'Color updated in real-time';
+$lang['credits'] = 'Credits';
+$lang['credits_modal_title'] = 'Credits - centralAdmin';
+$lang['version_number'] = 'Version';
