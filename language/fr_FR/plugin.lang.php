@@ -21,8 +21,8 @@ $lang['reset_current_scheme_only'] = 'Réinitialiser uniquement le thème actuel
 // == SECTIONS ==
 $lang['central_admin_layout'] = 'Paramètres de mise en page';
 $lang['central_admin_tooltips'] = 'Couleurs des info-bulles';
-$lang['central_admin_scheme_clear'] = 'Couleurs spécifiques au thème clair';
-$lang['central_admin_scheme_dark'] = 'Couleurs spécifiques au thème sombre';
+$lang['central_admin_scheme_clear'] = 'Couleurs spécifiques au thème actuel : clair';
+$lang['central_admin_scheme_dark'] = 'Couleurs spécifiques au thème actuel : sombre';
 $lang['debug_infos_area'] = 'Informations de débogage';
 
 // == ÉTATS ==
@@ -31,7 +31,7 @@ $lang['central_admin_locked'] = 'Paramètre verrouillé';
 
 // == OPTIONS HEADER ==
 $lang['actual_piwigo_admin_theme'] = 'Thème admin Piwigo détecté :';
-$lang['preference_browser_scheme'] = 'Utiliser le thème du navigateur';
+$lang['preference_browser_scheme'] = 'Affichage avec le thème neutre';
 $lang['accordion_choice'] = 'Un seul panneau ouvert à la fois';
 
 // == PARAMÈTRES LAYOUT ==
@@ -47,14 +47,14 @@ $lang['menubar_width_tp'] =
 . "Valeur recommandée : 205px\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['align_pluginFilter_left'] = 'Position gauche de la barre d\'actions';
+$lang['align_pluginFilter_left'] = 'Page "Plugins" - Position gauche de la barre d\'actions';
 $lang['align_pluginFilter_left_tp'] = 
   "Position de la barre d'actions (partie gauche).\n"
 . "Doit correspondre à la largeur du menubar.\n"
 . "Valeur recommandée : 225px\n"
 . "Réservé aux utilisateurs avancés.";
 
-$lang['align_pluginFilter_right'] = 'Position droite de la barre d\'actions';
+$lang['align_pluginFilter_right'] = 'Page "Plugins" - Position droite de la barre d\'actions';
 $lang['align_pluginFilter_right_tp'] = 
   "Position de la barre d'actions (partie droite).\n"
 . "Valeur recommandée : 160px\n"
@@ -85,29 +85,29 @@ $lang['error_main_color'] = 'Couleur des erreurs';
 $lang['error_main_color_tp'] = 'Couleur de fond des bulles d\'erreur (rouge clair par défaut)';
 
 // == COULEURS THÈME CLAIR ==
-$lang['bg_clear_global'] = 'Arrière-plan général (clair)';
+$lang['bg_clear_global'] = 'Arrière-plan général';
 $lang['bg_clear_global_tp'] = 'Couleur des bandes latérales sur les côtés de l\'interface';
 
-$lang['bg_clear_content2'] = 'Arrière-plan des en-têtes (clair)';
+$lang['bg_clear_content2'] = 'Arrière-plan des en-têtes';
 $lang['bg_clear_content2_tp'] = 'Couleur de l\'en-tête des pages (bandeau supérieur)';
 
-$lang['bg_clear_content1'] = 'Arrière-plan du contenu principal (clair)';
+$lang['bg_clear_content1'] = 'Arrière-plan du contenu principal';
 $lang['bg_clear_content1_tp'] = 'Couleur de la zone de contenu utilisée par les options';
 
-$lang['bg_clear_content3'] = 'Arrière-plan secondaire (clair)';
+$lang['bg_clear_content3'] = 'Arrière-plan secondaire';
 $lang['bg_clear_content3_tp'] = 'Couleur de la zone restante sous les options (si présente)';
 
 // == COULEURS THÈME SOMBRE ==
-$lang['bg_dark_global'] = 'Arrière-plan général (sombre)';
+$lang['bg_dark_global'] = 'Arrière-plan général';
 $lang['bg_dark_global_tp'] = 'Couleur des bandes latérales sur les côtés de l\'interface';
 
-$lang['bg_dark_content2'] = 'Arrière-plan des en-têtes (sombre)';
+$lang['bg_dark_content2'] = 'Arrière-plan des en-têtes';
 $lang['bg_dark_content2_tp'] = 'Couleur de l\'en-tête des pages (bandeau supérieur)';
 
-$lang['bg_dark_content1'] = 'Arrière-plan du contenu principal (sombre)';
+$lang['bg_dark_content1'] = 'Arrière-plan du contenu principal';
 $lang['bg_dark_content1_tp'] = 'Couleur de la zone de contenu utilisée par les options';
 
-$lang['bg_dark_content3'] = 'Arrière-plan secondaire (sombre)';
+$lang['bg_dark_content3'] = 'Arrière-plan secondaire';
 $lang['bg_dark_content3_tp'] = 'Couleur de la zone restante sous les options (si présente)';
 
 // == DEBUG - VERSIONS ==
@@ -118,7 +118,7 @@ $lang['verification_'] = 'Vérification en cours...';
 // == DEBUG - DÉTECTION THÈME ==
 $lang['spectrum_suspending'] = 'Retiré (natif v2.9+)';
 $lang['theme_detection_php'] = 'Détection du thème (côté serveur - PHP)';
-$lang['theme_detection_js'] = 'Détection du thème (côté client - JavaScript)';
+$lang['theme_detection_js'] = 'Détection du thème (côté client - JavaScript) [OBSOLETE]';
 $lang['detection_method'] = 'Méthode de détection';
 $lang['raw_value_userprefs'] = 'Valeur brute (base de données)';
 $lang['normalized_value'] = 'Valeur normalisée';

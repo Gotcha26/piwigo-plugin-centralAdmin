@@ -40,10 +40,10 @@ $lang['admin_width_tp'] = "Maximum width of the administration interface.\nRecom
 $lang['menubar_width'] = 'Sidebar width';
 $lang['menubar_width_tp'] = "Width of the left column (menubar).\nRecommended value: 205px\nFor advanced users only.";
 
-$lang['align_pluginFilter_left'] = 'Left position of action bar';
+$lang['align_pluginFilter_left'] = '"Plugins" page - Left position of action bar';
 $lang['align_pluginFilter_left_tp'] = "Position of the action bar (left part).\nMust match menubar width.\nRecommended value: 225px\nFor advanced users only.";
 
-$lang['align_pluginFilter_right'] = 'Right position of action bar';
+$lang['align_pluginFilter_right'] = '"Plugins" page - Right position of action bar';
 $lang['align_pluginFilter_right_tp'] = "Position of the action bar (right part).\nRecommended value: 160px\nFor advanced users only.";
 
 $lang['fade_start'] = 'Color gradient start';
@@ -66,29 +66,29 @@ $lang['error_main_color'] = 'Error color';
 $lang['error_main_color_tp'] = 'Background color for error bubbles (light red by default)';
 
 // == LIGHT THEME COLORS ==
-$lang['bg_clear_global'] = 'Global background (light)';
+$lang['bg_clear_global'] = 'Global background';
 $lang['bg_clear_global_tp'] = 'Color of the lateral bands on the sides of the interface';
 
-$lang['bg_clear_content2'] = 'Header background (light)';
+$lang['bg_clear_content2'] = 'Header background';
 $lang['bg_clear_content2_tp'] = 'Color of page headers (top banner)';
 
-$lang['bg_clear_content1'] = 'Main content background (light)';
+$lang['bg_clear_content1'] = 'Main content background';
 $lang['bg_clear_content1_tp'] = 'Color of the content area used by options';
 
-$lang['bg_clear_content3'] = 'Secondary background (light)';
+$lang['bg_clear_content3'] = 'Secondary background';
 $lang['bg_clear_content3_tp'] = 'Color of the remaining area below options (if present)';
 
 // == DARK THEME COLORS ==
-$lang['bg_dark_global'] = 'Global background (dark)';
+$lang['bg_dark_global'] = 'Global background';
 $lang['bg_dark_global_tp'] = 'Color of the lateral bands on the sides of the interface';
 
-$lang['bg_dark_content2'] = 'Header background (dark)';
+$lang['bg_dark_content2'] = 'Header background';
 $lang['bg_dark_content2_tp'] = 'Color of page headers (top banner)';
 
-$lang['bg_dark_content1'] = 'Main content background (dark)';
+$lang['bg_dark_content1'] = 'Main content background';
 $lang['bg_dark_content1_tp'] = 'Color of the content area used by options';
 
-$lang['bg_dark_content3'] = 'Secondary background (dark)';
+$lang['bg_dark_content3'] = 'Secondary background';
 $lang['bg_dark_content3_tp'] = 'Color of the remaining area below options (if present)';
 
 // == DEBUG - VERSIONS ==
@@ -99,7 +99,7 @@ $lang['verification_'] = 'Checking...';
 // == DEBUG - THEME DETECTION ==
 $lang['spectrum_suspending'] = 'Removed (native v2.9+)';
 $lang['theme_detection_php'] = 'Theme Detection (Server-side - PHP)';
-$lang['theme_detection_js'] = 'Theme Detection (Client-side - JavaScript)';
+$lang['theme_detection_js'] = 'Theme Detection (Client-side - JavaScript) [OBSOLETE]';
 $lang['detection_method'] = 'Detection method';
 $lang['raw_value_userprefs'] = 'Raw value (database)';
 $lang['normalized_value'] = 'Normalized value';

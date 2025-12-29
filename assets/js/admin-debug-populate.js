@@ -73,6 +73,7 @@
             '<br><small style="color: #ffa500;">⚠️ JS détecte : ' + debug.js + ' (Paramètre ignoré)</small>';
         }
         
+        debug.concordance = (debug.js === phpScheme);
         document.getElementById('console-js-detection').innerHTML = '<strong>' + debug.js + '</strong>';
         document.getElementById('console-concordance').innerHTML = debug.concordance 
           ? '<strong style="color: #28a745;">Oui</strong>' 
