@@ -140,9 +140,6 @@ add_event_handler('loc_begin_admin_page', function () {
     $scheme = userprefs_get_param('admin_theme', 'clear');
     $scheme = ($scheme === 'roma') ? 'dark' : 'clear';
 
-    error_log('[CentralAdmin] loc_begin_admin_page - Schéma détecté: ' . $scheme);
-    error_log('[CentralAdmin] userprefs admin_theme brut: ' . userprefs_get_param('admin_theme', 'clear'));
-    
     // CHEMINS
     $assets_path = get_root_url() . 'plugins/centralAdmin/assets/';
 
