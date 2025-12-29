@@ -179,21 +179,6 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .centralAdmin-container {
     background: linear-gradient(135deg, #777, #666);
   }
   
-  /* Spectrum adaptations */
-  .sp-replacer {
-    background: #2a2a2a !important;
-    border-color: #555 !important;
-    color: #f0f0f0 !important;
-  }
-  
-  .sp-dd {
-    color: #b0b0b0 !important;
-  }
-  
-  .sp-preview {
-    border-color: #555 !important;
-  }
-  
   /* Debug section dark */
   .ca-debug-info {
     background: #2a2a2a;
@@ -235,6 +220,20 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .centralAdmin-container {
 body.ca-piwigo-theme-clear:not(.ca-browser-theme) .centralAdmin-container {
   /* Styles clear déjà définis par défaut dans admin-form.css */
   /* Pas besoin de redéfinir */
+}
+
+/* ================================================
+   THÈME DARK
+   ================================================ */
+
+/* Color pickers natifs - Dark theme */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-color-picker {
+  border-color: #4a5568;
+  background: #2c3e50;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-color-picker:hover {
+  border-color: #ff7700;
 }
 
 /* ================================================

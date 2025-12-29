@@ -44,13 +44,10 @@
           '<span style="color: #dc3545;">❌ Non disponible</span>';
       }
       
-      // Détecter Spectrum
-      if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
-        document.getElementById('spectrum-version').innerHTML = 
-          '<span class="ca-debug-badge ca-badge-info">1.8.1 (CDN)</span>';
-      } else {
-        document.getElementById('spectrum-version').innerHTML = 
-          '<span style="color: #dc3545;">❌ Non détecté</span>';
+      // Message historique Spectrum
+      const spectrumEl = document.getElementById('spectrum-version');
+      if (spectrumEl) {
+        spectrumEl.innerHTML = '<span style="color: #999;">Removed (native v2.9+)</span>';
       }
       
       // Peupler les infos JS

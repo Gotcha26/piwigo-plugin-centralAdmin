@@ -125,11 +125,11 @@
 			</tr>
 			<tr>
 			<td><strong>jQuery :</strong></td>
-				<td><span id="jquery-version">{'verification_'|@translate}</span></td>
-				</tr>
+			  <td><span id="jquery-version">{'verification_'|@translate}</span></td>
+			  </tr>
 			<tr>
-				<td><strong>jQuery Confirm :</strong></td>
-				<td><span id="jquery-confirm-status">{'verification_'|@translate}</span></td>
+			  <td><strong>jQuery Confirm :</strong></td>
+			  <td><span id="jquery-confirm-status">{'verification_'|@translate}</span></td>
 			</tr>
 			<tr>
 			  <td><strong>Smarty :</strong></td>
@@ -137,7 +137,7 @@
 			</tr>
 			<tr>
 			  <td><strong>Spectrum :</strong></td>
-			  <td><span id="spectrum-version">{'verification_'|@translate}</span></td>
+			  <td><span style="color: #999;">{'spectrum_suspending'|@translate}</span></td>
 			</tr>
 		  </table>
 		  
@@ -211,8 +211,8 @@
 			<li>{'css_rebuild'|@translate} {$CENTRAL_ADMIN_REBUILD_CSS}</li>
 			<li>{'css_form'|@translate} {$CENTRAL_ADMIN_FORM_CSS}</li>
 			<li>{'css_admin_theme'|@translate} {$CENTRAL_ADMIN_THEME_CSS}</li>
-			<li>{'css_spectrum'|@translate} CDN cloudflare</li>
-			<li>{'spectrum_js'|@translate} CDN cloudflare (EOP)</li>
+			<li>{'css_spectrum'|@translate} <del>CDN cloudflare</del> <em>(retiré v2.9+)</em></li>
+			<li>{'spectrum_js'|@translate} <del>CDN cloudflare</del> <em>(retiré v2.9+)</em></li>
 			<li>{'js_form'|@translate} {$CENTRAL_ADMIN_FORM_JS}</li>
 			<li>{'js_preview'|@translate} {$CENTRAL_ADMIN_PREVIEW_JS}</li>
 		  </ul>
@@ -248,9 +248,6 @@
     </div>
   </form>
 </div>
-
-{* Spectrum JS - Charger APRÈS jQuery mais AVANT nos scripts *}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.js"></script>
 
 {* Scripts du plugin - EN DERNIER *}
 <script src="{$CENTRAL_ADMIN_FORM_JS}"></script>

@@ -14,24 +14,8 @@
     initAccordions();
     initLockToggles();
     initSliders();
+    initColorPickers();
     initCreditsModal();
-    
-    // Attendre que Spectrum soit chargé
-    if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
-      console.log('[CentralAdmin] Spectrum détecté, initialisation des color pickers');
-      initColorPickers();
-    } else {
-      console.warn('[CentralAdmin] Spectrum non disponible, attente...');
-      // Réessayer après un délai
-      setTimeout(function() {
-        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.spectrum !== 'undefined') {
-          console.log('[CentralAdmin] Spectrum chargé avec délai, initialisation');
-          initColorPickers();
-        } else {
-          console.error('[CentralAdmin] Spectrum toujours non disponible après délai');
-        }
-      }, 500);
-    }
   }
 
   /* ================================================
@@ -178,11 +162,6 @@
         const inputs = field.querySelectorAll('input:not(.ca-lock), select, textarea');
         inputs.forEach(input => {
           input.disabled = newLockedState;
-          
-          // Si c'est un color picker Spectrum, le désactiver aussi
-          if (input.classList.contains('ca-color-input') && typeof jQuery !== 'undefined') {
-            jQuery(input).spectrum(newLockedState ? 'disable' : 'enable');
-          }
         });
       });
     });
@@ -235,11 +214,10 @@
   }
 
   /* ================================================
-     COLOR PICKERS AVEC SPECTRUM
-     ================================================ */
+    COLOR PICKERS NATIFS
+    ================================================ */
   function initColorPickers() {
     const colorPickers = document.querySelectorAll('.ca-color-picker');
-    let initCount = 0;
     
     colorPickers.forEach(picker => {
       const pickerId = picker.id;
@@ -251,69 +229,39 @@
         return;
       }
       
-      // Vérifier jQuery et Spectrum
-      if (typeof jQuery === 'undefined' || typeof jQuery.fn.spectrum === 'undefined') {
-        console.error('[CentralAdmin] jQuery ou Spectrum non disponible');
-        return;
-      }
+      // Synchronisation picker natif → input texte
+      picker.addEventListener('input', () => {
+        const hexValue = picker.value.toUpperCase();
+        textInput.value = hexValue;
+        
+        // Déclencher l'événement pour la prévisualisation
+        const event = new CustomEvent('color-change', { 
+          detail: { color: hexValue, inputId: textInput.id } 
+        });
+        textInput.dispatchEvent(event);
+      });
       
-      // Cacher UNIQUEMENT le picker natif (pas l'input texte)
-      picker.style.display = 'none';
-
-      // S'assurer que l'input texte reste visible
-      textInput.style.display = 'inline-block';
-      textInput.readOnly = false;
-      
-      // Initialiser Spectrum
-      jQuery(textInput).spectrum({
-        color: textInput.value || '#000000',
-        showInput: true,
-        showInitial: true,
-        showPalette: true,
-        showButtons: false,
-        preferredFormat: "hex",
-        clickoutFiresChange: true,
-        disabled: textInput.disabled,
-        containerClassName: 'ca-spectrum-container',
-        replacerClassName: 'ca-spectrum-replacer',
-        showAlpha: false,  // Désactiver le canal alpha pour forcer hexa pur
-        palette: [
-          ["#000","#444","#666","#999","#ccc","#eee","#f3f3f3","#fff"],
-          ["#f00","#f90","#ff0","#0f0","#0ff","#00f","#90f","#f0f"],
-          ["#f4cccc","#fce5cd","#fff2cc","#d9ead3","#d0e0e3","#cfe2f3","#d9d2e9","#ead1dc"],
-          ["#ea9999","#f9cb9c","#ffe599","#b6d7a8","#a2c4c9","#9fc5e8","#b4a7d6","#d5a6bd"],
-          ["#e06666","#f6b26b","#ffd966","#93c47d","#76a5af","#6fa8dc","#8e7cc3","#c27ba0"]
-        ],
-        move: function(color) {
-          if (color) {
-            const hexValue = color.toHexString().toUpperCase();
-            picker.value = hexValue;
-            // Déclencher l'événement personnalisé pour la prévisualisation
-            const event = new CustomEvent('spectrum-move', { 
-              detail: { color: hexValue, inputId: textInput.id } 
-            });
-            textInput.dispatchEvent(event);
-          }
-        },
-        change: function(color) {
-          if (color) {
-            const hexValue = color.toHexString().toUpperCase();
-            textInput.value = hexValue;
-            picker.value = hexValue;
-            // Déclencher l'événement personnalisé
-            const event = new CustomEvent('spectrum-change', { 
-              detail: { color: hexValue, inputId: textInput.id } 
-            });
-            textInput.dispatchEvent(event);
-            console.log('[CentralAdmin] Couleur changée:', hexValue);
-          }
+      // Synchronisation input texte → picker natif
+      textInput.addEventListener('input', () => {
+        if (/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
+          picker.value = textInput.value;
+          
+          const event = new CustomEvent('color-change', { 
+            detail: { color: textInput.value.toUpperCase(), inputId: textInput.id } 
+          });
+          textInput.dispatchEvent(event);
         }
       });
       
-      initCount++;
+      // Validation au blur
+      textInput.addEventListener('blur', () => {
+        if (!/^#[0-9A-Fa-f]{6}$/i.test(textInput.value)) {
+          textInput.value = picker.value.toUpperCase();
+        }
+      });
     });
     
-    console.log('[CentralAdmin] Color pickers initialisés:', initCount);
+    console.log('[CentralAdmin] Color pickers natifs initialisés:', colorPickers.length);
   }
 
   /* ================================================

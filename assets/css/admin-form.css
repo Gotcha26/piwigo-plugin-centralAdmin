@@ -455,8 +455,34 @@
 }
 
 /* ================================================
-   COLOR PICKER
+   COLOR PICKERS NATIFS
    ================================================ */
+
+.ca-color-picker {
+  width: 50px;
+  height: 36px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.ca-color-picker:hover {
+  transform: scale(1.05);
+  border-color: #3498db;
+}
+
+.ca-color-picker:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.ca-color-picker:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
 
 .ca-field-controls-color {
   justify-content: flex-start;
@@ -475,25 +501,6 @@
 
 .ca-color-picker-wrapper:hover {
   border-color: #adb5bd;
-}
-
-.ca-color-picker {
-  width: 50px;
-  height: 36px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform 0.2s ease;
-}
-
-.ca-color-picker:hover {
-  transform: scale(1.05);
-}
-
-.ca-color-picker:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
 }
 
 .ca-color-input {
@@ -845,17 +852,6 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-label-info {
 body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-badge-light {
   background: linear-gradient(135deg, #34495e, #2c3e50);
   color: #ecf0f1;
-}
-
-/* ================================================
-   SPECTRUM (color picker)
-   ================================================ */
-
- /* Forcer l'affichage de l'input Spectrum */
-.sp-input {
-  display: block !important;
-  width: 100%;
-  margin-top: 5px;
 }
 
 /* ================================================
