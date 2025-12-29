@@ -221,7 +221,7 @@
 		  <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
 		  <p>{'open_console_f12'|@translate}</p>
 		  <ul class="ca-debug-list">
-			<li>🔍 PHP Detection (userprefs): {$theme_debug.current_scheme_returned}</li>
+			<li>🔍 PHP Detection (userprefs): <span id="console-php-detection">{$theme_debug.current_scheme_returned}</li>
 			<li>🔍 JS Detection (DOM/CSS): <span id="console-js-detection">{'verification_'|@translate}</span></li>
 			<li>✅ PHP et JS concordent : <span id="console-concordance">{'verification_'|@translate}</span></li>
 		  </ul>

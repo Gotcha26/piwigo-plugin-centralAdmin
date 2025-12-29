@@ -74,7 +74,8 @@
         }
         
         debug.concordance = (debug.js === phpScheme);
-        document.getElementById('console-js-detection').innerHTML = '<strong>' + debug.js + '</strong>';
+        document.getElementById('console-php-detection').innerHTML = '<strong>' + phpScheme + '</strong>';
+        document.getElementById('console-js-detection').innerHTML = debug.js;
         document.getElementById('console-concordance').innerHTML = debug.concordance 
           ? '<strong style="color: #28a745;">Oui</strong>' 
           : '<strong style="color: #ffa500;">Non</strong>';
