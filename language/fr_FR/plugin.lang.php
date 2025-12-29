@@ -35,35 +35,41 @@ $lang['preference_browser_scheme'] = 'Utiliser le thème du navigateur';
 $lang['accordion_choice'] = 'Un seul panneau ouvert à la fois';
 
 // == PARAMÈTRES LAYOUT ==
-$lang['admin_width'] = 'Largeur maximale de l\'administration';
-$lang['admin_width_tp'] = "Largeur maximale de l'interface d'administration.\n"
-  "Valeur recommandée : 1600px\n"
+$lang['admin_width'] ='Largeur maximale de l\'administration';
+$lang['admin_width_tp'] = 
+  "Largeur maximale de l'interface d'administration.\n"
+. "Valeur recommandée : 1600px\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['menubar_width'] = 'Largeur de la barre latérale';
-$lang['menubar_width_tp'] = "Largeur de la colonne de gauche (menubar).\n"
-  "Valeur recommandée : 205px\n"
+$lang['menubar_width_tp'] = 
+  "Largeur de la colonne de gauche (menubar).\n"
+. "Valeur recommandée : 205px\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['align_pluginFilter_left'] = 'Position gauche de la barre d\'actions';
-$lang['align_pluginFilter_left_tp'] = "Position de la barre d'actions (partie gauche).\n"
- "Doit correspondre à la largeur du menubar.\n"
+$lang['align_pluginFilter_left_tp'] = 
+  "Position de la barre d'actions (partie gauche).\n"
+. "Doit correspondre à la largeur du menubar.\n"
 . "Valeur recommandée : 225px\n"
-."Réservé aux utilisateurs avancés.";
+. "Réservé aux utilisateurs avancés.";
 
 $lang['align_pluginFilter_right'] = 'Position droite de la barre d\'actions';
-$lang['align_pluginFilter_right_tp'] = "Position de la barre d'actions (partie droite).\n"
-  "Valeur recommandée : 160px\n"
+$lang['align_pluginFilter_right_tp'] = 
+  "Position de la barre d'actions (partie droite).\n"
+. "Valeur recommandée : 160px\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['fade_start'] = 'Début du dégradé de couleur';
-$lang['fade_start_tp'] = "Distance avant laquelle la couleur reste unie à 100%.\n"
-  "Valeur recommandée : 800px\n"
+$lang['fade_start_tp'] = 
+  "Distance avant laquelle la couleur reste unie à 100%.\n"
+. "Valeur recommandée : 800px\n"
 . "Réservé aux utilisateurs avancés.";
 
 $lang['hide_quick_sync_button'] = 'Masquer le bouton de synchronisation rapide';
-$lang['hide_quick_sync_button_tp'] = "Masque le bouton « Créer un album » sur la page de synchronisation.\n"
-  "Utile pour une interface plus épurée.";
+$lang['hide_quick_sync_button_tp'] = 
+  "Masque le bouton « Créer un album » sur la page de synchronisation.\n"
+. "Utile pour une interface plus épurée.";
 
 // == COULEURS TOOLTIPS ==
 $lang['infos_main_color'] = 'Couleur des messages informatifs';
