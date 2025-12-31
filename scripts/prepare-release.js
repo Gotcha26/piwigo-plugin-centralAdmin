@@ -85,7 +85,7 @@ function shouldInclude(filePath) {
     }
 
     // Autoriser uniquement les fichiers *.min.*
-    return /\.min\./i.test(path.basename(relativePath));
+    // return /\.min\./i.test(path.basename(relativePath));
   }
 
   // ⛔ Exclure dossiers

@@ -49,111 +49,89 @@
   }
 
   /* ================================================
-   PRÉVISUALISATION LAYOUT
-   ================================================ */
-function initLayoutPreview() {
-  // Largeur admin
-  const adminWidthSlider = document.getElementById('admin_width_range');
-  const adminWidthNumber = document.getElementById('admin_width_value');
-  
-  if (adminWidthSlider) {
-    adminWidthSlider.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-admin-width', adminWidthSlider.value + 'px');
-      logPreview('Admin width mis à jour', '--ca-layout-admin-width', adminWidthSlider.value + 'px');
-    });
-  }
-  
-  if (adminWidthNumber) {
-    adminWidthNumber.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-admin-width', adminWidthNumber.value + 'px');
-      logPreview('Admin width mis à jour', '--ca-layout-admin-width', adminWidthNumber.value + 'px');
-    });
-  }
+     PRÉVISUALISATION LAYOUT
+     ================================================ */
+  function initLayoutPreview() {
+    // Largeur admin
+    const adminWidthSlider = document.getElementById('admin_width_range');
+    const adminWidthNumber = document.getElementById('admin_width_value');
+    
+    if (adminWidthSlider) {
+      adminWidthSlider.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-admin-width', adminWidthSlider.value + 'px');
+      });
+    }
+    
+    if (adminWidthNumber) {
+      adminWidthNumber.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-admin-width', adminWidthNumber.value + 'px');
+      });
+    }
 
-  // Menubar width
-  const menubarSlider = document.getElementById('menubar_width_range');
-  const menubarNumber = document.getElementById('menubar_width_value');
-  
-  if (menubarSlider) {
-    menubarSlider.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-menubar-width', menubarSlider.value + 'px');
-      logPreview('Menubar width mis à jour', '--ca-layout-menubar-width', menubarSlider.value + 'px');
-    });
-  }
-  
-  if (menubarNumber) {
-    menubarNumber.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-menubar-width', menubarNumber.value + 'px');
-      logPreview('Menubar width mis à jour', '--ca-layout-menubar-width', menubarNumber.value + 'px');
-    });
-  }
+    // Menubar width
+    const menubarSlider = document.getElementById('menubar_width_range');
+    const menubarNumber = document.getElementById('menubar_width_value');
+    
+    if (menubarSlider) {
+      menubarSlider.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-menubar-width', menubarSlider.value + 'px');
+      });
+    }
+    
+    if (menubarNumber) {
+      menubarNumber.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-menubar-width', menubarNumber.value + 'px');
+      });
+    }
 
-  // align_pluginFilter_left
-  const leftSlider = document.getElementById('align_pluginFilter_left_range');
-  const leftNumber = document.getElementById('align_pluginFilter_left_value');
-  
-  if (leftSlider) {
-    leftSlider.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-align-pluginFilter-left', leftSlider.value + 'px');
-      logPreview('PluginFilter left mis à jour', '--ca-layout-align-pluginFilter-left', leftSlider.value + 'px');
-    });
-  }
-  
-  if (leftNumber) {
-    leftNumber.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-align-pluginFilter-left', leftNumber.value + 'px');
-      logPreview('PluginFilter left mis à jour', '--ca-layout-align-pluginFilter-left', leftNumber.value + 'px');
-    });
-  }
+    // align_pluginFilter_left
+    const leftSlider = document.getElementById('align_pluginFilter_left_range');
+    const leftNumber = document.getElementById('align_pluginFilter_left_value');
+    
+    if (leftSlider) {
+      leftSlider.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-align-pluginFilter-left', leftSlider.value + 'px');
+      });
+    }
+    
+    if (leftNumber) {
+      leftNumber.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-align-pluginFilter-left', leftNumber.value + 'px');
+      });
+    }
 
-  // align_pluginFilter_right
-  const rightSlider = document.getElementById('align_pluginFilter_right_range');
-  const rightNumber = document.getElementById('align_pluginFilter_right_value');
-  
-  if (rightSlider) {
-    rightSlider.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-align-pluginFilter-right', rightSlider.value + 'px');
-      logPreview('PluginFilter right mis à jour', '--ca-layout-align-pluginFilter-right', rightSlider.value + 'px');
-    });
-  }
-  
-  if (rightNumber) {
-    rightNumber.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-align-pluginFilter-right', rightNumber.value + 'px');
-      logPreview('PluginFilter right mis à jour', '--ca-layout-align-pluginFilter-right', rightNumber.value + 'px');
-    });
-  }
+    // align_pluginFilter_right
+    const rightSlider = document.getElementById('align_pluginFilter_right_range');
+    const rightNumber = document.getElementById('align_pluginFilter_right_value');
+    
+    if (rightSlider) {
+      rightSlider.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-align-pluginFilter-right', rightSlider.value + 'px');
+      });
+    }
+    
+    if (rightNumber) {
+      rightNumber.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-align-pluginFilter-right', rightNumber.value + 'px');
+      });
+    }
 
-  // fade_start
-  const fadeSlider = document.getElementById('fade_start_range');
-  const fadeNumber = document.getElementById('fade_start_value');
-  
-  if (fadeSlider) {
-    fadeSlider.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-fade-start', fadeSlider.value + 'px');
-      logPreview('Fade start mis à jour', '--ca-layout-fade-start', fadeSlider.value + 'px');
-    });
+    // fade_start
+    const fadeSlider = document.getElementById('fade_start_range');
+    const fadeNumber = document.getElementById('fade_start_value');
+    
+    if (fadeSlider) {
+      fadeSlider.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-fade-start', fadeSlider.value + 'px');
+      });
+    }
+    
+    if (fadeNumber) {
+      fadeNumber.addEventListener('input', () => {
+        updateCSSVariable('--ca-layout-fade-start', fadeNumber.value + 'px');
+      });
+    }
   }
-  
-  if (fadeNumber) {
-    fadeNumber.addEventListener('input', () => {
-      updateCSSVariable('--ca-layout-fade-start', fadeNumber.value + 'px');
-      logPreview('Fade start mis à jour', '--ca-layout-fade-start', fadeNumber.value + 'px');
-    });
-  }
-
-  // hide_quick_sync (checkbox)
-  const hideQuickSync = document.querySelector('input[name="layout[hide_quick_sync]"]');
-  if (hideQuickSync) {
-    hideQuickSync.addEventListener('change', () => {
-      const displayValue = hideQuickSync.checked ? 'none' : 'block';
-      updateCSSVariable('--ca-layout-hide-quick-sync', displayValue);
-      logPreview('Hide quick sync mis à jour', '--ca-layout-hide-quick-sync', displayValue);
-    });
-  }
-
-  console.log('[CentralAdmin Preview] Prévisualisation layout initialisée');
-}
 
 /* ================================================
    PRÉVISUALISATION COULEURS
@@ -170,14 +148,14 @@ function initColorPreview() {
 
   tooltipColors.forEach(colorName => {
     const textInput = document.getElementById(colorName + '_text');
+    const colorPicker = document.getElementById(colorName + '_picker');
     
     if (textInput) {
-      // Écouter l'événement color-change (déclenché par CA-form-colors.js)
+      // Écouter l'événement color-change (déclenché par admin-form.js)
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
-        const varName = '--ca-color-' + colorName.replace(/_/g, '-');
-        updateCSSVariable(varName, hexValue);
-        logPreview('Couleur tooltip mise à jour', varName, hexValue);
+        updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
+        console.log('[CentralAdmin Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
       });
     }
   });
@@ -194,7 +172,7 @@ function initColorPreview() {
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
         updateCSSVariable(cssVarName, hexValue);
-        logPreview('Couleur clear mise à jour', cssVarName, hexValue);
+        console.log('[CentralAdmin Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
       });
     }
   });
@@ -211,7 +189,7 @@ function initColorPreview() {
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
         updateCSSVariable(cssVarName, hexValue);
-        logPreview('Couleur dark mise à jour', cssVarName, hexValue);
+        console.log('[CentralAdmin Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
       });
     }
   });
