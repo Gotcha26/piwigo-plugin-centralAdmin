@@ -20,32 +20,27 @@
   }
 
   function initPreview() {
-    // Récupérer la balise <style> existante (déjà créée par le template)
-    let styleTag = document.getElementById('central-admin-vars-preview');
-    
-    if (!styleTag) {
-      console.warn('[CentralAdmin Preview] Style tag non trouvé, création...');
-      styleTag = document.createElement('style');
-      styleTag.id = 'central-admin-vars-preview';
-      document.head.appendChild(styleTag);
-    } else {
-      console.log('[CentralAdmin Preview] Style tag existant trouvé, préservation des valeurs initiales');
-    }
-
-    // Initialiser la prévisualisation pour tous les champs
-    initLayoutPreview();
-    initColorPreview();
-    
-    console.log('[CentralAdmin Preview] Prévisualisation initialisée');
-
-    // Debug : afficher les variables CSS actuelles
-    setTimeout(() => {
-      const styleTag = document.getElementById('central-admin-vars-preview');
-      if (styleTag) {
-        console.log('[CentralAdmin Preview] Contenu CSS actuel:');
-        console.log(styleTag.textContent);
+      console.log('[CentralAdmin Preview] Initialisation...');
+      
+      // Récupérer la balise <style> existante
+      let styleTag = document.getElementById('central-admin-vars-preview');
+      
+      if (!styleTag) {
+        console.error('[CentralAdmin Preview] ❌ Style tag introuvable !');
+        console.log('[CentralAdmin Preview] Création du style tag...');
+        styleTag = document.createElement('style');
+        styleTag.id = 'central-admin-vars-preview';
+        document.head.appendChild(styleTag);
+      } else {
+        console.log('[CentralAdmin Preview] ✅ Style tag trouvé');
+        console.log('[CentralAdmin Preview] Contenu actuel:', styleTag.textContent.substring(0, 150));
       }
-    }, 100);
+
+      // Initialiser la prévisualisation pour tous les champs
+      initLayoutPreview();
+      initColorPreview();
+      
+      console.log('[CentralAdmin Preview] ✅ Prévisualisation initialisée');
   }
 
   /* ================================================
@@ -201,35 +196,31 @@ function initColorPreview() {
     MISE À JOUR VARIABLE CSS
     ================================================ */
   function updateCSSVariable(varName, value) {
+    console.log('[CentralAdmin Preview] Mise à jour:', varName, '→', value);
+    
     const styleTag = document.getElementById('central-admin-vars-preview');
     if (!styleTag) {
-      console.error('[CentralAdmin Preview] Style tag introuvable');
+      console.error('[CentralAdmin Preview] ❌ Style tag introuvable lors de la mise à jour');
       return;
     }
 
-    // Récupérer le contenu actuel
+    // **SOLUTION ALTERNATIVE : Utiliser setProperty directement**
+    // Au lieu de modifier le contenu textuel, on modifie la propriété CSS
+    document.documentElement.style.setProperty(varName, value);
+    
+    console.log('[CentralAdmin Preview] ✅ Variable mise à jour via setProperty');
+    
+    // Optionnel : mettre à jour aussi le contenu du <style> pour la cohérence
     let cssContent = styleTag.textContent;
+    const pattern = new RegExp(varName.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\s*:\\s*[^;]+;', 'g');
     
-    // Créer le pattern pour trouver la variable (accepte espaces et sauts de ligne)
-    const pattern = new RegExp(varName + '\\s*:\\s*[^;]+;', 'g');
-    
-    // Si la variable existe, la remplacer
     if (pattern.test(cssContent)) {
       cssContent = cssContent.replace(pattern, varName + ': ' + value + ';');
-      console.log('[CentralAdmin Preview] Variable mise à jour:', varName, '=', value);
+      styleTag.textContent = cssContent;
+      console.log('[CentralAdmin Preview] ✅ Style tag aussi mis à jour');
     } else {
-      // Sinon, l'ajouter dans le bloc :root
-      if (cssContent.includes(':root')) {
-        // Ajouter avant la fermeture du :root
-        cssContent = cssContent.replace(/}([^}]*)$/, '  ' + varName + ': ' + value + ';\n}$1');
-        console.log('[CentralAdmin Preview] Variable ajoutée:', varName, '=', value);
-      } else {
-        cssContent = ':root {\n  ' + varName + ': ' + value + ';\n}';
-        console.log('[CentralAdmin Preview] Bloc :root créé avec:', varName, '=', value);
-      }
+      console.warn('[CentralAdmin Preview] ⚠️ Variable non trouvée dans le style tag, mais setProperty appliqué');
     }
-    
-    styleTag.textContent = cssContent;
   }
 
 })();
