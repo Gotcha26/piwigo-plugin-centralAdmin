@@ -1,3 +1,36 @@
-origins.css
-notes.md
-/assets/css/sandbox.css
+# ===================================
+# CENTRALADMIN - .gitignore
+# ===================================
+
+# Dépendances Node.js
+node_modules/
+package-lock.json
+
+# Dossier de distribution (releases)
+dist/
+
+# Fichiers temporaires
+*.tmp
+*.log
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Fichiers minifiés (générés automatiquement)
+*.min.css
+*.min.js
+
+# Documentation
+docs/*
+!docs/index.php
+!docs/TECHNICAL-DOCUMENTATION.md
+
+# Images
+images/*
+

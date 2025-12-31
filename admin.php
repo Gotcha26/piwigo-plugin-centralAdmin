@@ -1,9 +1,33 @@
 <?php
+/**
+ * CentralAdmin - Contrôleur Principal
+ * 
+ * Version 3.0 - Architecture refactorée
+ * 
+ * @package CentralAdmin
+ * @version 3.0.0
+ * @author Gotcha
+ */
+
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
+
+include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
 global $template, $conf, $page, $user;
 
-// CRITIQUE : Forcer le chargement de jQuery et dépendances
+// ====================================
+// CHARGEMENT DES CLASSES
+// ====================================
+
+require_once(dirname(__FILE__) . '/includes/class.config-manager.php');
+require_once(dirname(__FILE__) . '/includes/class.css-generator.php');
+require_once(dirname(__FILE__) . '/includes/class.theme-detector.php');
+
+// ====================================
+// INITIALISATION
+// ====================================
+
+// Forcer le chargement de jQuery et dépendances
 add_event_handler('loc_begin_page_header', function() {
     global $template;
     
@@ -22,17 +46,18 @@ add_event_handler('loc_begin_page_header', function() {
         'themes/default/js/plugins/jquery-confirm.min.css', 
         array(), 0);
         
-    // Falback nécessaire pour jquery-confirm
+    // Fallback nécessaire pour jquery-confirm
     $template->append('head_elements', '
     <link rel="stylesheet" href="themes/default/js/plugins/jquery-confirm.min.css">
     <script src="themes/default/js/plugins/jquery-confirm.min.js"></script>
     ');
 });
 
-/* ===============================
- *  RÉCUPÉRATION VERSION PLUGIN
- * =============================== */
-$plugin_version = '0'; // Valeur par défaut
+// ====================================
+// RÉCUPÉRATION VERSION PLUGIN
+// ====================================
+
+$plugin_version = '3.0.0'; // Valeur par défaut
 $main_file = dirname(__FILE__) . '/main.inc.php';
 if (file_exists($main_file)) {
     $content = file_get_contents($main_file);
@@ -41,188 +66,133 @@ if (file_exists($main_file)) {
     }
 }
 
-/* ===============================
- *  DÉTECTION DU THÈME ACTUEL
- * =============================== */
+// ====================================
+// INSTANCIATION DES CLASSES
+// ====================================
 
-// MÉTHODE CORRECTE : userprefs_get_param() au lieu de $user['theme']
-$current_scheme = userprefs_get_param('admin_theme', 'clear');
+$configManager = new CA_ConfigManager();
+$cssGenerator = new CA_CSSGenerator();
+$themeDetector = new CA_ThemeDetector();
 
-// Debug : créer un tableau pour tracer la détection
-$theme_debug = array(
-    'plugin_version' => $plugin_version,
-    'detection_method' => 'userprefs_get_param',
-    'admin_theme_value' => $current_scheme,
-    'is_roma' => ($current_scheme === 'roma'),
-    'is_clear' => ($current_scheme === 'clear'),
-    'user_theme_gallery' => isset($user['theme']) ? $user['theme'] : 'non défini',
-);
+// Récupérer la configuration et le thème
+$centralAdmin = $configManager->getCurrent();
+$current_scheme = $themeDetector->getTheme();
 
-// Normalisation : 'roma' = dark, 'clear' = clear
-// Piwigo utilise directement 'roma' ou 'clear' comme valeurs
-if ($current_scheme === 'roma') {
-    $current_scheme = 'dark';
-    $theme_debug['scheme_final'] = 'dark';
-    $theme_debug['normalized'] = 'roma → dark';
-} else {
-    // Par défaut, tout ce qui n'est pas 'roma' est considéré comme 'clear'
-    $current_scheme = 'clear';
-    $theme_debug['scheme_final'] = 'clear';
-    $theme_debug['normalized'] = $theme_debug['admin_theme_value'] . ' → clear';
-}
-
-$theme_debug['current_scheme_returned'] = $current_scheme;
-
-// Injecter la détection combinée PHP + JS
-$template->append(
-    'head_elements',
-    '<script>
-    (function() {
-        var scheme = "' . $current_scheme . '";
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", function() {
-                document.body.setAttribute("data-ca-theme", scheme);
-            });
-        } else {
-            document.body.setAttribute("data-ca-theme", scheme);
-        }
-    })();
-    </script>'
-);
-
-/* ===============================
- *  RÉCUPÉRATION VERSIONS
- * =============================== */
-
-// Version jQuery
-$jquery_version = 'non détecté';
-$jquery_file = PHPWG_ROOT_PATH . 'themes/default/js/ui/jquery.js';
-if (file_exists($jquery_file)) {
-    $jquery_content = file_get_contents($jquery_file, false, null, 0, 500);
-    if (preg_match('/jQuery\s+v([\d.]+)/', $jquery_content, $matches)) {
-        $jquery_version = $matches[1];
-    }
-}
-$theme_debug['jquery_version'] = $jquery_version;
-
-// Version Smarty
-$smarty_version = 'non détecté';
-$smarty_file = PHPWG_ROOT_PATH . 'include/smarty/src/Smarty.php';
-if (file_exists($smarty_file)) {
-    $smarty_content = file_get_contents($smarty_file, false, null, 0, 2000);
-    if (preg_match('/SMARTY_VERSION\s*=\s*[\'"]([^\'\"]+)/', $smarty_content, $matches)) {
-        $smarty_version = $matches[1];
-    }
-}
-$theme_debug['smarty_version'] = $smarty_version;
-
-/* ===============================
- *  CHARGEMENT CONFIG
- * =============================== */
-
-// Charger les valeurs par défaut
-$defaults_file = dirname(__FILE__) . '/config/defaults.php';
-if (!file_exists($defaults_file)) {
-    die('Erreur : config/defaults.php introuvable');
-}
-
-$centralAdminDefault = include $defaults_file;
-if (!is_array($centralAdminDefault)) {
-    die('Erreur : config/defaults.php ne retourne pas un tableau');
-}
-
-// Charger la configuration existante
-$centralAdmin = isset($conf['centralAdmin']) && is_array($conf['centralAdmin']) 
-    ? $conf['centralAdmin'] 
-    : $centralAdminDefault;
-
-// Fusionner avec les valeurs par défaut
-$centralAdmin = array_replace_recursive($centralAdminDefault, $centralAdmin);
-
-/* ===============================
- *  TRAITEMENT DU FORMULAIRE
- * =============================== */
+// ====================================
+// TRAITEMENT DU FORMULAIRE
+// ====================================
 
 if (isset($_POST['save'])) {
-    $newConfig = $centralAdmin;
+    // Préparer les nouvelles données
+    $newData = array();
     
     // Layout (commun aux deux schémas)
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
+        $newData['layout'] = array();
         foreach ($_POST['layout'] as $key => $value) {
             if ($key === 'hide_quick_sync') {
-                $newConfig['layout'][$key] = $value;
+                $newData['layout'][$key] = $value;
             } else {
-                $newConfig['layout'][$key] = trim($value);
+                $newData['layout'][$key] = trim($value);
             }
         }
     }
     
     // Gestion checkbox non coché
     if (!isset($_POST['layout']['hide_quick_sync'])) {
-        $newConfig['layout']['hide_quick_sync'] = '0';
+        $newData['layout']['hide_quick_sync'] = '0';
     }
     
-    // Colors - IMPORTANT : sauvegarder pour le schéma actif uniquement
+    // Colors - Sauvegarder pour le schéma actif uniquement
     if (isset($_POST['colors']) && is_array($_POST['colors'])) {
-        foreach ($_POST['colors'] as $scheme => $colors) {
-            if (is_array($colors)) {
-                foreach ($colors as $key => $value) {
-                    $trimmedValue = trim($value);
-                    $newConfig['colors'][$scheme][$key] = $trimmedValue;
-                    
-                    // Détecter si l'utilisateur a modifié la valeur par défaut
-                    $defaultValue = $centralAdminDefault['colors'][$scheme][$key] ?? null;
-                    if ($defaultValue && $trimmedValue !== $defaultValue) {
-                        // Stocker la modification utilisateur
-                        if (!isset($newConfig['user_modifications'])) {
-                            $newConfig['user_modifications'] = array('clear' => array(), 'dark' => array());
-                        }
-                        $newConfig['user_modifications'][$scheme][$key] = $trimmedValue;
-                    } else {
-                        // Supprimer si revenu à la valeur par défaut
-                        if (isset($newConfig['user_modifications'][$scheme][$key])) {
-                            unset($newConfig['user_modifications'][$scheme][$key]);
-                        }
-                    }
-                }
-            }
+        $newData['colors'] = $_POST['colors'];
+        
+        // Détecter les modifications utilisateur
+        $userModifications = $configManager->detectUserModifications($newData, $current_scheme);
+        if (!empty($userModifications)) {
+            $newData['user_modifications'][$current_scheme] = $userModifications;
         }
     }
     
     // Sauvegarder
-    conf_update_param('centralAdmin', $newConfig);
-    $centralAdmin = $newConfig;
+    if ($configManager->save($newData)) {
+        $page['infos'][] = l10n('configuration_saved');
+        $centralAdmin = $configManager->getCurrent();
+    } else {
+        $page['errors'][] = l10n('configuration_save_error');
+    }
     
-    $page['infos'][] = l10n('configuration_saved');
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
 if (isset($_POST['reset'])) {
     // Reset : restaurer les défauts mais préserver les modifications de l'autre schéma
-    $newConfig = $centralAdminDefault;
-    
-    // Préserver les modifications de l'autre schéma
-    $other_scheme = ($current_scheme === 'clear') ? 'dark' : 'clear';
-    if (isset($centralAdmin['user_modifications'][$other_scheme])) {
-        $newConfig['user_modifications'][$other_scheme] = $centralAdmin['user_modifications'][$other_scheme];
+    if ($configManager->reset($current_scheme)) {
+        $page['infos'][] = l10n('configuration_reset');
+        $centralAdmin = $configManager->getCurrent();
+    } else {
+        $page['errors'][] = l10n('configuration_reset_error');
     }
     
-    // Effacer les modifications du schéma actuel
-    $newConfig['user_modifications'][$current_scheme] = array();
-    
-    conf_update_param('centralAdmin', $newConfig);
-    $centralAdmin = $newConfig;
-    
-    $page['infos'][] = l10n('configuration_reset');
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
-/* ===============================
- *  TRANSMISSION AU TEMPLATE
- * =============================== */
+// ====================================
+// GÉNÉRATION DU CSS DYNAMIQUE
+// ====================================
+
+$dynamicCSS = $cssGenerator->generate($centralAdmin, $current_scheme);
+
+// ====================================
+// PRÉPARATION DES CHEMINS
+// ORDONANCEMENT A RESPECTER - IMPERATIF
+// ====================================
 
 $plugin_path = get_root_url() . 'plugins/centralAdmin/';
 $assets_path = $plugin_path . 'assets/';
+
+// CSS Core
+$css_core_path = $assets_path . 'css/core/';
+$CA_VARIABLES_CSS = ca_asset($css_core_path . 'CA-variables.css');
+$CA_ADMIN_LAYOUT_CSS = ca_asset($css_core_path . 'CA-admin-layout.css');
+$CA_ADMIN_OVERRIDE_CSS = ca_asset($css_core_path . 'CA-admin-override.css');
+
+// CSS Form
+$css_form_path = $assets_path . 'css/form/';
+$CA_FORM_BASE_CSS = ca_asset($css_form_path . 'CA-form-base.css');
+$CA_FORM_COMPONENTS_CSS = ca_asset($css_form_path . 'CA-form-components.css');
+$CA_FORM_THEMES_CSS = ca_asset($css_form_path . 'CA-form-themes.css');
+
+// CSS Modules
+$css_modules_path = $assets_path . 'css/modules/';
+$CA_DEBUG_CSS = ca_asset($css_modules_path . 'CA-debug.css');
+$CA_MODAL_CSS = ca_asset($css_modules_path . 'CA-modal.css');
+
+// JS Core
+$js_core_path = $assets_path . 'js/core/';
+$CA_INIT_JS = ca_asset($js_core_path . 'CA-init.js');
+$CA_THEME_DETECTOR_JS = ca_asset($js_core_path . 'CA-theme-detector.js');
+
+// JS Form
+$js_form_path = $assets_path . 'js/form/';
+$CA_FORM_CONTROLS_JS = ca_asset($js_form_path . 'CA-form-controls.js');
+$CA_FORM_COLORS_JS = ca_asset($js_form_path . 'CA-form-colors.js');
+$CA_FORM_PREVIEW_JS = ca_asset($js_form_path . 'CA-form-preview.js');
+
+// JS Modules
+$js_modules_path = $assets_path . 'js/modules/';
+$CA_DEBUG_JS = ca_asset($js_modules_path . 'CA-debug.js');
+$CA_MODAL_JS = ca_asset($js_modules_path . 'CA-modal.js');
+
+// ====================================
+// INJECTION DU THÈME
+// ====================================
+
+$themeDetector->injectThemeAttribute($template);
+
+// ====================================
+// TRANSMISSION AU TEMPLATE
+// ====================================
 
 $template->assign(array(
     // Configuration
@@ -233,50 +203,66 @@ $template->assign(array(
     // Thème actuel
     'current_scheme' => $current_scheme,
 
-    // Appliquer les modifications utilisateur au schéma actif
-    'active_scheme_colors' => array_merge(
-        $centralAdminDefault['colors'][$current_scheme] ?? array(),
-        $centralAdmin['colors'][$current_scheme] ?? array(),
-        $centralAdmin['user_modifications'][$current_scheme] ?? array()
-    ),
+    // Couleurs fusionnées pour le schéma actif
+    'active_scheme_colors' => $configManager->getMergedColors($current_scheme),
 
     // Debug thème
-    'theme_debug' => $theme_debug,
+    'theme_debug' => array_merge(
+        $themeDetector->getDebugInfo(),
+        array(
+            'plugin_version' => $plugin_version,
+            'jquery_version' => 'Détection JS',
+            'smarty_version' => defined('SMARTY_VERSION') ? SMARTY_VERSION : 'inconnu',
+        )
+    ),
 
-    // CSS - TOUS LES CHEMINS DÉFINIS
-    'CENTRAL_ADMIN_REBUILD_CSS' => $assets_path . 'css/centralAdmin-rebuild.css',
-    'CENTRAL_ADMIN_FORM_CSS' => $assets_path . 'css/admin-form.css',
-    'CENTRAL_ADMIN_THEME_CSS' => $assets_path . 'css/admin-form-theme.css',
+    // CSS - Core
+    'CA_VARIABLES_CSS' => $CA_VARIABLES_CSS,
+    'CA_ADMIN_LAYOUT_CSS' => $CA_ADMIN_LAYOUT_CSS,
+    'CA_ADMIN_OVERRIDE_CSS' => $CA_ADMIN_OVERRIDE_CSS,
 
-    // JavaScript - TOUS LES CHEMINS DÉFINIS
-    'CENTRAL_ADMIN_FORM_JS' => $assets_path . 'js/admin-form.js',
-    'CENTRAL_ADMIN_PREVIEW_JS' => $assets_path . 'js/admin-form-preview.js',
-    'CENTRAL_ADMIN_THEME_DETECTION_JS' => $assets_path . 'js/admin-theme-detection.js',
-    'CENTRAL_ADMIN_DEBUG_JS' => $assets_path . 'js/admin-debug-populate.js',
+    // CSS - Form
+    'CA_FORM_BASE_CSS' => $CA_FORM_BASE_CSS,
+    'CA_FORM_COMPONENTS_CSS' => $CA_FORM_COMPONENTS_CSS,
+    'CA_FORM_THEMES_CSS' => $CA_FORM_THEMES_CSS,
+
+    // CSS - Modules
+    'CA_DEBUG_CSS' => $CA_DEBUG_CSS,
+    'CA_MODAL_CSS' => $CA_MODAL_CSS,
+
+    // JS - Core
+    'CA_INIT_JS' => $CA_INIT_JS,
+    'CA_THEME_DETECTOR_JS' => $CA_THEME_DETECTOR_JS,
+
+    // JS - Form
+    'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
+    'CA_FORM_COLORS_JS' => $CA_FORM_COLORS_JS,
+    'CA_FORM_PREVIEW_JS' => $CA_FORM_PREVIEW_JS,
+
+    // JS - Modules
+    'CA_DEBUG_JS' => $CA_DEBUG_JS,
+    'CA_MODAL_JS' => $CA_MODAL_JS,
 
     // Templates sections
     'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',
     'TOOLTIPS_SECTION_TPL' => dirname(__FILE__) . '/sections/tooltips.tpl',
     'COLORS_CLEAR_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_clear.tpl',
     'COLORS_DARK_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_dark.tpl',
+
+    // CSS dynamique
+    'dynamic_css' => $dynamicCSS,
 ));
 
-// Injecter la classe du thème sur body via JavaScript
-$template->append(
-    'head_elements',
-    '<script>
-    (function() {
-        var scheme = "' . $current_scheme . '";
-        document.addEventListener("DOMContentLoaded", function() {
-            document.body.classList.add("ca-piwigo-theme-" + scheme);
-            console.log("[CentralAdmin] Thème Piwigo détecté:", scheme);
-            console.log("[CentralAdmin] user[theme]:", "' . (isset($user['theme']) ? $user['theme'] : 'non défini') . '");
-        });
-    })();
-    </script>'
-);
+// ====================================
+// INJECTION CSS DYNAMIQUE
+// ====================================
 
-// Template
+$cssGenerator->injectInTemplate($template, $dynamicCSS, 'central-admin-vars-preview');
+
+// ====================================
+// TEMPLATE
+// ====================================
+
 $template->set_filenames(array(
     'plugin_admin_content' => dirname(__FILE__).'/admin.tpl'
 ));

@@ -1,0 +1,70 @@
+/* ================================================
+   MODULE MODAL - STYLES
+   Styles pour jquery-confirm (modales crédits, etc)
+   Version: 3.0.0
+   ================================================ */
+
+/* === OVERLAY AVEC FLOU === */
+.jconfirm-bg {
+  backdrop-filter: blur(3px) !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* === CONTENU DE LA MODALE === */
+.jconfirm-box.jconfirm-type-blue {
+  border-radius: 8px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* === TITRE DE LA MODALE === */
+.jconfirm-title-c {
+  border-bottom: 1px solid #e0e0e0 !important;
+  padding-bottom: 15px !important;
+}
+
+/* === CONTENU SCROLLABLE === */
+.jconfirm-content {
+  overflow-y: auto !important;
+  padding-right: 10px !important;
+}
+
+/* === SCROLLBAR PERSONNALISÉE === */
+.jconfirm-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.jconfirm-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.jconfirm-content::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.jconfirm-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* === ADAPTATION THÈME DARK === */
+body.ca-piwigo-theme-dark .jconfirm-box {
+  background: #2c3e50 !important;
+}
+
+body.ca-piwigo-theme-dark .jconfirm-title {
+  color: #e9ecef !important;
+}
+
+body.ca-piwigo-theme-dark .jconfirm-content {
+  color: #e9ecef !important;
+}
+
+body.ca-piwigo-theme-dark .jconfirm-content::-webkit-scrollbar-track {
+  background: #34495e;
+}
+
+body.ca-piwigo-theme-dark .jconfirm-content::-webkit-scrollbar-thumb {
+  background: #5a6c7d;
+}

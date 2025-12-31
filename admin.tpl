@@ -1,44 +1,25 @@
-{* Variables CSS dynamiques - INJECTION CORRECTE DES VALEURS *}
+{* ================================================
+   CENTRALADMIN - TEMPLATE PRINCIPAL
+   Version: 3.0.0
+   ================================================ *}
+
+{* Variables CSS dynamiques - Injection *}
 <style id="central-admin-vars-preview">
-:root {
-  {* Layout *}
-  --ca-layout-admin-width: {$centralAdmin.layout.admin_width}px;
-  --ca-layout-menubar-width: {$centralAdmin.layout.menubar_width}px;
-  --ca-layout-align-pluginFilter-left: {$centralAdmin.layout.align_pluginFilter_left}px;
-  --ca-layout-align-pluginFilter-right: {$centralAdmin.layout.align_pluginFilter_right}px;
-  --ca-layout-fade-start: {$centralAdmin.layout.fade_start}px;
-  --ca-layout-hide-quick-sync: {if $centralAdmin.layout.hide_quick_sync == '1'}none{else}block{/if};
-  
-  {* Tooltips (commun) *}
-  --ca-color-infos-main-color: {$centralAdmin.colors.tooltips.infos_main_color};
-  --ca-color-warning-main-color: {$centralAdmin.colors.tooltips.warning_main_color};
-  --ca-color-messages-main-color: {$centralAdmin.colors.tooltips.messages_main_color};
-  --ca-color-error-main-color: {$centralAdmin.colors.tooltips.error_main_color};
-  
-  {* Couleurs du schéma actif (avec modifications utilisateur fusionnées) *}
-  {if isset($active_scheme_colors)}
-    --ca-color-bg-global: {$active_scheme_colors.bg_global};
-    --ca-color-bg-content2: {$active_scheme_colors.bg_content2};
-    --ca-color-bg-content1: {$active_scheme_colors.bg_content1};
-    --ca-color-bg-content3: {$active_scheme_colors.bg_content3};
-  {else}
-    {* Fallback si active_scheme_colors n'existe pas *}
-    --ca-color-bg-global: {$centralAdmin.colors[$current_scheme].bg_global};
-    --ca-color-bg-content2: {$centralAdmin.colors[$current_scheme].bg_content2};
-    --ca-color-bg-content1: {$centralAdmin.colors[$current_scheme].bg_content1};
-    --ca-color-bg-content3: {$centralAdmin.colors[$current_scheme].bg_content3};
-  {/if}
-}
+{$dynamic_css}
 </style>
 
-{* CSS du plugin *}
-<link rel="stylesheet" href="{$CENTRAL_ADMIN_CSS}">
-<link rel="stylesheet" href="{$CENTRAL_ADMIN_REBUILD_CSS}">
-<link rel="stylesheet" href="{$CENTRAL_ADMIN_FORM_CSS}">
-<link rel="stylesheet" href="{$CENTRAL_ADMIN_THEME_CSS}">
+{* === CSS CORE === *}
+<link rel="stylesheet" href="{$CA_ADMIN_LAYOUT_CSS}">
+<link rel="stylesheet" href="{$CA_ADMIN_OVERRIDE_CSS}">
 
-{* Spectrum Color Picker *}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectrum/1.8.1/spectrum.min.css">
+{* === CSS FORM === *}
+<link rel="stylesheet" href="{$CA_FORM_BASE_CSS}">
+<link rel="stylesheet" href="{$CA_FORM_COMPONENTS_CSS}">
+<link rel="stylesheet" href="{$CA_FORM_THEMES_CSS}">
+
+{* === CSS MODULES === *}
+<link rel="stylesheet" href="{$CA_DEBUG_CSS}">
+<link rel="stylesheet" href="{$CA_MODAL_CSS}">
 
 <div class="centralAdmin-container">
   
@@ -101,135 +82,124 @@
       {include file=$COLORS_DARK_SECTION_TPL}
     {/if}
 
-	{* SECTION DEBUG - Accordion replié par défaut *}
-	<div class="ca-section" data-section="debug">
-	  <div class="ca-section-header">
-		<h3 class="ca-section-title">
-		  <span class="ca-icon">🐛</span>
-		  {'debug_infos_area'|@translate}
-		</h3>
-		<button type="button" class="ca-toggle" aria-expanded="false">
-		  <span class="ca-chevron">▼</span>
-		</button>
-	  </div>
-	  
-	  <div class="ca-section-content" style="display: none;">
-		<div class="ca-debug-info">
-		  
-		  {* VERSIONS *}
-		  <h4>{'versions'|@translate}</h4>
-		  <table class="ca-debug-table">
-			<tr>
-			  <td><strong>{'plugin_internal_version'|@translate}</strong></td>
-			  <td>{$theme_debug.plugin_version}</td>
-			</tr>
-			<tr>
-			<td><strong>jQuery :</strong></td>
-			  <td><span id="jquery-version">{'verification_'|@translate}</span></td>
-			  </tr>
-			<tr>
-			  <td><strong>jQuery Confirm :</strong></td>
-			  <td><span id="jquery-confirm-status">{'verification_'|@translate}</span></td>
-			</tr>
-			<tr>
-			  <td><strong>Smarty :</strong></td>
-			  <td>{$theme_debug.smarty_version}</td>
-			</tr>
-			<tr>
-			  <td><strong>Spectrum :</strong></td>
-			  <td><span style="color: #999;">{'spectrum_suspending'|@translate}</span></td>
-			</tr>
-		  </table>
-		  
-		  {* DÉTECTION THÈME PHP *}
-		  <h4 style="margin-top: 20px;">{'theme_detection_php'|@translate}</h4>
-		  <table class="ca-debug-table">
-			<tr>
-			  <td><strong>{'detection_method'|@translate}</strong></td>
-			  <td><span class="ca-debug-badge ca-badge-info">{$theme_debug.detection_method}</span></td>
-			</tr>
-			<tr>
-			  <td><strong>{'raw_value_userprefs'|@translate}</strong></td>
-			  <td><span class="ca-debug-badge ca-badge-warning">{$theme_debug.admin_theme_value}</span></td>
-			</tr>
-			<tr>
-			  <td><strong>{'normalized_value'|@translate}</strong></td>
-			  <td>{$theme_debug.normalized}</td>
-			</tr>
-			<tr>
-			  <td><strong>{'theme_applied'|@translate}</strong></td>
-			  <td><span class="ca-debug-value">{$theme_debug.current_scheme_returned}</span></td>
-			</tr>
-			<tr>
-			  <td><strong>{'is_roma_check'|@translate}</strong></td>
-			  <td>{if $theme_debug.is_roma}✅ Oui{else}❌ Non{/if}</td>
-			</tr>
-			<tr>
-			  <td><strong>{'is_clear_check'|@translate}</strong></td>
-			  <td>{if $theme_debug.is_clear}✅ Oui{else}❌ Non{/if}</td>
-			</tr>
-		  </table>
-		  
-		  {* DÉTECTION THÈME JS *}
-		  <h4 style="margin-top: 20px;">{'theme_detection_js'|@translate}</h4>
-		  <table class="ca-debug-table">
-			<tr>
-			  <td><strong>{'js_detected_scheme'|@translate}</strong></td>
-			  <td><span id="js-scheme-value">{'verification_'|@translate}</span></td>
-			</tr>
-			<tr>
-			  <td><strong>{'html_classes'|@translate}</strong></td>
-			  <td><code id="html-classes-value">{'verification_'|@translate}</code></td>
-			</tr>
-			<tr>
-			  <td><strong>{'body_classes'|@translate}</strong></td>
-			  <td><code id="body-classes-value">{'verification_'|@translate}</code></td>
-			</tr>
-			<tr>
-			  <td><strong>{'body_bgcolor'|@translate}</strong></td>
-			  <td><code id="body-bgcolor-value">{'verification_'|@translate}</code></td>
-			</tr>
-			<tr>
-			  <td><strong>{'php_js_concordance'|@translate}</strong></td>
-			  <td><span id="concordance-value">{'verification_'|@translate}</span></td>
-			</tr>
-		  </table>
-		  
-		  {* INFORMATIONS COMPLÉMENTAIRES *}
-		  <h4 style="margin-top: 20px;">{'additional_info'|@translate}</h4>
-		  <table class="ca-debug-table">
-			<tr>
-			  <td><strong>$user['theme'] ({'gallery_theme'|@translate}) :</strong></td>
-			  <td><em>{$theme_debug.user_theme_gallery}</em></td>
-			</tr>
-		  </table>
-		  
-		  {* FICHIERS CHARGÉS *}
-		  <h4 style="margin-top: 20px;">{'files_charged'|@translate}</h4>
-		  <ul class="ca-debug-list">
-			<li>{'css_principal'|@translate} {$CENTRAL_ADMIN_CSS}</li>
-			<li>{'css_rebuild'|@translate} {$CENTRAL_ADMIN_REBUILD_CSS}</li>
-			<li>{'css_form'|@translate} {$CENTRAL_ADMIN_FORM_CSS}</li>
-			<li>{'css_admin_theme'|@translate} {$CENTRAL_ADMIN_THEME_CSS}</li>
-			<li>{'css_spectrum'|@translate} <del>CDN cloudflare</del> <em>(retiré v2.9+)</em></li>
-			<li>{'spectrum_js'|@translate} <del>CDN cloudflare</del> <em>(retiré v2.9+)</em></li>
-			<li>{'js_form'|@translate} {$CENTRAL_ADMIN_FORM_JS}</li>
-			<li>{'js_preview'|@translate} {$CENTRAL_ADMIN_PREVIEW_JS}</li>
-		  </ul>
-		  
-		  {* CONSOLE NAVIGATEUR *}
-		  <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
-		  <p>{'open_console_f12'|@translate}</p>
-		  <ul class="ca-debug-list">
-			<li>🔍 PHP Detection (userprefs): <span id="console-php-detection">{$theme_debug.current_scheme_returned}</li>
-			<li>🔍 JS Detection (DOM/CSS): <span id="console-js-detection">{'verification_'|@translate}</span></li>
-			<li>✅ PHP et JS concordent : <span id="console-concordance">{'verification_'|@translate}</span></li>
-		  </ul>
-		</div>
-	  </div>
-	</div>
+    {* SECTION DEBUG - Accordion replié par défaut *}
+    <div class="ca-section" data-section="debug">
+      <div class="ca-section-header">
+        <h3 class="ca-section-title">
+          <span class="ca-icon">🐛</span>
+          {'debug_infos_area'|@translate}
+        </h3>
+        <button type="button" class="ca-toggle" aria-expanded="false">
+          <span class="ca-chevron">▼</span>
+        </button>
+      </div>
+      
+      <div class="ca-section-content" style="display: none;">
+        <div class="ca-debug-info">
+          
+          {* VERSIONS *}
+          <h4>{'versions'|@translate}</h4>
+          <table class="ca-debug-table">
+            <tr>
+              <td><strong>{'plugin_internal_version'|@translate}</strong></td>
+              <td>{$theme_debug.plugin_version}</td>
+            </tr>
+            <tr>
+              <td><strong>jQuery :</strong></td>
+              <td><span id="jquery-version">{'verification_'|@translate}</span></td>
+            </tr>
+            <tr>
+              <td><strong>jQuery Confirm :</strong></td>
+              <td><span id="jquery-confirm-status">{'verification_'|@translate}</span></td>
+            </tr>
+            <tr>
+              <td><strong>Smarty :</strong></td>
+              <td>{$theme_debug.smarty_version}</td>
+            </tr>
+          </table>
+          
+          {* DÉTECTION THÈME PHP *}
+          <h4 style="margin-top: 20px;">{'theme_detection_php'|@translate}</h4>
+          <table class="ca-debug-table">
+            <tr>
+              <td><strong>{'detection_method'|@translate}</strong></td>
+              <td><span class="ca-debug-badge ca-badge-info">{$theme_debug.detection_method}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{'raw_value_userprefs'|@translate}</strong></td>
+              <td><span class="ca-debug-badge ca-badge-warning">{$theme_debug.admin_theme_value}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{'normalized_value'|@translate}</strong></td>
+              <td>{$theme_debug.normalized}</td>
+            </tr>
+            <tr>
+              <td><strong>{'theme_applied'|@translate}</strong></td>
+              <td><span class="ca-debug-value">{$theme_debug.theme_final}</span></td>
+            </tr>
+          </table>
+          
+          {* DÉTECTION THÈME JS *}
+          <h4 style="margin-top: 20px;">{'theme_detection_js'|@translate}</h4>
+          <table class="ca-debug-table">
+            <tr>
+              <td><strong>{'js_detected_scheme'|@translate}</strong></td>
+              <td><span id="js-scheme-value">{'verification_'|@translate}</span></td>
+            </tr>
+            <tr>
+              <td><strong>{'html_classes'|@translate}</strong></td>
+              <td><code id="html-classes-value">{'verification_'|@translate}</code></td>
+            </tr>
+            <tr>
+              <td><strong>{'body_classes'|@translate}</strong></td>
+              <td><code id="body-classes-value">{'verification_'|@translate}</code></td>
+            </tr>
+            <tr>
+              <td><strong>{'body_bgcolor'|@translate}</strong></td>
+              <td><code id="body-bgcolor-value">{'verification_'|@translate}</code></td>
+            </tr>
+            <tr>
+              <td><strong>{'php_js_concordance'|@translate}</strong></td>
+              <td><span id="concordance-value">{'verification_'|@translate}</span></td>
+            </tr>
+          </table>
+          
+          {* FICHIERS CHARGÉS *}
+          <h4 style="margin-top: 20px;">{'files_charged'|@translate}</h4>
+          <ul class="ca-debug-list">
+            <li><strong>CSS Core:</strong></li>
+            <li>├─ CA-admin-layout.css</li>
+            <li>└─ CA-admin-override.css</li>
+            <li><strong>CSS Form:</strong></li>
+            <li>├─ CA-form-base.css</li>
+            <li>├─ CA-form-components.css</li>
+            <li>└─ CA-form-themes.css</li>
+            <li><strong>CSS Modules:</strong></li>
+            <li>├─ CA-debug.css</li>
+            <li>└─ CA-modal.css</li>
+            <li><strong>JS:</strong></li>
+            <li>├─ CA-init.js</li>
+            <li>├─ CA-theme-detector.js</li>
+            <li>├─ CA-form-controls.js</li>
+            <li>├─ CA-form-colors.js</li>
+            <li>├─ CA-form-preview.js</li>
+            <li>├─ CA-debug.js</li>
+            <li>└─ CA-modal.js</li>
+          </ul>
+          
+          {* CONSOLE NAVIGATEUR *}
+          <h4 style="margin-top: 20px;">{'browser_consol'|@translate}</h4>
+          <p>{'open_console_f12'|@translate}</p>
+          <ul class="ca-debug-list">
+            <li>🔍 PHP Detection: <span id="console-php-detection">{$theme_debug.theme_final}</span></li>
+            <li>🔍 JS Detection: <span id="console-js-detection">{'verification_'|@translate}</span></li>
+            <li>✅ Concordance: <span id="console-concordance">{'verification_'|@translate}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-	{* Lien crédits *}
+    {* Lien crédits *}
     <div style="text-align: right; margin-bottom: 10px; padding-right: 5px;">
       <a href="#" id="ca-credits-link" style="color: #999; font-size: 13px; text-decoration: none;">
         {'credits'|@translate} : Gotcha
@@ -249,8 +219,21 @@
   </form>
 </div>
 
-{* Scripts du plugin - EN DERNIER *}
-<script src="{$CENTRAL_ADMIN_FORM_JS}"></script>
-<script src="{$CENTRAL_ADMIN_DEBUG_JS}"></script>
-<script src="{$CENTRAL_ADMIN_THEME_DETECTION_JS}"></script>
-<script src="{$CENTRAL_ADMIN_PREVIEW_JS}"></script>
+{* === JAVASCRIPT - Ordre d'exécution important === *}
+
+{* 1. Core - Détection thème (doit être en premier) *}
+<script src="{$CA_THEME_DETECTOR_JS}"></script>
+
+{* 2. Modules - Debug (avant form pour être disponible) *}
+<script src="{$CA_DEBUG_JS}"></script>
+
+{* 3. Form - Contrôles et couleurs *}
+<script src="{$CA_FORM_CONTROLS_JS}"></script>
+<script src="{$CA_FORM_COLORS_JS}"></script>
+<script src="{$CA_FORM_PREVIEW_JS}"></script>
+
+{* 4. Modules - Modal *}
+<script src="{$CA_MODAL_JS}"></script>
+
+{* 5. Core - Initialisation (en dernier pour coordonner tout) *}
+<script src="{$CA_INIT_JS}"></script>

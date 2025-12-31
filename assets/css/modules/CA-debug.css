@@ -1,0 +1,142 @@
+/* ================================================
+   MODULE DEBUG - STYLES
+   Réutilisable dans d'autres projets Piwigo
+   Version: 3.0.0
+   ================================================ */
+
+/* === DEBUG CONTAINER === */
+.ca-debug-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+}
+
+.ca-debug-info h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+/* === DEBUG TABLE === */
+.ca-debug-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.ca-debug-table tr {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.ca-debug-table tr:last-child {
+  border-bottom: none;
+}
+
+.ca-debug-table td {
+  padding: 8px 10px;
+}
+
+.ca-debug-table td:first-child {
+  width: 40%;
+  color: #6c757d;
+}
+
+.ca-debug-table td:last-child {
+  font-family: 'Courier New', monospace;
+  background: #fff;
+  border-radius: 3px;
+}
+
+/* === DEBUG VALUES === */
+.ca-debug-value {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #28a745;
+  color: white;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* === DEBUG LIST === */
+.ca-debug-list {
+  margin: 10px 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.ca-debug-list li {
+  color: #495057;
+  font-family: 'Courier New', monospace;
+}
+
+/* === DEBUG BADGES === */
+.ca-debug-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ca-badge-info {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.ca-badge-warning {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.ca-badge-dark {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+}
+
+.ca-badge-light {
+  background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+  color: #2c3e50;
+}
+
+/* === THÈME DARK - Section Debug === */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-debug-info {
+  background: #1a252f;
+  border-color: #4a5568;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-debug-info h4 {
+  color: #e9ecef;
+  border-bottom-color: #3498db;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-debug-table td:last-child {
+  background: #2c3e50;
+  color: #e9ecef;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-debug-list li {
+  color: #cbd5e0;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-info {
+  border-bottom-color: #4a5568;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-option-label-info {
+  color: #adb5bd;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-badge-light {
+  background: linear-gradient(135deg, #34495e, #2c3e50);
+  color: #ecf0f1;
+}

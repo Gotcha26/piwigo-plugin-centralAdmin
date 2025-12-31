@@ -1,90 +1,10 @@
-/* Général */
-html {
-    background-color: var(--ca-color-bg-global);
-}
+/* ================================================
+   CENTRALADMIN - SURCHARGES PIWIGO
+   Ajustements spécifiques aux pages admin Piwigo
+   Version: 3.0.0
+   ================================================ */
 
-#content,
-.tabsheet li.selected_tab {
-  background-color: var(--ca-color-bg-content1);
-}
-
-#content H1,
-#tabsheet {
-  background-color: var(--ca-color-bg-content2);
-}
-
-
-.eiw .messages {
-  background: linear-gradient(
-    to right,
-    var(--ca-color-messages-main-color) 0,
-    var(--ca-color-messages-main-color) var(--ca-layout-fade-start),
-    rgba(0, 0, 0, 0.05) 100%
-  );
-}
-
-.eiw .infos {
-  background: linear-gradient(
-    to right,
-    var(--ca-color-infos-main-color) 0,
-    var(--ca-color-infos-main-color) var(--ca-layout-fade-start),
-    rgba(0, 170, 0, 0.05) 100%
-  );
-}
-
-.eiw .warnings {
-  background: linear-gradient(
-    to right,
-    var(--ca-color-warning-main-color) 0,
-    var(--ca-color-warning-main-color) var(--ca-layout-fade-start),
-    rgba(0, 0, 0, 0.05) 100%
-  );
-}
-
-.eiw .error {
-  background: linear-gradient(
-    to right,
-    var(--ca-color-error-main-color) 0,
-    var(--ca-color-error-main-color) var(--ca-layout-fade-start),
-    rgba(0, 0, 0, 0.05) 100%
-  );
-}
-
-#theAdminPage #the_page {
-  background-color: var(--ca-color-bg-content3);
-}
-    
-
-/* Centrage */
-#theAdminPage {
-    max-width: var(--ca-layout-admin-width);
-    min-width: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#theAdminPage #the_page {
-    position: inherit;
-}
-
-/* Footer */
-#theAdminPage #footer {
-  position: fixed;
-  bottom: 0;
-  left: max(0px, calc((100vw - var(--ca-layout-admin-width)) / 2));
-  max-width: var(--ca-layout-admin-width);
-  width: var(--ca-layout-menubar-width);
-}
-
-/* -- Menubar -- */
-#menubar,
-#pwgHead a.visit-gallery {
-  left: max(0px, calc((100vw - var(--ca-layout-admin-width)) / 2));
-  max-width: var(--ca-layout-admin-width);
-  width: var(--ca-layout-menubar-width);
-}
-
-/* -- Communs -- */
+/* === COMMUNS === */
 .eiw ul li:nth-child(2) a[href="admin.php?page=plugins&filter=deactivated"],
 #showCreateSite a,
 #showAddPermalink a {
@@ -93,23 +13,21 @@ html {
   cursor: pointer;
 }
 
-/* -- Page d'accueil -- */
-
-/* -- 1er Page -- */
+/* === PAGE D'ACCUEIL === */
 .intro-page-container {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
   margin: 0 15px 0 15px;
 }
 
-/* -- Bouton de synchro rapide -- */
+/* === BOUTON DE SYNCHRO RAPIDE === */
 .showCreateAlbum,
 a.icon-plus-circled[href*="page=album"],
 #addAlbumForm {
   display: var(--ca-layout-hide-quick-sync, block) !important;
 }
 
-/* -- Barre d'actions -- */
+/* === BARRE D'ACTIONS === */
 .pluginTypeFilter {
   left: var(--ca-layout-align-pluginFilter-left);
 }
@@ -140,7 +58,7 @@ a.icon-plus-circled[href*="page=album"],
   background-color: #f3f3f3;
 }
 
-/* -- Plugins -- */
+/* === PLUGINS === */
 .pluginMiniBox .pluginDesc {
   height: 6em;
 }
@@ -172,8 +90,7 @@ a.icon-plus-circled[href*="page=album"],
   display: inline;
 }
 
-/* -- Photos -- */
-/* - Ajout - */
+/* === PHOTOS === */
 /* Applications */
 .applicationCard {
   width: 657px;
@@ -205,13 +122,12 @@ a.icon-plus-circled[href*="page=album"],
   padding-right: 25px;
 }
 
-/* Gestion par lots */
-/* Mode global */
+/* Gestion par lots - Mode global */
 #batchManagerGlobal #selectedMessage {
   float: initial;
 }
 
-/* Mode unitaire */
+/* Gestion par lots - Mode unitaire */
 .bottom-save-bar {
   right: 0px;
   width: calc(var(--ca-layout-admin-width) - var(--ca-layout-menubar-width));
@@ -223,8 +139,7 @@ a.icon-plus-circled[href*="page=album"],
   }
 }
 
-/* -- Utilisateurs -- */
-/* - Gérer - */
+/* === UTILISATEURS === */
 /* Liste */
 .selection-mode-group-manager {
   right: 30px
@@ -236,8 +151,7 @@ a.icon-plus-circled[href*="page=album"],
   }
 }
 
-/* - Notifications - */
-/* Paramétrage */
+/* Notifications - Paramétrage */
 .savebar-footer {
   right: 0px;
   width: calc(var(--ca-layout-admin-width) - var(--ca-layout-menubar-width));
@@ -249,8 +163,7 @@ a.icon-plus-circled[href*="page=album"],
   }
 }
 
-/* - Historique - */
-/* Statistiques */
+/* Historique - Statistiques */
 .stat-compare-mode {
   right: 10px
 }
@@ -261,9 +174,7 @@ a.icon-plus-circled[href*="page=album"],
   }
 }
 
-
-/* - Mises à jour - */
-/* */
+/* === MISES À JOUR === */
 .icon-block::before {
   display: inline;
 }

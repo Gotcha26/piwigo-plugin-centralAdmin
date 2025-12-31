@@ -1,0 +1,457 @@
+/* ================================================
+   CENTRALADMIN - FORMULAIRE BASE
+   Structure et layout du formulaire d'administration
+   Version: 3.0.0
+   ================================================ */
+
+/* === CONTAINER PRINCIPAL === */
+.centralAdmin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* === HEADER === */
+.ca-header {
+  margin-bottom: 30px;
+}
+
+.ca-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.ca-header-left {
+  flex: 1;
+}
+
+.ca-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.ca-subtitle {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.ca-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ca-options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #f8f9fa;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.ca-option-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ca-option-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #3498db;
+}
+
+.ca-option-label {
+  font-size: 13px;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.ca-option-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 8px;
+}
+
+.ca-option-label-info {
+  font-size: 12px;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.ca-option-value {
+  font-size: 13px;
+  color: #fff;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* === NOTIFICATIONS === */
+.ca-notification {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.ca-notification-success {
+  background: linear-gradient(135deg, #c2f5c2 0%, #a8e6a3 100%);
+  border-left: 4px solid #28a745;
+  color: #155724;
+}
+
+.ca-notification-error {
+  background: linear-gradient(135deg, #ffd5dc 0%, #ffb3c1 100%);
+  border-left: 4px solid #dc3545;
+  color: #721c24;
+}
+
+.ca-notification p {
+  margin: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === SECTIONS (ACCORDÉONS) === */
+.ca-section {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ca-section:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.ca-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #f1f3f5 100%);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.ca-section-header:hover {
+  background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
+}
+
+.ca-section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-icon {
+  font-size: 20px;
+  display: inline-block;
+}
+
+.ca-toggle {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ca-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ca-chevron {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.ca-section-active .ca-chevron,
+.ca-toggle[aria-expanded="true"] .ca-chevron {
+  transform: rotate(180deg);
+}
+
+.ca-section-content {
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === FIELDS (CHAMPS) === */
+.ca-field {
+  margin-bottom: 24px;
+  transition: opacity 0.2s ease;
+}
+
+.ca-field-locked {
+  opacity: 0.5;
+}
+
+.ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ca-lock {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ca-lock:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ca-lock-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.ca-lock[data-locked="false"] .ca-lock-icon {
+  transform: scale(1.1);
+}
+
+.ca-lock-placeholder {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.ca-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ca-help-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.ca-help {
+  background: #6c757d;
+  color: white;
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: help;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ca-help:hover {
+  background: #5a6268;
+  transform: scale(1.1);
+}
+
+.ca-help[title] {
+  position: relative;
+}
+
+.ca-help[title]::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.help-tooltip {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 6px;
+  
+  background: #333;
+  color: #fff;
+  padding: .4em .6em;
+  border-radius: .3em;
+  font-size: .9em;
+  line-height: 1.4;
+  text-align: left;
+  
+  min-width: 220px;
+  max-width: 320px;
+  white-space: pre-line;
+  z-index: 10000;
+  
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: auto;
+  transform: translate3d(0, -5px, 0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.35s;
+}
+
+.ca-help-container:hover .help-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(0, 0, 0);
+}
+
+.help-tooltip:hover {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === CONTRÔLES DES CHAMPS === */
+.ca-field-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ca-field-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.ca-field-checkbox .ca-field-header {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.ca-field-checkbox .ca-field-controls {
+  margin-left: auto;
+  justify-content: flex-end;
+}
+
+/* === BOUTONS D'ACTION === */
+.ca-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 30px;
+  margin-top: 30px;
+  border-top: 2px solid #e9ecef;
+}
+
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ca-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ca-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ca-btn-primary {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+}
+
+.ca-btn-primary:hover {
+  background: linear-gradient(135deg, #2980b9, #21618c);
+}
+
+.ca-btn-secondary {
+  background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+  color: white;
+}
+
+.ca-btn-secondary:hover {
+  background: linear-gradient(135deg, #7f8c8d, #6c7a7b);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .ca-field-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ca-value-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ca-input-number {
+    flex: 1;
+  }
+
+  .ca-actions {
+    flex-direction: column;
+  }
+
+  .ca-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
