@@ -132,8 +132,9 @@
    PRÉVISUALISATION COULEURS
    ================================================ */
 function initColorPreview() {
+  console.log('[CentralAdmin Preview] Initialisation preview couleurs...');
   
-  // TOOLTIPS COLORS (commun aux deux schémas)
+  // ===== TOOLTIPS COLORS (commun aux deux schémas) =====
   const tooltipColors = [
     'infos_main_color',
     'warning_main_color',
@@ -146,50 +147,79 @@ function initColorPreview() {
     const colorPicker = document.getElementById(colorName + '_picker');
     
     if (textInput) {
-      // Écouter l'événement color-change (déclenché par admin-form.js)
+      console.log('[Preview] ✅ Tooltip color trouvé:', colorName);
+      
+      // Écouter l'événement color-change (déclenché par CA-form-colors.js)
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
-        updateCSSVariable('--ca-color-' + colorName.replace(/_/g, '-'), hexValue);
-        console.log('[CentralAdmin Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
+        const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
+        updateCSSVariable(cssVar, hexValue);
+        console.log('[Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
       });
+    } else {
+      console.warn('[Preview] ❌ Tooltip color non trouvé:', colorName);
     }
   });
 
-  // CLEAR COLORS
-  const clearColors = ['bg_global', 'bg_content2', 'bg_content1', 'bg_content3'];
+  // ===== CLEAR COLORS =====
+  const clearColors = [
+    'bg_global',
+    'bg_content2',
+    'bg_content1',
+    'bg_content3'
+  ];
 
   clearColors.forEach(colorName => {
-    const fullName = 'bg_clear_' + colorName;
-    const textInput = document.getElementById(fullName + '_text');
-    const cssVarName = '--ca-color-' + colorName.replace(/_/g, '-');
+    const fullId = 'bg_clear_' + colorName;  // Ex: 'bg_clear_global'
+    const textInput = document.getElementById(fullId + '_text');
+    const colorPicker = document.getElementById(fullId + '_picker');
+    
+    // La variable CSS ne contient pas le préfixe 'clear' !
+    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // Ex: '--ca-color-bg-global'
     
     if (textInput) {
+      console.log('[Preview] ✅ Clear color trouvé:', fullId);
+      
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
-        updateCSSVariable(cssVarName, hexValue);
-        console.log('[CentralAdmin Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
+        updateCSSVariable(cssVar, hexValue);
+        console.log('[Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
       });
+    } else {
+      console.warn('[Preview] ❌ Clear color non trouvé:', fullId);
     }
   });
 
-  // DARK COLORS
-  const darkColors = ['bg_global', 'bg_content2', 'bg_content1', 'bg_content3'];
+  // ===== DARK COLORS =====
+  const darkColors = [
+    'bg_global',
+    'bg_content2',
+    'bg_content1',
+    'bg_content3'
+  ];
 
   darkColors.forEach(colorName => {
-    const fullName = 'bg_dark_' + colorName;
-    const textInput = document.getElementById(fullName + '_text');
-    const cssVarName = '--ca-color-' + colorName.replace(/_/g, '-');
+    const fullId = 'bg_dark_' + colorName;  // Ex: 'bg_dark_global'
+    const textInput = document.getElementById(fullId + '_text');
+    const colorPicker = document.getElementById(fullId + '_picker');
+    
+    // La variable CSS ne contient pas le préfixe 'dark' !
+    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // Ex: '--ca-color-bg-global'
     
     if (textInput) {
+      console.log('[Preview] ✅ Dark color trouvé:', fullId);
+      
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
-        updateCSSVariable(cssVarName, hexValue);
-        console.log('[CentralAdmin Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
+        updateCSSVariable(cssVar, hexValue);
+        console.log('[Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
       });
+    } else {
+      console.warn('[Preview] ❌ Dark color non trouvé:', fullId);
     }
   });
   
-  console.log('[CentralAdmin Preview] Prévisualisation couleurs initialisée');
+  console.log('[CentralAdmin Preview] ✅ Prévisualisation couleurs initialisée');
 }
 
   /* ================================================
