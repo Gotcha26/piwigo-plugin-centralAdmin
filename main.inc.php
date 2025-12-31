@@ -74,24 +74,23 @@ add_event_handler('loc_begin_admin_page', function () {
     $plugin_url = get_root_url() . 'plugins/centralAdmin/';
     $assets_url = $plugin_url . 'assets/css/';
 
-    // === CSS CORE (appliqué partout) ===
-    $cssGenerator->injectCSSFile(
-        $template,
-        ca_asset($assets_url . 'core/CA-admin-layout.css'),
-        'ca-admin-layout'
-    );
-
-    $cssGenerator->injectCSSFile(
-        $template,
-        ca_asset($assets_url . 'core/CA-admin-override.css'),
-        'ca-admin-override'
-    );
-
-    // === VARIABLES CSS DYNAMIQUES ===
-    // Génération des variables CSS à partir de la config
+    // === 1. VARIABLES CSS DYNAMIQUES (EN PREMIER) ===
     $dynamicCSS = $cssGenerator->generate($conf['centralAdmin'], $scheme);
-    $cssGenerator->injectInTemplate($template, $dynamicCSS, 'central-admin-vars');
+    
+    // Injection DIRECTE dans head_elements (comme version fonctionnelle)
+    $template->append('head_elements', 
+        '<style id="central-admin-vars">' . $dynamicCSS . '</style>'
+    );
 
-    // === INJECTION ATTRIBUT THÈME ===
+    // === 2. CSS CORE (APRÈS les variables) ===
+    $template->append('head_elements',
+        '<link rel="stylesheet" href="' . ca_asset($assets_url . 'core/CA-admin-layout.css') . '" id="ca-admin-layout">'
+    );
+
+    $template->append('head_elements',
+        '<link rel="stylesheet" href="' . ca_asset($assets_url . 'core/CA-admin-override.css') . '" id="ca-admin-override">'
+    );
+
+    // === 3. INJECTION ATTRIBUT THÈME ===
     $themeDetector->injectThemeAttribute($template);
 });

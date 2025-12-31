@@ -13,6 +13,7 @@ $lang['credits'] = 'Credits';
 // == MESSAGES ==
 $lang['configuration_saved'] = 'Configuration saved successfully 👍';
 $lang['configuration_reset'] = 'Configuration reset to default values';
+$lang['configuration_reset_error'] = 'Error while resetting configuration';
 $lang['scheme_switch_warning'] = 'Warning: you switched themes';
 $lang['user_modifications_preserved'] = 'Your modifications for {scheme} theme have been preserved';
 $lang['reset_current_scheme_only'] = 'Reset current theme only';

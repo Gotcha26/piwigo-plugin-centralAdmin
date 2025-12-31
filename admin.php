@@ -127,13 +127,21 @@ if (isset($_POST['save'])) {
 
 if (isset($_POST['reset'])) {
     // Reset : restaurer les défauts mais préserver les modifications de l'autre schéma
-    if ($configManager->reset($current_scheme)) {
-        $page['infos'][] = l10n('configuration_reset');
-        $centralAdmin = $configManager->getCurrent();
-    } else {
-        $page['errors'][] = l10n('configuration_reset_error');
+    $newConfig = $centralAdminDefault;
+    
+    // Préserver les modifications de l'autre schéma
+    $other_scheme = ($current_scheme === 'clear') ? 'dark' : 'clear';
+    if (isset($centralAdmin['user_modifications'][$other_scheme])) {
+        $newConfig['user_modifications'][$other_scheme] = $centralAdmin['user_modifications'][$other_scheme];
     }
     
+    // Effacer les modifications du schéma actuel
+    $newConfig['user_modifications'][$current_scheme] = array();
+    
+    conf_update_param('centralAdmin', $newConfig);
+    $centralAdmin = $newConfig;
+    
+    $page['infos'][] = l10n('configuration_reset');
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 

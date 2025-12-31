@@ -14,6 +14,7 @@ $lang['credits'] = 'Crédits';
 // == MESSAGES ==
 $lang['configuration_saved'] = 'Configuration enregistrée avec succès 👍';
 $lang['configuration_reset'] = 'Configuration réinitialisée aux valeurs par défaut';
+$lang['configuration_reset_error'] = 'Erreur lors de la réinitialisation de la configuration';
 $lang['scheme_switch_warning'] = 'Attention : vous avez changé de thème';
 $lang['user_modifications_preserved'] = 'Vos modifications pour le thème {scheme} ont été préservées';
 $lang['reset_current_scheme_only'] = 'Réinitialiser uniquement le thème actuel';
