@@ -162,6 +162,7 @@ function initColorPreview() {
   });
 
   // ===== CLEAR COLORS =====
+  // Noms cohérents avec config/defaults.php
   const clearColors = [
     'bg_global',
     'bg_content2',
@@ -170,15 +171,19 @@ function initColorPreview() {
   ];
 
   clearColors.forEach(colorName => {
-    const fullId = 'bg_clear_' + colorName;  // Ex: 'bg_clear_global'
+    // Construction de l'ID dans le template : 'bg_clear_' + 'bg_global' = 'bg_clear_bg_global'
+    // Mais dans les templates, c'est 'bg_clear_global' !
+    // Donc on enlève le préfixe 'bg_' pour la construction de l'ID
+    const colorSuffix = colorName.replace('bg_', '');  // 'bg_global' → 'global'
+    const fullId = 'bg_clear_' + colorSuffix;          // 'bg_clear_global'
     const textInput = document.getElementById(fullId + '_text');
     const colorPicker = document.getElementById(fullId + '_picker');
     
-    // La variable CSS ne contient pas le préfixe 'clear' !
-    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // Ex: '--ca-color-bg-global'
+    // La variable CSS garde le nom complet
+    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // '--ca-color-bg-global'
     
     if (textInput) {
-      console.log('[Preview] ✅ Clear color trouvé:', fullId);
+      console.log('[Preview] ✅ Clear color trouvé:', fullId, '→ CSS var:', cssVar);
       
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
@@ -191,6 +196,7 @@ function initColorPreview() {
   });
 
   // ===== DARK COLORS =====
+  // Noms cohérents avec config/defaults.php
   const darkColors = [
     'bg_global',
     'bg_content2',
@@ -199,15 +205,17 @@ function initColorPreview() {
   ];
 
   darkColors.forEach(colorName => {
-    const fullId = 'bg_dark_' + colorName;  // Ex: 'bg_dark_global'
+    // Construction de l'ID dans le template : enlever 'bg_' pour correspondre aux IDs
+    const colorSuffix = colorName.replace('bg_', '');  // 'bg_global' → 'global'
+    const fullId = 'bg_dark_' + colorSuffix;           // 'bg_dark_global'
     const textInput = document.getElementById(fullId + '_text');
     const colorPicker = document.getElementById(fullId + '_picker');
     
-    // La variable CSS ne contient pas le préfixe 'dark' !
-    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // Ex: '--ca-color-bg-global'
+    // La variable CSS garde le nom complet
+    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // '--ca-color-bg-global'
     
     if (textInput) {
-      console.log('[Preview] ✅ Dark color trouvé:', fullId);
+      console.log('[Preview] ✅ Dark color trouvé:', fullId, '→ CSS var:', cssVar);
       
       textInput.addEventListener('color-change', function(e) {
         const hexValue = e.detail.color;
