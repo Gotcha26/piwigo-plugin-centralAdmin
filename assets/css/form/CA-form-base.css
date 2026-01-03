@@ -455,3 +455,134 @@
     justify-content: center;
   }
 }
+
+/* ====================================
+   AJUSTEMENTS POUR CHAMPS SANS CADENAS
+   ==================================== */
+
+/**
+ * Les champs sans cadenas ont un header plus simple
+ * Ajustement de l'espacement et de l'alignement
+ */
+
+/* Header de champ sans lock */
+.ca-field:not(.ca-field-locked) .ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Label ajusté (pas de lock à gauche) */
+.ca-field:not(.ca-field-locked) .ca-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* Champs avec lock (advanced_params uniquement) */
+.ca-field-locked .ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ca-field-locked .ca-lock {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.ca-field-locked .ca-lock:hover {
+  transform: scale(1.1);
+}
+
+.ca-field-locked .ca-lock-icon {
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+/* État locked */
+.ca-field-locked .ca-lock[data-locked="true"] .ca-lock-icon::before {
+  content: "🔒";
+}
+
+/* État unlocked */
+.ca-field-locked .ca-lock[data-locked="false"] .ca-lock-icon::before {
+  content: "🔓";
+}
+
+/* Contrôles disabled quand locked */
+.ca-field-locked .ca-slider:disabled,
+.ca-field-locked .ca-input-number:disabled,
+.ca-field-locked .ca-color-picker:disabled,
+.ca-field-locked .ca-color-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Visual feedback pour champs locked */
+.ca-field-locked[data-locked="true"] {
+  opacity: 0.7;
+}
+
+/* ====================================
+   ESPACEMENT SPÉCIFIQUE CHECKBOXES
+   ==================================== */
+
+/**
+ * Les checkboxes n'ont jamais de lock visible
+ * mais conservent l'espace pour l'alignement
+ */
+
+.ca-field-checkbox .ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+/* Le lock est caché mais maintient l'espace */
+.ca-field-checkbox .ca-lock {
+  visibility: hidden;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.ca-field-checkbox .ca-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ====================================
+   RESPONSIVE SANS CADENAS
+   ==================================== */
+
+@media (max-width: 768px) {
+  .ca-field:not(.ca-field-locked) .ca-field-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .ca-field-locked .ca-field-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}

@@ -140,3 +140,54 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-badge-light {
   background: linear-gradient(135deg, #34495e, #2c3e50);
   color: #ecf0f1;
 }
+
+/* === SECTION AIDE === */
+/* === SECTION AIDE === */
+.ca-help-links {
+  background: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 6px;
+  border-left: 4px solid #3498db;
+}
+
+.ca-help-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.ca-help-links a:hover {
+  background: #3498db;
+  color: white !important;
+  border-color: #3498db;
+  transform: translateX(5px);
+}
+
+/* Thème dark */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-help-links {
+  background: #333333;
+  border-left-color: #ff7700;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-help-links a {
+  background: #3a3a3a;
+  border-color: #4a5568;
+  color: #e9ecef !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-help-links a:hover {
+  background: #3498db;
+  color: white !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-help-links a:hover {
+  background: #444444;
+  color: white !important;
+  border-color: #dee2e6;
+  transform: translateX(5px);
+}

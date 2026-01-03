@@ -4,7 +4,17 @@
    Version: 3.0.0
    ================================================ */
 
+/* === VARIABLES === */
+:root {
+  /* Gouttière dynamique de centrage */
+  --ca-layout-gutter: calc((100vw - var(--ca-layout-admin-width)) / 2);
+}
+
 /* === COMMUNS === */
+.eiw a {
+    padding: 0px 7px;
+}
+
 .eiw ul li:nth-child(2) a[href="admin.php?page=plugins&filter=deactivated"],
 #showCreateSite a,
 #showAddPermalink a {
@@ -30,28 +40,26 @@ a.icon-plus-circled[href*="page=album"],
 /* === BARRE D'ACTIONS === */
 .pluginTypeFilter {
   left: var(--ca-layout-align-pluginFilter-left);
+  left: max(
+    var(--ca-layout-align-pluginFilter-left),
+    calc(var(--ca-layout-gutter) + var(--ca-layout-align-pluginFilter-left))
+  );
 }
 
 .pluginFilter {
   right: var(--ca-layout-align-pluginFilter-right);
+  right: max(
+    var(--ca-layout-align-pluginFilter-right),
+    calc(var(--ca-layout-gutter) + var(--ca-layout-align-pluginFilter-right))
+  );
 }
 
 .AlbumViewSelector {
   right: 20px;
-}
-
-@media (min-width: 1600px) {
-  .pluginTypeFilter {
-    left: calc((100vw - var(--ca-layout-admin-width)) / 2 + var(--ca-layout-align-pluginFilter-left));
-  }
-
-  .pluginFilter {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + var(--ca-layout-align-pluginFilter-right));
-  }
-
-  .AlbumViewSelector {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + 20px);
-  }
+  right: max(
+    20px,
+    calc(var(--ca-layout-gutter) + 20px)
+  );
 }
 
 .sort {
@@ -101,21 +109,20 @@ a.icon-plus-circled[href*="page=album"],
 
 /* Tags */
 #search-tag {
-  right: calc(var(--ca-layout-menubar-width) + 15);
+  right: calc(var(--ca-layout-menubar-width) + 15px);
+  right: max(
+    calc(var(--ca-layout-menubar-width) + 15px),
+    calc(var(--ca-layout-gutter) + var(--ca-layout-menubar-width) + 15px)
+  );
 }
 
 .selection-mode-group-manager {
-  right: 15px;
+  right: 30px;
+  right: max(
+    30px,
+    calc(var(--ca-layout-gutter) + 30px)
+  );
   margin-top: 8px;
-}
-
-@media (min-width: 1600px) {
-  #search-tag {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + (var(--ca-layout-menubar-width) + 15)) !important;
-  }
-  .selection-mode-group-manager {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + 15px);
-  }
 }
 
 .tag-container {
@@ -128,50 +135,24 @@ a.icon-plus-circled[href*="page=album"],
 }
 
 /* Gestion par lots - Mode unitaire */
-.bottom-save-bar {
+.bottom-save-bar,
+.savebar-footer {
   right: 0px;
+  right: max(
+    0px,
+    var(--ca-layout-gutter)
+  );
   width: calc(var(--ca-layout-admin-width) - var(--ca-layout-menubar-width));
-}
-
-@media (min-width: 1600px) {
-  .bottom-save-bar {
-    right: calc((100vw - var(--ca-layout-admin-width)) /2);
-  }
 }
 
 /* === UTILISATEURS === */
-/* Liste */
-.selection-mode-group-manager {
-  right: 30px
-}
-
-@media (min-width: 1600px) {
-  .selection-mode-group-manager {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + 30px) !important;
-  }
-}
-
-/* Notifications - Paramétrage */
-.savebar-footer {
-  right: 0px;
-  width: calc(var(--ca-layout-admin-width) - var(--ca-layout-menubar-width));
-}
-
-@media (min-width: 1600px) {
-  .savebar-footer {
-    right: calc((100vw - var(--ca-layout-admin-width)) /2);
-  }
-}
-
 /* Historique - Statistiques */
 .stat-compare-mode {
-  right: 10px
-}
-
-@media (min-width: 1600px) {
-  .stat-compare-mode {
-    right: calc((100vw - var(--ca-layout-admin-width)) / 2 + 10px) !important;
-  }
+  right: 10px;
+  right: max(
+    10px,
+    calc(var(--ca-layout-gutter) + 10px)
+  );
 }
 
 /* === MISES À JOUR === */

@@ -18,13 +18,14 @@ const CSS_FILES = [
   'core/CA-admin-override.css',
   'form/CA-form-base.css',
   'form/CA-form-components.css',
+  'form/CA-form-themes.css',
   'modules/CA-debug.css',
-  'modules/CA-modal.css'
+  'modules/CA-modal.css',
+  'modules/CA-colors-unified.css'
 ];
 
 const JS_FILES = [
   'core/CA-init.js',
-  'core/CA-theme-detector.js',
   'form/CA-form-colors.js',
   'form/CA-form-controls.js',
   'form/CA-form-preview.js',

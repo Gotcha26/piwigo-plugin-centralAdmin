@@ -161,41 +161,7 @@ const CADebug = (function() {
         jqConfirmEl.innerHTML = '<span style="color: #dc3545;">❌ Non disponible</span>';
       }
     }
-    
-    // Infos thème
-    const themeInfo = window.caThemeDebug || detectTheme();
-    
-    const jsSchemeEl = document.getElementById('js-scheme-value');
-    if (jsSchemeEl) {
-      const badgeClass = themeInfo.js === 'dark' ? 'ca-badge-dark' : 'ca-badge-light';
-      jsSchemeEl.innerHTML = '<span class="ca-debug-badge ' + badgeClass + '">' + themeInfo.js + '</span>';
-    }
-    
-    const htmlClassesEl = document.getElementById('html-classes-value');
-    if (htmlClassesEl) {
-      htmlClassesEl.textContent = themeInfo.htmlClasses;
-    }
-    
-    const bodyClassesEl = document.getElementById('body-classes-value');
-    if (bodyClassesEl) {
-      bodyClassesEl.textContent = themeInfo.bodyClasses;
-    }
-    
-    const bgColorEl = document.getElementById('body-bgcolor-value');
-    if (bgColorEl) {
-      bgColorEl.textContent = themeInfo.bgColor;
-    }
-    
-    const concordanceEl = document.getElementById('concordance-value');
-    if (concordanceEl) {
-      const phpScheme = document.body.getAttribute('data-ca-theme');
-      concordanceEl.innerHTML = '<strong style="color: #3498db;">PHP prioritaire : ' + phpScheme + '</strong>';
-      
-      if (themeInfo.js !== phpScheme) {
-        concordanceEl.innerHTML += '<br><small style="color: #ffa500;">⚠️ JS détecte : ' + themeInfo.js + ' (Ignoré)</small>';
-      }
-    }
-    
+        
     log('DOM peuplé avec succès');
   }
   

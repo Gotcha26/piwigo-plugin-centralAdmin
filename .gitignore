@@ -34,3 +34,6 @@ docs/*
 # Images
 images/*
 
+# Fichiers références
+assets/css/form/CA-form-theme_original.css
+

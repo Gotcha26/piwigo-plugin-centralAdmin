@@ -131,8 +131,16 @@ $lang['js_form'] = 'Form JavaScript:';
 $lang['js_preview'] = 'Preview JavaScript:';
 
 // == DEBUG - CONSOLE ==
-$lang['browser_consol'] = 'Browser Console';
-$lang['open_console_f12'] = 'Open developer tools (F12) > Console to see details:';
+$lang['browser_console'] = 'Browser Console';
+$lang['open_console_f12'] = 'Open developer tools (F12) > Console to see theme detection details and component loading information.';
+
+// == HELP REQUEST ==
+$lang['help_section_title'] = 'Plugin Help & Support';
+$lang['help_section_description'] = 'Need help or want to report an issue? Check out these resources:';
+$lang['help_link_wiki'] = 'Documentation Wiki';
+$lang['help_link_forum'] = 'Discussion Forum';
+$lang['help_link_issues'] = 'Report a bug or suggest an improvement';
+$lang['help_link_documentation'] = 'Complete Technical Documentation';
 
 // == PREVIEW ==
 $lang['css_vars_injected'] = 'CSS variables injected';
@@ -147,3 +155,11 @@ $lang['version_number'] = 'Version';
 $lang['jquery_not_loaded'] = 'jQuery not loaded';
 $lang['jquery_confirm_available'] = 'jQuery Confirm available';
 $lang['credits_loading_error'] = 'Unable to load credits';
+
+// == REORGANIZED SECTIONS ==
+$lang['central_admin_general'] = 'General';
+$lang['central_admin_messages_colors'] = 'Message Colors';
+$lang['central_admin_advanced_params'] = 'Advanced Parameters';
+
+// == ADVANCED WARNING ==
+$lang['advanced_params_warning'] = 'These parameters are intended for advanced users. Incorrect values may alter the interface display. Use the locks to modify these parameters.';

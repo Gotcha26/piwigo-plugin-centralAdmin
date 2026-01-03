@@ -1,6 +1,6 @@
 {
   "name": "centraladmin",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Plugin Piwigo - CSS skin pour l'administration",
   "private": true,
   "scripts": {

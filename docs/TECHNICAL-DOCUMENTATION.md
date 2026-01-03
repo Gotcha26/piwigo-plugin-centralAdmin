@@ -628,33 +628,6 @@ if ($scheme === 'dark') {
 }
 ```
 
-### 🔍 Méthode JavaScript (Client)
-
-```javascript
-// CA-theme-detector.js
-const phpDetectedScheme = document.body.getAttribute('data-ca-theme');
-
-// Détection DOM/CSS (fallback)
-let jsDetectedScheme = 'clear';
-if (document.body.className.includes('theme-roma')) {
-    jsDetectedScheme = 'dark';
-}
-```
-
-### 🎯 Priorité Détection
-
-```
-1. PHP (userprefs_get_param) - PRIORITAIRE
-        ↓
-2. Attribut data-ca-theme - Injection PHP→JS
-        ↓
-3. Classes CSS DOM - Fallback JS
-        ↓
-4. Couleur background - Fallback ultime
-```
-
----
-
 ## Personnalisation
 
 ### 🎨 Ajouter Nouvelle Couleur

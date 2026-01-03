@@ -68,7 +68,7 @@
   border: 1px solid #ced4da;
   border-radius: 4px;
   font-size: 14px;
-  text-align: right;
+  text-align: center;
   transition: all 0.2s ease;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .ca-field-controls-color {
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .ca-color-picker-wrapper {
@@ -210,4 +210,9 @@
 
 .ca-switch:hover .ca-switch-slider {
   opacity: 0.9;
+}
+
+a#ca-credits-link:hover {
+    color: #ffa646 !important;
+    text-decoration: underline !important;
 }

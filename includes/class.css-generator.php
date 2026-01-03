@@ -33,7 +33,6 @@ class CA_CSSGenerator {
     public function generate($config, $scheme = 'clear') {
         $css = ":root {\n";
         $css .= $this->generateLayout($config['layout'] ?? array());
-        $css .= $this->generateTooltips($config['colors']['tooltips'] ?? array());
         $css .= $this->generateSchemeColors($config, $scheme);
         $css .= "}\n";
         
@@ -64,24 +63,7 @@ class CA_CSSGenerator {
         
         return $css;
     }
-    
-    /**
-     * Génère les variables CSS pour les tooltips (commun aux schémas)
-     * 
-     * @param array $tooltips Configuration tooltips
-     * @return string CSS généré
-     */
-    private function generateTooltips($tooltips) {
-        $css = "\n" . $this->indent . "/* Tooltips (commun) */\n";
         
-        foreach ($tooltips as $key => $value) {
-            $varName = $this->prefix . 'color-' . str_replace('_', '-', $key);
-            $css .= $this->indent . $varName . ': ' . $this->sanitizeColor($value) . ";\n";
-        }
-        
-        return $css;
-    }
-    
     /**
      * Génère les variables CSS pour les couleurs du schéma actif
      * 
@@ -139,13 +121,32 @@ class CA_CSSGenerator {
      * Injecte le CSS dans le template
      * 
      * @param object $template Instance du template Smarty
-     * @param string $css CSS à injecter
+     * @param string|array $css CSS à injecter
      * @param string $id ID du tag <style>
      */
     public function injectInTemplate($template, $css, $id = 'central-admin-vars') {
-        $template->append(
-            'head_elements',
-            '<style id="' . $id . '">' . $css . '</style>'
+
+        // Sécurité : Piwigo ne sait gérer que des strings à ce stade
+        if (is_array($css)) {
+            $buffer = '';
+
+            foreach ($css as $name => $value) {
+                // Normalisation minimale
+                if (is_scalar($value)) {
+                    $buffer .= $this->indent . $this->prefix . $name . ': ' . $value . ";\n";
+                }
+            }
+
+            $css = ":root {\n" . $buffer . "}\n";
+        }
+
+        // Sécurité ultime
+        if (!is_string($css) || $css === '') {
+            return;
+        }
+
+        $template->append('head_elements', 
+            '<style id="' . htmlspecialchars($id, ENT_QUOTES) . '">' . $css . '</style>'
         );
     }
     
@@ -156,14 +157,20 @@ class CA_CSSGenerator {
      * @param string $url URL du fichier CSS
      * @param string $id ID du tag <link>
      */
-    public function injectCSSFile($template, $url, $id = null) {
-        $idAttr = $id ? ' id="' . $id . '"' : '';
+    public function injectCSSFile($template, $url, $id = null)
+    {
+        if (!is_string($url) || $url === '') {
+            return;
+        }
+
+        $idAttr = $id ? ' id="' . htmlspecialchars($id, ENT_QUOTES) . '"' : '';
+
         $template->append(
             'head_elements',
-            '<link rel="stylesheet" href="' . $url . '"' . $idAttr . '>'
+            '<link rel="stylesheet" href="' . htmlspecialchars($url, ENT_QUOTES) . '"' . $idAttr . '>'
         );
     }
-    
+        
     /**
      * Sanitise une valeur de couleur hexadécimale
      * 

@@ -41,10 +41,10 @@ add_event_handler('loc_begin_page_header', function() {
         'themes/default/js/plugins/jquery-confirm.min.js', 
         array('jquery'), 10, false);
     
-    // CSS jQuery Confirm
-    $template->cssLoader->add('jquery-confirm', 
-        'themes/default/js/plugins/jquery-confirm.min.css', 
-        array(), 0);
+    // CSS jQuery Confirm - Injection directe (pas de cssLoader)
+    $template->append('head_elements', 
+        '<link rel="stylesheet" href="themes/default/js/plugins/jquery-confirm.min.css">'
+    );
         
     // Fallback nécessaire pour jquery-confirm
     $template->append('head_elements', '
@@ -157,40 +157,33 @@ $dynamicCSS = $cssGenerator->generate($centralAdmin, $current_scheme);
 // ====================================
 
 $plugin_path = get_root_url() . 'plugins/centralAdmin/';
-$assets_path = $plugin_path . 'assets/';
 
 // CSS Core
-$css_core_path = $assets_path . 'css/core/';
-$CA_VARIABLES_CSS = ca_asset($css_core_path . 'CA-variables.css');
-$CA_ADMIN_LAYOUT_CSS = ca_asset($css_core_path . 'CA-admin-layout.css');
-$CA_ADMIN_OVERRIDE_CSS = ca_asset($css_core_path . 'CA-admin-override.css');
+$CA_VARIABLES_CSS = $plugin_path . ca_asset('assets/css/core/CA-variables.css');
+$CA_ADMIN_LAYOUT_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-layout.css');
+$CA_ADMIN_OVERRIDE_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-override.css');
 
 // CSS Form
-$css_form_path = $assets_path . 'css/form/';
-$CA_FORM_BASE_CSS = ca_asset($css_form_path . 'CA-form-base.css');
-$CA_FORM_COMPONENTS_CSS = ca_asset($css_form_path . 'CA-form-components.css');
-$CA_FORM_THEMES_CSS = ca_asset($css_form_path . 'CA-form-themes.css');
+$CA_FORM_BASE_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-base.css');
+$CA_FORM_COMPONENTS_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-components.css');
+$CA_FORM_THEMES_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-themes.css');
 
 // CSS Modules
-$css_modules_path = $assets_path . 'css/modules/';
-$CA_DEBUG_CSS = ca_asset($css_modules_path . 'CA-debug.css');
-$CA_MODAL_CSS = ca_asset($css_modules_path . 'CA-modal.css');
+$CA_COLORS_UNIFIED_CSS = $plugin_path . ca_asset('assets/css/modules/CA-colors-unified.css');
+$CA_DEBUG_CSS = $plugin_path . ca_asset('assets/css/modules/CA-debug.css');
+$CA_MODAL_CSS = $plugin_path . ca_asset('assets/css/modules/CA-modal.css');
 
 // JS Core
-$js_core_path = $assets_path . 'js/core/';
-$CA_INIT_JS = ca_asset($js_core_path . 'CA-init.js');
-$CA_THEME_DETECTOR_JS = ca_asset($js_core_path . 'CA-theme-detector.js');
+$CA_INIT_JS = $plugin_path . ca_asset('assets/js/core/CA-init.js');
 
 // JS Form
-$js_form_path = $assets_path . 'js/form/';
-$CA_FORM_CONTROLS_JS = ca_asset($js_form_path . 'CA-form-controls.js');
-$CA_FORM_COLORS_JS = ca_asset($js_form_path . 'CA-form-colors.js');
-$CA_FORM_PREVIEW_JS = ca_asset($js_form_path . 'CA-form-preview.js');
+$CA_FORM_CONTROLS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-controls.js');
+$CA_FORM_COLORS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-colors.js');
+$CA_FORM_PREVIEW_JS = $plugin_path . ca_asset('assets/js/form/CA-form-preview.js');
 
 // JS Modules
-$js_modules_path = $assets_path . 'js/modules/';
-$CA_DEBUG_JS = ca_asset($js_modules_path . 'CA-debug.js');
-$CA_MODAL_JS = ca_asset($js_modules_path . 'CA-modal.js');
+$CA_DEBUG_JS = $plugin_path . ca_asset('assets/js/modules/CA-debug.js');
+$CA_MODAL_JS = $plugin_path . ca_asset('assets/js/modules/CA-modal.js');
 
 // ====================================
 // INJECTION DU THÈME
@@ -220,7 +213,7 @@ $template->assign(array(
         array(
             'plugin_version' => $plugin_version,
             'jquery_version' => 'Détection JS',
-            'smarty_version' => defined('SMARTY_VERSION') ? SMARTY_VERSION : 'inconnu',
+            'smarty_version' => class_exists('Smarty') && defined('Smarty::SMARTY_VERSION') ? Smarty::SMARTY_VERSION : '5.5.2',
         )
     ),
 
@@ -237,10 +230,10 @@ $template->assign(array(
     // CSS - Modules
     'CA_DEBUG_CSS' => $CA_DEBUG_CSS,
     'CA_MODAL_CSS' => $CA_MODAL_CSS,
+    'CA_COLORS_UNIFIED_CSS' => $CA_COLORS_UNIFIED_CSS,
 
     // JS - Core
     'CA_INIT_JS' => $CA_INIT_JS,
-    'CA_THEME_DETECTOR_JS' => $CA_THEME_DETECTOR_JS,
 
     // JS - Form
     'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
@@ -252,10 +245,11 @@ $template->assign(array(
     'CA_MODAL_JS' => $CA_MODAL_JS,
 
     // Templates sections
-    'LAYOUT_SECTION_TPL' => dirname(__FILE__) . '/sections/layout.tpl',
-    'TOOLTIPS_SECTION_TPL' => dirname(__FILE__) . '/sections/tooltips.tpl',
-    'COLORS_CLEAR_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_clear.tpl',
-    'COLORS_DARK_SECTION_TPL' => dirname(__FILE__) . '/sections/colors_dark.tpl',
+    'A01_GENERAL_TPL' => dirname(__FILE__) . '/sections/A01_general.tpl',
+    'A02_THEME_COLORS_TPL' => dirname(__FILE__) . '/sections/A02_theme_colors.tpl',
+    'A03_EIW_COLORS_TPL' => dirname(__FILE__) . '/sections/A03_eiw_colors.tpl',
+    'A04_ADVANCED_PARAMS_SECTION_TPL' => dirname(__FILE__) . '/sections/A04_advanced_params.tpl',
+    'A05_DEBUG_SECTION_TPL' => dirname(__FILE__) . '/sections/A05_debug.tpl',
 
     // CSS dynamique
     'dynamic_css' => $dynamicCSS,

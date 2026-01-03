@@ -128,108 +128,92 @@
     }
   }
 
-/* ================================================
-   PRÉVISUALISATION COULEURS
-   ================================================ */
-function initColorPreview() {
-  console.log('[CentralAdmin Preview] Initialisation preview couleurs...');
-  
-  // ===== TOOLTIPS COLORS (commun aux deux schémas) =====
-  const tooltipColors = [
-    'infos_main_color',
-    'warning_main_color',
-    'messages_main_color',
-    'error_main_color'
-  ];
-
-  tooltipColors.forEach(colorName => {
-    const textInput = document.getElementById(colorName + '_text');
-    const colorPicker = document.getElementById(colorName + '_picker');
+  /* ================================================
+    PRÉVISUALISATION COULEURS
+    ================================================ */
+  function initColorPreview() {
+    console.log('[CentralAdmin Preview] Initialisation preview couleurs...');
     
-    if (textInput) {
-      console.log('[Preview] ✅ Tooltip color trouvé:', colorName);
+    // ===== CLEAR COLORS (backgrounds + tooltips) =====
+    const clearColors = [
+      'bg_global',
+      'bg_content2',
+      'bg_content1',
+      'bg_content3',
+      'infos_main_color',
+      'warning_main_color',
+      'messages_main_color',
+      'error_main_color'
+    ];
+
+    clearColors.forEach(colorName => {
+      const colorSuffix = colorName.replace('bg_', '');
+      const fullId = 'bg_clear_' + colorSuffix;
       
-      // Écouter l'événement color-change (déclenché par CA-form-colors.js)
-      textInput.addEventListener('color-change', function(e) {
-        const hexValue = e.detail.color;
-        const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
-        updateCSSVariable(cssVar, hexValue);
-        console.log('[Preview] Couleur tooltip mise à jour:', colorName, '=', hexValue);
-      });
-    } else {
-      console.warn('[Preview] ❌ Tooltip color non trouvé:', colorName);
-    }
-  });
-
-  // ===== CLEAR COLORS =====
-  // Noms cohérents avec config/defaults.php
-  const clearColors = [
-    'bg_global',
-    'bg_content2',
-    'bg_content1',
-    'bg_content3'
-  ];
-
-  clearColors.forEach(colorName => {
-    // Construction de l'ID dans le template : 'bg_clear_' + 'bg_global' = 'bg_clear_bg_global'
-    // Mais dans les templates, c'est 'bg_clear_global' !
-    // Donc on enlève le préfixe 'bg_' pour la construction de l'ID
-    const colorSuffix = colorName.replace('bg_', '');  // 'bg_global' → 'global'
-    const fullId = 'bg_clear_' + colorSuffix;          // 'bg_clear_global'
-    const textInput = document.getElementById(fullId + '_text');
-    const colorPicker = document.getElementById(fullId + '_picker');
-    
-    // La variable CSS garde le nom complet
-    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // '--ca-color-bg-global'
-    
-    if (textInput) {
-      console.log('[Preview] ✅ Clear color trouvé:', fullId, '→ CSS var:', cssVar);
+      // Pour les tooltips, l'ID est différent
+      const inputId = colorName.startsWith('bg_') 
+        ? fullId 
+        : colorName + '_clear';
       
-      textInput.addEventListener('color-change', function(e) {
-        const hexValue = e.detail.color;
-        updateCSSVariable(cssVar, hexValue);
-        console.log('[Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
-      });
-    } else {
-      console.warn('[Preview] ❌ Clear color non trouvé:', fullId);
-    }
-  });
-
-  // ===== DARK COLORS =====
-  // Noms cohérents avec config/defaults.php
-  const darkColors = [
-    'bg_global',
-    'bg_content2',
-    'bg_content1',
-    'bg_content3'
-  ];
-
-  darkColors.forEach(colorName => {
-    // Construction de l'ID dans le template : enlever 'bg_' pour correspondre aux IDs
-    const colorSuffix = colorName.replace('bg_', '');  // 'bg_global' → 'global'
-    const fullId = 'bg_dark_' + colorSuffix;           // 'bg_dark_global'
-    const textInput = document.getElementById(fullId + '_text');
-    const colorPicker = document.getElementById(fullId + '_picker');
-    
-    // La variable CSS garde le nom complet
-    const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');  // '--ca-color-bg-global'
-    
-    if (textInput) {
-      console.log('[Preview] ✅ Dark color trouvé:', fullId, '→ CSS var:', cssVar);
+      const textInput = document.getElementById(inputId + '_text');
+      const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
       
-      textInput.addEventListener('color-change', function(e) {
-        const hexValue = e.detail.color;
-        updateCSSVariable(cssVar, hexValue);
-        console.log('[Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
-      });
-    } else {
-      console.warn('[Preview] ❌ Dark color non trouvé:', fullId);
-    }
-  });
-  
-  console.log('[CentralAdmin Preview] ✅ Prévisualisation couleurs initialisée');
-}
+      if (textInput) {
+        console.log('[Preview] ✅ Clear color trouvé:', inputId, '→ CSS var:', cssVar);
+        
+        textInput.addEventListener('color-change', function(e) {
+          if (!textInput.disabled) {
+            const hexValue = e.detail.color;
+            updateCSSVariable(cssVar, hexValue);
+            console.log('[Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
+          }
+        });
+      } else {
+        console.warn('[Preview] ❌ Clear color non trouvé:', inputId);
+      }
+    });
 
+    // ===== DARK COLORS (backgrounds + tooltips) =====
+    const darkColors = [
+      'bg_global',
+      'bg_content2',
+      'bg_content1',
+      'bg_content3',
+      'infos_main_color',
+      'warning_main_color',
+      'messages_main_color',
+      'error_main_color'
+    ];
+
+    darkColors.forEach(colorName => {
+      const colorSuffix = colorName.replace('bg_', '');
+      const fullId = 'bg_dark_' + colorSuffix;
+      
+      // Pour les tooltips, l'ID est différent
+      const inputId = colorName.startsWith('bg_') 
+        ? fullId 
+        : colorName + '_dark';
+      
+      const textInput = document.getElementById(inputId + '_text');
+      const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
+      
+      if (textInput) {
+        console.log('[Preview] ✅ Dark color trouvé:', inputId, '→ CSS var:', cssVar);
+        
+        textInput.addEventListener('color-change', function(e) {
+          if (!textInput.disabled) {
+            const hexValue = e.detail.color;
+            updateCSSVariable(cssVar, hexValue);
+            console.log('[Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
+          }
+        });
+      } else {
+        console.warn('[Preview] ❌ Dark color non trouvé:', inputId);
+      }
+    });
+    
+    console.log('[CentralAdmin Preview] ✅ Prévisualisation couleurs initialisée');
+  }
   /* ================================================
     MISE À JOUR VARIABLE CSS
     ================================================ */

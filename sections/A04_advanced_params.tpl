@@ -1,49 +1,25 @@
-<div class="ca-section ca-section-active" data-section="layout">
+{* ================================================
+   SECTION PARAMÈTRES AVANCÉS
+   Paramètres techniques de mise en page
+   ================================================ *}
+
+<div class="ca-section" data-section="advanced-params">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
-      <span class="ca-icon">📐</span>
-      {'central_admin_layout'|@translate}
+      <span class="ca-icon">⚙️</span>
+      {'central_admin_advanced_params'|@translate}
     </h3>
-    <button type="button" class="ca-toggle" aria-expanded="true">
+    <button type="button" class="ca-toggle" aria-expanded="false">
       <span class="ca-chevron">▼</span>
     </button>
   </div>
   
-  <div class="ca-section-content">
+  <div class="ca-section-content" style="display: none;">
     
-    {* Largeur admin *}
-    <div class="ca-field">
-      <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_unlocked'|@translate}">
-          <span class="ca-lock-icon">🔓</span>
-        </button>
-        <label class="ca-label">
-          {'admin_width'|@translate}
-          <span class="ca-help-container">
-            <button type="button" class="ca-help">
-              ⓘ
-            </button>
-            <span class="help-tooltip">{'admin_width_tp'|@translate}</span>
-          </span>
-        </label>
-      </div>
-      <div class="ca-field-controls">
-        <input type="range" 
-               class="ca-slider"
-               id="admin_width_range"
-               name="layout[admin_width]"
-               min="1024" max="1800" step="1"
-               value="{$centralAdmin.layout.admin_width}"
-               data-output="admin_width_value">
-        <div class="ca-value-group">
-          <input type="number" 
-                 class="ca-input-number"
-                 id="admin_width_value"
-                 min="1024" max="1800" step="1"
-                 value="{$centralAdmin.layout.admin_width}">
-          <span class="ca-unit">px</span>
-        </div>
-      </div>
+    {* Avertissement utilisateurs avancés *}
+    <div class="ca-advanced-warning">
+      <span class="ca-warning-icon">⚠️</span>
+      <p>{'advanced_params_warning'|@translate}</p>
     </div>
 
     {* Menubar width *}
@@ -154,33 +130,6 @@
                  disabled>
           <span class="ca-unit">px</span>
         </div>
-      </div>
-    </div>
-
-    {* Option supplémentaire : masquer bouton sync rapide *}
-    <div class="ca-field ca-field-checkbox">
-      <div class="ca-field-header">
-        <button type="button" class="ca-lock" data-locked="false" title="{'central_admin_unlocked'|@translate}" style="visibility: hidden;">
-          <span class="ca-lock-icon">🔓</span>
-        </button>
-        <label class="ca-label">
-          {'hide_quick_sync_button'|@translate}
-          <span class="ca-help-container">
-            <button type="button" class="ca-help" data-tooltip="{'hide_quick_sync_button_tp'|@translate}">
-              ⓘ
-            </button>
-            <span class="help-tooltip">{'hide_quick_sync_button_tp'|@translate}</span>
-          </span>
-        </label>
-      </div>
-      <div class="ca-field-controls">
-        <label class="ca-switch">
-          <input type="checkbox" 
-                 name="layout[hide_quick_sync]"
-                 value="1"
-                 {if isset($centralAdmin.layout.hide_quick_sync) && $centralAdmin.layout.hide_quick_sync == '1'}checked{/if}>
-          <span class="ca-switch-slider"></span>
-        </label>
       </div>
     </div>
 

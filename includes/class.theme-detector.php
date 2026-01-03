@@ -46,19 +46,20 @@ class CA_ThemeDetector {
      * @return string Thème détecté ('clear' ou 'dark')
      */
     public function detect() {
-        global $user;
+    global $user;
+    
+    // Méthode 1 : userprefs_get_param (RECOMMANDÉE)
+    if (function_exists('userprefs_get_param')) {
+        $rawTheme = userprefs_get_param('admin_theme', 'clear');
+        $this->detectionMethod = 'userprefs_get_param';
         
-        // Méthode 1 : userprefs_get_param (RECOMMANDÉE)
-        if (function_exists('userprefs_get_param')) {
-            $rawTheme = userprefs_get_param('admin_theme', 'clear');
-            $this->detectionMethod = 'userprefs_get_param';
-            
-            $this->debugInfo = array(
-                'detection_method' => 'userprefs_get_param',
-                'raw_value' => $rawTheme,
-                'is_roma' => ($rawTheme === 'roma'),
-                'is_clear' => ($rawTheme === 'clear'),
-            );
+        $this->debugInfo = array(
+            'detection_method' => 'userprefs_get_param',
+            'raw_value' => $rawTheme,
+            'admin_theme_value' => $rawTheme,  // ← AJOUT
+            'is_roma' => ($rawTheme === 'roma'),
+            'is_clear' => ($rawTheme === 'clear'),
+        );
             
             // Normalisation
             $this->theme = $this->normalize($rawTheme);
@@ -75,6 +76,7 @@ class CA_ThemeDetector {
             $this->debugInfo = array(
                 'detection_method' => 'user_array',
                 'raw_value' => $rawTheme,
+                'admin_theme_value' => $rawTheme,  // ← AJOUT
                 'warning' => 'Méthode fallback, peut être inexacte',
             );
             
@@ -91,6 +93,7 @@ class CA_ThemeDetector {
         $this->debugInfo = array(
             'detection_method' => 'default',
             'raw_value' => null,
+            'admin_theme_value' => 'clear',  // ← AJOUT
             'warning' => 'Aucune méthode de détection disponible, utilisation du défaut',
         );
         

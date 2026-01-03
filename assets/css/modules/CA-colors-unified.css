@@ -1,0 +1,251 @@
+/* ================================================
+   SECTION COULEURS UNIFIÉE - GRILLE 2 COLONNES
+   Version: 3.0.0
+   ================================================ */
+
+/* === INFO THÈME ACTIF === */
+.ca-theme-info {
+  background: linear-gradient(135deg, #e8f4f8 0%, #d4e9f2 100%);
+  border-left: 4px solid #3498db;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+.ca-theme-info p {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.ca-theme-info p:last-child {
+  margin-bottom: 0;
+}
+
+.ca-theme-note {
+  font-size: 13px !important;
+  color: #7f8c8d !important;
+  font-style: italic;
+}
+
+.ca-theme-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ca-theme-badge-clear {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+  color: white;
+}
+
+.ca-theme-badge-dark {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: white;
+}
+
+/* === GRILLE 2 COLONNES === */
+.ca-colors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* === COLONNES THÈMES === */
+.ca-theme-column {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Thème actif - Bordure accentuée */
+.ca-theme-column.ca-theme-active {
+  border-color: #3498db;
+  border-width: 3px;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+/* Couleur de fond selon thème */
+.ca-theme-column.ca-theme-clear {
+  background: linear-gradient(135deg, #fffaf0 0%, #fff5e6 100%);
+}
+
+.ca-theme-column.ca-theme-dark {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+}
+
+/* === EN-TÊTE COLONNE === */
+.ca-theme-column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.ca-theme-column-header .ca-icon {
+  font-size: 24px;
+}
+
+.ca-theme-column-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.ca-theme-dark .ca-theme-column-header h4 {
+  color: #f0f0f0;
+}
+
+/* Badge actif */
+.ca-active-badge {
+  background: linear-gradient(135deg, #27ae60, #229954);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* === CHAMPS DANS COLONNES === */
+.ca-theme-column .ca-field {
+  margin-bottom: 20px;
+}
+
+.ca-theme-column .ca-field:last-child {
+  margin-bottom: 0;
+}
+
+/* Labels dans thème dark */
+.ca-theme-dark .ca-label {
+  color: #ddd;
+}
+
+/* Inputs désactivés - Style plus visible */
+.ca-theme-column .ca-color-picker:disabled,
+.ca-theme-column .ca-color-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+.ca-theme-column .ca-color-picker-wrapper:has(input:disabled) {
+  opacity: 0.6;
+  background: #e9ecef;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1200px) {
+  .ca-colors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ca-theme-column {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* === THÈME DARK - Adaptation === */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-info {
+  background: linear-gradient(135deg, #1a3a4a 0%, #0f2532 100%);
+  border-left-color: #3498db;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-info p {
+  color: #e9ecef;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-note {
+  color: #adb5bd !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column {
+  background: #2c3e50;
+  border-color: #4a5568;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column.ca-theme-active {
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column.ca-theme-clear {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2f2f2f 100%);
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column.ca-theme-dark {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column-header h4 {
+  color: #f0f0f0;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-theme-column-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* === PARAMÈTRE COMMUN (fade_start dans tooltips) === */
+.ca-common-param {
+  max-width: 600px;
+  margin: 0 auto 25px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+  border: 2px solid #3498db;
+  border-radius: 8px;
+}
+
+.ca-common-param .ca-field {
+  margin-bottom: 0;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-common-param {
+  background: linear-gradient(135deg, #1a3a4a 0%, #0f2532 100%);
+  border-color: #3498db;
+}
+
+/* === AVERTISSEMENT PARAMÈTRES AVANCÉS === */
+.ca-advanced-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+  border-left: 4px solid #f39c12;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin-bottom: 25px;
+}
+
+.ca-warning-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.ca-advanced-warning p {
+  margin: 0;
+  font-size: 14px;
+  color: #856404;
+  line-height: 1.5;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-advanced-warning {
+  background: linear-gradient(135deg, #5a4a1a 0%, #4a3a0f 100%);
+  border-left-color: #f39c12;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-advanced-warning p {
+  color: #ffc107;
+}
