@@ -22,6 +22,30 @@
       <p>{'advanced_params_warning'|@translate}</p>
     </div>
 
+    {* hide_homepage_charts *}
+    <div class="ca-field ca-field-checkbox">
+      <div class="ca-field-header">
+        <label class="ca-label">
+          {'hide_homepage_charts'|@translate}
+          <span class="ca-help-container">
+            <button type="button" class="ca-help">
+              ⓘ
+            </button>
+            <span class="help-tooltip">{'hide_homepage_charts_tp'|@translate}</span>
+          </span>
+        </label>
+      </div>
+      <div class="ca-field-controls">
+        <label class="ca-switch">
+          <input type="checkbox" 
+                name="layout[hide_homepage_charts]"
+                value="1"
+                {if isset($centralAdmin.layout.hide_homepage_charts) && $centralAdmin.layout.hide_homepage_charts == '1'}checked{/if}>
+          <span class="ca-switch-slider"></span>
+        </label>
+      </div>
+    </div>
+
     {* Menubar width *}
     <div class="ca-field ca-field-locked">
       <div class="ca-field-header">

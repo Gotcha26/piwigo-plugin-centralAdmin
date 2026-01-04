@@ -90,7 +90,8 @@ if (isset($_POST['save'])) {
     if (isset($_POST['layout']) && is_array($_POST['layout'])) {
         $newData['layout'] = array();
         foreach ($_POST['layout'] as $key => $value) {
-            if ($key === 'hide_quick_sync') {
+            // Checkboxes de masquage
+            if (in_array($key, ['hide_quick_sync', 'hide_homepage_charts'])) {
                 $newData['layout'][$key] = $value;
             } else {
                 $newData['layout'][$key] = trim($value);
@@ -98,9 +99,12 @@ if (isset($_POST['save'])) {
         }
     }
     
-    // Gestion checkbox non coché
-    if (!isset($_POST['layout']['hide_quick_sync'])) {
-        $newData['layout']['hide_quick_sync'] = '0';
+    // Gestion checkboxes non cochées (valeur 0 si absente)
+    $checkboxes = ['hide_quick_sync', 'hide_homepage_charts'];
+    foreach ($checkboxes as $checkbox) {
+        if (!isset($_POST['layout'][$checkbox])) {
+            $newData['layout'][$checkbox] = '0';
+        }
     }
     
     // Colors - Sauvegarder pour le schéma actif uniquement
@@ -160,13 +164,12 @@ $plugin_path = get_root_url() . 'plugins/centralAdmin/';
 
 // CSS Core
 $CA_VARIABLES_CSS = $plugin_path . ca_asset('assets/css/core/CA-variables.css');
-$CA_ADMIN_LAYOUT_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-layout.css');
 $CA_ADMIN_OVERRIDE_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-override.css');
 
 // CSS Form
 $CA_FORM_BASE_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-base.css');
 $CA_FORM_COMPONENTS_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-components.css');
-$CA_FORM_THEMES_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-themes.css');
+$CA_FORM_THEMES_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-themes.scss');
 
 // CSS Modules
 $CA_COLORS_UNIFIED_CSS = $plugin_path . ca_asset('assets/css/modules/CA-colors-unified.css');
@@ -219,7 +222,6 @@ $template->assign(array(
 
     // CSS - Core
     'CA_VARIABLES_CSS' => $CA_VARIABLES_CSS,
-    'CA_ADMIN_LAYOUT_CSS' => $CA_ADMIN_LAYOUT_CSS,
     'CA_ADMIN_OVERRIDE_CSS' => $CA_ADMIN_OVERRIDE_CSS,
 
     // CSS - Form

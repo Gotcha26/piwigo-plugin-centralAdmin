@@ -35,6 +35,11 @@ $lang['preference_browser_scheme'] = 'Use browser theme preference';
 $lang['accordion_choice'] = 'Only one panel open at a time';
 
 // == LAYOUT PARAMETERS ==
+$lang['hide_homepage_charts'] = 'Hide homepage charts';
+$lang['hide_homepage_charts_tp'] = 
+  "Hides activity and storage charts on the administration home page.\n"
+. "Useful for a cleaner interface.";
+
 $lang['admin_width'] = 'Maximum administration width';
 $lang['admin_width_tp'] = "Maximum width of the administration interface.\nRecommended value: 1600px\nFor advanced users only.";
 

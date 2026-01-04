@@ -126,6 +126,16 @@
         updateCSSVariable('--ca-layout-fade-start', fadeNumber.value + 'px');
       });
     }
+
+    // hide_homepage_charts
+    const homepageChartsCheckbox = document.querySelector('input[name="layout[hide_homepage_charts]"]');
+    if (homepageChartsCheckbox) {
+      homepageChartsCheckbox.addEventListener('change', () => {
+        const displayValue = homepageChartsCheckbox.checked ? 'none' : 'block';
+        updateCSSVariable('--ca-layout-hide-homepage-charts', displayValue);
+      });
+    }
+    
   }
 
   /* ================================================

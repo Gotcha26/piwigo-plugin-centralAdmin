@@ -491,20 +491,6 @@
   margin-bottom: 12px;
 }
 
-.ca-field-locked .ca-lock {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  transition: transform 0.2s ease;
-}
-
 .ca-field-locked .ca-lock:hover {
   transform: scale(1.1);
 }
@@ -512,16 +498,6 @@
 .ca-field-locked .ca-lock-icon {
   font-size: 18px;
   transition: all 0.3s ease;
-}
-
-/* État locked */
-.ca-field-locked .ca-lock[data-locked="true"] .ca-lock-icon::before {
-  content: "🔒";
-}
-
-/* État unlocked */
-.ca-field-locked .ca-lock[data-locked="false"] .ca-lock-icon::before {
-  content: "🔓";
 }
 
 /* Contrôles disabled quand locked */

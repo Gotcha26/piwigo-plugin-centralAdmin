@@ -39,14 +39,14 @@
                  class="ca-slider"
                  id="fade_start_range"
                  name="layout[fade_start]"
-                 min="800" max="1600" step="25"
+                 min="400" max="1024" step="25"
                  value="{$centralAdmin.layout.fade_start}"
                  data-output="fade_start_value">
           <div class="ca-value-group">
             <input type="number" 
                    class="ca-input-number"
                    id="fade_start_value"
-                   min="800" max="1600" step="25"
+                   min="400" max="1024" step="25"
                    value="{$centralAdmin.layout.fade_start}">
             <span class="ca-unit">px</span>
           </div>

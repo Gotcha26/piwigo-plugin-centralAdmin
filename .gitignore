@@ -27,13 +27,15 @@ Thumbs.db
 *.min.js
 
 # Documentation
-docs/*
+docs/
 !docs/index.php
 !docs/TECHNICAL-DOCUMENTATION.md
 
 # Images
-images/*
+images/
 
 # Fichiers références
 assets/css/form/CA-form-theme_original.css
 
+# Mes archives
+archives/

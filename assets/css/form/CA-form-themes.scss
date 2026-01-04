@@ -1,0 +1,388 @@
+/* ================================================
+   ADAPTATION THÈME CLEAR / DARK
+   Priorité : Thème Piwigo > Option navigateur
+   ================================================ */
+
+/* ================================================
+   THÈME DARK - Piwigo (PRIORITAIRE)
+   Inspiré de Roma - Charte officielle Piwigo
+   ================================================ */
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .centralAdmin-container {
+  
+  /* Header */
+  .ca-header h2 {
+    color: #f0f0f0;
+  }
+  
+  .ca-subtitle {
+    color: #b0b0b0;
+  }
+  
+  /* Options group */
+  .ca-options-group {
+    background: #3a3a3a;
+    border-color: #555;
+  }
+  
+  .ca-option-label {
+    color: #ddd;
+  }
+  
+  /* Sections */
+  .ca-section {
+    background: #3a3a3a;
+    border-color: #555;
+  }
+  
+  .ca-section-header {
+    background: linear-gradient(135deg, #444 0%, #3a3a3a 100%);
+  }
+  
+  .ca-section-header:hover {
+    background: linear-gradient(135deg, #4d4d4d 0%, #444 100%);
+  }
+  
+  .ca-section-title {
+    color: #f0f0f0;
+  }
+  
+  .ca-section-content {
+    border-top-color: #555;
+    background: #3a3a3a;
+  }
+  
+  /* Labels */
+  .ca-label {
+    color: #ddd;
+  }
+  
+  /* Inputs */
+  .ca-input-number {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #f0f0f0;
+  }
+  
+  .ca-input-number:focus {
+    border-color: #ff7700;
+    background: #333;
+  }
+  
+  .ca-input-number:disabled {
+    background: #2a2a2a;
+    color: #777;
+  }
+  
+  /* Color picker wrapper */
+  .ca-color-picker-wrapper {
+    background: #2a2a2a;
+    border-color: #555;
+  }
+  
+  .ca-color-input {
+    background: #2a2a2a;
+    border-color: #555;
+    color: #f0f0f0;
+  }
+  
+  .ca-color-input:focus {
+    border-color: #ff7700;
+    background: #333;
+  }
+  
+  .ca-color-input:disabled {
+    background: #2a2a2a;
+    color: #777;
+  }
+  
+  /* Unit */
+  .ca-unit {
+    color: #b0b0b0;
+  }
+  
+  /* Slider track */
+  .ca-slider {
+    background: linear-gradient(to right, #ff7700, #ff5500);
+  }
+  
+  .ca-slider:disabled {
+    background: #555;
+  }
+  
+  /* Toggle button */
+  .ca-toggle:hover {
+    background: rgba(255, 119, 0, 0.1);
+  }
+  
+  /* Lock button */
+  .ca-lock:hover {
+    background: rgba(255, 119, 0, 0.1);
+  }
+  
+  /* Help tooltip */
+  .ca-help {
+    background: #666;
+  }
+  
+  .ca-help:hover {
+    background: #777;
+  }
+  
+  .ca-help .help-tooltip {
+    background: #2a2a2a;
+    color: #f0f0f0;
+    border: 1px solid #555;
+  }
+  
+  /* Switch */
+  .ca-switch-slider {
+    background-color: #555;
+  }
+  
+  .ca-switch input:checked + .ca-switch-slider {
+    background: linear-gradient(135deg, #ff7700, #ff5500);
+  }
+  
+  /* Actions */
+  .ca-actions {
+    border-top-color: #555;
+  }
+  
+  /* Notifications */
+  .ca-notification-success {
+    background: linear-gradient(135deg, #2a4a2a 0%, #1f3a1f 100%);
+    border-left-color: #5cb85c;
+    color: #b3d9b3;
+  }
+  
+  .ca-notification-error {
+    background: linear-gradient(135deg, #5a2a2a 0%, #4a1f1f 100%);
+    border-left-color: #d9534f;
+    color: #f5b3b3;
+  }
+  
+  /* Buttons */
+  .ca-btn-primary {
+    background: linear-gradient(135deg, #ff7700, #ff5500);
+  }
+  
+  .ca-btn-primary:hover {
+    background: linear-gradient(135deg, #ff5500, #ff3300);
+  }
+  
+  .ca-btn-secondary {
+    background: linear-gradient(135deg, #666, #555);
+  }
+  
+  .ca-btn-secondary:hover {
+    background: linear-gradient(135deg, #777, #666);
+  }
+  
+  /* Debug section dark */
+  .ca-debug-info {
+    background: #2a2a2a;
+    border-color: #555;
+  }
+  
+  .ca-debug-info h4 {
+    color: #f0f0f0;
+    border-bottom-color: #ff7700;
+  }
+  
+  .ca-debug-table td:last-child {
+    background: #333;
+    color: #f0f0f0;
+  }
+  
+  .ca-debug-list li {
+    color: #ddd;
+  }
+  
+  .ca-option-info {
+    border-bottom-color: #555;
+  }
+  
+  .ca-option-label-info {
+    color: #b0b0b0;
+  }
+  
+  .ca-badge-light {
+    background: linear-gradient(135deg, #444, #3a3a3a);
+    color: #f0f0f0;
+  }
+}
+
+/* ================================================
+   THÈME CLEAR - Par défaut (Piwigo)
+   ================================================ */
+
+/* Styles clear déjà définis par défaut dans admin-form.css */
+/* Pas besoin de redéfinir */
+
+/* ================================================
+   THÈME DARK
+   ================================================ */
+
+/* Color pickers natifs - Dark theme */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-color-picker {
+  border-color: #4a5568;
+  background: #2c3e50;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-color-picker:hover {
+  border-color: #ff7700;
+}
+
+/* ================================================
+   MODE THÈME NAVIGATEUR (optionnel - priorité basse)
+   ================================================ */
+
+body.ca-browser-theme {
+  
+  @media (prefers-color-scheme: dark) {
+    .centralAdmin-container {
+    
+    /* Reprend les mêmes styles que le thème dark Piwigo */
+    .ca-header h2 {
+      color: #e9ecef;
+    }
+    
+    .ca-subtitle {
+      color: #adb5bd;
+    }
+    
+    .ca-options-group {
+      background: #2c3e50;
+      border-color: #4a5568;
+    }
+    
+    .ca-option-label {
+      color: #cbd5e0;
+    }
+    
+    .ca-section {
+      background: #2c3e50;
+      border-color: #4a5568;
+    }
+    
+    .ca-section-header {
+      background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    }
+    
+    .ca-section-header:hover {
+      background: linear-gradient(135deg, #3d5a70 0%, #34495e 100%);
+    }
+    
+    .ca-section-title {
+      color: #e9ecef;
+    }
+    
+    .ca-section-content {
+      border-top-color: #4a5568;
+      background: #2c3e50;
+    }
+    
+    .ca-label {
+      color: #cbd5e0;
+    }
+    
+    .ca-input-number {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .ca-input-number:focus {
+      border-color: #3498db;
+      background: #243447;
+    }
+    
+    .ca-input-number:disabled {
+      background: #1a252f;
+      color: #6c757d;
+    }
+    
+    .ca-color-picker-wrapper {
+      background: #1a252f;
+      border-color: #4a5568;
+    }
+    
+    .ca-color-input {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .ca-color-input:focus {
+      border-color: #3498db;
+      background: #243447;
+    }
+    
+    .ca-color-input:disabled {
+      background: #1a252f;
+      color: #6c757d;
+    }
+    
+    .ca-unit {
+      color: #adb5bd;
+    }
+    
+    .ca-slider:disabled {
+      background: #4a5568;
+    }
+    
+    .ca-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .ca-lock:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .ca-help {
+      background: #5a6c7d;
+    }
+    
+    .ca-help:hover {
+      background: #4a5a6b;
+    }
+    
+    .ca-help .help-tooltip {
+      background: #1a252f;
+      color: #e9ecef;
+      border: 1px solid #4a5568;
+    }
+    
+    .ca-switch-slider {
+      background-color: #4a5568;
+    }
+    
+    .ca-actions {
+      border-top-color: #4a5568;
+    }
+    
+    .ca-notification-success {
+      background: linear-gradient(135deg, #155724 0%, #0f4419 100%);
+      border-left-color: #28a745;
+      color: #c3e6cb;
+    }
+    
+    .ca-notification-error {
+      background: linear-gradient(135deg, #721c24 0%, #5a1419 100%);
+      border-left-color: #dc3545;
+      color: #f5c6cb;
+    }
+    
+    .sp-replacer {
+      background: #1a252f;
+      border-color: #4a5568;
+      color: #e9ecef;
+    }
+    
+    .sp-dd {
+      color: #adb5bd;
+    }
+    }
+  }
+}
