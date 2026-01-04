@@ -237,6 +237,29 @@ a.icon-plus-circled[href*="page=album"],
   width: calc(var(--ca-layout-admin-width) - var(--ca-layout-menubar-width));
 }
 
+/* === ALBUMS === */
+.cat-modify-footer {
+    position: initial;
+    width: initial;
+}
+
+.cat-modify-footer-start {
+  margin-left: 0;
+}
+
+.cat-modify {
+  height: initial;
+}
+
+.content .admin-object-id {
+  padding-top: 5px;
+  right: max(0px, calc(((100vw - var(--ca-layout-admin-width)) / 2)) + 15px);
+}
+
+.cat-modify-ariane a {
+  max-width: calc(var(--ca-layout-admin-width) - (var(--ca-layout-menubar-width) * 2) - 125px);
+}
+
 /* === UTILISATEURS === */
 /* Historique - Statistiques */
 .stat-compare-mode {
