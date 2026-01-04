@@ -49,10 +49,11 @@ class CA_CSSGenerator {
         $css = "\n" . $this->indent . "/* Layout */\n";
         
         foreach ($layout as $key => $value) {
-            // Traitement spécial pour hide_quick_sync
-            if ($key === 'hide_quick_sync') {
-                $displayValue = ($value === '1') ? 'none' : 'block';
-                $css .= $this->indent . $this->prefix . 'layout-hide-quick-sync: ' . $displayValue . ";\n";
+            // Traitement spécial pour les options de masquage
+            if (in_array($key, ['hide_quick_sync', 'hide_homepage_charts'])) {
+                $displayValue = ($value === '1') ? 'none' : 'initial';
+                $cssVarName = str_replace('_', '-', $key);
+                $css .= $this->indent . $this->prefix . 'layout-' . $cssVarName . ': ' . $displayValue . ";\n";
                 continue;
             }
             
@@ -80,7 +81,9 @@ class CA_CSSGenerator {
         $mergedColors = array_merge($baseColors, $userModifications);
         
         foreach ($mergedColors as $key => $value) {
-            $varName = $this->prefix . 'color-' . str_replace('_', '-', $key);
+            // Conserver les underscores pour les tooltips (infos_main_color, etc.)
+            $cssKey = str_replace('_', '-', $key);
+            $varName = $this->prefix . 'color-' . $cssKey;
             $css .= $this->indent . $varName . ': ' . $this->sanitizeColor($value) . ";\n";
         }
         
@@ -99,9 +102,11 @@ class CA_CSSGenerator {
         
         // Layout
         foreach ($layout as $key => $value) {
-            if ($key === 'hide_quick_sync') {
-                $displayValue = ($value === '1') ? 'none' : 'block';
-                $css .= $this->prefix . 'layout-hide-quick-sync: ' . $displayValue . ";\n";
+            // Traitement spécial pour les options de masquage
+            if (in_array($key, ['hide_quick_sync', 'hide_homepage_charts'])) {
+                $displayValue = ($value === '1') ? 'none' : 'initial';
+                $cssVarName = str_replace('_', '-', $key);
+                $css .= $this->prefix . 'layout-' . $cssVarName . ': ' . $displayValue . ";\n";
             } else {
                 $varName = $this->prefix . 'layout-' . str_replace('_', '-', $key);
                 $css .= $varName . ': ' . (int)$value . "px;\n";

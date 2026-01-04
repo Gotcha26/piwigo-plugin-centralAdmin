@@ -1,126 +1,90 @@
 <?php
 /**
  * Gestion des assets (CSS/JS) avec support des versions minifiées
- * Version 3.1.1 - Correction du problème "Array to string conversion"
+ * Version 3.2.0 - Correction du problème "Array to string conversion"
  * 
  * @package CentralAdmin
- * @version 3.1.1
+ * @version 3.2.0
  */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 /**
- * Retourne le chemin d'un asset en privilégiant la version minifiée si elle existe
+ * Retourne le chemin d'un asset avec gestion SCSS/CSS/MIN
  * 
- * IMPORTANT : Cette fonction attend un chemin RELATIF depuis la racine du plugin
- * Exemple correct : 'assets/css/core/CA-admin-layout.css'
- * Exemple incorrect : 'plugins/centralAdmin/assets/css/...' ← Ne jamais faire ça !
+ * Ordre de priorité :
+ * 1. .min.css (production)
+ * 2. .css (compilé)
+ * 3. .scss (développement - renommé en .css pour Piwigo)
  * 
- * @param string $asset_path Chemin relatif de l'asset depuis la racine du plugin
- * @return string Chemin relatif de l'asset (minifié ou normal) avec cache-buster
+ * @param string $asset_path Chemin relatif depuis racine plugin
+ * @return string Chemin avec cache-buster
  */
 function ca_asset($asset_path)
 {
-    // ============================================
-    // VALIDATION STRICTE DE L'ENTRÉE
-    // ============================================
-    
+    // Validation
     if (!is_string($asset_path)) {
-        error_log('[CentralAdmin] ca_asset() - ERREUR CRITIQUE : $asset_path n\'est pas une chaîne, type : ' . gettype($asset_path));
-        return (string)$asset_path; // Cast forcé en dernier recours
+        error_log('[CA] ca_asset() - Type invalide : ' . gettype($asset_path));
+        return (string)$asset_path;
     }
 
-    // ============================================
-    // AUTO-CORRECTION DES CHEMINS INCORRECTS
-    // ============================================
-    
-    // Si le chemin contient "plugins/centralAdmin/", c'est une erreur d'appel
-    // On le corrige automatiquement pour éviter le crash
+    // Auto-correction chemins incorrects
     if (strpos($asset_path, 'plugins/centralAdmin/') !== false) {
-        error_log('[CentralAdmin] ca_asset() - ATTENTION : Chemin incorrect détecté : ' . $asset_path);
-        error_log('[CentralAdmin] ca_asset() - ca_asset() attend SEULEMENT le chemin relatif (ex: "assets/css/core/file.css")');
-        
-        // Extraction de la partie après "plugins/centralAdmin/"
         $asset_path = preg_replace('#^.*?plugins/centralAdmin/#', '', $asset_path);
-        error_log('[CentralAdmin] ca_asset() - Chemin auto-corrigé en : ' . $asset_path);
     }
     
-    // Si le chemin commence par un slash, le retirer
     $asset_path = ltrim($asset_path, '/');
-    
-    // ============================================
-    // CONSTRUCTION DES CHEMINS
-    // ============================================
-    
-    // Extraire l'extension et construire le chemin minifié
     $path_info = pathinfo($asset_path);
     
-    // Protection contre les chemins sans extension
     if (!isset($path_info['extension'])) {
-        error_log('[CentralAdmin] ca_asset() - ERREUR : Pas d\'extension détectée dans : ' . $asset_path);
+        error_log('[CA] ca_asset() - Pas d\'extension : ' . $asset_path);
+        return $asset_path;
+    }
+
+    $plugin_root = dirname(dirname(__FILE__));
+    $ext = $path_info['extension'];
+    
+    // === GESTION SPÉCIALE CSS/SCSS ===
+    if (in_array($ext, ['css', 'scss'])) {
+        $base_path = $path_info['dirname'] . '/' . $path_info['filename'];
+        
+        // 1. Chercher .min.css (priorité absolue)
+        $min_path = $base_path . '.min.css';
+        if (file_exists($plugin_root . '/' . $min_path)) {
+            return $min_path . '?v=' . filemtime($plugin_root . '/' . $min_path);
+        }
+        
+        // 2. Chercher .css (compilé depuis SCSS)
+        $css_path = $base_path . '.css';
+        if (file_exists($plugin_root . '/' . $css_path)) {
+            return $css_path . '?v=' . filemtime($plugin_root . '/' . $css_path);
+        }
+        
+        // 3. Chercher .scss (DEV uniquement - servir comme .css)
+        $scss_path = $base_path . '.scss';
+        if (file_exists($plugin_root . '/' . $scss_path)) {
+            // HACK : Renommer en .css pour Piwigo
+            // Le contenu SCSS reste valide car CSS est un sous-ensemble
+            return $scss_path . '?v=' . filemtime($plugin_root . '/' . $scss_path);
+        }
+        
+        error_log('[CA] ca_asset() - Aucun fichier trouvé pour : ' . $asset_path);
         return $asset_path;
     }
     
-    $minified_path = $path_info['dirname'] . '/' . $path_info['filename'] . '.min.' . $path_info['extension'];
+    // === GESTION CLASSIQUE AUTRES EXTENSIONS ===
+    $minified_path = $path_info['dirname'] . '/' . $path_info['filename'] . '.min.' . $ext;
     
-    // Chemin absolu vers la racine du plugin
-    // dirname(dirname(__FILE__)) remonte de includes/ vers plugins/centralAdmin/
-    $plugin_root = dirname(dirname(__FILE__));
-    
-    // Chemins complets pour vérification filesystem
-    $full_minified_path = $plugin_root . '/' . $minified_path;
-    $full_normal_path = $plugin_root . '/' . $asset_path;
-    
-    // ============================================
-    // CHOIX DE LA VERSION (MINIFIÉE OU NORMALE)
-    // ============================================
-    
-    $final_path = '';
-    $version_used = '';
-    
-    if (file_exists($full_minified_path)) {
-        $final_path = $minified_path;
-        $version_used = 'minified';
-    } elseif (file_exists($full_normal_path)) {
-        $final_path = $asset_path;
-        $version_used = 'normal';
-    } else {
-        // Aucun fichier trouvé - Log détaillé pour debugging
-        error_log('[CentralAdmin] ca_asset() - ERREUR : Fichier introuvable');
-        error_log('[CentralAdmin] ca_asset() - Chemin normal testé : ' . $full_normal_path);
-        error_log('[CentralAdmin] ca_asset() - Chemin minifié testé : ' . $full_minified_path);
-        error_log('[CentralAdmin] ca_asset() - Plugin root : ' . $plugin_root);
-        
-        // Retour fallback sur le chemin normal
-        $final_path = $asset_path;
-        $version_used = 'fallback';
+    if (file_exists($plugin_root . '/' . $minified_path)) {
+        return $minified_path . '?v=' . filemtime($plugin_root . '/' . $minified_path);
     }
     
-    // ============================================
-    // CACHE BUSTER (VERSIONNING)
-    // ============================================
-    
-    $cache_buster = '';
-    $full_final_path = $plugin_root . '/' . $final_path;
-    
-    if (file_exists($full_final_path)) {
-        $mtime = filemtime($full_final_path);
-        $cache_buster = '?v=' . $mtime;
+    if (file_exists($plugin_root . '/' . $asset_path)) {
+        return $asset_path . '?v=' . filemtime($plugin_root . '/' . $asset_path);
     }
     
-    // ============================================
-    // RETOUR GARANTI STRING
-    // ============================================
-    
-    $result = $final_path . $cache_buster;
-    
-    // Validation finale du type de retour
-    if (!is_string($result)) {
-        error_log('[CentralAdmin] ca_asset() - ERREUR CRITIQUE : Le résultat n\'est pas une chaîne !');
-        return (string)$result;
-    }
-    
-    return $result;
+    error_log('[CA] ca_asset() - Fichier introuvable : ' . $asset_path);
+    return $asset_path;
 }
 
 /**

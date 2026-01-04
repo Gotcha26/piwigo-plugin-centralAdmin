@@ -1,0 +1,5 @@
+This plugin allows you to obtain a central column theme for administration only.
+Also adjust your own colors, light/dark compatible
+Some customization options are also offered to you.
+
+CSS skin only for the administration part!

@@ -14,6 +14,7 @@ return array(
     'align_pluginFilter_right' => '160',
     'fade_start'               => '800',
     'hide_quick_sync'          => '1',
+    'hide_homepage_charts'     => '0',
   ),
   'colors' => array(
     'clear' => array(

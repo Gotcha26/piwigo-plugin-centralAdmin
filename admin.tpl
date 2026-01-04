@@ -17,7 +17,6 @@ if (document.getElementById('central-admin-vars-preview')) {
 </script>
 
 {* === CSS CORE === *}
-<link rel="stylesheet" href="{$CA_ADMIN_LAYOUT_CSS}">
 <link rel="stylesheet" href="{$CA_ADMIN_OVERRIDE_CSS}">
 <link rel="stylesheet" href="{$CA_COLORS_UNIFIED_CSS}">
 
