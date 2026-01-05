@@ -215,3 +215,13 @@ $lang['central_admin_advanced_params'] = 'Paramètres avancés';
 
 // == AVERTISSEMENT AVANCÉS ==
 $lang['advanced_params_warning'] = 'Ces paramètres sont destinés aux utilisateurs avancés. Des valeurs incorrectes peuvent altérer l\'affichage de l\'interface. Utilisez les verrous pour modifier ces paramètres.';
+
+// == SECTION CSS PERSONNALISÉ ==
+$lang['custom_css_section_title'] = 'Injection CSS personnalisée';
+$lang['custom_css_warning'] = 'Cette section permet d\'injecter vos propres règles CSS. Erreurs de syntaxe peuvent altérer l\'interface. Utiliser le backup en cas de problème.';
+$lang['custom_css_label'] = 'Code CSS personnalisé';
+$lang['custom_css_help'] = "Saisissez vos règles CSS ici. Elles seront injectées dans toutes les pages d'administration.\nExemple : body { background: red; }";
+$lang['custom_css_placeholder'] = 'Saisissez votre code CSS ici...';
+$lang['custom_css_restore'] = 'Restaurer backup';
+$lang['custom_css_restored'] = 'CSS restauré depuis le backup';
+$lang['custom_css_no_backup'] = 'Aucun backup disponible';

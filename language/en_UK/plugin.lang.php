@@ -168,3 +168,13 @@ $lang['central_admin_advanced_params'] = 'Advanced Parameters';
 
 // == ADVANCED WARNING ==
 $lang['advanced_params_warning'] = 'These parameters are intended for advanced users. Incorrect values may alter the interface display. Use the locks to modify these parameters.';
+
+// == CUSTOM CSS SECTION ==
+$lang['custom_css_section_title'] = 'Custom CSS Injection';
+$lang['custom_css_warning'] = 'This section allows injecting your own CSS rules. Syntax errors may alter the interface. Use backup if needed.';
+$lang['custom_css_label'] = 'Custom CSS code';
+$lang['custom_css_help'] = "Enter your CSS rules here. They will be injected in all admin pages.\nExample: body { background: red; }";
+$lang['custom_css_placeholder'] = 'Enter your CSS code here...';
+$lang['custom_css_restore'] = 'Restore backup';
+$lang['custom_css_restored'] = 'CSS restored from backup';
+$lang['custom_css_no_backup'] = 'No backup available';
