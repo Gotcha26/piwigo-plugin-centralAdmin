@@ -228,7 +228,6 @@ a.icon-plus-circled[href*="page=album"],
 /* Gestion par lots - Mode unitaire */
 .bottom-save-bar,
 .savebar-footer {
-  bottom: unset;
   right: 0px;
   right: max(
     0px,
