@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
              Tient compte de la couleur (clair / obscur).
              Injecte des feuilles CSS personnalisées uniquement.
-Version: 3.2.0
+Version: 3.2.1
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
