@@ -5,7 +5,7 @@ Description: Center all admin elements within a single column of up to 1600px.
              Accepts color (light/dark).
              Injects only custom CSS stylesheets.
 Plugin URI: https://fr.piwigo.org/ext/index.php?eid=1058
-Version: 3.2.2
+Version: 3.3.0
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
@@ -88,6 +88,15 @@ add_event_handler('loc_begin_admin_page', function () {
         '<link rel="stylesheet" href="' . $plugin_url . $override_css_path . '" id="ca-admin-override">'
     );
 
-    // === 3. INJECTION ATTRIBUT THÈME ===
+    // === 3. CSS PERSONNALISÉ UTILISATEUR ===
+    if (!empty($conf['centralAdmin']['custom_css']['code'])) {
+        $template->append('head_elements',
+            '<style id="ca-custom-css">' . 
+            $conf['centralAdmin']['custom_css']['code'] . 
+            '</style>'
+        );
+    }
+
+    // === 4. INJECTION ATTRIBUT THÈME ===
     $themeDetector->injectThemeAttribute($template);
 });

@@ -86,8 +86,11 @@ if (document.getElementById('central-admin-vars-preview')) {
     {* 4. Section Paramètres Avancés *}
     {include file=$A04_ADVANCED_PARAMS_SECTION_TPL}
 
-    {* 5. Section Debug (nouveau fichier séparé) *}
-    {include file=$A05_DEBUG_SECTION_TPL}
+    {* 5. Section CSS Personnalisé *}
+    {include file=$A05_CUSTOM_CSS_SECTION_TPL}
+
+    {* 5. Section Debug *}
+    {include file=$A10_DEBUG_SECTION_TPL}
     
     {* Lien crédits *}
     <div style="text-align: right; margin-bottom: 10px; padding-right: 5px;">

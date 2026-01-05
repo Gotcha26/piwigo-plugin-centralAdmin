@@ -117,6 +117,16 @@ if (isset($_POST['save'])) {
             $newData['user_modifications'][$current_scheme] = $userModifications;
         }
     }
+
+    // Custom CSS
+    if (isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
+        // Backup automatique de l'ancienne version
+        if (!empty($centralAdmin['custom_css']['code'])) {
+            $newData['custom_css']['backup'] = $centralAdmin['custom_css']['code'];
+        }
+        // Nouvelle saisie
+        $newData['custom_css']['code'] = trim($_POST['custom_css']['code']);
+    }
     
     // Sauvegarder
     if ($configManager->save($newData)) {
@@ -146,6 +156,26 @@ if (isset($_POST['reset'])) {
     $centralAdmin = $newConfig;
     
     $page['infos'][] = l10n('configuration_reset');
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+}
+
+if (isset($_POST['restore_css'])) {
+    if (!empty($centralAdmin['custom_css']['backup'])) {
+        $newData = array(
+            'custom_css' => array(
+                'code' => $centralAdmin['custom_css']['backup'],
+                'backup' => $centralAdmin['custom_css']['code'],
+            ),
+        );
+        
+        if ($configManager->save($newData)) {
+            $page['infos'][] = l10n('custom_css_restored');
+            $centralAdmin = $configManager->getCurrent();
+        }
+    } else {
+        $page['errors'][] = l10n('custom_css_no_backup');
+    }
+    
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
@@ -251,7 +281,8 @@ $template->assign(array(
     'A02_THEME_COLORS_TPL' => dirname(__FILE__) . '/sections/A02_theme_colors.tpl',
     'A03_EIW_COLORS_TPL' => dirname(__FILE__) . '/sections/A03_eiw_colors.tpl',
     'A04_ADVANCED_PARAMS_SECTION_TPL' => dirname(__FILE__) . '/sections/A04_advanced_params.tpl',
-    'A05_DEBUG_SECTION_TPL' => dirname(__FILE__) . '/sections/A05_debug.tpl',
+    'A05_CUSTOM_CSS_SECTION_TPL' => dirname(__FILE__) . '/sections/A05_custom_css.tpl',
+    'A10_DEBUG_SECTION_TPL' => dirname(__FILE__) . '/sections/A10_debug.tpl',
 
     // CSS dynamique
     'dynamic_css' => $dynamicCSS,
