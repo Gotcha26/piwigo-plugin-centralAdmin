@@ -1,10 +1,11 @@
 <?php
 /*
 Plugin Name: Central Admin CSS
-Description: Centrage de toute l'administration sur une colonne maximum de 1600px.
-             Tient compte de la couleur (clair / obscur).
-             Injecte des feuilles CSS personnalisées uniquement.
-Version: 3.2.1
+Description: Center all admin elements within a single column of up to 1600px.
+             Accepts color (light/dark).
+             Injects only custom CSS stylesheets.
+Plugin URI: https://fr.piwigo.org/ext/index.php?eid=1058
+Version: 3.2.2
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
