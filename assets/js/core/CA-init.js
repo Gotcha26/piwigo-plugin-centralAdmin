@@ -30,6 +30,12 @@
       CAFormPreview.init();
       console.log('[CentralAdmin] ✓ Prévisualisation initialisée');
     }
+
+    // Initialiser les tooltips intelligents
+    if (typeof CATooltips !== 'undefined') {
+      CATooltips.init();
+      console.log('[CentralAdmin] ✓ Tooltips intelligents initialisés');
+    }
     
     // Initialiser le module modal
     if (typeof CAModal !== 'undefined') {

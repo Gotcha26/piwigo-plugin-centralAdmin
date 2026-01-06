@@ -27,6 +27,7 @@ const JS_FILES = [
   'form/CA-form-colors.js',
   'form/CA-form-controls.js',
   'form/CA-form-preview.js',
+  'form/CA-form-tooltips.js',
   'modules/CA-debug.js',
   'modules/CA-modal.js'
 ];

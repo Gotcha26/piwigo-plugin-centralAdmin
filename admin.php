@@ -213,6 +213,7 @@ $CA_INIT_JS = $plugin_path . ca_asset('assets/js/core/CA-init.js');
 $CA_FORM_CONTROLS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-controls.js');
 $CA_FORM_COLORS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-colors.js');
 $CA_FORM_PREVIEW_JS = $plugin_path . ca_asset('assets/js/form/CA-form-preview.js');
+$CA_FORM_TOOLTIPS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-tooltips.js');
 
 // JS Modules
 $CA_DEBUG_JS = $plugin_path . ca_asset('assets/js/modules/CA-debug.js');
@@ -271,6 +272,7 @@ $template->assign(array(
     'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
     'CA_FORM_COLORS_JS' => $CA_FORM_COLORS_JS,
     'CA_FORM_PREVIEW_JS' => $CA_FORM_PREVIEW_JS,
+    'CA_FORM_TOOLTIPS_JS' => $CA_FORM_TOOLTIPS_JS,
 
     // JS - Modules
     'CA_DEBUG_JS' => $CA_DEBUG_JS,
