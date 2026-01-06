@@ -144,7 +144,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   margin-bottom: 16px;
-  overflow: hidden;
+  overflow: visible;
   transition: all 0.3s ease;
 }
 
@@ -213,6 +213,7 @@
   padding: 20px;
   border-top: 1px solid #e9ecef;
   overflow: visible;
+  position: relative;
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -280,6 +281,7 @@
   position: relative;
   display: inline-block;
   margin-left: 6px;
+  vertical-align: middle;
 }
 
 .ca-help {
@@ -320,6 +322,8 @@
 
 .help-tooltip {
   position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
   z-index: 999999;
   
   background: #333;
@@ -337,14 +341,14 @@
   
   display: none;
   opacity: 0;
-  transform: scale(0.95);
+  transform: translateY(-5px);
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .help-tooltip.ca-tooltip-visible {
   display: block;
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 
 /* === CONTRÔLES DES CHAMPS === */
