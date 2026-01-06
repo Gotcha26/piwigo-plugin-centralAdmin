@@ -115,15 +115,16 @@ if (document.getElementById('central-admin-vars-preview')) {
 
 {* === JAVASCRIPT - Ordre d'exécution important === *}
 
-{* 1. Core - Détection thème (doit être en premier) [OBSOLETE sur DOM, PHP était la solution] *}
-
-{* 2. Modules - Debug (avant form pour être disponible) *}
+{* 1. Modules - Debug (avant form pour être disponible) *}
 <script src="{$CA_DEBUG_JS}"></script>
 
-{* 3. Form - Contrôles et couleurs *}
+{* 2. Form - Contrôles et couleurs *}
 <script src="{$CA_FORM_CONTROLS_JS}"></script>
 <script src="{$CA_FORM_COLORS_JS}"></script>
 <script src="{$CA_FORM_PREVIEW_JS}"></script>
+
+{* 3. Form - Tooltips intelligents *}
+<script src="{$CA_FORM_TOOLTIPS_JS}"></script>
 
 {* 4. Modules - Modal *}
 <script src="{$CA_MODAL_JS}"></script>
