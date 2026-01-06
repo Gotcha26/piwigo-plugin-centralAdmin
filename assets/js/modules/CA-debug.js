@@ -95,32 +95,34 @@ const CADebug = (function() {
    * @returns {Object} Informations sur le thème détecté
    */
   function detectTheme() {
-    // Lire la valeur PHP
-    const phpDetectedScheme = document.body.getAttribute('data-ca-theme') || 'clear';
+    // Lire la valeur PHP injectée
+    const phpDetectedScheme = document.body.getAttribute('data-ca-theme') || 
+                              document.documentElement.getAttribute('data-ca-theme') || 
+                              'clear';
     
-    // Détection JS/CSS
-    let jsDetectedScheme = 'clear';
-    const htmlClasses = document.documentElement.className;
-    const bodyClasses = document.body.className;
+    // Vérifier la classe CSS appliquée
+    const hasThemeClass = document.body.classList.contains('ca-piwigo-theme-' + phpDetectedScheme);
     
-    if (htmlClasses.includes('theme-roma') || bodyClasses.includes('theme-roma')) {
-      jsDetectedScheme = 'dark';
-    } else if (htmlClasses.includes('theme-clear') || bodyClasses.includes('theme-clear')) {
-      jsDetectedScheme = 'clear';
-    } else {
-      const bgColor = window.getComputedStyle(document.body).backgroundColor;
-      if (bgColor === 'rgb(0, 0, 0)' || bgColor === 'rgb(17, 17, 17)') {
-        jsDetectedScheme = 'dark';
-      }
-    }
+    // Récupérer les infos PHP si disponibles
+    const phpDebugData = window.caThemeDebugPHP || {};
     
     const themeInfo = {
+      // Détection finale
       php: phpDetectedScheme,
-      js: jsDetectedScheme,
-      htmlClasses: htmlClasses || 'aucune',
-      bodyClasses: bodyClasses || 'aucune',
-      bgColor: window.getComputedStyle(document.body).backgroundColor,
-      concordance: phpDetectedScheme === jsDetectedScheme,
+      hasThemeClass: hasThemeClass,
+      
+      // Infos PHP enrichies
+      detection_method: phpDebugData.detection_method || 'unknown',
+      admin_theme_value: phpDebugData.admin_theme_value || phpDetectedScheme,
+      raw_value: phpDebugData.raw_value || phpDetectedScheme,
+      is_roma: phpDebugData.is_roma || false,
+      is_clear: phpDebugData.is_clear || (phpDetectedScheme === 'clear'),
+      normalized: phpDebugData.normalized || (phpDetectedScheme + ' → ' + phpDetectedScheme),
+      
+      // Validations
+      attributePresent: !!document.body.getAttribute('data-ca-theme'),
+      classPresent: hasThemeClass,
+      allOk: !!document.body.getAttribute('data-ca-theme') && hasThemeClass,
     };
     
     log('Thème détecté', themeInfo);

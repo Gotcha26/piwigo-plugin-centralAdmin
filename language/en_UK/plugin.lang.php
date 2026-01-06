@@ -103,15 +103,11 @@ $lang['plugin_internal_version'] = 'Plugin version:';
 $lang['verification_'] = 'Checking...';
 
 // == DEBUG - THEME DETECTION ==
-$lang['spectrum_suspending'] = 'Removed (native v2.9+)';
 $lang['theme_detection_php'] = 'Theme Detection (Server-side - PHP)';
-$lang['theme_detection_js'] = 'Theme Detection (Client-side - JavaScript) [OBSOLETE]';
-$lang['detection_method'] = 'Detection method';
-$lang['raw_value_userprefs'] = 'Raw value (database)';
-$lang['normalized_value'] = 'Normalized value';
-$lang['theme_applied'] = 'Final applied theme';
-$lang['is_roma_check'] = 'Is it Roma theme (dark)?';
-$lang['is_clear_check'] = 'Is it Clear theme (light)?';
+$lang['debug_detection_method'] = 'Detection method';
+$lang['debug_piwigo_theme'] = 'Piwigo theme';
+$lang['debug_normalized'] = 'Normalization';
+$lang['debug_final_theme'] = 'Final applied theme';
 
 // == DEBUG - JS DETECTION ==
 $lang['js_detected_scheme'] = 'Detected scheme (JavaScript)';

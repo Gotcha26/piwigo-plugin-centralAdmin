@@ -225,6 +225,11 @@ $CA_MODAL_JS = $plugin_path . ca_asset('assets/js/modules/CA-modal.js');
 
 $themeDetector->injectThemeAttribute($template);
 
+// Exposer les infos debug APRÈS l'injection du thème
+$template->append('head_elements', 
+    '<script>window.caThemeDebugPHP = ' . json_encode($themeDetector->getDebugInfo()) . ';</script>'
+);
+
 // ====================================
 // TRANSMISSION AU TEMPLATE
 // ====================================

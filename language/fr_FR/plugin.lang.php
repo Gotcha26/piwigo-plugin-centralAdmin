@@ -150,15 +150,11 @@ $lang['plugin_internal_version'] = 'Version du plugin :';
 $lang['verification_'] = 'Vérification en cours...';
 
 // == DEBUG - DÉTECTION THÈME ==
-$lang['spectrum_suspending'] = 'Retiré (natif v2.9+)';
 $lang['theme_detection_php'] = 'Détection du thème (côté serveur - PHP)';
-$lang['theme_detection_js'] = 'Détection du thème (côté client - JavaScript) [OBSOLETE]';
-$lang['detection_method'] = 'Méthode de détection';
-$lang['raw_value_userprefs'] = 'Valeur brute (base de données)';
-$lang['normalized_value'] = 'Valeur normalisée';
-$lang['theme_applied'] = 'Thème final appliqué';
-$lang['is_roma_check'] = 'Est-ce le thème Roma (sombre) ?';
-$lang['is_clear_check'] = 'Est-ce le thème Clear (clair) ?';
+$lang['debug_detection_method'] = 'Méthode de détection';
+$lang['debug_piwigo_theme'] = 'Thème Piwigo';
+$lang['debug_normalized'] = 'Normalisation';
+$lang['debug_final_theme'] = 'Thème final appliqué';
 
 // == DEBUG - DÉTECTION JS ==
 $lang['js_detected_scheme'] = 'Schéma détecté (JavaScript)';
