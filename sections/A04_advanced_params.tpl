@@ -3,7 +3,7 @@
    Paramètres techniques de mise en page
    ================================================ *}
 
-<div class="ca-section" data-section="advanced-params">
+<div class="ca-section" data-section="advanced-params" data-section-id="advanced-params">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">⚙️</span>

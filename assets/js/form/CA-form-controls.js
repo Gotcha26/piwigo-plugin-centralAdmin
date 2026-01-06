@@ -63,10 +63,36 @@ const CAFormControls = (function() {
   function initAccordions() {
     const sections = document.querySelectorAll('.ca-section');
     
+    // Restaurer l'état des sections depuis localStorage
+    sections.forEach(function(section) {
+      const sectionId = section.getAttribute('data-section-id');
+      if (!sectionId) return;
+      
+      const savedState = localStorage.getItem('ca-section-' + sectionId);
+      const toggle = section.querySelector('.ca-toggle');
+      const content = section.querySelector('.ca-section-content');
+      
+      if (savedState === 'open' && toggle && content) {
+        toggle.setAttribute('aria-expanded', 'true');
+        content.style.display = 'block';
+        content.style.maxHeight = '2000px';
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
+        
+        // Réinitialiser les tooltips après ouverture
+        setTimeout(function() {
+          if (typeof CATooltips !== 'undefined' && CATooltips.initSection) {
+            CATooltips.initSection(content);
+          }
+        }, 100);
+      }
+    });
+    
     sections.forEach(function(section) {
       const header = section.querySelector('.ca-section-header');
       const toggle = section.querySelector('.ca-toggle');
       const content = section.querySelector('.ca-section-content');
+      const sectionId = section.getAttribute('data-section-id');
       
       if (!header || !toggle || !content) return;
 
@@ -81,6 +107,7 @@ const CAFormControls = (function() {
             if (otherSection !== section) {
               const otherToggle = otherSection.querySelector('.ca-toggle');
               const otherContent = otherSection.querySelector('.ca-section-content');
+              const otherSectionId = otherSection.getAttribute('data-section-id');
               
               if (otherToggle && otherContent && otherToggle.getAttribute('aria-expanded') === 'true') {
                 otherToggle.setAttribute('aria-expanded', 'false');
@@ -90,6 +117,12 @@ const CAFormControls = (function() {
                 otherContent.style.paddingTop = '0';
                 otherContent.style.paddingBottom = '0';
                 otherContent.style.borderTopWidth = '0';
+                
+                // Sauvegarder l'état fermé
+                if (otherSectionId) {
+                  localStorage.setItem('ca-section-' + otherSectionId, 'closed');
+                }
+                
                 setTimeout(function() {
                   if (otherToggle.getAttribute('aria-expanded') === 'false') {
                     otherContent.style.display = 'none';
@@ -109,6 +142,12 @@ const CAFormControls = (function() {
           content.style.paddingTop = '0';
           content.style.paddingBottom = '0';
           content.style.borderTopWidth = '0';
+          
+          // Sauvegarder l'état fermé
+          if (sectionId) {
+            localStorage.setItem('ca-section-' + sectionId, 'closed');
+          }
+          
           setTimeout(function() {
             if (toggle.getAttribute('aria-expanded') === 'false') {
               content.style.display = 'none';
@@ -124,11 +163,22 @@ const CAFormControls = (function() {
           content.style.maxHeight = '2000px';
           content.style.opacity = '1';
           content.style.transform = 'translateY(0)';
+          
+          // Sauvegarder l'état ouvert
+          if (sectionId) {
+            localStorage.setItem('ca-section-' + sectionId, 'open');
+          }
+          
+          // Réinitialiser les tooltips après ouverture
+          setTimeout(function() {
+            if (typeof CATooltips !== 'undefined' && CATooltips.initSection) {
+              CATooltips.initSection(content);
+            }
+          }, 100);
         }
       });
     });
-  }
-  
+  }  
   /**
    * Initialise les verrous (lock/unlock)
    */
