@@ -71,6 +71,9 @@ add_event_handler('loc_begin_admin_page', function () {
     // Récupérer le schéma actif
     $scheme = $themeDetector->getTheme();
 
+    // === INJECTION DU THÈME (CRITIQUE POUR CSS) ===
+    $themeDetector->injectThemeAttribute($template);
+
     // URL de base du plugin
     $plugin_url = get_root_url() . 'plugins/centralAdmin/';
     
