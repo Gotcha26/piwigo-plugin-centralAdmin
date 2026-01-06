@@ -282,17 +282,3 @@ const CADebug = (function() {
     displaySummary: displaySummary,
   };
 })();
-
-// Auto-initialisation si dans le contexte CentralAdmin
-if (document.body.classList.contains('centralAdmin-container') || 
-    document.querySelector('.centralAdmin-container')) {
-  document.addEventListener('DOMContentLoaded', function() {
-    CADebug.init({ enableConsoleLog: true });
-    CADebug.detectTheme();
-    
-    // Attendre un peu pour que tout soit chargé
-    setTimeout(() => {
-      CADebug.populateDOM();
-    }, 100);
-  });
-}
