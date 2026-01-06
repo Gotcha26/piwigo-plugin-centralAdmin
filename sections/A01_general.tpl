@@ -3,7 +3,7 @@
    Paramètres principaux uniquement
    ================================================ *}
 
-<div class="ca-section ca-section-active" data-section="layout">
+<div class="ca-section ca-section-active" data-section-id="general" data-section="layout">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">📐</span>

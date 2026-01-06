@@ -290,7 +290,7 @@
   height: 18px;
   border-radius: 50%;
   font-size: 12px;
-  cursor: help;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -301,7 +301,11 @@
 
 .ca-help:hover {
   background: #5a6268;
-  transform: scale(1.1);
+  transform: scale(1.15);
+}
+
+.ca-help:active {
+  transform: scale(0.95);
 }
 
 .ca-help[title] {
@@ -315,43 +319,32 @@
 }
 
 .help-tooltip {
-  position: fixed;
+  position: absolute;
   z-index: 999999;
   
   background: #333;
   color: #fff;
-  padding: .4em .6em;
-  border-radius: .3em;
-  font-size: .9em;
-  line-height: 1.4;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.5;
   text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
   min-width: 220px;
   max-width: 320px;
   white-space: pre-line;
   
+  display: none;
   opacity: 0;
-  visibility: hidden;
-  pointer-events: auto;
-  transform: translate3d(0, -5px, 0);
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  
-  transition:
-    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    visibility 0.35s;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.ca-help-container:hover .help-tooltip {
+.help-tooltip.ca-tooltip-visible {
+  display: block;
   opacity: 1;
-  visibility: visible;
-  transform: translate3d(0, 0, 0);
-}
-
-.help-tooltip:hover {
-  opacity: 1;
-  visibility: visible;
+  transform: scale(1);
 }
 
 /* === CONTRÔLES DES CHAMPS === */
