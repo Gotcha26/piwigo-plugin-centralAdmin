@@ -36,11 +36,9 @@ const CAFormControls = (function() {
         if (browserThemeCheckbox.checked) {
           document.body.classList.add('ca-browser-theme');
           localStorage.setItem('ca-use-browser-theme', 'true');
-          console.log('[CA Controls] Thème navigateur activé');
         } else {
           document.body.classList.remove('ca-browser-theme');
           localStorage.setItem('ca-use-browser-theme', 'false');
-          console.log('[CA Controls] Thème navigateur désactivé');
         }
       });
     }
