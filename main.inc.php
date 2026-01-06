@@ -4,7 +4,7 @@ Plugin Name: Central Admin CSS
 Description: Center all admin elements within a single column of up to 1600px.
              Accepts color (light/dark).
              Injects only custom CSS stylesheets.
-Plugin URI: https://fr.piwigo.org/ext/index.php?eid=1058
+Plugin URI: https://piwigo.org/ext/extension_view.php?eid=1058
 Version: 3.3.0
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
