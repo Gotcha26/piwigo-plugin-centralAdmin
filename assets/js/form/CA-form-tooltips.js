@@ -85,49 +85,12 @@ const CATooltips = (function() {
   }
   
   function positionTooltip(trigger, tooltip) {
-    const rect = trigger.getBoundingClientRect();
-    
-    // Forcer le display pour obtenir les dimensions réelles
-    tooltip.style.display = 'block';
-    tooltip.style.visibility = 'hidden';
-    
-    const tooltipWidth = tooltip.offsetWidth;
-    const tooltipHeight = tooltip.offsetHeight;
-    
-    tooltip.style.visibility = '';
-    
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    
-    // Position par défaut : en dessous du bouton
-    let top = rect.bottom + scrollTop + 8;
-    let left = rect.left + scrollLeft;
-    
-    // Ajustement horizontal si débordement à droite
-    if (left + tooltipWidth > viewportWidth + scrollLeft - 10) {
-      left = viewportWidth + scrollLeft - tooltipWidth - 10;
-    }
-    
-    // Ajustement horizontal si débordement à gauche
-    if (left < scrollLeft + 10) {
-      left = scrollLeft + 10;
-    }
-    
-    // Ajustement vertical si débordement en bas
-    if (top + tooltipHeight > viewportHeight + scrollTop - 10) {
-      // Afficher au-dessus du bouton
-      top = rect.top + scrollTop - tooltipHeight - 8;
-    }
-    
-    // Si toujours pas assez de place en haut, forcer en bas avec scroll possible
-    if (top < scrollTop + 10) {
-      top = rect.bottom + scrollTop + 8;
-    }
-    
-    tooltip.style.top = top + 'px';
-    tooltip.style.left = left + 'px';
+    // Reset des styles pour positionnement naturel
+    tooltip.style.top = '';
+    tooltip.style.left = '';
+    tooltip.style.right = '';
+    tooltip.style.bottom = '';
+    tooltip.style.transform = '';
   }
   
   return {
