@@ -63,7 +63,6 @@ const CAFormColors = (function() {
       });
     });
     
-    console.log('[CA Colors] Color pickers natifs initialisés:', colorPickers.length);
   }
   
   // API publique

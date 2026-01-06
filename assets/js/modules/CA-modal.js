@@ -96,7 +96,6 @@ const CAModal = (function() {
       });
     });
     
-    console.log('[CA Modal] Modale crédits initialisée');
   }
   
   // API publique

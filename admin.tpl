@@ -8,14 +8,6 @@
 {$dynamic_css}
 </style>
 
-{* DEBUG : Vérifier l'injection *}
-<script>
-console.log('[CentralAdmin] Style tag chargé:', document.getElementById('central-admin-vars-preview') ? 'OUI' : 'NON');
-if (document.getElementById('central-admin-vars-preview')) {
-  console.log('[CentralAdmin] Contenu CSS initial:', document.getElementById('central-admin-vars-preview').textContent.substring(0, 200));
-}
-</script>
-
 {* === CSS CORE === *}
 <link rel="stylesheet" href="{$CA_ADMIN_OVERRIDE_CSS}">
 <link rel="stylesheet" href="{$CA_COLORS_UNIFIED_CSS}">

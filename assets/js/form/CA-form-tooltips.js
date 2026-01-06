@@ -19,7 +19,6 @@ const CATooltips = (function() {
       }
     });
     
-    console.log('[CA Tooltips] Tooltips au clic initialisés');
   }
   
   function initAllTooltips() {
@@ -37,7 +36,6 @@ const CATooltips = (function() {
       initTooltip(help);
     });
     
-    console.log('[CA Tooltips] Section réinitialisée:', helps.length, 'tooltips');
   }
   
   function initTooltip(help) {
