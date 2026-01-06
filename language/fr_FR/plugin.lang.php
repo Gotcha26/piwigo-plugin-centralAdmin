@@ -15,19 +15,11 @@ $lang['credits'] = 'Crédits';
 $lang['configuration_saved'] = 'Configuration enregistrée avec succès 👍';
 $lang['configuration_reset'] = 'Configuration réinitialisée aux valeurs par défaut';
 $lang['configuration_reset_error'] = 'Erreur lors de la réinitialisation de la configuration';
-$lang['scheme_switch_warning'] = 'Attention : vous avez changé de thème';
-$lang['user_modifications_preserved'] = 'Vos modifications pour le thème {scheme} ont été préservées';
-$lang['reset_current_scheme_only'] = 'Réinitialiser uniquement le thème actuel';
 
 // == SECTIONS ==
-$lang['central_admin_layout'] = 'Paramètres de mise en page';
-$lang['central_admin_tooltips'] = 'Couleurs des info-bulles';
-$lang['central_admin_scheme_clear'] = 'Couleurs spécifiques au thème actuel : clair';
-$lang['central_admin_scheme_dark'] = 'Couleurs spécifiques au thème actuel : sombre';
 $lang['debug_infos_area'] = 'Informations de débogage';
 
 // == ÉTATS ==
-$lang['central_admin_unlocked'] = 'Paramètre déverrouillé';
 $lang['central_admin_locked'] = 'Paramètre verrouillé';
 
 // == OPTIONS HEADER ==
@@ -76,20 +68,6 @@ $lang['hide_quick_sync_button'] = 'Masquer le bouton de synchronisation rapide';
 $lang['hide_quick_sync_button_tp'] = 
   "Masque le bouton « Créer un album » sur la page de synchronisation.\n"
 . "Utile pour une interface plus épurée.";
-
-// == UNIFIED COLORS SECTION ==
-$lang['central_admin_colors_by_theme'] = 'Colors by Theme';
-$lang['active_theme_info'] = 'Active theme:';
-$lang['theme_preview_note'] = 'Real-time preview only works on the active theme. Colors of the other theme can be modified but will only be visible after switching themes.';
-$lang['theme_clear_title'] = 'Light Theme';
-$lang['theme_dark_title'] = 'Dark Theme';
-$lang['active'] = 'Active';
-
-// == COMMON COLORS (simplified) ==
-$lang['bg_global'] = 'Global background';
-$lang['bg_content2'] = 'Header background';
-$lang['bg_content1'] = 'Main content background';
-$lang['bg_content3'] = 'Secondary background';
 
 // == SECTION COULEURS UNIFIÉE ==
 $lang['central_admin_colors_by_theme'] = 'Couleurs par thème';
@@ -156,53 +134,17 @@ $lang['debug_piwigo_theme'] = 'Thème Piwigo';
 $lang['debug_normalized'] = 'Normalisation';
 $lang['debug_final_theme'] = 'Thème final appliqué';
 
-// == DEBUG - DÉTECTION JS ==
-$lang['js_detected_scheme'] = 'Schéma détecté (JavaScript)';
-$lang['html_classes'] = 'Classes CSS de <html>';
-$lang['body_classes'] = 'Classes CSS de <body>';
-$lang['body_bgcolor'] = 'Couleur de fond de <body>';
-$lang['php_js_concordance'] = 'Concordance PHP/JS';
-
-// == DEBUG - INFOS COMPLÉMENTAIRES ==
-$lang['additional_info'] = 'Informations complémentaires';
-$lang['gallery_theme'] = 'Thème de la galerie publique';
-
-// == DEBUG - FICHIERS ==
-$lang['files_charged'] = 'Fichiers CSS et JavaScript chargés';
-$lang['css_principal'] = 'CSS principal :';
-$lang['css_rebuild'] = 'CSS rebuild (structure) :';
-$lang['css_form'] = 'CSS formulaire :';
-$lang['css_admin_theme'] = 'CSS thème admin :';
-$lang['css_spectrum'] = 'Spectrum CSS :';
-$lang['spectrum_js'] = 'Spectrum JavaScript :';
-$lang['js_form'] = 'JavaScript formulaire :';
-$lang['js_preview'] = 'JavaScript prévisualisation :';
-
 // == DEBUG - CONSOLE ==
 $lang['browser_console'] = 'Console du navigateur';
 $lang['open_console_f12'] = 'Ouvrez les outils de développement (F12) > Console pour voir les détails de la détection du thème et du chargement des composants.';
 
-// == NOUVELLE SECTION : DEMANDE D'AIDE ==
+// == DEMANDE D'AIDE ==
 $lang['help_section_title'] = 'Demande d\'aide relative au plugin';
 $lang['help_section_description'] = 'Besoin d\'aide ou vous souhaitez signaler un problème ? Consultez les ressources suivantes :';
 $lang['help_link_wiki'] = 'Documentation Wiki';
 $lang['help_link_forum'] = 'Forum de discussion';
 $lang['help_link_issues'] = 'Signaler un bug ou suggérer une amélioration';
 $lang['help_link_documentation'] = 'Documentation technique complète';
-
-// == PRÉVISUALISATION ==
-$lang['css_vars_injected'] = 'Variables CSS injectées';
-$lang['css_preview_active'] = 'Prévisualisation en temps réel active';
-$lang['css_applying_scheme'] = 'Application du schéma : {scheme}';
-$lang['color_preview_active'] = 'Prévisualisation des couleurs active';
-$lang['color_updated_realtime'] = 'Couleur mise à jour en temps réel';
-
-// == MODALE CRÉDITS ==
-$lang['credits_modal_title'] = 'Crédits - centralAdmin';
-$lang['version_number'] = 'Version';
-$lang['jquery_not_loaded'] = 'jQuery non chargé';
-$lang['jquery_confirm_available'] = 'jQuery Confirm disponible';
-$lang['credits_loading_error'] = 'Impossible de charger les crédits';
 
 // == SECTIONS RÉORGANISÉES ==
 $lang['central_admin_general'] = 'Général';
