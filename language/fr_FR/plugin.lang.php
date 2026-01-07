@@ -163,3 +163,8 @@ $lang['custom_css_placeholder'] = 'Saisissez votre code CSS ici...';
 $lang['custom_css_restore'] = 'Restaurer backup';
 $lang['custom_css_restored'] = 'CSS restauré depuis le backup';
 $lang['custom_css_no_backup'] = 'Aucun backup disponible';
+
+// == Onglets ==
+$lang['ca_tab_global'] = 'Global';
+$lang['ca_tab_reserved'] = 'Réservé';
+$lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
