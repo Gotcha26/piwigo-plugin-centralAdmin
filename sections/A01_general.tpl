@@ -3,18 +3,18 @@
    Paramètres principaux uniquement
    ================================================ *}
 
-<div class="ca-section ca-section-active" data-section-id="general" data-section="layout">
+<div class="ca-section" data-section-id="general" data-section="layout">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">📐</span>
       {'central_admin_general'|@translate}
     </h3>
-    <button type="button" class="ca-toggle" aria-expanded="true">
+    <button type="button" class="ca-toggle" aria-expanded="false">
       <span class="ca-chevron">▼</span>
     </button>
   </div>
   
-  <div class="ca-section-content">
+  <div class="ca-section-content" style="display: none;">
     
     {* Largeur admin *}
     <div class="ca-field">
