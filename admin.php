@@ -13,6 +13,15 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
+// Langue avec fallback
+global $user;
+$plugin_dir = dirname(__FILE__) . '/';
+$user_lang = $user['language'];
+
+if (!load_language('plugin.lang', $plugin_dir, array('language' => $user_lang, 'no_fallback' => true))) {
+    load_language('plugin.lang', $plugin_dir, array('language' => 'en_UK'));
+}
+
 global $template, $conf, $page, $user;
 
 // ====================================
