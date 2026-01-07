@@ -11,6 +11,7 @@
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
 // Langue avec fallback
@@ -86,6 +87,22 @@ $themeDetector = new CA_ThemeDetector();
 // Récupérer la configuration et le thème
 $centralAdmin = $configManager->getCurrent();
 $current_scheme = $themeDetector->getTheme();
+
+// ====================================
+// GESTION DES ONGLETS
+// ====================================
+
+if (!isset($_GET['tab'])) {
+    $page['tab'] = 'global';
+} else {
+    $page['tab'] = $_GET['tab'];
+}
+
+$tabsheet = new tabsheet();
+$tabsheet->add('global', l10n('ca_tab_global'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=global');
+$tabsheet->add('reserved', l10n('ca_tab_reserved'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=reserved');
+$tabsheet->select($page['tab']);
+$tabsheet->assign();
 
 // ====================================
 // TRAITEMENT DU FORMULAIRE
@@ -254,6 +271,9 @@ $template->assign(array(
 
     // Couleurs fusionnées pour le schéma actif
     'active_scheme_colors' => $configManager->getMergedColors($current_scheme),
+
+    // Onglet actif
+    'current_tab' => $page['tab'],
 
     // Debug thème
     'theme_debug' => array_merge(
