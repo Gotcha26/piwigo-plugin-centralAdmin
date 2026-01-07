@@ -424,6 +424,36 @@
   background: linear-gradient(135deg, #7f8c8d, #6c7a7b);
 }
 
+/* === BARRE D'ACTIONS FIXE === */
+.savebar-footer {
+  position: fixed;
+  bottom: 0;
+  left: calc(max(0px, (100vw - var(--ca-layout-admin-width)) / 2) + var(--ca-layout-menubar-width));
+  width: calc(min(100vw, var(--ca-layout-admin-width)) - var(--ca-layout-menubar-width) - 40px);
+  background: linear-gradient(to top, #fff 0%, #fff 85%, transparent 100%);
+  padding: 20px 20px 15px 20px;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #e9ecef;
+}
+
+.savebar-footer .ca-actions {
+  border-top: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Espacement en bas du formulaire pour éviter chevauchement */
+.ca-form {
+  padding-bottom: 100px;
+}
+
+/* Thème dark */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .savebar-footer {
+  background: linear-gradient(to top, #3a3a3a 0%, #3a3a3a 85%, transparent 100%);
+  border-top-color: #555;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .ca-field-controls {
