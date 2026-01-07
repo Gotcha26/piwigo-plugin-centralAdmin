@@ -144,3 +144,8 @@ $lang['custom_css_placeholder'] = 'Enter your CSS code here...';
 $lang['custom_css_restore'] = 'Restore backup';
 $lang['custom_css_restored'] = 'CSS restored from backup';
 $lang['custom_css_no_backup'] = 'No backup available';
+
+// == Tabs ==
+$lang['ca_tab_global'] = 'Global';
+$lang['ca_tab_reserved'] = 'Reserved';
+$lang['ca_reserved_tab_message'] = 'Space reserved for future features';
