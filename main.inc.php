@@ -13,6 +13,20 @@ Has Settings: webmaster
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+/* ==================================================
+ * CHARGEMENT LANGUE PAR DEFAUT (en_UK)
+ * Surcharge à appliquer dans admin.php juste AVANT
+ * la transmission au template !
+ * ================================================== */
+
+$plugin_dir = PHPWG_PLUGINS_PATH.'centralAdmin/';
+
+load_language('plugin.lang', $plugin_dir, array('language' => 'en_UK', 'no_fallback' => true));
+
+/* ==================================================
+ * SUITE
+ * ================================================== */
+
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
 add_event_handler('init', 'central_admin_init');
@@ -24,16 +38,6 @@ add_event_handler('init', 'central_admin_init');
 function central_admin_init()
 {
     global $conf, $user;
-
-    // Langue avec fallback en_UK
-    $plugin_dir = PHPWG_PLUGINS_PATH.'centralAdmin/';
-    $user_lang = $user['language'];
-    
-    // Tenter de charger la langue utilisateur
-    if (!load_language('plugin.lang', $plugin_dir, array('language' => $user_lang, 'no_fallback' => true))) {
-        // Fallback vers en_UK si langue utilisateur absente
-        load_language('plugin.lang', $plugin_dir, array('language' => 'en_UK'));
-    }
 
     // Chargement des classes
     require_once(__DIR__ . '/includes/class.config-manager.php');
