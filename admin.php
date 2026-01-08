@@ -14,15 +14,6 @@ defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
-// Langue avec fallback
-global $user;
-$plugin_dir = dirname(__FILE__) . '/';
-$user_lang = $user['language'];
-
-if (!load_language('plugin.lang', $plugin_dir, array('language' => $user_lang, 'no_fallback' => true))) {
-    load_language('plugin.lang', $plugin_dir, array('language' => 'en_UK'));
-}
-
 global $template, $conf, $page, $user;
 
 // ====================================
@@ -243,6 +234,19 @@ $CA_FORM_TOOLTIPS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-tooltips.
 // JS Modules
 $CA_DEBUG_JS = $plugin_path . ca_asset('assets/js/modules/CA-debug.js');
 $CA_MODAL_JS = $plugin_path . ca_asset('assets/js/modules/CA-modal.js');
+
+// ====================================
+// CHARGEMENT DE LA LANGUE ADMINISTRATION
+// ====================================
+
+load_language(
+  'plugin.lang',
+  PHPWG_PLUGINS_PATH.'centralAdmin/',
+  array(
+    'language' => $user['language'],
+    'no_fallback' => true,
+  )
+);
 
 // ====================================
 // INJECTION DU THÈME
