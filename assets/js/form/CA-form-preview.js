@@ -20,27 +20,21 @@
   }
 
   function initPreview() {
-      console.log('[CentralAdmin Preview] Initialisation...');
       
       // Récupérer la balise <style> existante
       let styleTag = document.getElementById('central-admin-vars-preview');
       
       if (!styleTag) {
-        console.error('[CentralAdmin Preview] ❌ Style tag introuvable !');
-        console.log('[CentralAdmin Preview] Création du style tag...');
         styleTag = document.createElement('style');
         styleTag.id = 'central-admin-vars-preview';
         document.head.appendChild(styleTag);
       } else {
-        console.log('[CentralAdmin Preview] ✅ Style tag trouvé');
-        console.log('[CentralAdmin Preview] Contenu actuel:', styleTag.textContent.substring(0, 150));
       }
 
       // Initialiser la prévisualisation pour tous les champs
       initLayoutPreview();
       initColorPreview();
       
-      console.log('[CentralAdmin Preview] ✅ Prévisualisation initialisée');
   }
 
   /* ================================================
@@ -142,7 +136,6 @@
     PRÉVISUALISATION COULEURS
     ================================================ */
   function initColorPreview() {
-    console.log('[CentralAdmin Preview] Initialisation preview couleurs...');
     
     // ===== CLEAR COLORS (backgrounds + tooltips) =====
     const clearColors = [
@@ -169,13 +162,11 @@
       const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
       
       if (textInput) {
-        console.log('[Preview] ✅ Clear color trouvé:', inputId, '→ CSS var:', cssVar);
         
         textInput.addEventListener('color-change', function(e) {
           if (!textInput.disabled) {
             const hexValue = e.detail.color;
             updateCSSVariable(cssVar, hexValue);
-            console.log('[Preview] Couleur clear mise à jour:', colorName, '=', hexValue);
           }
         });
       } else {
@@ -208,13 +199,11 @@
       const cssVar = '--ca-color-' + colorName.replace(/_/g, '-');
       
       if (textInput) {
-        console.log('[Preview] ✅ Dark color trouvé:', inputId, '→ CSS var:', cssVar);
         
         textInput.addEventListener('color-change', function(e) {
           if (!textInput.disabled) {
             const hexValue = e.detail.color;
             updateCSSVariable(cssVar, hexValue);
-            console.log('[Preview] Couleur dark mise à jour:', colorName, '=', hexValue);
           }
         });
       } else {
@@ -222,13 +211,11 @@
       }
     });
     
-    console.log('[CentralAdmin Preview] ✅ Prévisualisation couleurs initialisée');
   }
   /* ================================================
     MISE À JOUR VARIABLE CSS
     ================================================ */
   function updateCSSVariable(varName, value) {
-    console.log('[CentralAdmin Preview] Mise à jour:', varName, '→', value);
     
     const styleTag = document.getElementById('central-admin-vars-preview');
     if (!styleTag) {
@@ -240,7 +227,6 @@
     // Au lieu de modifier le contenu textuel, on modifie la propriété CSS
     document.documentElement.style.setProperty(varName, value);
     
-    console.log('[CentralAdmin Preview] ✅ Variable mise à jour via setProperty');
     
     // Optionnel : mettre à jour aussi le contenu du <style> pour la cohérence
     let cssContent = styleTag.textContent;
@@ -249,7 +235,6 @@
     if (pattern.test(cssContent)) {
       cssContent = cssContent.replace(pattern, varName + ': ' + value + ';');
       styleTag.textContent = cssContent;
-      console.log('[CentralAdmin Preview] ✅ Style tag aussi mis à jour');
     } else {
       console.warn('[CentralAdmin Preview] ⚠️ Variable non trouvée dans le style tag, mais setProperty appliqué');
     }

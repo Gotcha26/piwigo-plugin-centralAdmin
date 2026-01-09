@@ -3,7 +3,7 @@
    Affichage côte à côte des deux thèmes
    ================================================ *}
 
-<div class="ca-section" data-section="tooltips-unified">
+<div class="ca-section" data-section="tooltips-unified" data-section-id="eiw-colors">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">💬</span>

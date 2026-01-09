@@ -42,9 +42,14 @@ return array(
       'error_main_color'    => '#5a1a1a',
     ),
   ),
-  // Nouveau : sauvegarde des modifications utilisateur par schéma
+  // Schéma du thème
   'user_modifications' => array(
     'clear' => array(),
     'dark' => array(),
+  ),
+  // Injectin CSS personnalisé
+  'custom_css' => array(
+    'code' => '',
+    'backup' => '',
   ),
 );

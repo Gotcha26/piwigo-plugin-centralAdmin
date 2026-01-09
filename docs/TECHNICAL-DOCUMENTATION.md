@@ -2,7 +2,7 @@
 
 > Documentation à destination des développeurs souhaitant comprendre, maintenir ou étendre le plugin centralAdmin pour Piwigo.
 
-**Version** : 3.0.0  
+**Version** : 3.2  
 **Auteur** : Gotcha  
 **Licence** : GPL v2+
 
@@ -21,6 +21,7 @@
 9. [Personnalisation](#personnalisation)
 10. [Débogage](#débogage)
 11. [Extension du Plugin](#extension-du-plugin)
+12. [Stockage des données](#stockage-des-données)
 
 ---
 
@@ -87,8 +88,7 @@ centralAdmin/
 ```
 assets/css/
 ├── core/                    # Appliqué PARTOUT (main.inc.php)
-│   ├── CA-admin-layout.css      → Centrage, structure
-│   └── CA-admin-override.css    → Surcharges pages Piwigo
+│   └── CA-admin-override.css    → Surcharges pages Piwigo, centrage, structure
 │
 ├── form/                    # Page plugin UNIQUEMENT (admin.tpl)
 │   ├── CA-form-base.css         → Structure formulaire
@@ -229,30 +229,37 @@ $config = [
         'align_pluginFilter_right' => '160',  // string (px)
         'fade_start' => '800',                // string (px)
         'hide_quick_sync' => '1',             // string ('0' ou '1')
+        'hide_homepage_charts' => '0',        // string ('0' ou '1')
     ],
     'colors' => [
-        'tooltips' => [                       // Commun aux 2 schémas
-            'infos_main_color' => '#c2f5c2',
-            'warning_main_color' => '#ffdd99',
-            'messages_main_color' => '#bde5f8',
-            'error_main_color' => '#ffd5dc',
-        ],
         'clear' => [                          // Spécifique schéma clair
             'bg_global' => '#707070',
             'bg_content2' => '#eeeeee',
             'bg_content1' => '#f8f8f8',
             'bg_content3' => '#eeeeee',
+            'infos_main_color'    => '#c2f5c2',
+            'warning_main_color'  => '#ffdd99',
+            'messages_main_color' => '#bde5f8',
+            'error_main_color'    => '#ffd5dc',            
         ],
         'dark' => [                           // Spécifique schéma sombre
             'bg_global' => '#000000',
             'bg_content2' => '#565656',
             'bg_content1' => '#444444',
             'bg_content3' => '#565656',
+            'infos_main_color'    => '#2d5a2d',
+            'warning_main_color'  => '#5a4a1a',
+            'messages_main_color' => '#1a3a4a',
+            'error_main_color'    => '#5a1a1a',
         ],
     ],
     'user_modifications' => [                 // Modifications utilisateur
         'clear' => [],                        // par schéma
         'dark' => [],
+    ],
+    'custom_css' => [                         // CSS injecté directement
+        'code' => '',                         // par l'utilisateur
+        'backup' => '',
     ],
 ];
 ```
@@ -796,6 +803,124 @@ add_event_handler('get_admin_plugin_menu_links', 'my_function');
 document.addEventListener('ca-config-saved', function(e) {
     console.log('Config sauvegardée', e.detail);
 });
+```
+
+---
+
+## Stockage des données
+
+* Localisation : **Base de données Piwigo**
+* Les données sont stockées dans la **table `piwigo_config`** de la base de données.
+
+---
+
+## Détails techniques
+
+### Structure de stockage
+
+**Table** : `piwigo_config`
+
+**Champ `param`** : `centralAdmin`
+
+**Champ `value`** : Tableau PHP sérialisé contenant :
+
+```php
+array(
+  'layout' => array(...),
+  'colors' => array(...),
+  'user_modifications' => array(...),
+  'custom_css' => array(
+    'code' => 'Votre CSS personnalisé ici',
+    'backup' => 'Backup du CSS précédent'
+  )
+)
+```
+
+---
+
+## Mécanisme utilisé
+
+### Fonction Piwigo : `conf_update_param()`
+
+**Fichier source Piwigo** : `include/functions.inc.php` (ligne ~1089)
+
+```php
+function conf_update_param($param, $value)
+{
+  $query = '
+SELECT param
+FROM '.CONFIG_TABLE.'
+WHERE param = \''.$param.'\'
+;';
+  
+  if (pwg_db_num_rows(pwg_query($query)))
+  {
+    $query = '
+UPDATE '.CONFIG_TABLE.'
+SET value = \''. pwg_db_real_escape_string(serialize($value)).'\'
+WHERE param = \''.$param.'\'
+;';
+  }
+  else
+  {
+    $query = '
+INSERT INTO '.CONFIG_TABLE.'
+(param, value)
+VALUES(\''.$param.'\', \''.pwg_db_real_escape_string(serialize($value)).'\')
+;';
+  }
+  
+  pwg_query($query);
+}
+```
+
+---
+
+## Vérification en base de données
+
+### Requête SQL pour consulter
+
+```sql
+SELECT * 
+FROM piwigo_config 
+WHERE param = 'centralAdmin';
+```
+
+### Résultat attendu
+
+| param | value | comment |
+|-------|-------|---------|
+| centralAdmin | `a:4:{s:6:"layout";a:7:{...}s:10:"custom_css";a:2:{s:4:"code";s:50:"body { background: red; }";s:6:"backup";s:0:"";}}` | NULL |
+
+---
+
+## Avantages de ce système
+
+1. **Pas de fichier** à gérer sur le disque
+2. **Backup automatique** dans le même enregistrement
+3. **Sécurisé** : sérialisation PHP native
+4. **Centralisé** : toute la config du plugin dans 1 seule entrée BDD
+
+---
+
+## Accès depuis le code
+
+### Lecture
+
+```php
+global $conf;
+$css_code = $conf['centralAdmin']['custom_css']['code'];
+```
+
+### Écriture
+
+```php
+$configManager->save(array(
+  'custom_css' => array(
+    'code' => 'nouveau CSS',
+    'backup' => 'ancien CSS'
+  )
+));
 ```
 
 ---

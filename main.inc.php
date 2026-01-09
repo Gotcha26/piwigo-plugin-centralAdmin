@@ -5,13 +5,27 @@ Description: Center all admin elements within a single column of up to 1600px.
              Accepts color (light/dark).
              Injects only custom CSS stylesheets.
 Plugin URI: https://piwigo.org/ext/extension_view.php?eid=1058
-Version: 3.2.3
+Version: 3.3.0
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
 */
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
+
+/* ==================================================
+ * CHARGEMENT LANGUE PAR DEFAUT (en_UK)
+ * Surcharge à appliquer dans admin.php juste AVANT
+ * la transmission au template !
+ * ================================================== */
+
+$plugin_dir = PHPWG_PLUGINS_PATH.'centralAdmin/';
+
+load_language('plugin.lang', $plugin_dir, array('language' => 'en_UK', 'no_fallback' => true));
+
+/* ==================================================
+ * SUITE
+ * ================================================== */
 
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
@@ -23,10 +37,7 @@ add_event_handler('init', 'central_admin_init');
 
 function central_admin_init()
 {
-    global $conf;
-
-    // Langue
-    load_language('plugin.lang', PHPWG_PLUGINS_PATH.'centralAdmin/');
+    global $conf, $user;
 
     // Chargement des classes
     require_once(__DIR__ . '/includes/class.config-manager.php');
@@ -71,6 +82,9 @@ add_event_handler('loc_begin_admin_page', function () {
     // Récupérer le schéma actif
     $scheme = $themeDetector->getTheme();
 
+    // === INJECTION DU THÈME (CRITIQUE POUR CSS) ===
+    $themeDetector->injectThemeAttribute($template);
+
     // URL de base du plugin
     $plugin_url = get_root_url() . 'plugins/centralAdmin/';
     
@@ -88,6 +102,15 @@ add_event_handler('loc_begin_admin_page', function () {
         '<link rel="stylesheet" href="' . $plugin_url . $override_css_path . '" id="ca-admin-override">'
     );
 
-    // === 3. INJECTION ATTRIBUT THÈME ===
+    // === 3. CSS PERSONNALISÉ UTILISATEUR ===
+    if (!empty($conf['centralAdmin']['custom_css']['code'])) {
+        $template->append('head_elements',
+            '<style id="ca-custom-css">' . 
+            $conf['centralAdmin']['custom_css']['code'] . 
+            '</style>'
+        );
+    }
+
+    // === 4. INJECTION ATTRIBUT THÈME ===
     $themeDetector->injectThemeAttribute($template);
 });

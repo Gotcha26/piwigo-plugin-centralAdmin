@@ -2,7 +2,7 @@
    SECTION DEBUG SIMPLIFIÉE v3.1.0
    ================================================ *}
 
-<div class="ca-section" data-section="debug">
+<div class="ca-section" data-section="debug" data-section-id="debug">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">🐛</span>
@@ -45,28 +45,20 @@
       <h4 style="margin-top: 20px;">{'theme_detection_php'|@translate}</h4>
       <table class="ca-debug-table">
         <tr>
-          <td><strong>{'detection_method'|@translate}</strong></td>
-          <td><span class="ca-debug-badge ca-badge-info">{$theme_debug.detection_method}</span></td>
+          <td>{'debug_detection_method'|@translate}</td>
+          <td><span class="ca-debug-value">{$theme_debug.detection_method}</span></td>
         </tr>
         <tr>
-          <td><strong>{'raw_value_userprefs'|@translate}</strong></td>
-          <td><span class="ca-debug-badge ca-badge-warning">{$theme_debug.admin_theme_value}</span></td>
+          <td>{'debug_piwigo_theme'|@translate}</td>
+          <td><span class="ca-debug-value">{$theme_debug.admin_theme_value}</span></td>
         </tr>
         <tr>
-          <td><strong>{'normalized_value'|@translate}</strong></td>
+          <td>{'debug_normalized'|@translate}</td>
           <td>{$theme_debug.normalized}</td>
         </tr>
         <tr>
-          <td><strong>{'theme_applied'|@translate}</strong></td>
-          <td><span class="ca-debug-value">{$theme_debug.theme_final}</span></td>
-        </tr>
-        <tr>
-          <td><strong>{'is_roma_check'|@translate}</strong></td>
-          <td>{if $theme_debug.is_roma}✅ Oui{else}❌ Non{/if}</td>
-        </tr>
-        <tr>
-          <td><strong>{'is_clear_check'|@translate}</strong></td>
-          <td>{if $theme_debug.is_clear}✅ Oui{else}❌ Non{/if}</td>
+          <td>{'debug_final_theme'|@translate}</td>
+          <td><span class="ca-debug-value">{$theme_debug.theme_final|upper}</span></td>
         </tr>
       </table>
       

@@ -14,19 +14,11 @@ $lang['credits'] = 'Credits';
 $lang['configuration_saved'] = 'Configuration saved successfully 👍';
 $lang['configuration_reset'] = 'Configuration reset to default values';
 $lang['configuration_reset_error'] = 'Error while resetting configuration';
-$lang['scheme_switch_warning'] = 'Warning: you switched themes';
-$lang['user_modifications_preserved'] = 'Your modifications for {scheme} theme have been preserved';
-$lang['reset_current_scheme_only'] = 'Reset current theme only';
 
 // == SECTIONS ==
-$lang['central_admin_layout'] = 'Layout Settings';
-$lang['central_admin_tooltips'] = 'Tooltip Colors';
-$lang['central_admin_scheme_clear'] = 'Light Theme Specific Colors';
-$lang['central_admin_scheme_dark'] = 'Dark Theme Specific Colors';
 $lang['debug_infos_area'] = 'Debug Information';
 
 // == STATES ==
-$lang['central_admin_unlocked'] = 'Parameter unlocked';
 $lang['central_admin_locked'] = 'Parameter locked';
 
 // == HEADER OPTIONS ==
@@ -57,6 +49,20 @@ $lang['fade_start_tp'] = "Distance before which color remains solid at 100%.\nRe
 
 $lang['hide_quick_sync_button'] = 'Hide quick sync button';
 $lang['hide_quick_sync_button_tp'] = "Hides the \"Create album\" button on the sync page.\nUseful for a cleaner interface.";
+
+// == UNIFIED COLORS SECTION ==
+$lang['central_admin_colors_by_theme'] = 'Colors by Theme';
+$lang['active_theme_info'] = 'Active theme:';
+$lang['theme_preview_note'] = 'Real-time preview only works on the active theme. Colors of the other theme can be modified but will only be visible after switching themes.';
+$lang['theme_clear_title'] = 'Light Theme';
+$lang['theme_dark_title'] = 'Dark Theme';
+$lang['active'] = 'Active';
+
+// == COMMON COLORS (simplified) ==
+$lang['bg_global'] = 'Global background';
+$lang['bg_content2'] = 'Header background';
+$lang['bg_content1'] = 'Main content background';
+$lang['bg_content3'] = 'Secondary background';
 
 // == TOOLTIP COLORS ==
 $lang['infos_main_color'] = 'Informational message color';
@@ -103,37 +109,11 @@ $lang['plugin_internal_version'] = 'Plugin version:';
 $lang['verification_'] = 'Checking...';
 
 // == DEBUG - THEME DETECTION ==
-$lang['spectrum_suspending'] = 'Removed (native v2.9+)';
 $lang['theme_detection_php'] = 'Theme Detection (Server-side - PHP)';
-$lang['theme_detection_js'] = 'Theme Detection (Client-side - JavaScript) [OBSOLETE]';
-$lang['detection_method'] = 'Detection method';
-$lang['raw_value_userprefs'] = 'Raw value (database)';
-$lang['normalized_value'] = 'Normalized value';
-$lang['theme_applied'] = 'Final applied theme';
-$lang['is_roma_check'] = 'Is it Roma theme (dark)?';
-$lang['is_clear_check'] = 'Is it Clear theme (light)?';
-
-// == DEBUG - JS DETECTION ==
-$lang['js_detected_scheme'] = 'Detected scheme (JavaScript)';
-$lang['html_classes'] = 'CSS classes on <html>';
-$lang['body_classes'] = 'CSS classes on <body>';
-$lang['body_bgcolor'] = 'Background color of <body>';
-$lang['php_js_concordance'] = 'PHP/JS concordance';
-
-// == DEBUG - ADDITIONAL INFO ==
-$lang['additional_info'] = 'Additional Information';
-$lang['gallery_theme'] = 'Public gallery theme';
-
-// == DEBUG - FILES ==
-$lang['files_charged'] = 'Loaded CSS and JavaScript files';
-$lang['css_principal'] = 'Main CSS:';
-$lang['css_rebuild'] = 'Rebuild CSS (structure):';
-$lang['css_form'] = 'Form CSS:';
-$lang['css_admin_theme'] = 'Admin theme CSS:';
-$lang['css_spectrum'] = 'Spectrum CSS:';
-$lang['spectrum_js'] = 'Spectrum JavaScript:';
-$lang['js_form'] = 'Form JavaScript:';
-$lang['js_preview'] = 'Preview JavaScript:';
+$lang['debug_detection_method'] = 'Detection method';
+$lang['debug_piwigo_theme'] = 'Piwigo theme';
+$lang['debug_normalized'] = 'Normalization';
+$lang['debug_final_theme'] = 'Final applied theme';
 
 // == DEBUG - CONSOLE ==
 $lang['browser_console'] = 'Browser Console';
@@ -147,20 +127,6 @@ $lang['help_link_forum'] = 'Discussion Forum';
 $lang['help_link_issues'] = 'Report a bug or suggest an improvement';
 $lang['help_link_documentation'] = 'Complete Technical Documentation';
 
-// == PREVIEW ==
-$lang['css_vars_injected'] = 'CSS variables injected';
-$lang['css_preview_active'] = 'Real-time preview active';
-$lang['css_applying_scheme'] = 'Applying scheme: {scheme}';
-$lang['color_preview_active'] = 'Color preview active';
-$lang['color_updated_realtime'] = 'Color updated in real-time';
-
-// == CREDITS MODAL ==
-$lang['credits_modal_title'] = 'Credits - centralAdmin';
-$lang['version_number'] = 'Version';
-$lang['jquery_not_loaded'] = 'jQuery not loaded';
-$lang['jquery_confirm_available'] = 'jQuery Confirm available';
-$lang['credits_loading_error'] = 'Unable to load credits';
-
 // == REORGANIZED SECTIONS ==
 $lang['central_admin_general'] = 'General';
 $lang['central_admin_messages_colors'] = 'Message Colors';
@@ -168,3 +134,18 @@ $lang['central_admin_advanced_params'] = 'Advanced Parameters';
 
 // == ADVANCED WARNING ==
 $lang['advanced_params_warning'] = 'These parameters are intended for advanced users. Incorrect values may alter the interface display. Use the locks to modify these parameters.';
+
+// == CUSTOM CSS SECTION ==
+$lang['custom_css_section_title'] = 'Custom CSS Injection';
+$lang['custom_css_warning'] = 'This section allows injecting your own CSS rules. Syntax errors may alter the interface. Use backup if needed.';
+$lang['custom_css_label'] = 'Custom CSS code';
+$lang['custom_css_help'] = "Enter your CSS rules here. They will be injected in all admin pages.\nExample: body { background: red; }";
+$lang['custom_css_placeholder'] = 'Enter your CSS code here...';
+$lang['custom_css_restore'] = 'Restore backup';
+$lang['custom_css_restored'] = 'CSS restored from backup';
+$lang['custom_css_no_backup'] = 'No backup available';
+
+// == Tabs ==
+$lang['ca_tab_global'] = 'Global';
+$lang['ca_tab_reserved'] = 'Reserved';
+$lang['ca_reserved_tab_message'] = 'Space reserved for future features';

@@ -8,14 +8,6 @@
 {$dynamic_css}
 </style>
 
-{* DEBUG : Vérifier l'injection *}
-<script>
-console.log('[CentralAdmin] Style tag chargé:', document.getElementById('central-admin-vars-preview') ? 'OUI' : 'NON');
-if (document.getElementById('central-admin-vars-preview')) {
-  console.log('[CentralAdmin] Contenu CSS initial:', document.getElementById('central-admin-vars-preview').textContent.substring(0, 200));
-}
-</script>
-
 {* === CSS CORE === *}
 <link rel="stylesheet" href="{$CA_ADMIN_OVERRIDE_CSS}">
 <link rel="stylesheet" href="{$CA_COLORS_UNIFIED_CSS}">
@@ -74,20 +66,36 @@ if (document.getElementById('central-admin-vars-preview')) {
 
   <form method="post" class="ca-form" id="centralAdminForm">
     
-    {* 1. Section Général (layout simplifié) *}
-    {include file=$A01_GENERAL_TPL}
-    
-    {* 2. Section Couleurs du Thème (clear & dark unifiés) *}
-    {include file=$A02_THEME_COLORS_TPL}
-    
-    {* 3. Section Couleurs des Messages (tooltips unifiés) *}
-    {include file=$A03_EIW_COLORS_TPL}
-    
-    {* 4. Section Paramètres Avancés *}
-    {include file=$A04_ADVANCED_PARAMS_SECTION_TPL}
+    {if $current_tab == 'global'}
+      
+      {* 1. Section Général (layout simplifié) *}
+      {include file=$A01_GENERAL_TPL}
+      
+      {* 2. Section Couleurs du Thème (clear & dark unifiés) *}
+      {include file=$A02_THEME_COLORS_TPL}
+      
+      {* 3. Section Couleurs des Messages (tooltips unifiés) *}
+      {include file=$A03_EIW_COLORS_TPL}
+      
+      {* 4. Section Paramètres Avancés *}
+      {include file=$A04_ADVANCED_PARAMS_SECTION_TPL}
 
-    {* 5. Section Debug (nouveau fichier séparé) *}
-    {include file=$A05_DEBUG_SECTION_TPL}
+      {* 5. Section CSS Personnalisé *}
+      {include file=$A05_CUSTOM_CSS_SECTION_TPL}
+
+      {* 6. Section Debug *}
+      {include file=$A10_DEBUG_SECTION_TPL}
+      
+    {elseif $current_tab == 'reserved'}
+      
+      <div class="ca-section" style="padding: 40px; text-align: center;">
+        <p style="color: #7f8c8d; font-size: 16px;">
+          <span class="ca-icon">🚧</span>
+          {'ca_reserved_tab_message'|@translate}
+        </p>
+      </div>
+      
+    {/if}
     
     {* Lien crédits *}
     <div style="text-align: right; margin-bottom: 10px; padding-right: 5px;">
@@ -96,15 +104,18 @@ if (document.getElementById('central-admin-vars-preview')) {
       </a>
     </div>
 
-    <div class="ca-actions">
-      <button type="submit" name="save" class="ca-btn ca-btn-primary">
-        <span class="ca-icon">💾</span>
-        {'save'|@translate}
-      </button>
-      <button type="submit" name="reset" class="ca-btn ca-btn-secondary">
-        <span class="ca-icon">♻</span>
-        {'reset'|@translate}
-      </button>
+    {* Barre d'actions fixe en bas *}
+    <div class="savebar-footer">
+      <div class="ca-actions">
+        <button type="submit" name="save" class="ca-btn ca-btn-primary">
+          <span class="ca-icon">💾</span>
+          {'save'|@translate}
+        </button>
+        <button type="submit" name="reset" class="ca-btn ca-btn-secondary">
+          <span class="ca-icon">♻</span>
+          {'reset'|@translate}
+        </button>
+      </div>
     </div>
   </form>
   
@@ -112,15 +123,16 @@ if (document.getElementById('central-admin-vars-preview')) {
 
 {* === JAVASCRIPT - Ordre d'exécution important === *}
 
-{* 1. Core - Détection thème (doit être en premier) [OBSOLETE sur DOM, PHP était la solution] *}
-
-{* 2. Modules - Debug (avant form pour être disponible) *}
+{* 1. Modules - Debug (avant form pour être disponible) *}
 <script src="{$CA_DEBUG_JS}"></script>
 
-{* 3. Form - Contrôles et couleurs *}
+{* 2. Form - Contrôles et couleurs *}
 <script src="{$CA_FORM_CONTROLS_JS}"></script>
 <script src="{$CA_FORM_COLORS_JS}"></script>
 <script src="{$CA_FORM_PREVIEW_JS}"></script>
+
+{* 3. Form - Tooltips intelligents *}
+<script src="{$CA_FORM_TOOLTIPS_JS}"></script>
 
 {* 4. Modules - Modal *}
 <script src="{$CA_MODAL_JS}"></script>

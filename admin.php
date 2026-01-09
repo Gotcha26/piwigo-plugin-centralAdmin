@@ -11,6 +11,7 @@
 
 defined('PHPWG_ROOT_PATH') or die('Hacking attempt!');
 
+include_once(PHPWG_ROOT_PATH.'admin/include/tabsheet.class.php');
 include_once dirname(__FILE__) . '/includes/functions-assets.php';
 
 global $template, $conf, $page, $user;
@@ -79,6 +80,22 @@ $centralAdmin = $configManager->getCurrent();
 $current_scheme = $themeDetector->getTheme();
 
 // ====================================
+// GESTION DES ONGLETS
+// ====================================
+
+if (!isset($_GET['tab'])) {
+    $page['tab'] = 'global';
+} else {
+    $page['tab'] = $_GET['tab'];
+}
+
+$tabsheet = new tabsheet();
+$tabsheet->add('global', l10n('ca_tab_global'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=global');
+$tabsheet->add('reserved', l10n('ca_tab_reserved'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=reserved');
+$tabsheet->select($page['tab']);
+$tabsheet->assign();
+
+// ====================================
 // TRAITEMENT DU FORMULAIRE
 // ====================================
 
@@ -117,6 +134,16 @@ if (isset($_POST['save'])) {
             $newData['user_modifications'][$current_scheme] = $userModifications;
         }
     }
+
+    // Custom CSS
+    if (isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
+        // Backup automatique de l'ancienne version
+        if (!empty($centralAdmin['custom_css']['code'])) {
+            $newData['custom_css']['backup'] = $centralAdmin['custom_css']['code'];
+        }
+        // Nouvelle saisie
+        $newData['custom_css']['code'] = trim($_POST['custom_css']['code']);
+    }
     
     // Sauvegarder
     if ($configManager->save($newData)) {
@@ -149,6 +176,26 @@ if (isset($_POST['reset'])) {
     redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
 }
 
+if (isset($_POST['restore_css'])) {
+    if (!empty($centralAdmin['custom_css']['backup'])) {
+        $newData = array(
+            'custom_css' => array(
+                'code' => $centralAdmin['custom_css']['backup'],
+                'backup' => $centralAdmin['custom_css']['code'],
+            ),
+        );
+        
+        if ($configManager->save($newData)) {
+            $page['infos'][] = l10n('custom_css_restored');
+            $centralAdmin = $configManager->getCurrent();
+        }
+    } else {
+        $page['errors'][] = l10n('custom_css_no_backup');
+    }
+    
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+}
+
 // ====================================
 // GÉNÉRATION DU CSS DYNAMIQUE
 // ====================================
@@ -163,7 +210,6 @@ $dynamicCSS = $cssGenerator->generate($centralAdmin, $current_scheme);
 $plugin_path = get_root_url() . 'plugins/centralAdmin/';
 
 // CSS Core
-$CA_VARIABLES_CSS = $plugin_path . ca_asset('assets/css/core/CA-variables.css');
 $CA_ADMIN_OVERRIDE_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-override.css');
 
 // CSS Form
@@ -183,16 +229,35 @@ $CA_INIT_JS = $plugin_path . ca_asset('assets/js/core/CA-init.js');
 $CA_FORM_CONTROLS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-controls.js');
 $CA_FORM_COLORS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-colors.js');
 $CA_FORM_PREVIEW_JS = $plugin_path . ca_asset('assets/js/form/CA-form-preview.js');
+$CA_FORM_TOOLTIPS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-tooltips.js');
 
 // JS Modules
 $CA_DEBUG_JS = $plugin_path . ca_asset('assets/js/modules/CA-debug.js');
 $CA_MODAL_JS = $plugin_path . ca_asset('assets/js/modules/CA-modal.js');
 
 // ====================================
+// CHARGEMENT DE LA LANGUE ADMINISTRATION
+// ====================================
+
+load_language(
+  'plugin.lang',
+  PHPWG_PLUGINS_PATH.'centralAdmin/',
+  array(
+    'language' => $user['language'],
+    'no_fallback' => true,
+  )
+);
+
+// ====================================
 // INJECTION DU THÈME
 // ====================================
 
 $themeDetector->injectThemeAttribute($template);
+
+// Exposer les infos debug APRÈS l'injection du thème
+$template->append('head_elements', 
+    '<script>window.caThemeDebugPHP = ' . json_encode($themeDetector->getDebugInfo()) . ';</script>'
+);
 
 // ====================================
 // TRANSMISSION AU TEMPLATE
@@ -210,6 +275,9 @@ $template->assign(array(
     // Couleurs fusionnées pour le schéma actif
     'active_scheme_colors' => $configManager->getMergedColors($current_scheme),
 
+    // Onglet actif
+    'current_tab' => $page['tab'],
+
     // Debug thème
     'theme_debug' => array_merge(
         $themeDetector->getDebugInfo(),
@@ -221,7 +289,6 @@ $template->assign(array(
     ),
 
     // CSS - Core
-    'CA_VARIABLES_CSS' => $CA_VARIABLES_CSS,
     'CA_ADMIN_OVERRIDE_CSS' => $CA_ADMIN_OVERRIDE_CSS,
 
     // CSS - Form
@@ -241,6 +308,7 @@ $template->assign(array(
     'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
     'CA_FORM_COLORS_JS' => $CA_FORM_COLORS_JS,
     'CA_FORM_PREVIEW_JS' => $CA_FORM_PREVIEW_JS,
+    'CA_FORM_TOOLTIPS_JS' => $CA_FORM_TOOLTIPS_JS,
 
     // JS - Modules
     'CA_DEBUG_JS' => $CA_DEBUG_JS,
@@ -251,7 +319,8 @@ $template->assign(array(
     'A02_THEME_COLORS_TPL' => dirname(__FILE__) . '/sections/A02_theme_colors.tpl',
     'A03_EIW_COLORS_TPL' => dirname(__FILE__) . '/sections/A03_eiw_colors.tpl',
     'A04_ADVANCED_PARAMS_SECTION_TPL' => dirname(__FILE__) . '/sections/A04_advanced_params.tpl',
-    'A05_DEBUG_SECTION_TPL' => dirname(__FILE__) . '/sections/A05_debug.tpl',
+    'A05_CUSTOM_CSS_SECTION_TPL' => dirname(__FILE__) . '/sections/A05_custom_css.tpl',
+    'A10_DEBUG_SECTION_TPL' => dirname(__FILE__) . '/sections/A10_debug.tpl',
 
     // CSS dynamique
     'dynamic_css' => $dynamicCSS,
