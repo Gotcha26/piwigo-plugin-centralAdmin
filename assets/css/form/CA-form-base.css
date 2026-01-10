@@ -549,8 +549,6 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn.ca-btn-primary.ca-btn-e
   padding: 0;
 }
 
-<<<<<<< HEAD
-=======
 /* Thème dark */
 body.ca-piwigo-theme-dark:not(.ca-browser-theme) .savebar-footer {
   background: linear-gradient(to top, #3a3a3a 0%, #3a3a3a 85%, transparent 100%);
@@ -581,7 +579,6 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .savebar-footer {
   padding: 0;
 }
 
->>>>>>> origin/36-auto-enregistrement
 /* Espacement en bas du formulaire pour éviter chevauchement */
 .ca-form {
   padding-bottom: 100px;

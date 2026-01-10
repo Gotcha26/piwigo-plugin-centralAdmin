@@ -169,12 +169,8 @@ $lang['custom_css_no_backup'] = 'Aucun backup disponible';
 // == Onglets ==
 $lang['ca_tab_global'] = 'Global';
 $lang['ca_tab_reserved'] = 'Réservé';
-<<<<<<< HEAD
-$lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
-=======
 $lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
 
 // FR
 $lang['ca_autosave_success'] = 'Modifications enregistrées automatiquement';
 $lang['ca_autosave_error'] = 'Erreur lors de la sauvegarde automatique';
->>>>>>> origin/36-auto-enregistrement

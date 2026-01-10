@@ -137,13 +137,8 @@ if (isset($_POST['save']) || isset($_POST['autosave'])) {
         }
     }
 
-<<<<<<< HEAD
-    // Custom CSS
-    if (isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
-=======
     // Custom CSS - UNIQUEMENT si sauvegarde manuelle
     if (!$isAutosave && isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
->>>>>>> origin/36-auto-enregistrement
         // Backup automatique de l'ancienne version
         if (!empty($centralAdmin['custom_css']['code'])) {
             $newData['custom_css']['backup'] = $centralAdmin['custom_css']['code'];
