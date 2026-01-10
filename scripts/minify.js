@@ -24,6 +24,7 @@ const CSS_FILES = [
 
 const JS_FILES = [
   'core/CA-init.js',
+  'form/CA-form-autosave.js',
   'form/CA-form-colors.js',
   'form/CA-form-controls.js',
   'form/CA-form-preview.js',

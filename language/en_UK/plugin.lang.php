@@ -7,6 +7,8 @@
 $lang['central_admin'] = 'CSS Skin - centralAdmin';
 $lang['central_admin_description'] = 'Customize the appearance of your administration interface';
 $lang['save'] = 'Save';
+$lang['ca_saving'] = 'Saving';
+$lang['ca_saved'] = 'Saved';
 $lang['reset'] = 'Reset';
 $lang['credits'] = 'Credits';
 
@@ -149,3 +151,7 @@ $lang['custom_css_no_backup'] = 'No backup available';
 $lang['ca_tab_global'] = 'Global';
 $lang['ca_tab_reserved'] = 'Reserved';
 $lang['ca_reserved_tab_message'] = 'Space reserved for future features';
+
+// Autosave
+$lang['ca_autosave_success'] = 'Changes saved automatically';
+$lang['ca_autosave_error'] = 'Error during automatic save';

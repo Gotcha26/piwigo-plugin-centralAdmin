@@ -26,6 +26,11 @@
       CAFormPreview.init();
     }
 
+    // Initialiser l'autosave
+    if (typeof CAFormAutosave !== 'undefined') {
+      CAFormAutosave.init();
+    }
+
     // Initialiser les tooltips intelligents
     if (typeof CATooltips !== 'undefined') {
       CATooltips.init();

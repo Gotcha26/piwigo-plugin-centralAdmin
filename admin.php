@@ -99,7 +99,9 @@ $tabsheet->assign();
 // TRAITEMENT DU FORMULAIRE
 // ====================================
 
-if (isset($_POST['save'])) {
+if (isset($_POST['save']) || isset($_POST['autosave'])) {
+    $isAutosave = isset($_POST['autosave']);
+    
     // Préparer les nouvelles données
     $newData = array();
     
@@ -135,8 +137,8 @@ if (isset($_POST['save'])) {
         }
     }
 
-    // Custom CSS
-    if (isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
+    // Custom CSS - UNIQUEMENT si sauvegarde manuelle
+    if (!$isAutosave && isset($_POST['custom_css']) && is_array($_POST['custom_css'])) {
         // Backup automatique de l'ancienne version
         if (!empty($centralAdmin['custom_css']['code'])) {
             $newData['custom_css']['backup'] = $centralAdmin['custom_css']['code'];
@@ -147,13 +149,25 @@ if (isset($_POST['save'])) {
     
     // Sauvegarder
     if ($configManager->save($newData)) {
-        $page['infos'][] = l10n('configuration_saved');
+        if (!$isAutosave) {
+            $page['infos'][] = l10n('configuration_saved');
+        }
         $centralAdmin = $configManager->getCurrent();
     } else {
-        $page['errors'][] = l10n('configuration_save_error');
+        if (!$isAutosave) {
+            $page['errors'][] = l10n('configuration_save_error');
+        }
     }
     
-    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+    // Redirection uniquement si sauvegarde manuelle
+    if (!$isAutosave) {
+        redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+    } else {
+        // AJAX : retourner succès
+        header('Content-Type: application/json');
+        echo json_encode(array('success' => true));
+        exit;
+    }
 }
 
 if (isset($_POST['reset'])) {
@@ -226,6 +240,7 @@ $CA_MODAL_CSS = $plugin_path . ca_asset('assets/css/modules/CA-modal.css');
 $CA_INIT_JS = $plugin_path . ca_asset('assets/js/core/CA-init.js');
 
 // JS Form
+$CA_FORM_AUTOSAVE_JS = $plugin_path . ca_asset('assets/js/form/CA-form-autosave.js');
 $CA_FORM_CONTROLS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-controls.js');
 $CA_FORM_COLORS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-colors.js');
 $CA_FORM_PREVIEW_JS = $plugin_path . ca_asset('assets/js/form/CA-form-preview.js');
@@ -305,6 +320,7 @@ $template->assign(array(
     'CA_INIT_JS' => $CA_INIT_JS,
 
     // JS - Form
+    'CA_FORM_AUTOSAVE_JS' => $CA_FORM_AUTOSAVE_JS,
     'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
     'CA_FORM_COLORS_JS' => $CA_FORM_COLORS_JS,
     'CA_FORM_PREVIEW_JS' => $CA_FORM_PREVIEW_JS,

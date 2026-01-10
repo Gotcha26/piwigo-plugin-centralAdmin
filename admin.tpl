@@ -130,6 +130,7 @@
 <script src="{$CA_FORM_CONTROLS_JS}"></script>
 <script src="{$CA_FORM_COLORS_JS}"></script>
 <script src="{$CA_FORM_PREVIEW_JS}"></script>
+<script src="{$CA_FORM_AUTOSAVE_JS}"></script>
 
 {* 3. Form - Tooltips intelligents *}
 <script src="{$CA_FORM_TOOLTIPS_JS}"></script>
