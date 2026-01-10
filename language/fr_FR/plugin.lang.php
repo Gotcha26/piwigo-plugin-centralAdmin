@@ -8,6 +8,8 @@
 $lang['central_admin'] = 'Skin CSS - centralAdmin';
 $lang['central_admin_description'] = 'Personnalisez l\'apparence de votre interface d\'administration';
 $lang['save'] = 'Enregistrer';
+$lang['ca_saving'] = 'Sauvegarde.';
+$lang['ca_saved'] = 'Enregistré.';
 $lang['reset'] = 'Réinitialiser';
 $lang['credits'] = 'Crédits';
 
@@ -167,4 +169,12 @@ $lang['custom_css_no_backup'] = 'Aucun backup disponible';
 // == Onglets ==
 $lang['ca_tab_global'] = 'Global';
 $lang['ca_tab_reserved'] = 'Réservé';
+<<<<<<< HEAD
 $lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
+=======
+$lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
+
+// FR
+$lang['ca_autosave_success'] = 'Modifications enregistrées automatiquement';
+$lang['ca_autosave_error'] = 'Erreur lors de la sauvegarde automatique';
+>>>>>>> origin/36-auto-enregistrement

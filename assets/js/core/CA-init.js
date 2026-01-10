@@ -26,6 +26,14 @@
       CAFormPreview.init();
     }
 
+<<<<<<< HEAD
+=======
+    // Initialiser l'autosave
+    if (typeof CAFormAutosave !== 'undefined') {
+      CAFormAutosave.init();
+    }
+
+>>>>>>> origin/36-auto-enregistrement
     // Initialiser les tooltips intelligents
     if (typeof CATooltips !== 'undefined') {
       CATooltips.init();

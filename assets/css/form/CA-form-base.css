@@ -385,6 +385,7 @@
 .ca-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 24px;
   border: none;
@@ -392,35 +393,140 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ca-btn:hover {
+.ca-btn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.ca-btn:active {
+.ca-btn:active:not(:disabled) {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Largeur fixe */
+.ca-btn[name="save"],
+.ca-btn[name="reset"] {
+  min-width: 180px;
+  max-width: 180px;
+}
+
+/* === BOUTONS D'ACTION === */
+.ca-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 30px;
+  margin-top: 30px;
+  border-top: 2px solid #e9ecef;
+  position: relative; /* Pour les notifications futures */
+}
+
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ca-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ca-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Largeur fixe */
+.ca-btn[name="save"],
+.ca-btn[name="reset"] {
+  min-width: 180px;
+  max-width: 180px;
+}
+
+/* === ÉTATS DU BOUTON ENREGISTRER === */
+
+/* Par défaut - Thème clair */
 .ca-btn-primary {
   background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.ca-btn-primary:hover {
+.ca-btn-primary:hover:not(:disabled) {
   background: linear-gradient(135deg, #2980b9, #21618c);
 }
 
+/* Par défaut - Thème dark */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn-primary {
+  background: linear-gradient(135deg, #ff7700, #ff5500);
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff5500, #ff3300);
+}
+
+/* État SAVING - Orange uni */
+.ca-btn.ca-btn-primary.ca-btn-saving {
+  background: #f39c12 !important;
+  cursor: wait !important;
+  transform: none !important;
+  box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3) !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn.ca-btn-primary.ca-btn-saving {
+  background: #f39c12 !important;
+}
+
+/* État SUCCESS - Vert uni */
+.ca-btn.ca-btn-primary.ca-btn-success {
+  background: #27ae60 !important;
+  cursor: default !important;
+  transform: none !important;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3) !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn.ca-btn-primary.ca-btn-success {
+  background: #27ae60 !important;
+}
+
+/* État ERROR - Rouge uni */
+.ca-btn.ca-btn-primary.ca-btn-error {
+  background: #e74c3c !important;
+  cursor: pointer !important;
+  animation: error-shake 0.3s ease-in-out !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3) !important;
+}
+
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .ca-btn.ca-btn-primary.ca-btn-error {
+  background: #e74c3c !important;
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* === BOUTON RÉINITIALISER === */
 .ca-btn-secondary {
   background: linear-gradient(135deg, #95a5a6, #7f8c8d);
   color: white;
 }
 
-.ca-btn-secondary:hover {
+.ca-btn-secondary:hover:not(:disabled) {
   background: linear-gradient(135deg, #7f8c8d, #6c7a7b);
 }
 
@@ -443,6 +549,39 @@
   padding: 0;
 }
 
+<<<<<<< HEAD
+=======
+/* Thème dark */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) .savebar-footer {
+  background: linear-gradient(to top, #3a3a3a 0%, #3a3a3a 85%, transparent 100%);
+  border-top-color: #555;
+}
+
+/* Espacement */
+.ca-form {
+  padding-bottom: 100px;
+}
+
+/* === BARRE D'ACTIONS FIXE === */
+.savebar-footer {
+  position: fixed;
+  bottom: 0;
+  left: calc(max(0px, (100vw - var(--ca-layout-admin-width)) / 2) + var(--ca-layout-menubar-width));
+  width: calc(min(100vw, var(--ca-layout-admin-width)) - var(--ca-layout-menubar-width) - 40px);
+  background: linear-gradient(to top, #fff 0%, #fff 85%, transparent 100%);
+  padding: 20px 20px 15px 20px;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid #e9ecef;
+}
+
+.savebar-footer .ca-actions {
+  border-top: none;
+  margin: 0;
+  padding: 0;
+}
+
+>>>>>>> origin/36-auto-enregistrement
 /* Espacement en bas du formulaire pour éviter chevauchement */
 .ca-form {
   padding-bottom: 100px;
@@ -568,6 +707,11 @@ body.ca-piwigo-theme-dark:not(.ca-browser-theme) .savebar-footer {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+/* Positionnement relatif pour la savebar */
+.savebar-footer .ca-actions {
+  position: relative;
 }
 
 /* ====================================
