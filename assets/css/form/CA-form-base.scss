@@ -1,0 +1,656 @@
+/* ================================================
+   CENTRALADMIN - FORMULAIRE BASE
+   Structure et layout du formulaire d'administration
+   Version: 3.0.0
+   ================================================ */
+
+/* === VARIABLES SCSS === */
+$primary-color: #3498db;
+$primary-dark: #2980b9;
+$secondary-color: #95a5a6;
+$secondary-dark: #7f8c8d;
+
+$success-color: #27ae60;
+$warning-color: #f39c12;
+$error-color: #e74c3c;
+
+$text-primary: #2c3e50;
+$text-secondary: #7f8c8d;
+$text-muted: #6c757d;
+
+$bg-light: #f8f9fa;
+$bg-lighter: #f1f3f5;
+$bg-white: #fff;
+
+$border-color: #e0e0e0;
+$border-light: #e9ecef;
+
+$spacing-xs: 6px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 20px;
+$spacing-xxl: 24px;
+
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+/* === CONTAINER PRINCIPAL === */
+.centralAdmin-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: $spacing-xl;
+}
+
+/* === HEADER === */
+.ca-header {
+  margin-bottom: 30px;
+}
+
+.ca-header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: $spacing-xl;
+}
+
+.ca-header-left {
+  flex: 1;
+}
+
+.ca-header h2 {
+  margin: 0 0 $spacing-sm 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: $text-primary;
+}
+
+.ca-subtitle {
+  margin: 0;
+  color: $text-secondary;
+  font-size: 14px;
+}
+
+.ca-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ca-options-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  background: $bg-light;
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  border: 1px solid $border-color;
+}
+
+.ca-option-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ca-option-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: $primary-color;
+}
+
+.ca-option-label {
+  font-size: 13px;
+  color: #495057;
+  white-space: nowrap;
+}
+
+.ca-option-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-xs 0;
+  border-bottom: 1px solid $border-color;
+  margin-bottom: $spacing-sm;
+}
+
+.ca-option-label-info {
+  font-size: 12px;
+  color: $text-muted;
+  font-weight: 600;
+}
+
+.ca-option-value {
+  font-size: 13px;
+  color: $bg-white;
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* === NOTIFICATIONS === */
+.ca-notification {
+  padding: $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-xl;
+  font-size: 14px;
+  animation: slideIn 0.3s ease-out;
+
+  p {
+    margin: 0;
+  }
+}
+
+.ca-notification-success {
+  background: linear-gradient(135deg, #c2f5c2 0%, #a8e6a3 100%);
+  border-left: 4px solid $success-color;
+  color: #155724;
+}
+
+.ca-notification-error {
+  background: linear-gradient(135deg, #ffd5dc 0%, #ffb3c1 100%);
+  border-left: 4px solid $error-color;
+  color: #721c24;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === SECTIONS (ACCORDÉONS) === */
+.ca-section {
+  background: $bg-white;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-lg;
+  overflow: visible;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.ca-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg $spacing-xl;
+  background: linear-gradient(135deg, $bg-light 0%, $bg-lighter 100%);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, $bg-lighter 0%, $border-light 100%);
+  }
+}
+
+.ca-section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text-primary;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ca-icon {
+  font-size: 20px;
+  display: inline-block;
+}
+
+.ca-toggle {
+  background: none;
+  border: none;
+  padding: $spacing-sm;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $radius-sm;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.ca-chevron {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.ca-section-active .ca-chevron,
+.ca-toggle[aria-expanded="true"] .ca-chevron {
+  transform: rotate(180deg);
+}
+
+.ca-section-content {
+  padding: $spacing-xl;
+  border-top: 1px solid $border-light;
+  overflow: visible;
+  position: relative;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* === FIELDS (CHAMPS) === */
+.ca-field {
+  margin-bottom: $spacing-xxl;
+  transition: opacity 0.2s ease;
+
+  &-locked {
+    opacity: 0.5;
+
+    &[data-locked="true"] {
+      opacity: 0.7;
+    }
+
+    .ca-slider:disabled,
+    .ca-input-number:disabled,
+    .ca-color-picker:disabled,
+    .ca-color-input:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
+
+.ca-field-header {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: 10px;
+}
+
+/* Champs avec lock (advanced_params uniquement) */
+.ca-field-locked {
+  .ca-field-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  .ca-lock:hover {
+    transform: scale(1.1);
+  }
+
+  .ca-lock-icon {
+    font-size: 18px;
+    transition: all 0.3s ease;
+  }
+}
+
+/* Champs sans lock */
+.ca-field:not(.ca-field-locked) {
+  .ca-field-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+  }
+
+  .ca-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+  }
+}
+
+.ca-lock {
+  background: none;
+  border: none;
+  padding: $spacing-xs;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: $radius-sm;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.ca-lock-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.ca-lock[data-locked="false"] .ca-lock-icon {
+  transform: scale(1.1);
+}
+
+.ca-lock-placeholder {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.ca-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+/* === TOOLTIPS === */
+.ca-help-container {
+  position: relative;
+  display: inline-block;
+  margin-left: $spacing-xs;
+  vertical-align: middle;
+}
+
+.ca-help {
+  background: $text-muted;
+  color: white;
+  border: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: #5a6268;
+    transform: scale(1.15);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &[title] {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+    }
+  }
+}
+
+.help-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 999999;
+  
+  background: #333;
+  color: $bg-white;
+  padding: 10px 14px;
+  border-radius: $radius-md;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  
+  min-width: 220px;
+  max-width: 320px;
+  white-space: pre-line;
+  
+  display: none;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &.ca-tooltip-visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === CONTRÔLES DES CHAMPS === */
+.ca-field-controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.ca-field-checkbox {
+  display: flex;
+  align-items: center;
+
+  .ca-field-header {
+    flex: 1;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  .ca-field-controls {
+    margin-left: auto;
+    justify-content: flex-end;
+  }
+
+  .ca-lock {
+    visibility: hidden;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .ca-label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+}
+
+/* === BOUTONS D'ACTION === */
+.ca-actions {
+  display: flex;
+  gap: $spacing-md;
+  padding-top: 30px;
+  margin-top: 30px;
+  border-top: 2px solid $border-light;
+  position: relative;
+}
+
+.ca-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-md $spacing-xxl;
+  border: none;
+  border-radius: $radius-md;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: $shadow-sm;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &[name="save"],
+  &[name="reset"] {
+    min-width: 180px;
+    max-width: 180px;
+  }
+}
+
+/* === ÉTATS DU BOUTON ENREGISTRER === */
+.ca-btn-primary {
+  background: linear-gradient(135deg, $primary-color, $primary-dark);
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, $primary-dark, #21618c);
+  }
+
+  &.ca-btn-saving {
+    background: $warning-color !important;
+    cursor: wait !important;
+    transform: none !important;
+    box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.3) !important;
+  }
+
+  &.ca-btn-success {
+    background: $success-color !important;
+    cursor: default !important;
+    transform: none !important;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.3) !important;
+  }
+
+  &.ca-btn-error {
+    background: $error-color !important;
+    cursor: pointer !important;
+    animation: error-shake 0.3s ease-in-out !important;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3) !important;
+  }
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.ca-btn-secondary {
+  background: linear-gradient(135deg, $secondary-color, $secondary-dark);
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, $secondary-dark, #6c7a7b);
+  }
+}
+
+/* === BARRE D'ACTIONS FIXE === */
+.savebar-footer {
+  position: fixed;
+  bottom: 0;
+  left: calc(max(0px, (100vw - var(--ca-layout-admin-width)) / 2) + var(--ca-layout-menubar-width));
+  width: calc(min(100vw, var(--ca-layout-admin-width)) - var(--ca-layout-menubar-width) - 40px);
+  background: linear-gradient(to top, $bg-white 0%, $bg-white 85%, transparent 100%);
+  padding: $spacing-xl $spacing-xl 15px $spacing-xl;
+  z-index: 1000;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  border-top: 2px solid $border-light;
+
+  .ca-actions {
+    border-top: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.ca-form {
+  padding-bottom: 100px;
+}
+
+/* === THÈME DARK === */
+body.ca-piwigo-theme-dark:not(.ca-browser-theme) {
+  .ca-btn-primary {
+    background: linear-gradient(135deg, #ff7700, #ff5500);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, #ff5500, #ff3300);
+    }
+
+    &.ca-btn-saving {
+      background: $warning-color !important;
+    }
+
+    &.ca-btn-success {
+      background: $success-color !important;
+    }
+
+    &.ca-btn-error {
+      background: $error-color !important;
+    }
+  }
+
+  .savebar-footer {
+    background: linear-gradient(to top, #3a3a3a 0%, #3a3a3a 85%, transparent 100%);
+    border-top-color: #555;
+  }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .ca-field-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ca-value-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ca-input-number {
+    flex: 1;
+  }
+
+  .ca-actions {
+    flex-direction: column;
+  }
+
+  .ca-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ca-field:not(.ca-field-locked) .ca-field-header,
+  .ca-field-locked .ca-field-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-sm;
+  }
+
+  .ca-field-locked .ca-field-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}

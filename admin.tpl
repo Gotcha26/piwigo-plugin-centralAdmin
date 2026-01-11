@@ -36,10 +36,6 @@
             <span class="ca-option-value">{$current_scheme|upper}</span>
           </div>
           <label class="ca-option-item">
-            <input type="checkbox" id="ca-browser-theme" class="ca-option-checkbox">
-            <span class="ca-option-label">{'preference_browser_scheme'|@translate}</span>
-          </label>
-          <label class="ca-option-item">
             <input type="checkbox" id="ca-single-accordion" class="ca-option-checkbox" checked>
             <span class="ca-option-label">{'accordion_choice'|@translate}</span>
           </label>

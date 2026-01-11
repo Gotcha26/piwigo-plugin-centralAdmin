@@ -227,7 +227,7 @@ $plugin_path = get_root_url() . 'plugins/centralAdmin/';
 $CA_ADMIN_OVERRIDE_CSS = $plugin_path . ca_asset('assets/css/core/CA-admin-override.css');
 
 // CSS Form
-$CA_FORM_BASE_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-base.css');
+$CA_FORM_BASE_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-base.scss');
 $CA_FORM_COMPONENTS_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-components.css');
 $CA_FORM_THEMES_CSS = $plugin_path . ca_asset('assets/css/form/CA-form-themes.scss');
 

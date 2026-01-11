@@ -14,7 +14,7 @@ const ASSETS_JS = path.join(ROOT, 'assets', 'js');
 
 const CSS_FILES = [
   'core/CA-admin-override.css',
-  'form/CA-form-base.css',
+  'form/CA-form-base.scss',      // Fichier SCSS
   'form/CA-form-components.css',
   'form/CA-form-themes.scss',    // Fichier SCSS
   'modules/CA-debug.css',

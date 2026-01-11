@@ -22,27 +22,6 @@ const CAFormControls = (function() {
    * Initialise les options globales (header)
    */
   function initOptions() {
-    // Option thème navigateur
-    const browserThemeCheckbox = document.getElementById('ca-browser-theme');
-    if (browserThemeCheckbox) {
-      const useBrowserTheme = localStorage.getItem('ca-use-browser-theme') === 'true';
-      browserThemeCheckbox.checked = useBrowserTheme;
-      
-      if (useBrowserTheme) {
-        document.body.classList.add('ca-browser-theme');
-      }
-      
-      browserThemeCheckbox.addEventListener('change', function() {
-        if (browserThemeCheckbox.checked) {
-          document.body.classList.add('ca-browser-theme');
-          localStorage.setItem('ca-use-browser-theme', 'true');
-        } else {
-          document.body.classList.remove('ca-browser-theme');
-          localStorage.setItem('ca-use-browser-theme', 'false');
-        }
-      });
-    }
-
     // Option accordion unique
     const singleAccordionCheckbox = document.getElementById('ca-single-accordion');
     if (singleAccordionCheckbox) {
