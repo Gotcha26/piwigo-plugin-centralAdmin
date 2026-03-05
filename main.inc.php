@@ -56,6 +56,24 @@ function central_admin_init()
  * MENU ADMIN
  * ================================================== */
 
+// Hook expérimental menubar (Piwigo 13+)
+if (isset($GLOBALS['pwg_event_handlers']['admin_menubar_plugin_links']))
+{
+    add_event_handler('admin_menubar_plugin_links', 'centralAdmin_menubar_link');
+}
+
+function centralAdmin_menubar_link($items)
+{
+    $items[] = array(
+        'ID'   => 'central_admin',
+        'NAME' => 'Central Admin',
+        'URL'  => get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'),
+        'ICON' => 'icon-cog',
+    );
+    return $items;
+}
+
+// Fallback pour anciennes versions Piwigo
 add_event_handler('get_admin_plugin_menu_links', function ($menu) {
     $menu[] = array(
         'NAME' => 'Central Admin',
