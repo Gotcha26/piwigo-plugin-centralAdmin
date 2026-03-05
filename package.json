@@ -4,9 +4,9 @@
   "description": "Plugin Piwigo - CSS skin pour l'administration",
   "private": true,
   "scripts": {
-    "minify": "node local/scripts/minify.js",
-    "prepare-release": "node local/scripts/prepare-release.js",
-    "version-bump": "node local/scripts/version-bump.js"
+    "minify": "node D:/Gotcha/Documents/DIY/GitHub/Piwigo/.local/scripts/minify.js local/scripts/.env.db",
+    "prepare-release": "node D:/Gotcha/Documents/DIY/GitHub/Piwigo/.local/scripts/prepare-release.js",
+    "version-bump": "node D:/Gotcha/Documents/DIY/GitHub/Piwigo/.local/scripts/version-bump.js"
   },
   "devDependencies": {
     "archiver": "^7.0.1",
