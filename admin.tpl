@@ -131,9 +131,6 @@
 {* 3. Form - Tooltips intelligents *}
 <script src="{$CA_FORM_TOOLTIPS_JS}"></script>
 
-{* 3. Form - Tooltips intelligents *}
-<script src="{$CA_FORM_TOOLTIPS_JS}"></script>
-
 {* 4. Modules - Modal *}
 <script src="{$CA_MODAL_JS}"></script>
 

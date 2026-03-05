@@ -5,6 +5,7 @@
 # Dépendances Node.js
 node_modules/
 package-lock.json
+package.json
 
 # Dossier de distribution (releases)
 dist/
@@ -38,4 +39,7 @@ images/
 assets/css/form/CA-form-theme_original.css
 
 # Mes archives
-archives/
+local/
+
+# Mes fichiers
+xxx_devtools.bat
