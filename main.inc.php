@@ -6,7 +6,7 @@ Description: Customize, group, tweak...
              Accepts color (light/dark).
              Modules compatible to expend possibilities.
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=1058
-Version: 4.0.0
+Version: 3.4.0
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster

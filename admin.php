@@ -183,7 +183,7 @@ if (isset($_POST['save']) || isset($_POST['autosave'])) {
     
     // Redirection uniquement si sauvegarde manuelle
     if (!$isAutosave) {
-        redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
+        redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab'] . '&restore_accordion=1');
     } else {
         // AJAX : retourner succès
         header('Content-Type: application/json');
@@ -209,7 +209,7 @@ if (isset($_POST['reset'])) {
     $centralAdmin = $newConfig;
 
     $page['infos'][] = l10n('configuration_reset');
-    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab'] . '&restore_accordion=1');
 }
 
 if (isset($_POST['restore_css'])) {
@@ -228,8 +228,8 @@ if (isset($_POST['restore_css'])) {
     } else {
         $page['errors'][] = l10n('custom_css_no_backup');
     }
-    
-    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
+
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab'] . '&restore_accordion=1');
 }
 
 // ====================================

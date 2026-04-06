@@ -101,6 +101,9 @@ const CAFormAutosave = (function() {
       saveButton.classList.add('ca-btn-success');
       saveButton.innerHTML = '<span class="ca-icon">✓</span> ' + (window.CA_L10N ? window.CA_L10N.saved : 'Saved');
 
+      // Marquer que la page revient d'une sauvegarde (pour restauration des accordions)
+      sessionStorage.setItem('ca-accordion-restore', 'true');
+
       // Flash notification
       var msg = isAutosave
         ? (window.CA_L10N ? window.CA_L10N.autosave_success : 'Changes saved automatically')

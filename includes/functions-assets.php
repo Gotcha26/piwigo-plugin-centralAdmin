@@ -73,14 +73,17 @@ function ca_asset($asset_path)
     }
     
     // === GESTION CLASSIQUE AUTRES EXTENSIONS ===
+    // Ordre de priorité : source > minifié
+    // Si le fichier source existe (dev), on le préfère au .min
+    // Si seul le .min existe (prod sans sources), on le charge
     $minified_path = $path_info['dirname'] . '/' . $path_info['filename'] . '.min.' . $ext;
-    
-    if (file_exists($plugin_root . '/' . $minified_path)) {
-        return $minified_path . '?v=' . filemtime($plugin_root . '/' . $minified_path);
-    }
-    
+
     if (file_exists($plugin_root . '/' . $asset_path)) {
         return $asset_path . '?v=' . filemtime($plugin_root . '/' . $asset_path);
+    }
+
+    if (file_exists($plugin_root . '/' . $minified_path)) {
+        return $minified_path . '?v=' . filemtime($plugin_root . '/' . $minified_path);
     }
     
     error_log('[CA] ca_asset() - Fichier introuvable : ' . $asset_path);

@@ -43,7 +43,11 @@ const CAFormControls = (function() {
 
     var firstOpenSection = null;
 
-    // Restaurer l'état des sections depuis localStorage
+    // Restaurer l'état des sections depuis localStorage UNIQUEMENT après une sauvegarde
+    // Vérifier soit le sessionStorage (autosave AJAX) soit le paramètre URL (redirects PHP)
+    const urlParams = new URLSearchParams(window.location.search);
+    const shouldRestoreAccordion = sessionStorage.getItem('ca-accordion-restore') === 'true' || urlParams.has('restore_accordion');
+
     allSections.forEach(function(section) {
       const sectionId = section.getAttribute('data-section-id') || section.getAttribute('id');
       if (!sectionId) return;
@@ -52,7 +56,7 @@ const CAFormControls = (function() {
       const toggle = section.querySelector('.ca-toggle, .mog-section-header, .sky-section-header');
       const content = section.querySelector('.ca-section-content, .mog-section-content, .sky-section-content');
 
-      if (savedState === 'open' && toggle && content) {
+      if (shouldRestoreAccordion && savedState === 'open' && toggle && content) {
         toggle.setAttribute('aria-expanded', 'true');
         if (!section.classList.contains('is-open')) section.classList.add('is-open');
         content.style.display = 'block';
@@ -71,11 +75,20 @@ const CAFormControls = (function() {
       }
     });
 
-    // Scroll vers le premier accordéon ouvert (utile après rechargement de page)
+    // Scroll vers le premier accordéon ouvert (utile après une sauvegarde)
     if (firstOpenSection) {
       setTimeout(function() {
         firstOpenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 200);
+    }
+
+    // Nettoyer les flags après restauration
+    if (shouldRestoreAccordion) {
+      sessionStorage.removeItem('ca-accordion-restore');
+      // Nettoyer le param URL pour éviter la restauration au prochain rechargement
+      if (urlParams.has('restore_accordion')) {
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+      }
     }
     
     allSections.forEach(function(section) {
