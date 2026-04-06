@@ -43,3 +43,4 @@ local/
 
 # Fichiers IA
 CLAUDE.md
+.claude/
