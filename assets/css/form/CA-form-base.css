@@ -515,7 +515,8 @@
   padding: 0;
 }
 
-.ca-form {
+.ca-form[data-tab="global"],
+.centralAdmin-container[data-tab="modules"] {
   padding-bottom: 100px;
 }
 

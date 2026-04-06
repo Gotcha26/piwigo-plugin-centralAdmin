@@ -168,9 +168,11 @@ $lang['custom_css_no_backup'] = 'Aucun backup disponible';
 
 // == Onglets ==
 $lang['ca_tab_global'] = 'Global';
-$lang['ca_tab_reserved'] = 'Réservé';
+$lang['ca_tab_reserved'] = 'Modules';
 $lang['ca_reserved_tab_message'] = 'Espace réservé pour les futures fonctionnalités';
 
-// FR
+// Messages de sauvegarde
 $lang['ca_autosave_success'] = 'Modifications enregistrées automatiquement';
 $lang['ca_autosave_error'] = 'Erreur lors de la sauvegarde automatique';
+$lang['configuration_save_error'] = 'Erreur lors de l\'enregistrement de la configuration';
+$lang['ca_save_net_error'] = 'Erreur réseau. Veuillez réessayer.';

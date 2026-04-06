@@ -2,7 +2,7 @@
    SECTION CSS PERSONNALISÉ
    ================================================ *}
 
-<div class="ca-section" data-section="custom-css" data-section-id="custom-css">
+<div class="ca-section" data-section="custom-css" data-section-id="custom-css" data-accordion-group="ca-global">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">💻</span>

@@ -3,7 +3,7 @@
    Affichage côte à côte des deux thèmes
    ================================================ *}
 
-<div class="ca-section" data-section="colors-unified" data-section-id="theme-colors">
+<div class="ca-section" data-section="colors-unified" data-section-id="theme-colors" data-accordion-group="ca-global">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">🎨</span>

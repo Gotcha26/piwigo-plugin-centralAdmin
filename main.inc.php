@@ -1,11 +1,12 @@
 <?php
 /*
-Plugin Name: Central Admin CSS
-Description: Center all admin elements within a single column of up to 1600px.
+Plugin Name: Central Admin
+Description: Customize, group, tweak...
+             Center all admin elements within a single column of up to 1600px.
              Accepts color (light/dark).
-             Injects only custom CSS stylesheets.
+             Modules compatible to expend possibilities.
 Plugin URI: http://piwigo.org/ext/extension_view.php?eid=1058
-Version: 3.4.1
+Version: 4.0.0
 Author URI: https://github.com/Gotcha26/centralAdmin
 Author: Gotcha
 Has Settings: webmaster
@@ -56,11 +57,8 @@ function central_admin_init()
  * MENU ADMIN
  * ================================================== */
 
-// Hook expérimental menubar (Piwigo 13+)
-if (isset($GLOBALS['pwg_event_handlers']['admin_menubar_plugin_links']))
-{
-    add_event_handler('admin_menubar_plugin_links', 'centralAdmin_menubar_link');
-}
+// Hook menubar — silencieux si le core ne le supporte pas encore
+add_event_handler('admin_menubar_plugin_links', 'centralAdmin_menubar_link');
 
 function centralAdmin_menubar_link($items)
 {
@@ -81,6 +79,31 @@ add_event_handler('get_admin_plugin_menu_links', function ($menu) {
     );
     return $menu;
 });
+
+/* ==================================================
+ * CHARGEMENT DES MODULES
+ * ================================================== */
+
+// Module Meta OG - Hooks frontend (injection des balises meta)
+$metaog_hooks = dirname(__FILE__) . '/modules/metaog/metaog-hooks.php';
+if (file_exists($metaog_hooks)) {
+    include_once($metaog_hooks);
+}
+
+// Module Skyline - Interception AJAX précoce (avant tout rendu HTML)
+if (defined('IN_ADMIN') && isset($_GET['skyline_action'])) {
+    $skyline_ajax = dirname(__FILE__) . '/modules/skyline/skyline-ajax.php';
+    if (file_exists($skyline_ajax)) {
+        include($skyline_ajax);
+    }
+    exit; // skyline-ajax.php appelle exit, mais double protection
+}
+
+// Module Skyline - Hooks frontend (injection des bannieres)
+$skyline_hooks = dirname(__FILE__) . '/modules/skyline/skyline-hooks.php';
+if (file_exists($skyline_hooks)) {
+    include_once($skyline_hooks);
+}
 
 /* ==================================================
  * INJECTION DU CSS (ADMIN) - TOUTE L'ADMINISTRATION

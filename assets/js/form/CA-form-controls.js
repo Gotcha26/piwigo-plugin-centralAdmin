@@ -38,24 +38,30 @@ const CAFormControls = (function() {
    * Initialise les accordéons
    */
   function initAccordions() {
-    const sections = document.querySelectorAll('.ca-section');
-    
+    const allSections = document.querySelectorAll('[data-accordion-group="ca-global"], [data-section-id]');
+    const sections = document.querySelectorAll('.ca-section, .mog-section, .sky-section');
+
+    var firstOpenSection = null;
+
     // Restaurer l'état des sections depuis localStorage
-    sections.forEach(function(section) {
-      const sectionId = section.getAttribute('data-section-id');
+    allSections.forEach(function(section) {
+      const sectionId = section.getAttribute('data-section-id') || section.getAttribute('id');
       if (!sectionId) return;
-      
+
       const savedState = localStorage.getItem('ca-section-' + sectionId);
-      const toggle = section.querySelector('.ca-toggle');
-      const content = section.querySelector('.ca-section-content');
-      
+      const toggle = section.querySelector('.ca-toggle, .mog-section-header, .sky-section-header');
+      const content = section.querySelector('.ca-section-content, .mog-section-content, .sky-section-content');
+
       if (savedState === 'open' && toggle && content) {
         toggle.setAttribute('aria-expanded', 'true');
+        if (!section.classList.contains('is-open')) section.classList.add('is-open');
         content.style.display = 'block';
         content.style.maxHeight = '2000px';
         content.style.opacity = '1';
         content.style.transform = 'translateY(0)';
-        
+
+        if (!firstOpenSection) firstOpenSection = section;
+
         // Réinitialiser les tooltips après ouverture
         setTimeout(function() {
           if (typeof CATooltips !== 'undefined' && CATooltips.initSection) {
@@ -64,44 +70,52 @@ const CAFormControls = (function() {
         }, 100);
       }
     });
+
+    // Scroll vers le premier accordéon ouvert (utile après rechargement de page)
+    if (firstOpenSection) {
+      setTimeout(function() {
+        firstOpenSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
     
-    sections.forEach(function(section) {
-      const header = section.querySelector('.ca-section-header');
-      const toggle = section.querySelector('.ca-toggle');
-      const content = section.querySelector('.ca-section-content');
-      const sectionId = section.getAttribute('data-section-id');
-      
-      if (!header || !toggle || !content) return;
+    allSections.forEach(function(section) {
+      const isGlobalAccordion = section.getAttribute('data-accordion-group') === 'ca-global';
+      const header = section.querySelector('.ca-section-header, .mog-section-header, .sky-section-header');
+      const toggle = section.querySelector('.ca-toggle') || header;
+      const content = section.querySelector('.ca-section-content, .mog-section-content, .sky-section-content');
+      const sectionId = section.getAttribute('data-section-id') || section.getAttribute('id');
+
+      if (!header || !content) return;
 
       header.addEventListener('click', function() {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+        const isExpanded = section.classList.contains('is-open');
         const singleAccordionCheckbox = document.getElementById('ca-single-accordion');
         const singleMode = singleAccordionCheckbox ? singleAccordionCheckbox.checked : true;
-        
-        // Si mode unitaire, fermer toutes les autres sections
-        if (singleMode && !isExpanded) {
-          sections.forEach(function(otherSection) {
-            if (otherSection !== section) {
-              const otherToggle = otherSection.querySelector('.ca-toggle');
-              const otherContent = otherSection.querySelector('.ca-section-content');
-              const otherSectionId = otherSection.getAttribute('data-section-id');
-              
-              if (otherToggle && otherContent && otherToggle.getAttribute('aria-expanded') === 'true') {
-                otherToggle.setAttribute('aria-expanded', 'false');
+
+        // Si mode unitaire (pour global ca-accordion) et ouverture, fermer toutes les autres sections du groupe
+        if (isGlobalAccordion && singleMode && !isExpanded) {
+          allSections.forEach(function(otherSection) {
+            if (otherSection !== section && otherSection.getAttribute('data-accordion-group') === 'ca-global') {
+              const otherHeader = otherSection.querySelector('.ca-section-header, .mog-section-header, .sky-section-header');
+              const otherContent = otherSection.querySelector('.ca-section-content, .mog-section-content, .sky-section-content');
+              const otherSectionId = otherSection.getAttribute('data-section-id') || otherSection.getAttribute('id');
+
+              if (otherContent && otherSection.classList.contains('is-open')) {
+                otherSection.classList.remove('is-open');
                 otherContent.style.maxHeight = '0';
                 otherContent.style.opacity = '0';
                 otherContent.style.transform = 'translateY(-10px)';
                 otherContent.style.paddingTop = '0';
                 otherContent.style.paddingBottom = '0';
                 otherContent.style.borderTopWidth = '0';
-                
+
                 // Sauvegarder l'état fermé
                 if (otherSectionId) {
                   localStorage.setItem('ca-section-' + otherSectionId, 'closed');
                 }
-                
+
                 setTimeout(function() {
-                  if (otherToggle.getAttribute('aria-expanded') === 'false') {
+                  if (!otherSection.classList.contains('is-open')) {
                     otherContent.style.display = 'none';
                   }
                 }, 500);
@@ -112,26 +126,26 @@ const CAFormControls = (function() {
         
         // Toggle la section actuelle
         if (isExpanded) {
-          toggle.setAttribute('aria-expanded', 'false');
+          section.classList.remove('is-open');
           content.style.maxHeight = '0';
           content.style.opacity = '0';
           content.style.transform = 'translateY(-10px)';
           content.style.paddingTop = '0';
           content.style.paddingBottom = '0';
           content.style.borderTopWidth = '0';
-          
+
           // Sauvegarder l'état fermé
           if (sectionId) {
             localStorage.setItem('ca-section-' + sectionId, 'closed');
           }
-          
+
           setTimeout(function() {
-            if (toggle.getAttribute('aria-expanded') === 'false') {
+            if (!section.classList.contains('is-open')) {
               content.style.display = 'none';
             }
           }, 500);
         } else {
-          toggle.setAttribute('aria-expanded', 'true');
+          section.classList.add('is-open');
           content.style.display = 'block';
           content.style.paddingTop = '';
           content.style.paddingBottom = '';
@@ -140,12 +154,12 @@ const CAFormControls = (function() {
           content.style.maxHeight = '2000px';
           content.style.opacity = '1';
           content.style.transform = 'translateY(0)';
-          
+
           // Sauvegarder l'état ouvert
           if (sectionId) {
             localStorage.setItem('ca-section-' + sectionId, 'open');
           }
-          
+
           // Réinitialiser les tooltips après ouverture
           setTimeout(function() {
             if (typeof CATooltips !== 'undefined' && CATooltips.initSection) {

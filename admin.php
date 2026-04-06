@@ -91,9 +91,31 @@ if (!isset($_GET['tab'])) {
 
 $tabsheet = new tabsheet();
 $tabsheet->add('global', l10n('ca_tab_global'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=global');
-$tabsheet->add('reserved', l10n('ca_tab_reserved'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=reserved');
+$tabsheet->add('modules', l10n('ca_tab_reserved'), get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=modules');
 $tabsheet->select($page['tab']);
 $tabsheet->assign();
+
+// ====================================
+// CHARGEMENT DES MODULES (avant POST — les handlers de save doivent être disponibles)
+// Contrat d'interface : modules/MODULE_CONTRACT.md
+// ====================================
+
+if ($page['tab'] === 'modules') {
+    $metaog_module = dirname(__FILE__) . '/modules/metaog/metaog.php';
+    if (file_exists($metaog_module)) {
+        include_once($metaog_module);
+    }
+
+    $skyline_module = dirname(__FILE__) . '/modules/skyline/skyline.php';
+    if (file_exists($skyline_module)) {
+        include_once($skyline_module);
+    }
+
+    $capatcher_module = dirname(__FILE__) . '/modules/ca-patcher/ca-patcher.php';
+    if (file_exists($capatcher_module)) {
+        include_once($capatcher_module);
+    }
+}
 
 // ====================================
 // TRAITEMENT DU FORMULAIRE
@@ -161,7 +183,7 @@ if (isset($_POST['save']) || isset($_POST['autosave'])) {
     
     // Redirection uniquement si sauvegarde manuelle
     if (!$isAutosave) {
-        redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+        redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
     } else {
         // AJAX : retourner succès
         header('Content-Type: application/json');
@@ -185,9 +207,9 @@ if (isset($_POST['reset'])) {
     
     conf_update_param('centralAdmin', $newConfig);
     $centralAdmin = $newConfig;
-    
+
     $page['infos'][] = l10n('configuration_reset');
-    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
 }
 
 if (isset($_POST['restore_css'])) {
@@ -207,7 +229,7 @@ if (isset($_POST['restore_css'])) {
         $page['errors'][] = l10n('custom_css_no_backup');
     }
     
-    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php'));
+    redirect(get_admin_plugin_menu_link(dirname(__FILE__).'/admin.php') . '&tab=' . $page['tab']);
 }
 
 // ====================================
@@ -240,6 +262,7 @@ $CA_MODAL_CSS = $plugin_path . ca_asset('assets/css/modules/CA-modal.css');
 $CA_INIT_JS = $plugin_path . ca_asset('assets/js/core/CA-init.js');
 
 // JS Form
+$CA_FORM_FLASH_JS = $plugin_path . ca_asset('assets/js/form/CA-flash.js');
 $CA_FORM_AUTOSAVE_JS = $plugin_path . ca_asset('assets/js/form/CA-form-autosave.js');
 $CA_FORM_CONTROLS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-controls.js');
 $CA_FORM_COLORS_JS = $plugin_path . ca_asset('assets/js/form/CA-form-colors.js');
@@ -320,6 +343,7 @@ $template->assign(array(
     'CA_INIT_JS' => $CA_INIT_JS,
 
     // JS - Form
+    'CA_FORM_FLASH_JS' => $CA_FORM_FLASH_JS,
     'CA_FORM_AUTOSAVE_JS' => $CA_FORM_AUTOSAVE_JS,
     'CA_FORM_CONTROLS_JS' => $CA_FORM_CONTROLS_JS,
     'CA_FORM_COLORS_JS' => $CA_FORM_COLORS_JS,

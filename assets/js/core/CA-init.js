@@ -11,6 +11,11 @@
   
   document.addEventListener('DOMContentLoaded', function() {
     
+    // Vérifier que CAFlash est disponible (chargé globalement)
+    if (typeof CAFlash === 'undefined') {
+      console.warn('[CA Init] ⚠️ CAFlash non disponible');
+    }
+
     // Initialiser les contrôles du formulaire
     if (typeof CAFormControls !== 'undefined') {
       CAFormControls.init();

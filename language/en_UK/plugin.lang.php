@@ -149,9 +149,11 @@ $lang['custom_css_no_backup'] = 'No backup available';
 
 // == Tabs ==
 $lang['ca_tab_global'] = 'Global';
-$lang['ca_tab_reserved'] = 'Reserved';
+$lang['ca_tab_reserved'] = 'Modules';
 $lang['ca_reserved_tab_message'] = 'Space reserved for future features';
 
-// Autosave
+// Save messages
 $lang['ca_autosave_success'] = 'Changes saved automatically';
 $lang['ca_autosave_error'] = 'Error during automatic save';
+$lang['configuration_save_error'] = 'Error while saving configuration';
+$lang['ca_save_net_error'] = 'Network error. Please try again.';

@@ -216,3 +216,91 @@ a#ca-credits-link:hover {
     color: #ffa646 !important;
     text-decoration: underline !important;
 }
+
+/* ================================================
+   FLASH NOTIFICATIONS (caFlash)
+   Toast notification — top-right, auto-dismiss.
+   Used by centralAdmin core and all modules.
+   ================================================ */
+
+.ca-flash {
+  position: fixed;
+  top: 63px;
+  right: 20px;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 12px 18px 12px 42px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.ca-flash--visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Icons via ::before pseudo-element */
+.ca-flash::before {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+/* --- Success --- */
+.ca-flash--success {
+  background: #d6ffcf;
+  color: #2d6e23;
+  border-color: #4ca530;
+}
+.ca-flash--success::before {
+  content: "\2713"; /* ✓ */
+}
+
+/* --- Error --- */
+.ca-flash--error {
+  background: #ffc8c8;
+  color: #7a1e1e;
+  border-color: #be4949;
+}
+.ca-flash--error::before {
+  content: "\26A0"; /* ⚠ */
+}
+
+/* --- Info --- */
+.ca-flash--info {
+  background: #d6eaff;
+  color: #1a4a7a;
+  border-color: #4a90d9;
+}
+.ca-flash--info::before {
+  content: "\2139"; /* ℹ */
+}
+
+/* --- Dark theme support --- */
+body.ca-piwigo-theme-dark .ca-flash--success {
+  background: #1e3a1e;
+  color: #b3d9b3;
+  border-color: #4ca530;
+}
+body.ca-piwigo-theme-dark .ca-flash--error {
+  background: #3a1e1e;
+  color: #f5b3b3;
+  border-color: #be4949;
+}
+body.ca-piwigo-theme-dark .ca-flash--info {
+  background: #1e2a3a;
+  color: #b3d0f5;
+  border-color: #4a90d9;
+}

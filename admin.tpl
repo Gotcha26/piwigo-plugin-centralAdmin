@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="{$CA_DEBUG_CSS}">
 <link rel="stylesheet" href="{$CA_MODAL_CSS}">
 
-<div class="centralAdmin-container">
+<div class="centralAdmin-container" data-tab="{$current_tab}">
   
   <header class="ca-header">
     <div class="ca-header-main">
@@ -60,7 +60,7 @@
   </div>
   {/if}
 
-  <form method="post" class="ca-form" id="centralAdminForm">
+  <form method="post" class="ca-form" id="centralAdminForm" data-tab="{$current_tab}">
     
     {if $current_tab == 'global'}
       
@@ -82,28 +82,36 @@
       {* 6. Section Debug *}
       {include file=$A10_DEBUG_SECTION_TPL}
       
-    {elseif $current_tab == 'reserved'}
-      
-      <div class="ca-section" style="padding: 40px; text-align: center;">
-        <p style="color: #7f8c8d; font-size: 16px;">
-          <span class="ca-icon">🚧</span>
-          {'ca_reserved_tab_message'|@translate}
-        </p>
-      </div>
+    {elseif $current_tab == 'modules'}
+
+      {if isset($METAOG_ADMIN_TPL)}
+        {include file=$METAOG_ADMIN_TPL}
+      {/if}
+
+      {if isset($SKYLINE_ADMIN_TPL)}
+        {include file=$SKYLINE_ADMIN_TPL}
+      {/if}
+
+      {if isset($CAPATCHER_ADMIN_TPL)}
+        {include file=$CAPATCHER_ADMIN_TPL}
+      {/if}
+
+      {if !isset($METAOG_ADMIN_TPL) && !isset($SKYLINE_ADMIN_TPL) && !isset($CAPATCHER_ADMIN_TPL)}
+        <div class="ca-section" style="padding: 40px; text-align: center;">
+          <p style="color: #7f8c8d; font-size: 16px;">
+            <span class="ca-icon">&#128679;</span>
+            {'ca_reserved_tab_message'|@translate}
+          </p>
+        </div>
+      {/if}
       
     {/if}
-    
-    {* Lien crédits *}
-    <div style="text-align: right; margin-bottom: 10px; padding-right: 5px;">
-      <a href="#" id="ca-credits-link" style="color: #999; font-size: 13px; text-decoration: none;">
-        {'credits'|@translate} : Gotcha
-      </a>
-    </div>
 
     {* Barre d'actions fixe en bas *}
     <div class="savebar-footer">
+      {if $current_tab == 'global'}
       <div class="ca-actions">
-        <button type="submit" name="save" class="ca-btn ca-btn-primary">
+        <button type="button" id="ca-save-btn" class="ca-btn ca-btn-primary">
           <span class="ca-icon">💾</span>
           {'save'|@translate}
         </button>
@@ -112,17 +120,37 @@
           {'reset'|@translate}
         </button>
       </div>
+      {/if}
+      <div class="savebar-credits">
+        <a href="#" id="ca-credits-link">{'credits'|@translate} : Gotcha</a>
+      </div>
     </div>
   </form>
-  
+
 </div>
+
+{* === I18N strings for JavaScript === *}
+<script>
+window.CA_TAB = {$current_tab|json_encode};
+window.CA_L10N = {
+  saving:           {'ca_saving'|@translate|json_encode},
+  saved:            {'ca_saved'|@translate|json_encode},
+  save_success:     {'configuration_saved'|@translate|json_encode},
+  save_error:       {'configuration_save_error'|@translate|json_encode},
+  save_net_error:   {'ca_save_net_error'|@translate|json_encode},
+  autosave_success: {'ca_autosave_success'|@translate|json_encode}
+};
+</script>
 
 {* === JAVASCRIPT - Ordre d'exécution important === *}
 
 {* 1. Modules - Debug (avant form pour être disponible) *}
 <script src="{$CA_DEBUG_JS}"></script>
 
-{* 2. Form - Contrôles et couleurs *}
+{* 2. Form - Flash notifications (avant autosave, disponible pour tous) *}
+<script src="{$CA_FORM_FLASH_JS}"></script>
+
+{* 3. Form - Contrôles et couleurs *}
 <script src="{$CA_FORM_CONTROLS_JS}"></script>
 <script src="{$CA_FORM_COLORS_JS}"></script>
 <script src="{$CA_FORM_PREVIEW_JS}"></script>

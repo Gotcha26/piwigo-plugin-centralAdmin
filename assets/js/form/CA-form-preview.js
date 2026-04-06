@@ -33,7 +33,9 @@
 
       // Initialiser la prévisualisation pour tous les champs
       initLayoutPreview();
-      initColorPreview();
+      if (window.CA_TAB === 'global') {
+        initColorPreview();
+      }
       
   }
 

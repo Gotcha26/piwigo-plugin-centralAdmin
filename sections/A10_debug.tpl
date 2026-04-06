@@ -2,7 +2,7 @@
    SECTION DEBUG SIMPLIFIÉE v3.1.0
    ================================================ *}
 
-<div class="ca-section" data-section="debug" data-section-id="debug">
+<div class="ca-section" data-section="debug" data-section-id="debug" data-accordion-group="ca-global">
   <div class="ca-section-header">
     <h3 class="ca-section-title">
       <span class="ca-icon">🐛</span>
