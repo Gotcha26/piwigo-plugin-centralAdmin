@@ -1,87 +1,66 @@
-# centralAdmin — Free Edition
+[Read the FR version 🇫🇷](LISEZMOI.md)
+![centralAdmin](https://cdn.jsdelivr.net/gh/Gotcha26/piwigo-plugin-centralAdmin@main/centralAdmin/user-docs/images/centralAdmin-banner.en.webp)
 
-A Piwigo plugin that **centers the admin panel** on a configurable column width and offers **full color control** by theme (light/dark), without modifying the Piwigo core.
+# centralAdmin
 
-On large screens (27" 4K, ultrawide…), the Piwigo admin stretches across the full width: your eyes travel large distances to find buttons and information. centralAdmin constrains the display to a maximum width (1600 px by default) while preserving 100% of functionality.
-
-This is the **Free Edition**, freely distributed under GPL v2+.
-
----
-
-## 🖥️ Screenshots
-
-<!-- Screenshots on GitHub CDN: drag and drop the image in an issue at
-     https://github.com/Gotcha26/piwigo-plugin-centralAdmin/issues , copy the generated
-     user-images.githubusercontent.com URL and paste it below.
-     (Old postimg URLs reusable from git history of the main README.) -->
-
-| Before | After |
-|---|---|
-| ![Before](REPLACE_URL_BEFORE) | ![After](REPLACE_URL_AFTER) |
-
-![Administration](REPLACE_URL_ADMIN)
+centralAdmin centers the Piwigo admin panel on a column of configurable width and gives you full
+control over its colors, theme by theme (light/dark), without touching the Piwigo core.  
+It's for anyone who runs their gallery's admin on a large screen and is tired of chasing buttons.
 
 ---
 
-## 🎁 Free & Pro Editions
+## 🎯 What it does, and why
 
-| Feature | **Free** | **Pro** |
-|---|:---:|:---:|
-| Configurable column layout (centered, width) | ✅ | ✅ |
-| Light/dark theme detection | ✅ | ✅ |
-| Theme-adaptive color picker | ✅ | ✅ |
-| Custom CSS injection | ✅ | ✅ |
-| Batch Manager extensions (BM01-BM09) | — | ✅ |
-| Modules support (ca-patcher, metaog, skyline) | — | ✅ |
-| Self-update from server | — | ✅ |
-| Priority support | — | ✅ |
+On large screens (27" 4K, ultrawide…), the Piwigo admin stretches across the full width: your
+eyes travel long distances to find buttons and information. ***centralAdmin*** constrains the
+display to a maximum width (1600 px by default) and centers it, while keeping 100% of the
+admin's features.
 
-👉 **[Get Pro License](https://pro.julien-moreau.fr/products/centraladmin/)** — Support development, unlock advanced features.
+The colors follow the same logic: set once for the light theme and once for the dark theme, each
+kept separately, so switching themes never undoes your work.
 
----
+## ✨ What you get
 
-## ✨ Why centralAdmin?
+- **A centered admin** at the width you choose (1024 to 1800 px) — one switch restores Piwigo's
+  original width.
+- **Colors per theme**: background colors for the light and the dark theme, side by side, with a
+  live preview for the active one.
+- **Message colors**: info, warning, message and error bubbles, per theme.
+- **Text contrast**: one slider that strengthens every admin text at once, in both themes.
+- **Custom CSS injection**, for your own adjustments.
+- **Small comforts**: open the admin right after the webmaster logs in, enlarge thumbnails on the
+  properties, photo order and Batch Manager pages, hide the home page charts.
 
-- **Ergonomics**: centered interface, less eye strain on large screens, faster navigation.
-- **Customization**: fully adjustable colors per theme (light/dark), preserved separately.
-- **Risk-free**: CSS only, no modification to Piwigo core, can be disabled at any time.
-- **Compatibility**: Piwigo 14+, Clear & Roma (Dark) themes, modern browsers.
+## 🛠️ Installation
 
----
+1. From **Administration → Plugins → Add a plugin**, search for *centralAdmin* and install it.
+   **Or**, by hand: copy the folder into `plugins/` on your Piwigo installation.
+2. Activate it from **Administration → Plugins → List → Deactivated**.
+3. Open **Plugins → centralAdmin** and adjust the **Settings** tab.
 
-## Installation
+Works with Piwigo 14+, the Clear and Roma (dark) themes, and modern browsers.
 
-1. Upload this ZIP via **Plugins → Manage plugins → Install via ZIP**.
-2. Activate the plugin from **Plugins → Manage plugins**.
-3. Configure via **Plugins → centralAdmin**.
+**Outbound connection:** from its administration page, the plugin checks for its updates with pro.julien-moreau.fr. On activation and on update, it also downloads its bundle of shared components from there (`/commons/`); if that bundle is missing, the administrator's browser loads `marked` and `mermaid` (help drawer) from jsDelivr. [What is transmitted](https://pro.julien-moreau.fr/legal/confidentialite.php?lang=en#extensions-gratuites)
 
----
+## 📚 Further reading
 
-## Pro Edition only
-
-- Batch Manager extensions: image rotation, batch rename, descriptions, prefilters, "added by" management, fsrmp, thumbnail size, posted dates
-- Modules: ca-patcher (code editor), metaog (OpenGraph), skyline (footer)
-- Automatic updates (one-click from the licensing server)
-
-To unlock the Pro Edition: <https://pro.julien-moreau.fr/products/centraladmin/>
+The full documentation is readable online on the
+[project wiki](https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki).
 
 ---
 
-## Repository & support
-
-- Free Edition (public): <https://github.com/Gotcha26/piwigo-plugin-centralAdmin>
-- Bugs / requests: <https://github.com/Gotcha26/piwigo-plugin-centralAdmin/issues>
-- Documentation (wiki): <https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki>
-
-## License
-
-GPL v2+ — © Julien Moreau (Gotcha)
+##### Quick links:
+- Project: https://github.com/Gotcha26/piwigo-plugin-centralAdmin
+- Documentation: https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki
+- Piwigo listing: https://fr.piwigo.org/ext/index.php?eid=1058
+- Official page: https://pro.julien-moreau.fr/products/centraladmin/
+- Author: Gotcha (Julien Moreau) — https://julien-moreau.fr
 
 <!-- jm-conformite-lot-commun -->
 
 ---
 
-## 🔒 Network & privacy
+## Network & privacy
 
 This extension uses a **shared components bundle** — display libraries and fonts, all free and open source — which is not included in this archive.
 

@@ -11,7 +11,7 @@
     later, as required by Piwigo itself. See LICENCE.md for the full text.
 
     This applies to the entire codebase, including the Pro modules
-    (include-pro/ and modules-pro/): as a derivative work installed on a GPLv2 script, they
+    (user-docs/, include-pro/ and modules-pro/): as a derivative work installed on a GPLv2 script, they
     carry the same license — there is no proprietary, "all rights reserved"
     code in this plugin.
 

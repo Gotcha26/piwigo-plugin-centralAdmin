@@ -1,89 +1,68 @@
-# centralAdmin — Édition gratuite
+[Consulter la version EN 🇬🇧](README.md)
+![centralAdmin](https://cdn.jsdelivr.net/gh/Gotcha26/piwigo-plugin-centralAdmin@main/centralAdmin/user-docs/images/centralAdmin-banner.fr.webp)
 
-Plugin Piwigo qui **recentre le panneau d'administration** sur une colonne de largeur configurable et offre un **contrôle total des couleurs** par thème (clair/sombre), sans toucher au cœur de Piwigo.
+# centralAdmin
 
-Sur les grands écrans (27" 4K, ultrawide…), l'admin Piwigo s'étale sur toute la largeur : l'œil parcourt de grandes distances pour trouver boutons et infos. centralAdmin contraint l'affichage à une largeur max (1600 px par défaut) tout en préservant 100 % des fonctionnalités.
-
-Voici l'**Édition gratuite**, distribuée librement sous GPL v2+.
-
----
-
-## 🖥️ Captures d'écran
-
-<!-- Captures sur CDN GitHub : glisser-déposer l'image dans une issue de
-     https://github.com/Gotcha26/piwigo-plugin-centralAdmin/issues , copier l'URL
-     user-images.githubusercontent.com générée et la coller ci-dessous.
-     (Anciennes URLs postimg réutilisables dans l'historique git du README racine.) -->
-
-| Avant | Après |
-|---|---|
-| ![Avant](REMPLACER_URL_AVANT) | ![Après](REMPLACER_URL_APRES) |
-
-![Administration](REMPLACER_URL_ADMIN)
+centralAdmin recentre le panneau d'administration de Piwigo sur une colonne de largeur réglable et
+vous donne la main sur ses couleurs, thème par thème (clair/sombre), sans toucher au cœur.  
+Il s'adresse à qui administre sa galerie sur un grand écran et en a assez de courir après les boutons.
 
 ---
 
-## 🎁 Éditions Gratuite & Pro
+## 🎯 À quoi ça sert, et pourquoi
 
-| Fonctionnalité | **Gratuite** | **Pro** |
-|---|:---:|:---:|
-| Mise en page colonne configurable (centrée, largeur) | ✅ | ✅ |
-| Détection thème clair/sombre | ✅ | ✅ |
-| Sélecteur de couleurs adapté au thème | ✅ | ✅ |
-| Injection CSS personnalisé | ✅ | ✅ |
-| Extensions du Batch Manager (BM01-BM09) | — | ✅ |
-| Support des modules (ca-patcher, metaog, skyline) | — | ✅ |
-| Export/Import de la configuration (cœur + modules) | — | ✅ |
-| Mise à jour automatique depuis le serveur | — | ✅ |
-| Support prioritaire | — | ✅ |
+Sur les grands écrans (27" 4K, ultrawide…), l'admin Piwigo s'étale sur toute la largeur : l'œil
+parcourt de grandes distances pour trouver boutons et informations. ***centralAdmin*** contraint
+l'affichage à une largeur maximale (1600 px par défaut) et le centre, sans rien retirer aux
+fonctions de l'administration.
 
-👉 **[Obtenir une licence Pro](https://pro.julien-moreau.fr/products/centraladmin/)** — Soutenez le développement, débloquez les fonctionnalités avancées.
+Les couleurs suivent la même logique : réglées une fois pour le thème clair, une fois pour le
+thème sombre, conservées séparément — changer de thème ne défait jamais votre travail.
 
----
+## ✨ Ce que vous y trouvez
 
-## ✨ Pourquoi centralAdmin ?
+- **Une admin centrée** à la largeur de votre choix (1024 à 1800 px) — un interrupteur rend à
+  Piwigo sa largeur d'origine.
+- **Des couleurs par thème** : fonds du thème clair et du thème sombre, côte à côte, avec aperçu
+  en direct pour le thème actif.
+- **Des couleurs de messages** : bulles d'information, d'avertissement, de message et d'erreur,
+  par thème.
+- **Le contraste des textes** : un curseur qui renforce d'un geste tous les textes de l'admin,
+  dans les deux thèmes.
+- **L'injection CSS personnalisée**, pour vos propres retouches.
+- **Des petits conforts** : ouvrir l'admin dès la connexion du webmaster, agrandir les vignettes
+  des pages Propriétés, Ordre des photos et Gestionnaire de lots, masquer les graphiques de l'accueil.
 
-- **Ergonomie** : interface centrée, moins de fatigue oculaire sur grands écrans, navigation plus rapide.
-- **Personnalisation** : couleurs entièrement réglables par thème (clair/sombre), préservées séparément.
-- **Sans risque** : CSS uniquement, aucune modification du cœur Piwigo, désactivable à tout moment.
-- **Compatibilité** : Piwigo 14+, thèmes Clear & Roma (Dark), navigateurs modernes.
+## 🛠️ Installation
 
----
+1. Depuis **Administration → Plugins → Ajouter un plugin**, cherchez *centralAdmin* et
+   installez-le. **Ou**, à la main : copiez le dossier dans `plugins/` de votre installation Piwigo.
+2. Activez-le depuis **Administration → Plugins → Liste → Désactivé**.
+3. Ouvrez **Plugins → centralAdmin** et ajustez l'onglet **Paramètres**.
 
-## Installation
+Fonctionne avec Piwigo 14+, les thèmes Clear et Roma (sombre), et les navigateurs récents.
 
-1. Téléversez ce ZIP via **Plugins → Gestion des plugins → Installer via ZIP**.
-2. Activez le plugin depuis **Plugins → Gestion des plugins**.
-3. Configurez via **Plugins → centralAdmin**.
+**Connexion sortante :** depuis sa page d'administration, le plugin vérifie ses mises à jour auprès de pro.julien-moreau.fr. À l'activation et à la mise à jour, il y télécharge aussi son lot de composants partagés (`/commons/`) ; si ce lot manque, le navigateur de l'administrateur charge `marked` et `mermaid` (tiroir d'aide) depuis jsDelivr. [Ce qui est transmis](https://pro.julien-moreau.fr/legal/confidentialite.php#extensions-gratuites)
 
----
+## 📚 Pour aller plus loin
 
-## Réservé à l'Édition Pro
-
-- Extensions du Batch Manager : rotation, renommage en masse, descriptions, préfiltres, gestion « ajouté par », fsrmp, taille des miniatures, dates de publication
-- Modules : ca-patcher (éditeur de code), metaog (OpenGraph), skyline (footer)
-- Export/Import de la configuration (réglages cœur et modules) — la configuration étant une donnée sensible, cette fonction est réservée aux licenciés
-- Mise à jour automatique (one-click depuis le serveur de licences)
-
-Pour débloquer l'Édition Pro : <https://pro.julien-moreau.fr/products/centraladmin/>
+La documentation complète est lisible en ligne sur le
+[wiki du projet](https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki/Premiers-Pas).
 
 ---
 
-## Dépôt & support
-
-- Édition gratuite (publique) : <https://github.com/Gotcha26/piwigo-plugin-centralAdmin>
-- Bugs / demandes : <https://github.com/Gotcha26/piwigo-plugin-centralAdmin/issues>
-- Documentation (wiki) : <https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki>
-
-## Licence
-
-GPL v2+ — © Julien Moreau (Gotcha)
+##### Liens rapides :
+- Projet : https://github.com/Gotcha26/piwigo-plugin-centralAdmin
+- Documentation : https://github.com/Gotcha26/piwigo-plugin-centralAdmin/wiki/Premiers-Pas
+- Fiche Piwigo : https://fr.piwigo.org/ext/index.php?eid=1058
+- Page officielle : https://pro.julien-moreau.fr/products/centraladmin/
+- Auteur : Gotcha (Julien Moreau) — https://julien-moreau.fr
 
 <!-- jm-conformite-lot-commun -->
 
 ---
 
-## 🔒 Réseau et confidentialité
+## Réseau et confidentialité
 
 Cette extension utilise un **lot de composants communs** — bibliothèques d'affichage et polices, libres et open source — qui n'est pas embarqué dans cette archive.
 
